@@ -7,18 +7,27 @@ import {
   Pin,
   useAdvancedMarkerRef,
 } from "@vis.gl/react-google-maps";
-import { useState } from "react";
-import JanelaInfo from "../JanelaInfo";
+import { useEffect, useState } from "react";
 import { PlaceAutocomplete } from "../PlaceAutocomplete";
 import { MapHandler } from "../MapHandler";
-
+import ClusteredPetsMarkers from "../ClusterMarker";
+ 
 const MapaAchados = () => {
   const posicao = { lat: -23.43896506940708, lng: -46.53214115945167 };
 
-  const [open, setOpen] = useState(false);
   const [markerRef, marker] = useAdvancedMarkerRef();
 
   const [selectedPlace, setSelectedPlace] = useState(null);
+
+  const [pets, setPets] = useState([]);
+
+  useEffect(() => {
+    fetch('/pets.json')
+      .then(response => response.json())
+      .then(data => setPets(data)) 
+      .catch(error => console.error('Erro json pets', error))
+  }, []);
+  
 
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
@@ -35,16 +44,15 @@ const MapaAchados = () => {
               <PlaceAutocomplete onPlaceSelect={setSelectedPlace} />
             </div>
           </MapControl>
-          <AdvancedMarker
-            ref={markerRef}
-            position={null}
-            onClick={() => setOpen(true)}
-          >
-            <Pin background={"#FFC55E"} />
+
+          <ClusteredPetsMarkers pets={pets}/>
+
+          <AdvancedMarker ref={markerRef} position={null}>
+            <Pin/>
           </AdvancedMarker>
+
         </Map>
         <MapHandler place={selectedPlace} marker={marker} />
-        {open && <JanelaInfo posicao={posicao} setOpen={setOpen} />}
       </div>
     </APIProvider>
   );
