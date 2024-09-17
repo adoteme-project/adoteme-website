@@ -12,7 +12,8 @@ import { PlaceAutocomplete } from "../PlaceAutocomplete";
 import { MapHandler } from "../MapHandler";
 import ClusteredPetsMarkers from "../ClusterMarker";
 import ListAchados from "../ListAchados";
- 
+import useModal from "../../hooks/useModal";
+
 const MapaAchados = () => {
   const posicao = { lat: -23.43896506940708, lng: -46.53214115945167 };
 
@@ -23,13 +24,23 @@ const MapaAchados = () => {
   const [pets, setPets] = useState([]);
   const [nearbyPets, setNearbyPets] = useState([]);
 
+  const [isShowingModal, toogleModal] = useModal();
+
   useEffect(() => {
-    fetch('/pets.json')
-      .then(response => response.json())
-      .then(data => setPets(data)) 
-      .catch(error => console.error('Erro json pets', error))
+    fetch("/pets.json")
+      .then((response) => response.json())
+      .then((data) => setPets(data))
+      .catch((error) => console.error("Erro json pets", error));
   }, []);
-  
+
+  const handlePlaceSelect = (place) => {
+    setSelectedPlace(place);
+
+    if (!isShowingModal) {
+      toogleModal(); 
+    }
+  };
+
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
       <div className="w-full flex justify-center">
@@ -42,22 +53,30 @@ const MapaAchados = () => {
         >
           <MapControl position={ControlPosition.TOP}>
             <div className="m-6 bg-branco w-[500px] flex justify-center">
-              <PlaceAutocomplete onPlaceSelect={setSelectedPlace} />
+              <PlaceAutocomplete onPlaceSelect={handlePlaceSelect} />
             </div>
           </MapControl>
 
           <MapControl position={ControlPosition.RIGHT_CENTER}>
-              <ListAchados pets={nearbyPets}/>
+            <ListAchados
+              pets={nearbyPets}
+              show={isShowingModal}
+              onClose={toogleModal}
+            />
           </MapControl>
 
-          <ClusteredPetsMarkers pets={pets}/>
+          <ClusteredPetsMarkers pets={pets} />
 
           <AdvancedMarker ref={markerRef} position={null}>
-            <Pin/>
+            <Pin />
           </AdvancedMarker>
-
         </Map>
-        <MapHandler place={selectedPlace} marker={marker} pets={pets} setNearbyPets={setNearbyPets} />
+        <MapHandler
+          place={selectedPlace}
+          marker={marker}
+          pets={pets}
+          setNearbyPets={setNearbyPets}
+        />
       </div>
     </APIProvider>
   );

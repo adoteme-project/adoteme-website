@@ -49,7 +49,7 @@ const ClusteredPetsMarkers = ({ pets }) => {
   }, []);
 
   const handleMarkerClick = useCallback((pet) => {
-    setSelectedPet(pet); // Store the selected pet data
+    setSelectedPet(pet);
   }, []);
 
   return (
@@ -65,9 +65,9 @@ const ClusteredPetsMarkers = ({ pets }) => {
 
       {selectedPet && (
         <JanelaInfo
-          posicao={selectedPet.position}  // Pass the position of the selected pet
+          posicao={selectedPet.position}
           setOpen={handleInfoWindowClose}
-          pet={selectedPet} // Pass the entire pet object to JanelaInfo
+          pet={selectedPet}
         />
       )}
     </>
