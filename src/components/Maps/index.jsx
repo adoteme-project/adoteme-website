@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 import { PlaceAutocomplete } from "../PlaceAutocomplete";
 import { MapHandler } from "../MapHandler";
 import ClusteredPetsMarkers from "../ClusterMarker";
+import ListAchados from "../ListAchados";
  
 const MapaAchados = () => {
   const posicao = { lat: -23.43896506940708, lng: -46.53214115945167 };
@@ -20,6 +21,7 @@ const MapaAchados = () => {
   const [selectedPlace, setSelectedPlace] = useState(null);
 
   const [pets, setPets] = useState([]);
+  const [nearbyPets, setNearbyPets] = useState([]);
 
   useEffect(() => {
     fetch('/pets.json')
@@ -28,7 +30,6 @@ const MapaAchados = () => {
       .catch(error => console.error('Erro json pets', error))
   }, []);
   
-
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
       <div className="w-full flex justify-center">
@@ -45,6 +46,10 @@ const MapaAchados = () => {
             </div>
           </MapControl>
 
+          <MapControl position={ControlPosition.RIGHT_CENTER}>
+              <ListAchados pets={nearbyPets}/>
+          </MapControl>
+
           <ClusteredPetsMarkers pets={pets}/>
 
           <AdvancedMarker ref={markerRef} position={null}>
@@ -52,7 +57,7 @@ const MapaAchados = () => {
           </AdvancedMarker>
 
         </Map>
-        <MapHandler place={selectedPlace} marker={marker} />
+        <MapHandler place={selectedPlace} marker={marker} pets={pets} setNearbyPets={setNearbyPets} />
       </div>
     </APIProvider>
   );
