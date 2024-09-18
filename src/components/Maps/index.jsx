@@ -45,7 +45,7 @@ const MapaAchados = () => {
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
       <div className="w-full flex justify-center">
         <Map
-          style={{ width: "90%", height: "100vh" }}
+          style={{ width: "100%", height: "100vh" }}
           zoom={19}
           mapId={import.meta.env.VITE_MAP_ID}
           defaultCenter={posicao}
@@ -67,9 +67,10 @@ const MapaAchados = () => {
 
           <ClusteredPetsMarkers pets={pets} />
 
-          <AdvancedMarker ref={markerRef} position={null}>
+          <AdvancedMarker ref={markerRef} position={null} onClick={toogleModal}>
             <Pin />
           </AdvancedMarker>
+
         </Map>
         <MapHandler
           place={selectedPlace}

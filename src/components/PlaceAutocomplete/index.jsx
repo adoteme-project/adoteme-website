@@ -15,7 +15,6 @@ const PlaceAutocomplete = ({ onPlaceSelect }) => {
 
     setPlaceAutocomplete(new places.Autocomplete(inputRef.current, options));
 
-    console.log(inputRef.value);
   }, [places]);
 
   useEffect(() => {

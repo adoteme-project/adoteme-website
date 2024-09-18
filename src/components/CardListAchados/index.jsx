@@ -1,6 +1,4 @@
-const CardList = (props) => {
-  const { pet } = props;
-
+const CardList = ({pet, chosenPet}) => {
   return (
     <div className="border shadow-sm p-3 flex gap-5 w-full mb-3">
       <img
@@ -17,7 +15,7 @@ const CardList = (props) => {
         </ul>
         <button className="inline-block rounded bg-azul-main px-6 py-2 text-sm font-medium 
         text-white transition hover:rotate-2 hover:scale-110 focus:outline-none focus:ring 
-        active:bg-azul-main text-branco">
+        active:bg-azul-main text-branco" onClick={chosenPet}>
             Saiba mais
         </button>
       </div>
