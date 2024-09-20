@@ -7,8 +7,8 @@ const CustomMarker = (props) => {
   const handleShowInfo = useCallback(() => onClick(pet), [onClick, pet]);
     
   const ref = useCallback(
-    (marker) => setMarkerRef(marker, pet.key),
-    [setMarkerRef, pet.key]
+    (marker) => setMarkerRef(marker, pet.id),
+    [setMarkerRef, pet.id]
   );
 
   return (

@@ -56,7 +56,7 @@ const ClusteredPetsMarkers = ({ pets }) => {
     <>
       {pets.map(pet => (
         <CustomMarker
-          key={pet.key}
+          key={pet.id}
           pet={pet}
           onClick={handleMarkerClick}
           setMarkerRef={setMarkerRef}

@@ -45,7 +45,7 @@ const ListAchados = ({ pets, show, onClose }) => {
           <div>
             {pets.map((pet) => (
               <CardList
-                key={pet.key}
+                key={pet.id}
                 pet={pet}
                 chosenPet={() => setSelectedPet(pet)}
               />

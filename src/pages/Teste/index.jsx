@@ -1,42 +1,46 @@
-import { APIProvider, useMapsLibrary } from "@vis.gl/react-google-maps";
-import { useEffect, useMemo } from "react";
+import { APIProvider } from "@vis.gl/react-google-maps";
+import { useState } from "react";
+import useGeocoding from "../../hooks/useGeocoder";
 
-const Geodados = () => {
-  const geocodingLib = useMapsLibrary("geocoding");
-  const geocoder = useMemo(
-    () => geocodingLib && new geocodingLib.Geocoder(),
-    [geocodingLib]
+const PesquisaCoordenada = () => {
+  const [inputAddress, setInputAddress] = useState("");
+  const { coordinates, error, geocodeAddress } = useGeocoding(inputAddress);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    geocodeAddress();
+    console.log(coordinates);
+  };
+
+  return (
+    <div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={inputAddress}
+          onChange={(e) => setInputAddress(e.target.value)}
+          placeholder="Enter address"
+          className="border p-2 bg-beje"
+        />
+        <button type="submit" className="p-2 bg-azul-dark text-branco">Coordenadas</button>
+      </form>
+
+      {error && <p>Error: {error}</p>}
+      {coordinates && (
+        <p>
+          Latitude: {coordinates.lat}, Longitude: {coordinates.lng}
+        </p>
+      )}
+    </div>
   );
-
-  useEffect(() => {
-    if (!geocoder) return;
-
-    // const posicao = { lat: -23.43896506940708, lng: -46.53214115945167 };
-    const endereço = 'Jardim Iporanga Rua Petrópolis Guarulhos';
-
-    geocoder
-      .geocode({ address: endereço })
-      .then((response) => {
-        if (response.results && response.results.length > 0) {
-          console.log(response.results[0].geometry.location.toJSON());
-        } else {
-          console.log("No results found");
-        }
-      })
-      .catch((error) =>
-        console.log("Erro, Geocoder falhou por conta de " + error)
-      );
-  }, [geocoder]);
-
-  return <></>;
 };
 
 const Teste = () => {
   return (
     <>
-      <h1>Geodados teste </h1>
+      <h1>Geodados Test</h1>
       <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-        <Geodados />
+        <PesquisaCoordenada />
       </APIProvider>
     </>
   );
