@@ -22,7 +22,9 @@ const PesquisaCoordenada = () => {
           placeholder="Enter address"
           className="border p-2 bg-beje"
         />
-        <button type="submit" className="p-2 bg-azul-dark text-branco">Coordenadas</button>
+        <button type="submit" className="p-2 bg-azul-dark text-branco">
+          Coordenadas
+        </button>
       </form>
 
       {error && <p>Error: {error}</p>}
@@ -47,3 +49,37 @@ const Teste = () => {
 };
 
 export default Teste;
+
+/* import { useEffect, useState } from "react";
+import ListAchados from "../../components/ListAchados";
+import useModal from "../../hooks/useModal";
+import { getPetPerdido } from "../../services/pets";
+
+const Teste = () => {
+  const [pets, setPets] = useState([]);
+  const [isShowingModal, toogleModal] = useModal();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getPetPerdido();
+        console.log(response.data);
+        setPets(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  return (
+    <>
+      <button onClick={toogleModal} className="bg-azul-main p-2">
+        Mostrar modal
+      </button>
+      <ListAchados pets={pets} show={isShowingModal} onClose={toogleModal} />
+    </>
+  );
+};
+
+export default Teste; */

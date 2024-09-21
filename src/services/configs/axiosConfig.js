@@ -1,7 +1,11 @@
-import {axios} from 'axios';
+import axios from "axios";  // Correct import
 
 const client = axios.create({
-    baseURL: import.meta.env.CLIENT_DOMAIN,
-})
+  baseURL: "/api",  // Make sure this is correctly set in your .env
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",  // Enable CORS for all origins
+  },
+});
 
 export default client;
