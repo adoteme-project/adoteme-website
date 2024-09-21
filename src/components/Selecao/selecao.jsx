@@ -19,8 +19,7 @@ const Selecao = (props) => {
         >
             <InputLabel id="demo-simple-select-label"
                 sx={{
-                    fontSize:'15px',
-                    textAlign: 'center',
+                    fontSize:'12px'
                 }}
             
             >{props.nome}</InputLabel>
@@ -31,15 +30,8 @@ const Selecao = (props) => {
                 // onChange={handleChange}
                 sx={{
                     width: `${props.tamanho}px` ,
-                    height:30,
-                    border:2,
-                    fontSize:'12px',
-                    '& .MuiSelect-select': {
-                            display: 'flex',
-                            alignItems: 'center',
-                            fontSize: '12px', // Ajustar o tamanho da fonte aqui
-                        },
-                        
+                    height:48,
+                    border:2,                       
                 }}
             >
                 <MenuItem value={10}>Ten</MenuItem>
