@@ -10,7 +10,10 @@ export default [
     files: ['**/*.{js,jsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      globals: globals.browser,
+      globals: {
+        ...globals.browser,
+        ...globals.node // Remover erro do process.env
+      },
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
@@ -29,7 +32,7 @@ export default [
       ...react.configs['jsx-runtime'].rules,
       ...reactHooks.configs.recommended.rules,
       'react/jsx-no-target-blank': 'off',
-      'react/prop-types':'off', // Desabilitando o requerimento de passar o tipo do props;
+      'react/prop-types': 'off', // Desabilitado o requerimento de passar o tipo do props 
       'react-refresh/only-export-components': [
         'warn',
         { allowConstantExport: true },
