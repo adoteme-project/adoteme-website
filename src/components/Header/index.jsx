@@ -2,6 +2,7 @@ import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
+
 const Header = () => {
   return (
     <nav className="bg-branco py-6 w-full flex justify-center">
