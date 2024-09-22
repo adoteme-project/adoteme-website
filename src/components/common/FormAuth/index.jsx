@@ -1,26 +1,38 @@
 import { Link } from "react-router-dom";
 import Input from "../Input";
 
-const FormAuth = () => {
+const FormAuth = ({ title, subtitle, description, fields, onSubmit, buttonLabel, linkTo, linkLabel, linkForgot}) => {
   return (
-    <form className="max-w-screen-lg w-1/3 p-16 flex flex-col gap-10">
+    <form onSubmit={onSubmit} className="max-w-screen-lg w-1/3 p-16 flex flex-col gap-10">
       <div className="flex flex-col gap-4">
-        <h1 className="text-4xl text-center font-bold"> Login </h1>
-        <h3 className="text-2xl text-center text-cinza"> Adotante </h3>
+        <h1 className="text-4xl text-center font-bold">{title}</h1>
+        {subtitle && <h3 className="text-2xl text-center text-cinza">{subtitle}</h3>}
       </div>
-      <Input label={"Email"} placeholder="email@exemplo.com" />
-      <Input label={"Senha"} placeholder="Digia sua senha..." />
+
+      {description && <p>{description}</p>}
+      
+      {fields.map((field, index) => (
+        <Input 
+          key={index}
+          label={field.label} 
+          type={field.type} 
+          placeholder={field.placeholder} 
+        />
+      ))}
+
       <div className="flex justify-between gap-8">
-        <button className="w-full p-3 text-center bg-verde rounded-md font-bold">
-          Entar
+        <button type="submit" className="w-full p-3 text-center bg-verde rounded-md font-bold">
+          {buttonLabel}
         </button>
-        <Link
-          to={`/login/cadastro-adotante`}
-          className={`w-full p-3 text-center bg-amarelo rounded-md font-bold`}
-        >
-          Cadastrar
-        </Link>
+        {linkTo && linkLabel && (
+          <Link to={linkTo} className="w-full p-3 text-center bg-amarelo rounded-md font-bold">
+            {linkLabel}
+          </Link>
+        )}
       </div>
+      {linkForgot && (
+            <Link to={'/login/redefinir'} className="underline text-azul-main font-bold">Esqueci a senha</Link>
+       )}
     </form>
   );
 };
