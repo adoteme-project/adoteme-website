@@ -1,4 +1,4 @@
-import MapaAchados from "../../components/Maps";
+import MapaAchados from "../../components/feature/Maps";
 
 const Achados = () => {
   return (

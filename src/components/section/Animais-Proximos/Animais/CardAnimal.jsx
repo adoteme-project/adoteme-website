@@ -1,5 +1,5 @@
-import Botao from "../../Button/botao";
-import Avaliacao from '../../Avaliacao/avaliacao';
+import Botao from "../../../common/Button/botao";
+import Avaliacao from '../../../feature/Avaliacao/avaliacao';
 
 const Card = (props) => {
 

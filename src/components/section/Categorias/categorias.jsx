@@ -1,13 +1,11 @@
 import Box from "./Box/box";
-import Slider from "../Carrosel/Carrosel";
-import BreadCrumb from '../BreadCrumb/breadCrumb'
+import Slider from "../../common/Carrosel/Carrosel";
 
 const Categorias = () => {
     const cores = ['#FFC55E', '#C6D668', '#4C8EB5'];
 
     const data = [
         { id: '1', nome: 'Brincalhões' },
-        { id: '2', nome: 'Curiosos' },
         { id: '3', nome: 'Sociável' },
         { id: '4', nome: 'Divertidos' },
         { id: '5', nome: 'Animados' }

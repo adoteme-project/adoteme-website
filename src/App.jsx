@@ -5,8 +5,9 @@ import NotFound from "./pages/NotFound"
 import Doacoes from "./pages/Doacoes"
 import Ongs from "./pages/Ongs"
 import Achados from "./pages/Achados"
-import Institucional from "./components/Institucional"
+import Institucional from "./components/layout/Institucional"
 import Teste from "./pages/Teste"
+import Login from "./pages/Login"
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
             <Route path="/doacoes" element={<Doacoes/>}/>
             <Route path="/ongs" element={<Ongs/>}/>
             <Route path="/achados" element={<Achados/>}/>
+            <Route path="/login" element={<Login />}/>
           </Route>
           <Route path="/teste" element={<Teste/>}/>
           <Route path="*" element={<NotFound/>}/>

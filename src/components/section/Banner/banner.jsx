@@ -1,4 +1,4 @@
-import imagemBanner from '../../assets/imagem-tela-animais.svg'
+import imagemBanner from '../../../assets/imagem-tela-animais.svg'
 
 const Banner = (props) => {
     return (

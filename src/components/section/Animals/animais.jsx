@@ -1,6 +1,6 @@
-import Selecao from '../Selecao/selecao.jsx'
+import Selecao from '../../feature/Selecao/selecao.jsx'
 import AnimaisProximos from '../Animais-Proximos/AnimaisProximos.jsx'
-import Botao from "../Button/botao.jsx"
+import Botao from "../../common/Button/botao.jsx"
 
 const animais = () => {
     return (

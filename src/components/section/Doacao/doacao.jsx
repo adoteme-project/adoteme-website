@@ -1,5 +1,5 @@
-import Botao from "../Button/botao";
-import imagem from '../../assets/logo-apoie.svg';
+import Botao from "../../common/Button/botao";
+import imagem from '../../../assets/logo-apoie.svg';
 // import imagem2 from '../../assets/gato-categorias.png';
 
 const Doacao = () => {
