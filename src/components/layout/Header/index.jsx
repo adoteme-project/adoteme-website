@@ -15,7 +15,7 @@ const Header = () => {
           <Link to="/achados">Achados e Perdidos</Link>
           <Link to="/favoritos"><FontAwesomeIcon icon={faHeart} className="text-vermelho"/></Link> 
           <Link to="/perfil"><FontAwesomeIcon icon={faUser} /></Link>
-          <button className="rounded bg-azul-main text-branco px-4 py-2"> Entrar </button>
+          <Link to="/login" className="rounded bg-azul-main text-branco px-4 py-2"> Entrar </Link>
         </div>
       </ul>
     </nav>
