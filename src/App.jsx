@@ -12,6 +12,7 @@ import LoginLayout from "./components/layout/LoginLayout";
 import LoginAdotante from "./pages/LoginAdotante";
 import LoginOng from "./pages/LoginOng";
 import RedefinirAcesso from "./pages/RedefinirAcesso";
+import CadastroAdotante from "./pages/CadastroAdotante";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/login" element={<LoginSelection />} />
           <Route path="/login/adotante" element={<LoginAdotante />} />
           <Route path="/login/ong" element={<LoginOng />} />
+          <Route path="/login/cadastro-adotante" element={<CadastroAdotante />} />
           <Route path="/login/redefinir" element={<RedefinirAcesso />} />
         </Route>
 
