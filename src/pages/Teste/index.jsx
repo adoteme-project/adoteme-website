@@ -1,38 +1,39 @@
-import { APIProvider } from "@vis.gl/react-google-maps";
 import { useState } from "react";
-import useGeocoding from "../../hooks/useGeocoder";
+import CloudImage from "../../components/common/CloudImage";
+import UploadWidget from "../../components/feature/UploadImage";
+import axios from "axios";
 
-const PesquisaCoordenada = () => {
-  const [inputAddress, setInputAddress] = useState("");
-  const { coordinates, error, geocodeAddress } = useGeocoding(inputAddress);
+const EnviarImagem = () => {
+  const [image, setImage] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    geocodeAddress();
-    console.log(coordinates);
+  const uwConfig = {
+    cloudName: import.meta.env.VITE_CLOUD_NAME,
+    uploadPreset: import.meta.env.VITE_UPLOAD_PRESET,
+  };
+
+  const uploadImage = (files) => {
+    const formData = new FormData();
+
+    formData.append("file", files[0]);
+    formData.append("upload_preset", uwConfig.uploadPreset);
+    axios
+      .post(
+        `https://api.cloudinary.com/v1_1/${uwConfig.cloudName}/image/upload`,
+        formData
+      )
+      .then((response) => {
+        setImage(response.data.secure_url);
+      })
+      .catch((error) => {
+        console.error("Error uploading the image:", error);
+      });
   };
 
   return (
     <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={inputAddress}
-          onChange={(e) => setInputAddress(e.target.value)}
-          placeholder="Enter address"
-          className="border p-2 bg-beje"
-        />
-        <button type="submit" className="p-2 bg-azul-dark text-branco">
-          Coordenadas
-        </button>
-      </form>
-
-      {error && <p>Error: {error}</p>}
-      {coordinates && (
-        <p>
-          Latitude: {coordinates.lat}, Longitude: {coordinates.lng}
-        </p>
-      )}
+      {/* <UploadWidget uwConfig={uwConfig} setPublicId={setPublicId}/> */}
+      <input type="file" onChange={(e) => uploadImage(e.target.files)} />
+      <img src={image} alt="Imagem enviada" />
     </div>
   );
 };
@@ -40,10 +41,7 @@ const PesquisaCoordenada = () => {
 const Teste = () => {
   return (
     <>
-      <h1>Geodados Test</h1>
-      <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-        <PesquisaCoordenada />
-      </APIProvider>
+      <EnviarImagem />
     </>
   );
 };
