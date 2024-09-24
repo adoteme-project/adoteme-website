@@ -24,7 +24,7 @@ const LoginSelection = () => {
         <h4 className="text-azul-main font-bold text-4xl"> adoteMe </h4>
         <p>Entrar como</p>
       </div>
-      <div className="flex gap-14 mt-14">
+      <div className="flex gap-20 mt-14">
         {userSelectOptions.map((option) => (
           <UserSelect
             key={option.key}

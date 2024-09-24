@@ -3,7 +3,7 @@ const NavigationForm = ({ prevStep, nextStep, step, totalSteps }) => {
     const bothButtonsVisible = prevStep && nextStep;
   
     return (
-      <div className={`flex w-1/2 mt-4 ${bothButtonsVisible ? "justify-between" : "justify-end"} space-x-4`}>
+      <div className={`flex w-2/3 mt-4 ${bothButtonsVisible ? "justify-between" : "justify-end"} space-x-4`}>
         {prevStep && (
           <button
             className="bg-amarelo px-4 py-3 rounded-md"

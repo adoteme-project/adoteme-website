@@ -12,7 +12,7 @@ const FormGroup = ({ title, fields = [], column = 1, radioControl = [] }) => {
 
   return (
     <form className="max-w-screen-lg w-full px-14 py-8 flex flex-col gap-8 bg-beje shadow-md rounded-2xl">
-      <h1 className="text-xl font-bold">{title}</h1>
+      <h1 className="text-2xl font-bold">{title}</h1>
 
       <div className="grid gap-4 w-full" style={{ gridTemplateColumns }}>
         {fields.length > 0 &&

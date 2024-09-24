@@ -3,7 +3,7 @@ import Input from "../Input";
 
 const FormAuth = ({ title, subtitle, description, fields, onSubmit, buttonLabel, linkTo, linkLabel, linkForgot}) => {
   return (
-    <form onSubmit={onSubmit} className="max-w-screen-lg w-1/3 p-16 flex flex-col gap-10">
+    <form onSubmit={onSubmit} className="max-w-screen-lg w-2/5 p-16 flex flex-col gap-10 font-nunito">
       <div className="flex flex-col gap-4">
         <h1 className="text-4xl text-center font-bold">{title}</h1>
         {subtitle && <h3 className="text-2xl text-center text-cinza">{subtitle}</h3>}
