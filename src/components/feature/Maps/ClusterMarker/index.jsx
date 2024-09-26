@@ -1,8 +1,8 @@
 import { useMap } from '@vis.gl/react-google-maps';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { MarkerClusterer } from '@googlemaps/markerclusterer';
-import CustomMarker from '../CustomMarker';
-import JanelaInfo from '../JanelaInfo';
+import CustomMarker from '@/components/feature/Maps/CustomMarker';
+import JanelaInfo from '@maps/JanelaInfo';
 
 /**
  * O componente ClusteredPetsMarkers é responsável por integrar os

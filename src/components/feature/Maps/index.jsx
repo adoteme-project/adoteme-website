@@ -8,12 +8,12 @@ import {
   useAdvancedMarkerRef,
 } from "@vis.gl/react-google-maps";
 import React, { useCallback, useEffect, useState } from "react";
-import { PlaceAutocomplete } from "../PlaceAutocomplete";
-import { MapHandler } from "../MapHandler";
-import ClusteredPetsMarkers from "../ClusterMarker";
-import ListAchados from "../ListAchados";
-import useModal from "../../../hooks/useModal";
-import useGeolocation from "../../../hooks/useGeolocation";
+import { PlaceAutocomplete } from "./PlaceAutocomplete";
+import { MapHandler } from "./MapHandler";
+import ClusteredPetsMarkers from "./ClusterMarker";
+import ListAchados from "./ListAchados";
+import useModal from "@/hooks/useModal";
+import useGeolocation from "@/hooks/useGeolocation";
 import { useLocation } from "react-router-dom";
 
 const MapaAchados = () => {

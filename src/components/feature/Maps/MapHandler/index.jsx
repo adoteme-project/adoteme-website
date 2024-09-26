@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useMap } from "@vis.gl/react-google-maps";
-import calculateDistance from "../../../utils/nearbyMarkers";
+import calculateDistance from "@/utils/nearbyMarkers";
 
 const MapHandler = ({ place, marker, pets, setNearbyPets }) => {
   const map = useMap();
