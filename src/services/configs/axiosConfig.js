@@ -8,7 +8,7 @@ const client = axios.create({
   },
 });
 
-client.interceptors.request.use(
+/* client.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -45,6 +45,6 @@ client.interceptors.response.use(
 
     return Promise.reject(error);
   }
-);
+); */
 
 export default client;
