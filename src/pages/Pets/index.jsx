@@ -1,16 +1,20 @@
-import Animais from '../../components/section/Animals/animais'
-import Banner from '../../components/section/Banner/banner'
-import Categorias from '../../components/section/Categorias/categorias';
-import BreadCrumb from '../../components/common/BreadCrumb/breadCrumb';
+import Animais from '@/components/section/Animals'
+import Banner from '@/components/section/Banner'
+import Categorias from '@/components/section/Categories';
+import BreadCrumb from '@/components/common/BreadCrumb';
+import Doacao from '@/components/section/Donation';
+// import AnimaisProximos from '@/components/section/Near-Animals/index'
 
 
 const Pets = () => {
   return (
     <>
      <Banner tamanho='700.25vh'/>
-     <BreadCrumb caminho="Home" caminho2="Animais" cor="#B2DED3"/>
-     <Categorias/>
+     <BreadCrumb tituloCaminho="Home" tituloCaminho2="Animais" cor="#B2DED3" caminho="/pets" />
+     <Categorias titulo="Categorias" tipo="categorias"/>
      <Animais/>
+     
+     <Doacao/>
   
     </>
   );

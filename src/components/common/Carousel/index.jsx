@@ -4,11 +4,13 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import Box from '../../section/Categorias/Box/box';
+import Box from '../../feature/Box-Carousel';
 
 register();
 
 function Carrosel({ data = [], slidePerview, color }) {
+  // console.log('Data:', data);
+  // console.log('Cores:', color);
   return (
     <div>
       <Swiper
