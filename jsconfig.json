@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "paths": {
+            "@/*": ["./src/*"],
+            "@maps/*": ["./src/components/feature/Maps/*"]
+        }
+    }
+}
