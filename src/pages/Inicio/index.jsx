@@ -1,7 +1,7 @@
-import AnimaisProximos from "../../components/Animais-Proximos/AnimaisProximos.jsx";
-import Banner from "../../components/Banner/banner.jsx";
-import Doacao from "../../components/Doacao/Doacao.jsx";
-import Categorias from "../../components/Categorias/categorias.jsx";
+import AnimaisProximos from "../../components/section/Animais-Proximos/AnimaisProximos.jsx";
+import Banner from "../../components/section/Banner/banner.jsx";
+import Doacao from "../../components/section/Doacao/Doacao.jsx";
+import Categorias from "../../components/section/Categorias/categorias";
 
 const Inicio = () => {
   return (

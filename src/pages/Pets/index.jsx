@@ -1,7 +1,7 @@
-import Animais from '../../components/Animals/animais'
-import Banner from '../../components/Banner/banner'
-import Categorias from '../../components/Categorias/categorias';
-import BreadCrumb from '../../components/BreadCrumb/breadCrumb';
+import Animais from '../../components/section/Animals/animais'
+import Banner from '../../components/section/Banner/banner'
+import Categorias from '../../components/section/Categorias/categorias';
+import BreadCrumb from '../../components/common/BreadCrumb/breadCrumb';
 
 
 const Pets = () => {
