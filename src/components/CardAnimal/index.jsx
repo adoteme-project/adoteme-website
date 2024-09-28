@@ -1,5 +1,5 @@
-import Botao from "../../Button/botao";
-import Avaliacao from '../../Avaliacao/avaliacao';
+import Botao from "../Button";
+import Avaliacao from '../Rating';
 
 const Card = (props) => {
 
@@ -21,11 +21,11 @@ const Card = (props) => {
                     <h3 >
                         Sociável:
                     </h3>
-                    <Avaliacao avaliacao='3' cor='#A9B949' />
+                    <Avaliacao avaliacao={3} cor='#A9B949' />
                     <h3>
                         Brincalhão:
                     </h3>
-                    <Avaliacao avaliacao='4' cor='#EC5A49' />
+                    <Avaliacao avaliacao={4} cor='#EC5A49' />
                 <Botao textColor="branco" color="azul-main" tamanho="120" altura="40" nome="Ver mais"></Botao>
                 </div>
 

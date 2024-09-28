@@ -1,16 +1,16 @@
-import AnimaisProximos from "../../components/Animais-Proximos/AnimaisProximos.jsx";
-import Banner from "../../components/Banner/banner.jsx";
-import Doacao from "../../components/Doacao/Doacao.jsx";
-import Categorias from "../../components/Categorias/categorias.jsx";
+import AnimaisProximos from "../../components/Near-Animals/index.jsx";
+import Banner from "../../components/Banner/index.jsx";
+import Doacao from "../../components/Donation/index.jsx";
+import Carousel from "../../components/Categories/index.jsx";
 
 const Inicio = () => {
   return (
     <>
-      <h1 className="text-2xl p-8"> Início </h1>
       <Banner/>
       <Doacao/>
-      <Categorias/>
-      <AnimaisProximos>Animais próximos a você</AnimaisProximos>
+      <Carousel titulo="Categorias" tipo= "categorias"/>
+      <AnimaisProximos tipo="animal">Animais próximos a você</AnimaisProximos>
+      <Carousel titulo="Ongs" tipo="ongs"/>
       </>
   );
 };
