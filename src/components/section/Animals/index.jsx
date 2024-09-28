@@ -1,6 +1,6 @@
-import Selecao from '../DropDown/index.jsx'
-import AnimaisProximos from '../Near-Animals/index.jsx'
-import Botao from "../Button/index.jsx"
+import Selecao from '@/components/common/DropDown/index.jsx'
+import AnimaisProximos from '@/components/section/Near-Animals/index.jsx'
+import Botao from "@/components/common/Button/index.jsx"
 
 const animais = () => {
 

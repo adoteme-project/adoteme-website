@@ -1,9 +1,9 @@
-import Animais from '../../components/Animals'
-import Banner from '../../components/Banner'
-import Categorias from '../../components/Categories';
-import BreadCrumb from '../../components/BreadCrumb';
-import Doacao from '../../components/Donation';
-import AnimaisProximos from '../../components/Near-Animals/index'
+import Animais from '@/components/section/Animals'
+import Banner from '@/components/section/Banner'
+import Categorias from '@/components/section/Categories';
+import BreadCrumb from '@/components/common/BreadCrumb';
+import Doacao from '@/components/section/Donation';
+// import AnimaisProximos from '@/components/section/Near-Animals/index'
 
 
 const Pets = () => {

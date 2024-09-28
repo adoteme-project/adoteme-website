@@ -1,8 +1,8 @@
-import Breadcrumbs from '../../components/BreadCrumb/index';
-import Banner from '../../components/Banner/index'
-import DropDown from '../../components/DropDown-ONG/index'
-import Grid from '../../components/Grid/index'
-import Doacao from '../../components/Donation';
+import Breadcrumbs from '@/components/common/BreadCrumb/index';
+import Banner from '@/components/section/Banner';
+import DropDown from "@/components/common/DropDown-ONG/index"
+import Grid from "@/components/layout/Grid"
+import Doacao from "@/components/section/Donation"
 
 const Doacoes = () => {
   return (

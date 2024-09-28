@@ -1,7 +1,7 @@
-import AnimaisProximos from "../../components/Near-Animals/index.jsx";
-import Banner from "../../components/Banner/index.jsx";
-import Doacao from "../../components/Donation/index.jsx";
-import Carousel from "../../components/Categories/index.jsx";
+import AnimaisProximos from "../../components/section/Near-Animals/index.jsx";
+import Banner from "@/components/section/Banner/index.jsx";
+import Doacao from "../../components/section/Donation/index.jsx";
+import Carousel from "../../components/section/Categories/index.jsx";
 
 const Inicio = () => {
   return (
