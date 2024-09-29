@@ -16,7 +16,7 @@ const animais = () => {
                 </div>
                 <div className="flex justify-center gap-5 ">
                     <input type="text" className="border rounded-lg h-[40px] w-[253px] text-xs pl-2" placeholder='Cidade' />
-                    <Botao color="#C6D668"  titulo= "Buscar" tamanho="120" altura="40" fontSize="15"  ></Botao>
+                    <Botao color="#C6D668"  titulo="Buscar" tamanho="120" altura="40" fontSize="15"  ></Botao>
                 </div>
             </div>
             </AnimaisProximos>

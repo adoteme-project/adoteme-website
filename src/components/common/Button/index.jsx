@@ -1,4 +1,4 @@
-const Botao = ({ color, textColor, fontWeight, tamanho,altura, nome, titulo, fontSize, onClick}) => {
+const Botao = ({ color, textColor, fontWeight, tamanho, altura, titulo, fontSize, onClick}) => {
 
   return (
     <button

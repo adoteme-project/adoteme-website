@@ -1,10 +1,10 @@
 import { Breadcrumbs } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const breadCrumb = (props,cor) => {
+const breadCrumb = (props, cor) => {
     return (
         <>
-            <Breadcrumbs aria-label="breadcrumb" className= 'px-16'>
+            <Breadcrumbs aria-label="breadcrumb" className='px-16'>
                 <Link
                     underline=""
                     color="inherit"
@@ -15,13 +15,23 @@ const breadCrumb = (props,cor) => {
                     underline=""
                     color="inherit"
                     to={props.caminho}
-                    style={{ 
+                    style={{
                         fontWeight: 'bold',
-                        color: cor, 
+                        color: cor,
                     }}
-                    className="text-azul-main "
-                >
+                    className="text-azul-main ">
                     {props.tituloCaminho2}
+                </Link>
+                <Link
+                    underline=""
+                    color="inherit"
+                    to={props.caminho}
+                    style={{
+                        fontWeight: 'bold',
+                        color: cor,
+                    }}
+                    className="text-azul-main ">
+                    {props.tituloCaminho3}
                 </Link>
             </Breadcrumbs>
         </>

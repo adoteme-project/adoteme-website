@@ -1,5 +1,6 @@
 import Botao from "@/components/common/Button";
 import Avaliacao from '@/components/feature/Rating';
+import { Link } from "react-router-dom";
 
 const Card = (props) => {
 
@@ -12,9 +13,9 @@ const Card = (props) => {
             </div>
             <div>
                 <h1 style={{ backgroundColor: `${props.colorBg}` }} className="w-full h-[7.52vh] text-left px-2 font-roboto text-2xl flex items-center">
-                    {props.name}
+                    {props.nome}
                 </h1>
-                <div className = "font-roboto flex flex-col gap-3">
+                <div className="font-roboto flex flex-col gap-3">
                     <h3 >
                         Idade: {props.idade}
                     </h3>
@@ -26,7 +27,9 @@ const Card = (props) => {
                         Brincalhão:
                     </h3>
                     <Avaliacao avaliacao={4} cor='#EC5A49' />
-                <Botao textColor="branco" color="azul-main" tamanho="120" altura="40" nome="Ver mais"></Botao>
+                    <Link to={"/pagina-pet"}>
+                        <Botao textColor="#fff" color="#4C8EB5" tamanho="120" altura="40" titulo="Ver mais" />
+                    </Link>
                 </div>
 
             </div>
