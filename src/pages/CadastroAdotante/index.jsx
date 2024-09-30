@@ -1,46 +1,60 @@
 import { useState } from "react";
 import NavigationForm from "../../components/common/NavigationForm";
-import stepsData from "@/mocks/stepFormRegister";
-import FormGroup from "@/components/common/FormGroup";
+import { FormProvider, useForm } from "react-hook-form";
+import CadastroDados from "@/pages/CadastroAdotante/CadastroDados";
+import CadastroPerguntas from "@/pages/CadastroAdotante/CadastroPerguntas";
+import CadastroFoto from "@/pages/CadastroAdotante/CadastroFoto";
+import { MoonLoader } from "react-spinners";
 
 const CadastroAdotante = () => {
-  const [step, setStep] = useState(1);
-  const totalSteps = stepsData.length;
+  const methods = useForm();
+  const [step, setStep] = useState(0);
+  const [loadingStep, setLoadingStep] = useState(false);
 
-  const nextStep = () => setStep(step + 1);
-  const prevStep = () => setStep(step - 1);
+  const steps = [
+    <CadastroDados key={0} />,
+    <CadastroPerguntas key={1} />,
+    <CadastroFoto key={2} />,
+  ];
 
-  const handleSubmit = () => {
-    alert("Registro enviado");
+  const nextStep = () => {
+    setStep((prev) => Math.min(prev + 1, steps.length - 1));
   };
 
-  const renderStep = (stepsData, step) => {
-    const currentStepData = stepsData.find((s) => s.step === step);
-  
-    return currentStepData.formGroups.map((formGroup, index) => (
-      <FormGroup
-        key={index}
-        title={formGroup.title}
-        column={formGroup.column}
-        fields={formGroup.fields}
-        radioControl={formGroup.radioControl}
-      />
-    ));
+  const prevStep = () => {
+    setStep((prev) => Math.max(prev - 1, 0));
+  };
+
+  const onSubmit = (data) => {
+    console.log("Final Data:", data);
+    alert("Formulário enviado");
   };
 
   return (
-    <div className="w-full justify-center items-center flex flex-col gap-8 overflow-y-auto my-8 font-nunito">
-      <h1 className="text-center text-4xl">Cadastro: Adotante</h1>
+    <FormProvider {...methods}>
+      <form
+        onSubmit={methods.handleSubmit(onSubmit)}
+        className="w-full justify-center items-center flex flex-col gap-8 overflow-y-auto my-8 font-nunito"
+      >
+        <h1 className="text-center text-4xl">Cadastro: Adotante</h1>
 
-      {renderStep (stepsData, step)}
+        {loadingStep ? (
+          <div className="flex justify-center items-center">
+            <MoonLoader speedMultiplier={1} />
+          </div>
+        ) : (
+          steps[step]
+        )}
 
-      <NavigationForm
-        prevStep={step > 1 ? prevStep : null}
-        nextStep={step < totalSteps ? nextStep : handleSubmit}
-        step={step}
-        totalSteps={totalSteps}
-      />
-    </div>
+        <NavigationForm
+          prevStep={step > 0 ? prevStep : null}
+          nextStep={step < steps.length - 1 ? nextStep : null}
+          step={step}
+          totalSteps={steps.length - 1}
+          handleSubmit={methods.handleSubmit(onSubmit)}
+        />
+      </form>
+    </FormProvider>
   );
 };
 
