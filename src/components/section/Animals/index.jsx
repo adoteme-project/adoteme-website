@@ -1,13 +1,23 @@
 import Selecao from '@/components/common/DropDown/index.jsx'
-import AnimaisProximos from '@/components/section/Near-Animals/index.jsx'
+import SectionGrid from '@/components/section/SectionGrid/index.jsx'
 import Botao from "@/components/common/Button/index.jsx"
+import { useEffect, useState } from 'react';
 
-const animais = () => {
+const Animais = () => {
+
+    const [pets, setPets] = useState([]);
+
+    useEffect(() => {
+      fetch("/petsResumido.json")
+        .then((response) => response.json())
+        .then((data) => setPets(data))
+        .catch((error) => console.error("Erro json pets", error));
+    }, []);
 
     return (
 
         <section >
-            <AnimaisProximos tipo="animal">Animais
+            <SectionGrid data={pets}>Animais
             <div className="flex py-5 gap-7">
                 <div className=" h-[40px] flex gap-3 w-[759px]">
                     <Selecao nome="Tamanhos" tamanho="300" />
@@ -19,9 +29,9 @@ const animais = () => {
                     <Botao color="#C6D668"  titulo="Buscar" tamanho="120" altura="40" fontSize="15"  ></Botao>
                 </div>
             </div>
-            </AnimaisProximos>
+            </SectionGrid>
         </section>
     );
 }
 
-export default animais;
+export default Animais;
