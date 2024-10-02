@@ -13,7 +13,8 @@ import LoginAdotante from "./pages/LoginAdotante";
 import LoginOng from "./pages/LoginOng";
 import RedefinirAcesso from "./pages/RedefinirAcesso";
 import CadastroAdotante from "./pages/CadastroAdotante";
-import PaginaPet from "./pages/PaginaPet";
+import PaginaPet from "./pages/PaginaPet"
+import PerfilUsuario from "./pages/PerfilUsuario"
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/ongs" element={<Ongs />} />
           <Route path="/achados" element={<Achados />} />
           <Route path="/pagina-pet" element={<PaginaPet />} />
+          <Route path="/perfil" element={<PerfilUsuario />}/>
         </Route>
 
         <Route path="/login" element={<LoginLayout/>}>

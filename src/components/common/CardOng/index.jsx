@@ -1,19 +1,6 @@
-import { useState } from "react";
 import Botao from "@/components/common/Button/index";
-import Modal from "../Modal";
 
 const Card = (props) => {
-  const [isModalOpen, setModalOpen] = useState(false);
-  
-// Abre o modal
-const handleOpenModal = () => {
-  setModalOpen(true);
-};
-
-// Fecha o modal
-const handleCloseModal = () => {
-  setModalOpen(false);
-};
 
   return (
 
@@ -44,7 +31,6 @@ const handleCloseModal = () => {
             tamanho="111"
             altura="40"
             fontSize="15"
-            onClick={handleOpenModal}
           ></Botao> 
           <Botao
             color="#FFC55E"
@@ -52,11 +38,10 @@ const handleCloseModal = () => {
             tamanho="111"
             altura="40"
             fontSize="15"
-            onClick={handleOpenModal}
+            onClick={props.onDoarClick}
           ></Botao>
           </div>
         </div>
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
       </div>
   );
 };

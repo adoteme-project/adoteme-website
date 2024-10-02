@@ -1,23 +1,10 @@
 import Card from "@/components/common/CardAnimal";
 import CardOng from "@/components/common/CardOng/index"
 // import Botao from "@/components/common/Button/index"
-import Modal from "@/components/common/Modal";
-import { useState } from "react";
 
 const GridAnimais = (props) => {
   let grid = [];
   const cores = ["#FFC55E", "#A9B949", "#B2DED3", "#EC5A49"];
-  const [isModalOpen, setModalOpen] = useState(false);
-
-   // Abre o modal
-   const handleOpenModal = () => {
-    setModalOpen(true);
-  };
-
-  // Fecha o modal
-  const handleCloseModal = () => {
-    setModalOpen(false);
-  };
 
   if (props.tipo == "animal") {
     grid = [
@@ -50,8 +37,8 @@ const GridAnimais = (props) => {
               key={grid.key}
               name={grid.name}
               colorBg={cores[index % cores.length]}
-              descricao={props.tipo === "ong" ? item.descricao : undefined}
-              endereco={props.tipo === "ong" ? item.endereco : undefined}
+              descricao={props.tipo === "ong" ? props.descricao : undefined}
+              endereco={props.tipo === "ong" ? props.endereco : undefined}
             />
           ))}
         </section>
@@ -98,11 +85,10 @@ const GridAnimais = (props) => {
                 endereco={grid.endereco}
                 titulo = {props.titulo}
                 titulo1 = {props.titulo1}
+                onDoarClick={props.onDoarClick}
               />
               
-            ))}
-        <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
-            
+            ))}            
           </section>
         </>
       );
