@@ -14,33 +14,35 @@ import LoginOng from "./pages/LoginOng";
 import RedefinirAcesso from "./pages/RedefinirAcesso";
 import CadastroAdotante from "./pages/CadastroAdotante";
 import PaginaPet from "./pages/PaginaPet";
+import { CardProvider } from "@/contextCard/index";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Institucional />}>
-          <Route path="/" element={<Inicio />} />
-          <Route path="/pets" element={<Pets />} />
-          <Route path="/doacoes" element={<Doacoes />} />
-          <Route path="/ongs" element={<Ongs />} />
-          <Route path="/achados" element={<Achados />} />
-          <Route path="/pagina-pet" element={<PaginaPet />} />
-        </Route>
+    <CardProvider> {/* Envolvendo todo o Router no Provider */}
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Institucional />}>
+            <Route path="/" element={<Inicio />} />
+            <Route path="/pets" element={<Pets />} />
+            <Route path="/doacoes" element={<Doacoes />} />
+            <Route path="/ongs" element={<Ongs />} />
+            <Route path="/achados" element={<Achados />} />
+            <Route path="/pagina-pet" element={<PaginaPet />} />
+          </Route>
 
-        <Route path="/login" element={<LoginLayout/>}>
-          <Route path="/login" element={<LoginSelection />} />
-          <Route path="/login/adotante" element={<LoginAdotante />} />
-          <Route path="/login/ong" element={<LoginOng />} />
-          <Route path="/login/cadastro-adotante" element={<CadastroAdotante />} />
-          <Route path="/login/redefinir" element={<RedefinirAcesso />} />
-        </Route>
+          <Route path="/login" element={<LoginLayout />}>
+            <Route path="/login" element={<LoginSelection />} />
+            <Route path="/login/adotante" element={<LoginAdotante />} />
+            <Route path="/login/ong" element={<LoginOng />} />
+            <Route path="/login/cadastro-adotante" element={<CadastroAdotante />} />
+            <Route path="/login/redefinir" element={<RedefinirAcesso />} />
+          </Route>
 
-        <Route path="/teste" element={<Teste />} />
-        <Route path="*" element={<NotFound />} />
-
-      </Routes>
-    </BrowserRouter>
+          <Route path="/teste" element={<Teste />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </CardProvider>
   );
 }
 
