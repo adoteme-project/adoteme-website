@@ -25,7 +25,8 @@ export default {
       'beje': '#FDF6F0',
       'branco': '#FFFFFF',
       'titulo': '#1B1B1B',
-      'preto': '#000000'
+      'preto': '#000000',
+      'input-d': '#FFDFC4'
     },
   },
   plugins: [],

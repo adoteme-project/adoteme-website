@@ -2,7 +2,7 @@ import { useState } from "react";
 import NavigationForm from "../../components/common/NavigationForm";
 import { FormProvider, useForm } from "react-hook-form";
 import CadastroDados from "@/pages/CadastroAdotante/CadastroDados";
-import CadastroPerguntas from "@/pages/CadastroAdotante/CadastroPerguntas";
+// import CadastroPerguntas from "@/pages/CadastroAdotante/CadastroPerguntas";
 import CadastroFoto from "@/pages/CadastroAdotante/CadastroFoto";
 import { MoonLoader } from "react-spinners";
 
@@ -13,8 +13,8 @@ const CadastroAdotante = () => {
 
   const steps = [
     <CadastroDados key={0} />,
-    <CadastroPerguntas key={1} />,
-    <CadastroFoto key={2} />,
+    // <CadastroPerguntas key={0} />,
+    <CadastroFoto key={1} />,
   ];
 
   const nextStep = () => {
@@ -25,8 +25,9 @@ const CadastroAdotante = () => {
     setStep((prev) => Math.max(prev - 1, 0));
   };
 
-  const onSubmit = (data) => {
-    console.log("Final Data:", data);
+  const onSubmit = () => {
+    methods.unregister(["endereco", "cidade", "estado"])
+    console.log("Final Data:", methods.getValues());
     alert("Formulário enviado");
   };
 

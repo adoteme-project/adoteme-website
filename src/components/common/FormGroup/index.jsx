@@ -31,6 +31,7 @@ const FormGroup = ({
               type={field.type}
               placeholder={field.placeholder}
               name={field.name}
+              disabled={field.disabled}
               register={register}
             />
           ))}
