@@ -1,5 +1,5 @@
 import Botao from "@/components/common/Button";
-import Avaliacao from '@/components/feature/Rating';
+import Favorite from "@/components/feature/Favorite"
 import { Link } from "react-router-dom";
 
 const Card = (props) => {
@@ -16,20 +16,27 @@ const Card = (props) => {
                     {props.nome}
                 </h1>
                 <div className="font-roboto flex flex-col gap-3">
+                    <div className="flex flex-col gap-4 bg-vermelho  py-4 ">
                     <h3 >
-                        Idade: {props.idade}
+                        Idade:
                     </h3>
                     <h3 >
-                        Sociável:
+                        Tamanho:
                     </h3>
-                    <Avaliacao avaliacao={3} cor='#A9B949' />
                     <h3>
-                        Brincalhão:
+                        Espécie:
                     </h3>
-                    <Avaliacao avaliacao={4} cor='#EC5A49' />
-                    <Link to={"/pagina-pet"}>
-                        <Botao textColor="#fff" color="#4C8EB5" tamanho="120" altura="40" titulo="Ver mais" />
-                    </Link>
+                    <h3></h3>
+
+                    </div>                 
+                        <div className="flex items-center justify-between py-4">
+                        <Link to={"/pagina-pet"}>
+                            <Botao textColor="#fff" color="#4C8EB5" tamanho="120" altura="40" titulo="Ver mais" />
+                        </Link>
+                        
+                            <Favorite/>
+                        </div>
+
                 </div>
 
             </div>

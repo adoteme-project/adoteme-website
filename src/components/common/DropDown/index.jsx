@@ -2,12 +2,6 @@ import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 // import { useState } from "react";
 
 const Selecao = (props) => {
-  //     const [data, setData] = useState('');
-
-  //   const handleChange = (event) => {
-  //     setData(event.target.value);
-  //   };
-
   return (
     <section className="w-full">
       <Box sx={{ minWidth: 120 }}>
