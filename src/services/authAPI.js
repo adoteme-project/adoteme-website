@@ -1,11 +1,14 @@
-import { auth, axiosForm } from "./configs/axiosConfig";
+import { axiosAuth, axiosForm } from "./configs/axiosConfig";
 
 export function cadastrarAdotante(formData) {
     return axiosForm.post("/adotantes/cadastrar", formData);
 }
 
+export function login(context, data) {
+    return axiosAuth.post(`/login/${context}`, data);
+}
 
-auth.interceptors.request.use(
+axiosAuth.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -16,7 +19,7 @@ auth.interceptors.request.use(
     (error) => Promise.reject(error)
 );
 
-auth.interceptors.response.use(
+axiosAuth.interceptors.response.use(
     (response) => response,
     async (error) => {
         const originalRequest = error.config;
@@ -26,7 +29,7 @@ auth.interceptors.response.use(
 
             try {
                 const refreshToken = localStorage.getItem("refreshToken");
-                const response = await auth.post("/api/refresh-token", {
+                const response = await axiosAuth.post("/api/refresh-token", {
                     refreshToken,
                 });
 
@@ -35,7 +38,7 @@ auth.interceptors.response.use(
 
                 originalRequest.headers.Authorization = `Bearer ${token}`;
 
-                return auth(originalRequest);
+                return axiosAuth(originalRequest);
             } catch (refreshError) {
                 console.error("Refresh token request failed", refreshError);
             }

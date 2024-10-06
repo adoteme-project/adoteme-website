@@ -1,19 +1,20 @@
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import NavigationForm from "../../components/common/NavigationForm";
 import { FormProvider, useForm } from "react-hook-form";
-import CadastroDados from "@/pages/CadastroAdotante/CadastroDados";
-import CadastroFoto from "@/pages/CadastroAdotante/CadastroFoto";
 import { MoonLoader } from "react-spinners";
 import { cadastrarAdotante } from "@/services/authAPI";
+import { useNavigate } from "react-router-dom";
+
+const CadastroFoto = lazy(() => import('@/pages/CadastroAdotante/CadastroFoto'))
+const CadastroDados = lazy(() => import('@/pages/CadastroAdotante/CadastroDados'))
 
 const CadastroAdotante = () => {
   const methods = useForm();
   const [step, setStep] = useState(0);
-  const [loadingStep, setLoadingStep] = useState(false);
+  const navigation = useNavigate();
 
   const steps = [
     <CadastroDados key={0} />,
-    // <CadastroPerguntas key={0} />,
     <CadastroFoto key={1} />,
   ];
 
@@ -29,29 +30,27 @@ const CadastroAdotante = () => {
     methods.unregister(["endereco", "cidade", "estado", "confirmarSenha"])
 
     const data = methods.getValues();
-    console.log("Adotante data:", data);
 
     const { fotoPerfil, ...dadosAdotante } = data;
 
     const formData = new FormData();
     formData.append("adotante", JSON.stringify(dadosAdotante));
 
-    console.log(dadosAdotante);
-
     if (data.fotoPerfil instanceof File) {
       formData.append("fotoPerfil", fotoPerfil);
     }
 
-    console.log(formData.getAll("fotoPerfil"));
-
     try {
       const response = await cadastrarAdotante(formData);
-      console.log(response);
+      if (response.status === 201) {
+        navigation("/login/adotante");
+      } else {
+        console.log("Erro ao cadastro adotante:", response.status, response.statusText);
+      }
     } catch (error) {
       return console.log("Erro: " + error);
     }
 
-    alert("Formulário enviado");
   };
 
 
@@ -63,13 +62,9 @@ const CadastroAdotante = () => {
       >
         <h1 className="text-center text-4xl">Cadastro: Adotante</h1>
 
-        {loadingStep ? (
-          <div className="flex justify-center items-center">
-            <MoonLoader speedMultiplier={1} />
-          </div>
-        ) : (
-          steps[step]
-        )}
+        <Suspense fallback={<MoonLoader speedMultiplier={1} />}>
+          {steps[step]}
+        </Suspense>
 
         <NavigationForm
           prevStep={step > 0 ? prevStep : null}
