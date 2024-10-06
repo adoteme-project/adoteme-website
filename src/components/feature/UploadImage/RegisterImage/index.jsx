@@ -18,7 +18,9 @@ const FormRegisterImage = ({ control }) => {
     }
 
     setPreview(file ? URL.createObjectURL(file) : null);
-    onChange(file);
+    if(file) {
+      onChange(file);
+    }
   };
 
   return (

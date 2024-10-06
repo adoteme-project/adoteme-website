@@ -2,9 +2,9 @@ import { useState } from "react";
 import NavigationForm from "../../components/common/NavigationForm";
 import { FormProvider, useForm } from "react-hook-form";
 import CadastroDados from "@/pages/CadastroAdotante/CadastroDados";
-// import CadastroPerguntas from "@/pages/CadastroAdotante/CadastroPerguntas";
 import CadastroFoto from "@/pages/CadastroAdotante/CadastroFoto";
 import { MoonLoader } from "react-spinners";
+import { cadastrarAdotante } from "@/services/authAPI";
 
 const CadastroAdotante = () => {
   const methods = useForm();
@@ -25,11 +25,35 @@ const CadastroAdotante = () => {
     setStep((prev) => Math.max(prev - 1, 0));
   };
 
-  const onSubmit = () => {
-    methods.unregister(["endereco", "cidade", "estado"])
-    console.log("Final Data:", methods.getValues());
+  const onSubmit = async () => {
+    methods.unregister(["endereco", "cidade", "estado", "confirmarSenha"])
+
+    const data = methods.getValues();
+    console.log("Adotante data:", data);
+
+    const { fotoPerfil, ...dadosAdotante } = data;
+
+    const formData = new FormData();
+    formData.append("adotante", JSON.stringify(dadosAdotante));
+
+    console.log(dadosAdotante);
+
+    if (data.fotoPerfil instanceof File) {
+      formData.append("fotoPerfil", fotoPerfil);
+    }
+
+    console.log(formData.getAll("fotoPerfil"));
+
+    try {
+      const response = await cadastrarAdotante(formData);
+      console.log(response);
+    } catch (error) {
+      return console.log("Erro: " + error);
+    }
+
     alert("Formulário enviado");
   };
+
 
   return (
     <FormProvider {...methods}>

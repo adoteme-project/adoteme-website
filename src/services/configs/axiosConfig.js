@@ -1,6 +1,15 @@
 import axios from "axios";
 
-const client = axios.create({
+const auth = axios.create({
+  baseURL: "/api",
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
+  withCredentials: true,
+});
+
+const api = axios.create({
   baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
@@ -8,5 +17,20 @@ const client = axios.create({
   },
 });
 
+const axiosForm = axios.create({
+  baseURL: "/api",
+  headers: {
+    "Content-Type": "multipart/form-data",
+    "Access-Control-Allow-Origin": "*",
+  }
+})
 
-export default client;
+const viaCep = axios.create({
+  baseURL: "https://viacep.com.br/ws/",
+  headers: {
+    "Content-Type": "application/json"
+  }
+})
+
+
+export { auth, viaCep, api, axiosForm};

@@ -1,6 +1,11 @@
-import client from "./configs/axiosConfig";
+import { auth, axiosForm } from "./configs/axiosConfig";
 
-client.interceptors.request.use(
+export function cadastrarAdotante(formData) {
+    return axiosForm.post("/adotantes/cadastrar", formData);
+}
+
+
+auth.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -11,7 +16,7 @@ client.interceptors.request.use(
     (error) => Promise.reject(error)
 );
 
-client.interceptors.response.use(
+auth.interceptors.response.use(
     (response) => response,
     async (error) => {
         const originalRequest = error.config;
@@ -21,7 +26,7 @@ client.interceptors.response.use(
 
             try {
                 const refreshToken = localStorage.getItem("refreshToken");
-                const response = await client.post("/api/refresh-token", {
+                const response = await auth.post("/api/refresh-token", {
                     refreshToken,
                 });
 
@@ -30,7 +35,7 @@ client.interceptors.response.use(
 
                 originalRequest.headers.Authorization = `Bearer ${token}`;
 
-                return client(originalRequest);
+                return auth(originalRequest);
             } catch (refreshError) {
                 console.error("Refresh token request failed", refreshError);
             }
