@@ -11,7 +11,7 @@ export const CardProvider = ({ children }) => {
     useEffect(() => {
         const fetchAnimais = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/animais`, {
+                const response = await axios.get(`http://localhost:8080/animais`, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
@@ -23,6 +23,7 @@ export const CardProvider = ({ children }) => {
         };
 
         fetchAnimais();
+
     }, []);
 
     return (

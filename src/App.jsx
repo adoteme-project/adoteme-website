@@ -18,7 +18,7 @@ import { CardProvider } from "@/contextCard/index";
 
 function App() {
   return (
-    <CardProvider> {/* Envolvendo todo o Router no Provider */}
+    <CardProvider> 
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Institucional />}>
@@ -27,7 +27,7 @@ function App() {
             <Route path="/doacoes" element={<Doacoes />} />
             <Route path="/ongs" element={<Ongs />} />
             <Route path="/achados" element={<Achados />} />
-            <Route path="/pagina-pet" element={<PaginaPet />} />
+            <Route path="/pagina-pet/:id" element={<PaginaPet />} />
           </Route>
 
           <Route path="/login" element={<LoginLayout />}>
