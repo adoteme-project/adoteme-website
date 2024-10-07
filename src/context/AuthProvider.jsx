@@ -1,12 +1,50 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { login as loginService } from "@/services/authAPI"
+import { useNavigate } from "react-router-dom";
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState({});
+    const [auth, setAuth] = useState({
+        email: null,
+        token: localStorage.getItem("token") || null,
+    });
+
+    const navigate = useNavigate();
+
+    const login = async (context, data) => {
+        try {
+            const response = await loginService(context, data);
+            const { token } = response.data;
+
+            setAuth((prevAuth) => ({
+                ...prevAuth,
+                email: data.email,
+                token,
+            }));
+
+            localStorage.setItem("token", token);
+            navigate("/");
+        } catch (error) {
+            console.log("Erro ao fazer login: ", error);
+        }
+    }
+
+    const logout = () => {
+        setAuth({ email: null, token: null });
+        localStorage.removeItem("token");
+        navigate("/login");
+    };
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        if (token && !auth.token) {
+            setAuth((prev) => ({ ...prev, token }));
+        }
+    }, [auth.token]);
 
     return (
-        <AuthContext.Provider value={{auth, setAuth}}>
+        <AuthContext.Provider value={{ auth, setAuth, login, logout }}>
             {children}
         </AuthContext.Provider>
     )
