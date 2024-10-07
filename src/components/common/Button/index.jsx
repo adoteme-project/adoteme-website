@@ -1,4 +1,6 @@
-const Botao = ({ color, textColor, fontWeight, tamanho, altura, titulo, fontSize, onClick}) => {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const Botao = ({ color, textColor, fontWeight, tamanho, altura, titulo, fontSize, onClick,icon,margin}) => {
 
   return (
     <button
@@ -9,10 +11,12 @@ const Botao = ({ color, textColor, fontWeight, tamanho, altura, titulo, fontSize
          fontSize: fontSize ? `${fontSize}px` : 'inherit',
          backgroundColor: `${color}`,
          color: `${textColor}`,
+         marginRight: `${margin}`
       }}
       onClick={onClick}
     >
       {titulo}
+      {icon && <FontAwesomeIcon icon={icon} style={{ marginLeft:"8px"}}/>}
     </button>
   );
 };

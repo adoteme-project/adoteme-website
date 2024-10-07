@@ -4,8 +4,8 @@ import SidebarUsuario from "@/components/layout/SidebarUser";
 import CadastroData from "@/mocks/stepFormRegister";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 
-const PerfilUsuario = () => {
-  const firstStepData = CadastroData[0];
+const FormularioUsuario = () => {
+  const firstStepData = CadastroData[1];
 
   const renderForm = (stepData) => {
     return stepData.formGroups.map((formGroup, index) => (
@@ -60,4 +60,4 @@ const PerfilUsuario = () => {
   );
 };
 
-export default PerfilUsuario;
+export default FormularioUsuario;
