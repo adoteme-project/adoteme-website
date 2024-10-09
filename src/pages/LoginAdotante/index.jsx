@@ -1,12 +1,21 @@
 import FormAuth from "../../components/common/FormAuth";
 import { useContext } from "react";
 import AuthContext from "@/context/AuthProvider";
+import { useFormContext } from "react-hook-form";
 
 const LoginAdotante = () => {
   const { login } = useContext(AuthContext);
+  const methods = useFormContext();
 
   const handleLogin = async (data) => {
-    await login("adotante", data);
+    try {
+      await login("adotante", data);
+    } catch (e) {
+      methods.setError("senha", {
+        type: "manual",
+        message: e || "Erro no login",
+      });
+    }
   };
 
   return (

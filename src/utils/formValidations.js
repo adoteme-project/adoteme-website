@@ -26,4 +26,9 @@ const RegistrationAdotanteSchema = z.object({
     }
 });
 
-export { RegistrationAdotanteSchema }
+const LoginSchema = z.object({
+    email: z.string().email({ message: "Deve ser um e-mail válido" }),
+    senha: z.string().min(8, { message: "A senha deve ter no mínimo 8 caracteres" })
+})
+
+export { RegistrationAdotanteSchema, LoginSchema }

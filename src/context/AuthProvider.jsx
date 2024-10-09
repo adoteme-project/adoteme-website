@@ -24,16 +24,13 @@ export const AuthProvider = ({ children }) => {
                 token,
             }));
 
-            toast.promise(response, {
-                pending: "Aguarde um momento...",
-                success: "Login realizado com sucesso!",
-                error: "Erro ao realizar o login! Por favor, tente novamente.",
-            })
+            toast.success("Login realizado com sucesso!");
 
             localStorage.setItem("token", token);
             navigate("/");
         } catch (error) {
-            console.log("Erro ao fazer login: ", error);
+            toast.error("Erro ao realizar o login! Por favor, verifique suas credenciais.");
+            throw error.response.data || "Erro desconhecido";
         }
     }
 

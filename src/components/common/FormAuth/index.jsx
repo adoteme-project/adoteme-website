@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Input from "../Input";
 import { FormProvider, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { LoginSchema } from "@/utils/formValidations";
 
 const FormAuth = ({
   title,
@@ -14,7 +16,9 @@ const FormAuth = ({
   linkForgot,
 }) => {
 
-  const methods = useForm();
+  const methods = useForm({ resolver: zodResolver(LoginSchema) });
+
+  const {formState: { errors } } = methods;
 
   return (
     <FormProvider {...methods}>
@@ -36,6 +40,7 @@ const FormAuth = ({
             key={index}
             label={field.label}
             type={field.type}
+            error={errors}
             placeholder={field.placeholder}
             name={field.name}
           />
