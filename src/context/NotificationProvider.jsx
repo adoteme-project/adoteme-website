@@ -54,11 +54,28 @@ export const NotificationProvider = ({ children }) => {
     });
   };
 
+  const notifyPromise = (promise, messages) => {
+    toast.promise(promise, {
+      pending: messages.pending || "Processando...",
+      success: messages.success || "Sucesso!",
+      error: messages.error || "Algo deu errado!",
+    }, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: false,
+      progress: undefined,
+    })
+  };
+
   const notificationValue = {
     success: notifySuccess,
     error: notifyError,
     info: notifyInfo,
     warn: notifyWarning,
+    promise: notifyPromise,
   };
 
   return (

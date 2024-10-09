@@ -6,15 +6,17 @@ import { cadastrarAdotante } from "@/services/authAPI";
 import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { useNotification } from "@/context/NotificationProvider";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { RegistrationAdotanteSchema } from "@/utils/formValidations";
 
 const CadastroFoto = lazy(() => import('@/pages/CadastroAdotante/CadastroFoto'));
 const CadastroDados = lazy(() => import('@/pages/CadastroAdotante/CadastroDados'));
 
 const CadastroAdotante = () => {
-  const methods = useForm();
+  const methods = useForm({ resolver: zodResolver(RegistrationAdotanteSchema) });
   const [step, setStep] = useState(0);
   const navigate = useNavigate();
-  const { success, error } = useNotification();
+  const { error, promise } = useNotification();
 
   const steps = [
     <CadastroDados key={0} />,
@@ -42,22 +44,23 @@ const CadastroAdotante = () => {
       formData.append("fotoPerfil", fotoPerfil);
     }
 
-    try {
-      const response = await cadastrarAdotante(formData);
-      if (response.status === 201) {
-        success("Cadastro realizado com sucesso !")
-        navigate("/login/adotante");
-      } else {
-        error(`Erro ao cadastrar o adotante: ${response.status} - ${response.statusText}`)
-      }
-    } catch (err) {
-      if (err.response) {
-        const { status, data } = err.response;
-        error(`Erro ${status}: ${data.message || "Erro ao enviar o formulário"}`);
-      } else {
-        error(`Erro: ${err.message || "Erro desconhecido"}`);
-      }
-    }
+    const cadastroPromise = cadastrarAdotante(formData)
+      .then((response) => {
+        if (response.status === 201) {
+          navigate("/login/adotante");
+        }
+      })
+      .catch((err) => {
+        error("Erro ao cadastrar adotante!");
+        console.error("Erro ao cadastrar adotante:", err);
+      });
+
+    promise(cadastroPromise, {
+      pending: "Enviando dados...",
+      success: "Cadastro realizado com sucesso!",
+      error: "Erro ao cadastrar! Por favor, tente novamente.",
+    });
+
   };
 
   return (

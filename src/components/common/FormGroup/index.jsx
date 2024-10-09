@@ -15,6 +15,7 @@ const FormGroup = ({
   radioControl = [],
   register,
   control,
+  errors,
 }) => {
   const gridTemplateColumns = column === 2 ? "1fr 1fr" : "1fr";
 
@@ -33,6 +34,7 @@ const FormGroup = ({
               name={field.name}
               disabled={field.disabled}
               register={register}
+              error={errors}
             />
           ))}
 

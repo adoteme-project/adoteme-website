@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { MoonLoader } from "react-spinners";
 
 const CadastroDados = () => {
-    const { register, setValue, control } = useFormContext();
+    const { register, setValue, control, formState: {errors} } = useFormContext();
     const formsDadosUsuario = stepsData.find(step => step.step === 1);
     const cep = useWatch({ control, name: "cep" });
     const [loading, setLoading] = useState(false);
@@ -49,6 +49,7 @@ const CadastroDados = () => {
                     title={formGroup.title}
                     column={formGroup.column}
                     fields={formGroup.fields}
+                    errors={errors}
                     register={register}
                 />
             ))}

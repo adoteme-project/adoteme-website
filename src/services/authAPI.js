@@ -4,6 +4,8 @@ export function cadastrarAdotante(formData) {
     return axiosForm.post("/adotantes/cadastrar", formData);
 }
 
-export function login(context, data) {
+const login = (context, data) => {
     return axiosAuth.post(`/login/${context}`, data);
 }
+
+export { login }

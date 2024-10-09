@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 
-const Input = ({ label, placeholder, type, name, disabled }) => {
+const Input = ({ label, placeholder, type, name, disabled, error }) => {
   const { register } = useFormContext() || {};
 
   return (
@@ -14,6 +14,7 @@ const Input = ({ label, placeholder, type, name, disabled }) => {
           disabled: disabled
         })}
       />
+      {error?.[name]?.message && <p className="text-vermelho">{error[name].message}</p>}
     </div>
   );
 };

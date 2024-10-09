@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { login as loginService } from "@/services/authAPI"
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
@@ -22,6 +23,12 @@ export const AuthProvider = ({ children }) => {
                 email: data.email,
                 token,
             }));
+
+            toast.promise(response, {
+                pending: "Aguarde um momento...",
+                success: "Login realizado com sucesso!",
+                error: "Erro ao realizar o login! Por favor, tente novamente.",
+            })
 
             localStorage.setItem("token", token);
             navigate("/");
