@@ -13,33 +13,41 @@ import LoginAdotante from "./pages/LoginAdotante";
 import LoginOng from "./pages/LoginOng";
 import RedefinirAcesso from "./pages/RedefinirAcesso";
 import CadastroAdotante from "./pages/CadastroAdotante";
-import PaginaPet from "./pages/PaginaPet";
+import { AuthProvider } from "./context/AuthProvider";
+import PrivateRoute from "@/components/wrapper/RotaPrivada";
+import { NotificationProvider } from "./context/NotificationProvider";
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Institucional />}>
-          <Route path="/" element={<Inicio />} />
-          <Route path="/pets" element={<Pets />} />
-          <Route path="/doacoes" element={<Doacoes />} />
-          <Route path="/ongs" element={<Ongs />} />
-          <Route path="/achados" element={<Achados />} />
-          <Route path="/pagina-pet" element={<PaginaPet />} />
-        </Route>
+      <NotificationProvider>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<Institucional />}>
+              <Route path="/" element={<Inicio />} />
+              <Route path="/pets" element={<Pets />} />
+              <Route path="/doacoes" element={<Doacoes />} />
+              <Route path="/ongs" element={<Ongs />} />
+              <Route path="/achados" element={<Achados />} />
+              <Route path="/pagina-pet" element={<PaginaPet />} />
+            </Route>
 
-        <Route path="/login" element={<LoginLayout/>}>
-          <Route path="/login" element={<LoginSelection />} />
-          <Route path="/login/adotante" element={<LoginAdotante />} />
-          <Route path="/login/ong" element={<LoginOng />} />
-          <Route path="/login/cadastro-adotante" element={<CadastroAdotante />} />
-          <Route path="/login/redefinir" element={<RedefinirAcesso />} />
-        </Route>
+            <Route path="/login" element={<LoginLayout />}>
+              <Route path="/login" element={<LoginSelection />} />
+              <Route path="/login/adotante" element={<LoginAdotante />} />
+              <Route path="/login/ong" element={<LoginOng />} />
+              <Route path="/login/cadastro-adotante" element={<CadastroAdotante />} />
+              <Route path="/login/redefinir" element={<RedefinirAcesso />} />
+            </Route>
 
-        <Route path="/teste" element={<Teste />} />
-        <Route path="*" element={<NotFound />} />
+            <Route path="/teste" element={<PrivateRoute />}>
+              <Route path="/teste" element={<Teste />} />
+            </Route>
 
-      </Routes>
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </AuthProvider>
+      </NotificationProvider>
     </BrowserRouter>
   );
 }

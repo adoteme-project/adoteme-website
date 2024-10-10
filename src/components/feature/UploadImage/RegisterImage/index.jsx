@@ -1,52 +1,30 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faCamera } from "@fortawesome/free-solid-svg-icons";
-import { postProfilePicture } from "@/services/adotanteAPI";
+import { Controller } from "react-hook-form"; // Import Controller from react-hook-form
 
-const FormRegisterImage = () => {
-  const [selectedFile, setSelectedFile] = useState(null);
+const FormRegisterImage = ({ control }) => {
   const [preview, setPreview] = useState(null);
-  const [setImage] = useState("");
-  const [setUploadError] = useState(null);
 
-  const uploadImage = () => {
-    if (!selectedFile) {
-      console.error("No file selected.");
+  const handleFileChange = (file, onChange) => {
+    if (file && file.size > 5 * 1024 * 1024) {
+      alert("Arquivo não pode passar de 5MB");
       return;
     }
 
-    const formData = new FormData();
-    formData.append("file", selectedFile);
+    if (file && !file.type.startsWith("image/")) {
+      alert("Apenas imagens são permitidas");
+      return;
+    }
 
-    postProfilePicture(formData)
-      .then((response) => {
-        console.log(response);
-        setImage(response.data.secure_url);
-        setPreview(null);
-        setSelectedFile(null);
-        setUploadError(null);
-      })
-      .catch((error) => {
-        console.error("Error uploading the image:", error);
-        setUploadError("Error uploading the image. Please try again.");
-      });
-  };
-
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    uploadImage();
-  };
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedFile(file);
-    if (file) {
-      setPreview(URL.createObjectURL(file));
+    setPreview(file ? URL.createObjectURL(file) : null);
+    if(file) {
+      onChange(file);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col items-center gap-10">
+    <div className="flex flex-col items-center gap-10">
       <div className="relative">
         <div className="w-72 h-72 bg-cinza rounded-full flex items-center justify-center overflow-hidden">
           {preview ? (
@@ -65,17 +43,21 @@ const FormRegisterImage = () => {
         >
           <FontAwesomeIcon icon={faCamera} />
         </label>
-        <input
-          id="file-input"
-          type="file"
-          onChange={handleFileChange}
-          className="hidden"
+        <Controller
+          name="fotoPerfil"
+          control={control}
+          defaultValue={null}
+          render={({ field: { onChange } }) => (
+            <input
+              id="file-input"
+              type="file"
+              className="hidden"
+              onChange={(e) => handleFileChange(e.target.files[0], onChange)}
+            />
+          )}
         />
       </div>
-      <button type="submit" className="bg-azul-main px-4 py-2 w-fit">
-        Enviar
-      </button>
-    </form>
+    </div>
   );
 };
 
