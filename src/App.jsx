@@ -29,6 +29,7 @@ function App() {
               <Route path="/doacoes" element={<Doacoes />} />
               <Route path="/ongs" element={<Ongs />} />
               <Route path="/achados" element={<Achados />} />
+              <Route path="/pagina-pet" element={<PaginaPet />} />
             </Route>
 
             <Route path="/login" element={<LoginLayout />}>
@@ -47,7 +48,6 @@ function App() {
           </Routes>
         </AuthProvider>
       </NotificationProvider>
-
     </BrowserRouter>
   );
 }

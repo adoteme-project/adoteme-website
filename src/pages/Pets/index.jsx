@@ -13,7 +13,6 @@ const Pets = () => {
      <BreadCrumb tituloCaminho="Home" tituloCaminho2="Animais" cor="#B2DED3" caminho="/pets" />
      <Categorias titulo="Categorias" tipo="categorias"/>
      <Animais/>
-     
      <Doacao/>
   
     </>
