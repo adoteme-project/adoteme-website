@@ -11,31 +11,43 @@ const PaginaPet = () => {
     const { id } = useParams();
     const { sugestoes } = useCardContext();
     const [animal, setAnimal] = useState(null);
+    const cores = ["#FFC55E", "#A9B949", "#B2DED3", "#EC5A49"];
+
 
     useEffect(() => {
-        const animalEncontrado = sugestoes.find(animal => animal.id === parseInt(id));
+        if (sugestoes.length > 0) {
+            const animalEncontrado = sugestoes
+                .filter(sugestao => sugestao.tipo === 'animal')
+                .find(animal => animal.id === parseInt(id));
 
-        if (animalEncontrado) {
-            setAnimal(animalEncontrado);
+            if (animalEncontrado) {
+                setAnimal(animalEncontrado);
+            }
         }
     }, [id, sugestoes]);
 
     if (!animal) {
-        return <p>Carregando...</p>;
+        return <p>Carregando...</p>
     }
 
     return (
         <>
-            <BreadCrumb tituloCaminho="Animais" tituloCaminho2="Página Pets" tituloCaminho3={animal.id} cor="#B2DED3" caminho={`/pagina-pet/${animal.id}`} />
+            <BreadCrumb
+                tituloCaminho="Animais"
+                tituloCaminho2="Página Pets"
+                tituloCaminho3={animal.nome}
+                cor="#B2DED3"
+                caminho={`/pagina-pet/${animal.id}`}
+            />
 
             <section className="p-10 bg-beje">
                 <div className="grid grid-cols-2 gap-10">
                     <div>
-                        <img src={animal.imagem} alt={`Imagem de ${animal.nome}`} className="w-full h-auto rounded-lg" />
+                        <img src={animal.imagemUrl} alt={`Imagem de ${animal.nome}`} className="w-full h-auto rounded-lg" />
                         <div className="flex gap-4 mt-4">
-                            <img src={animal.imagem} alt="Miniatura 1" className="w-20 h-20 rounded-lg" />
-                            <img src={animal.imagem2} alt="Miniatura 2" className="w-20 h-20 rounded-lg" />
-                            <img src={animal.imagem3} alt="Miniatura 3" className="w-20 h-20 rounded-lg" />
+                            <img src={animal.imagemUrl} alt="Miniatura 1" className="w-20 h-20 rounded-lg" />
+                            {animal.imagem2 && <img src={animal.imagem2} alt="Miniatura 2" className="w-20 h-20 rounded-lg" />}
+                            {animal.imagem3 && <img src={animal.imagem3} alt="Miniatura 3" className="w-20 h-20 rounded-lg" />}
                         </div>
                         <button className="mt-6 bg-green-500 text-white py-2 px-4 rounded-lg">Adotar</button>
                     </div>
@@ -75,10 +87,10 @@ const PaginaPet = () => {
                 <h2 className="text-3xl font-bold mb-6 text-center">Sugestão</h2>
                 {sugestoes.length > 0 ? (
                     <Carousel
-                        items={sugestoes}
-                        renderItem={(animal) => <Card animal={animal} />}
-                        slidesPerView={2} 
-                        spaceBetween={10} 
+                        items={sugestoes.filter(sugestao => sugestao.tipo === 'animal')}
+                        renderItem={(sugestao) => <Card key={sugestao.animal} data={sugestao} colorBg={cores[sugestao.id % cores.length]} />}
+                        slidesPerView={2}
+                        spaceBetween={10}
                     />
                 ) : (
                     <p>Nenhuma sugestão disponível no momento.</p>

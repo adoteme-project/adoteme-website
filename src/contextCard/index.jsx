@@ -1,28 +1,43 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-
 const CardContext = createContext();
-
 
 export const CardProvider = ({ children }) => {
     const [sugestoes, setSugestoes] = useState([]);
 
     useEffect(() => {
-        const fetchAnimais = async () => {
+        const fetchDados = async () => {
             try {
-                const response = await axios.get(`http://localhost:8080/animais`, {
+                
+                const responseAnimais = await axios.get(`http://localhost:8080/animais`, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
                 });
-                setSugestoes(response.data);
+
+                
+                const responseOngs = await axios.get(`http://localhost:8080/ongs`, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+
+                
+                const dadosCombinados = [
+                    ...responseAnimais.data.map(animal => ({ ...animal, tipo: 'animal' })),
+                    ...responseOngs.data.map(ong => ({ ...ong, tipo: 'ong' })),
+                ];
+
+                setSugestoes(dadosCombinados);
+                
+                
             } catch (error) {
-                console.error('Erro ao buscar animais', error);
+                console.error('Erro ao buscar dados', error);
             }
         };
 
-        fetchAnimais();
+        fetchDados();
 
     }, []);
 
