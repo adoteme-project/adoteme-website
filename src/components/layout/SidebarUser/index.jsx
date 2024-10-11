@@ -25,7 +25,7 @@ const SideBarUsuario = () => {
         </div>
         <div className="flex flex-row items-center gap-2">
           <FontAwesomeIcon icon={faClockRotateLeft} />
-          <li>Aplicações</li>
+          <li style={{cursor:"pointer"}} onClick={() => handleRedirect("/perfil-aplicacao")}>Aplicações</li>
         </div>
         <div className="flex flex-row items-center gap-2">
           <FontAwesomeIcon icon={faWpforms} />
