@@ -1,12 +1,11 @@
 import { useCardContext } from '@/contextCard/index';
-import Card from "@/components/common/CardAnimal";
+import Card from "@/components/common/Card";
 
-const GridLayout = ({ onDoarClick, titulo }) => {
+const GridLayout = ({ onDoarClick, titulo,tipoCard}) => {
   const { sugestoes } = useCardContext();
   const cores = ["#FFC55E", "#A9B949", "#B2DED3", "#EC5A49"];
-
-
-  const validItems = sugestoes.filter(item => item.tipo === 'animal');
+  console.log("tipo card", tipoCard)
+  const validItems = sugestoes.filter(item => item.tipo === tipoCard);
 
   return (
     <>

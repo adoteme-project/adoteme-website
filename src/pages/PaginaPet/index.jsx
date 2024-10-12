@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import BreadCrumb from '@/components/common/BreadCrumb';
-import Card from '@/components/common/CardAnimal';
+import Card from '@/components/common/Card';
 import Doacao from '@/components/section/Donation';
 import Avaliacao from '@/components/feature/Rating';
 import { useCardContext } from '@/contextCard/index';

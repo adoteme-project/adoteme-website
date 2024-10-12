@@ -58,7 +58,7 @@ const Card = ({ colorBg, data = [], onDoarClick }) => {
                         </Link>
                     ) : (
                         <div className="flex gap-2">
-                            <Link to={`/pagina-ong/${data.id}`}>
+                            <Link to={`/pagina-ong/${data.key}`}>
                                 <Botao
                                     textColor="#FFFFFF"
                                     color="#FFC55E"

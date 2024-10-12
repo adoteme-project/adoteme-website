@@ -10,14 +10,14 @@ export const CardProvider = ({ children }) => {
         const fetchDados = async () => {
             try {
                 
-                const responseAnimais = await axios.get(`http://localhost:8080/animais`, {
+                const responseAnimais = await axios.get(`petCard.json`, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
                 });
 
                 
-                const responseOngs = await axios.get(`http://localhost:8080/ongs`, {
+                const responseOngs = await axios.get(`ongs.json`, {
                     headers: {
                         'Content-Type': 'application/json',
                     },
