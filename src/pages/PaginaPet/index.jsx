@@ -1,58 +1,53 @@
+import { useParams } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import BreadCrumb from '@/components/common/BreadCrumb';
 import Card from '@/components/common/CardAnimal';
 import Doacao from '@/components/section/Donation';
 import Avaliacao from '@/components/feature/Rating';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useCardContext } from '@/contextCard/index';
+import Carousel from '@/components/common/Carrossel';
 
 const PaginaPet = () => {
-    const [animal] = useState({
-        nome: "NOAH",
-        localizacao: "São Paulo - SP",
-        especie: "Cachorro",
-        sexo: "Macho",
-        idade: "2 anos",
-        tamanho: "Médio",
-        taxaAdocao: "R$70",
-        energia: 4,
-        sociavel: 5,
-        territorialista: 2,
-        inteligente: 4,
-        historico: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec velit ligula dignissim ...",
-    });
+    const { id } = useParams();
+    const { sugestoes } = useCardContext();
+    const [animal, setAnimal] = useState(null);
+    const cores = ["#FFC55E", "#A9B949", "#B2DED3", "#EC5A49"];
 
-    const [sugestoes, setSugestoes] = useState([]);
 
     useEffect(() => {
-        const fetchAnimais = async () => {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API_URL}/animais`, {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-                setSugestoes(response.data);
-            } catch (error) {
-                console.error('Erro ao buscar animais', error);
-            }
-        };
+        if (sugestoes.length > 0) {
+            const animalEncontrado = sugestoes
+                .filter(sugestao => sugestao.tipo === 'animal')
+                .find(animal => animal.id === parseInt(id));
 
-        fetchAnimais();
-    }, []);
+            if (animalEncontrado) {
+                setAnimal(animalEncontrado);
+            }
+        }
+    }, [id, sugestoes]);
+
+    if (!animal) {
+        return <p>Carregando...</p>
+    }
 
     return (
         <>
-            <BreadCrumb tituloCaminho="Animais" tituloCaminho2="Página Pets" tituloCaminho3="id" cor="#B2DED3" caminho="/pagina-pet" />
+            <BreadCrumb
+                tituloCaminho="Animais"
+                tituloCaminho2="Página Pets"
+                tituloCaminho3={animal.nome}
+                cor="#B2DED3"
+                caminho={`/pagina-pet/${animal.id}`}
+            />
 
-            {/* Seção do Animal */}
             <section className="p-10 bg-beje">
                 <div className="grid grid-cols-2 gap-10">
                     <div>
-                        <img src="/images/noah.jpg" alt={`Imagem de ${animal.nome}`} className="w-full h-auto rounded-lg" />
+                        <img src={animal.imagemUrl} alt={`Imagem de ${animal.nome}`} className="w-full h-auto rounded-lg" />
                         <div className="flex gap-4 mt-4">
-                            <img src="/images/noah.jpg" alt="Miniatura 1" className="w-20 h-20 rounded-lg" />
-                            <img src="/images/noah2.jpg" alt="Miniatura 2" className="w-20 h-20 rounded-lg" />
-                            <img src="/images/noah3.jpg" alt="Miniatura 3" className="w-20 h-20 rounded-lg" />
+                            <img src={animal.imagemUrl} alt="Miniatura 1" className="w-20 h-20 rounded-lg" />
+                            {animal.imagem2 && <img src={animal.imagem2} alt="Miniatura 2" className="w-20 h-20 rounded-lg" />}
+                            {animal.imagem3 && <img src={animal.imagem3} alt="Miniatura 3" className="w-20 h-20 rounded-lg" />}
                         </div>
                         <button className="mt-6 bg-green-500 text-white py-2 px-4 rounded-lg">Adotar</button>
                     </div>
@@ -88,27 +83,20 @@ const PaginaPet = () => {
                 </div>
             </section>
 
-            {/* Seção de Sugestão */}
             <section className="mt-10 p-10 bg-gray-100">
-                <h2 className="text-3xl font-bold mb-6">Sugestão</h2>
-                <div className="flex overflow-x-auto gap-6">
-                    {sugestoes.length > 0 ? (
-                        sugestoes.map((animal, index) => (
-                            <Card
-                                key={index}
-                                nome={animal.nome}
-                                idade={animal.idade}
-                                sociavel={animal.sociavel}
-                                img={animal.imagem}
-                            />
-                        ))
-                    ) : (
-                        <p>Nenhuma sugestão disponível no momento.</p>
-                    )}
-                </div>
+                <h2 className="text-3xl font-bold mb-6 text-center">Sugestão</h2>
+                {sugestoes.length > 0 ? (
+                    <Carousel
+                        items={sugestoes.filter(sugestao => sugestao.tipo === 'animal')}
+                        renderItem={(sugestao) => <Card key={sugestao.animal} data={sugestao} colorBg={cores[sugestao.id % cores.length]} />}
+                        slidesPerView={2}
+                        spaceBetween={10}
+                    />
+                ) : (
+                    <p>Nenhuma sugestão disponível no momento.</p>
+                )}
             </section>
 
-            {/* Doação */}
             <Doacao />
         </>
     );

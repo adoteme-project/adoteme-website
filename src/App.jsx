@@ -13,6 +13,10 @@ import LoginAdotante from "./pages/LoginAdotante";
 import LoginOng from "./pages/LoginOng";
 import RedefinirAcesso from "./pages/RedefinirAcesso";
 import CadastroAdotante from "./pages/CadastroAdotante";
+
+import PaginaPet from "./pages/PaginaPet";
+import { CardProvider } from "@/contextCard/index";
+
 import { AuthProvider } from "./context/AuthProvider";
 import PrivateRoute from "@/components/wrapper/RotaPrivada";
 import { NotificationProvider } from "./context/NotificationProvider";
@@ -22,6 +26,7 @@ function App() {
     <BrowserRouter>
       <NotificationProvider>
         <AuthProvider>
+    <CardProvider>
           <Routes>
             <Route path="/" element={<Institucional />}>
               <Route path="/" element={<Inicio />} />
@@ -29,7 +34,7 @@ function App() {
               <Route path="/doacoes" element={<Doacoes />} />
               <Route path="/ongs" element={<Ongs />} />
               <Route path="/achados" element={<Achados />} />
-              <Route path="/pagina-pet" element={<PaginaPet />} />
+              <Route path="/pagina-pet/:id" element={<PaginaPet />} />
             </Route>
 
             <Route path="/login" element={<LoginLayout />}>
@@ -46,6 +51,7 @@ function App() {
 
             <Route path="*" element={<NotFound />} />
           </Routes>
+</CardProvider>
         </AuthProvider>
       </NotificationProvider>
     </BrowserRouter>
