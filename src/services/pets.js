@@ -1,5 +1,7 @@
-import client from "./configs/axiosConfig"
+import { api } from "./configs/axiosConfig"
 
 export function getPetPerdido() {
-    return client.get("/animais-perdidos")
+
+    return api.get("/animais-perdidos")
+
 }
