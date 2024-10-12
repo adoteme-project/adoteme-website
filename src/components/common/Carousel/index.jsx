@@ -9,14 +9,12 @@ import Box from '../../feature/Box-Carousel';
 register();
 
 function Carrosel({ data = [], slidePerview, color }) {
-  // console.log('Data:', data);
-  // console.log('Cores:', color);
   return (
     <div>
       <Swiper
         slidesPerView={slidePerview}
         navigation
-        pagination={{clickable:true}}
+        pagination={{ clickable: true }}
         className='py-5'
       >
         {data.map((item, index) => (

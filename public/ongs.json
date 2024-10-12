@@ -1,24 +1,24 @@
 [
   {
-    "key": "1",
+    "id": "1",
     "nome": "Amor Animal",
     "descricao": "ONG dedicada ao resgate e adoção de animais abandonados, focando em cães e gatos em situação de risco.",
     "endereco": "Rua das Flores, 123, São Paulo, SP"
   },
   {
-    "key": "2",
+    "id": "2",
     "nome": "Vida de Patas",
     "descricao": "Organização sem fins lucrativos que promove o bem-estar animal e a adoção responsável de pets.",
     "endereco": "Avenida Central, 456, Rio de Janeiro, RJ"
   },
   {
-    "key": "3",
+    "id": "3",
     "nome": "Lar dos Peludos",
     "descricao": "Grupo de voluntários que acolhe animais de rua, oferecendo tratamento veterinário e lares temporários.",
     "endereco": "Praça da Liberdade, 789, Belo Horizonte, MG"
   },
   {
-    "key": "4",
+    "id": "4",
     "nome": "Patas e Focinhos",
     "descricao": "ONG voltada para o resgate de animais abandonados, com programas de adoção e conscientização sobre maus-tratos.",
     "endereco": "Rua Verde, 321, Porto Alegre, RS"

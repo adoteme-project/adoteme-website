@@ -3,42 +3,25 @@ import Banner from '@/components/section/Banner'
 import Categorias from '@/components/section/Categories';
 import BreadCrumb from '@/components/common/BreadCrumb';
 import Doacao from '@/components/section/Donation';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import Grid from '@/components/layout/Grid/index'
-import AnimaisProximos from '@/components/section/Near-Animals';
+import { useCardContext } from '@/contextCard';
 // import AnimaisProximos from '@/components/section/Near-Animals/index'
 
 
 const Pets = () => {
   
-  const[data,setData] = useState([]);
+  const {context} = useCardContext();
 
-  useEffect(() => {
-    const fetchOngs = async () => {
-      try {
-        const response = await axios.get(`petCard.json`, {
-          headers: {
-            'Content-type': 'application/json',
-          }
-        });
-        // console.log(response.data);
-        setData(response.data);
-      } catch (error) {
-        console.log("Erro ao buscar os dados dos cards", error);
-      }
-    };
-    fetchOngs();
-  }, []);
+  const validItems = context.filter(item => item.tipo === 'animal');
 
   return (
     <>
      <Banner tamanho='700.25vh'/>
      <BreadCrumb tituloCaminho="Home" tituloCaminho2="Animais" cor="#B2DED3" caminho="/pets" />
      <Categorias titulo="Categorias" tipo="categorias"/>
-     <DropDown items={data} titulo="Animais">
+     <DropDown items={validItems} titulo="Animais">
        <Grid
-       items={data}
+       items={validItems}
        />
      <DropDown/>    
      <Doacao/>

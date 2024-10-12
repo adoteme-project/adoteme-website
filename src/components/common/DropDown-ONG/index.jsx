@@ -57,7 +57,8 @@ const DropDown = ({ items = [] }) => {
       <div>
         <GridLayout
           items={filteredOngs}
-          onDoarClick={toggleModal}
+          toggle={toggleModal}
+          tipoCard="ong"
         />
         {isShowing && (
           <Modal isOpen={isShowing} onClose={toggleModal} />
