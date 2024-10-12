@@ -9,7 +9,7 @@ import useModal from '@/hooks/useModal';
 
 const Doacoes = () => {
   const [data, setData] = useState([]);
-  const [isShowing, toggleModal] = useModal(); // Use o hook para controle do modal
+  const [isShowing, toggleModal] = useModal(); 
 
   useEffect(() => {
     const fetchOngs = async () => {
@@ -26,6 +26,7 @@ const Doacoes = () => {
     };
     fetchOngs();
   }, []);
+  
   return (
     <>
       <Banner />
