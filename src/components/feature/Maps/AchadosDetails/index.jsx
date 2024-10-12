@@ -6,16 +6,22 @@ const AchadoDetails = ({pet}) => {
         alt="Pet Perdido"
         className="h-56 w-full"
       />
-      <div className="border w-full">
+      <div className="bg-branco rounded-lg w-full">
         <div className="flex flex-col gap-2 p-2">
           <h3 className="text-xl">Detalhes Pet</h3>
           <div className="w-full grid grid-cols-2 bg-azul-">
-            <div className="text-sm"> Gênero: {pet.genero ?? '?'} </div>
-            <div className="text-sm"> Tipo: {pet.tipo ?? 'Cachorro'} </div>
-            <div className="text-sm"> Raça: {pet.raca ?? 'Vira-lata'} </div>
-            <div className="text-sm"> Data de resgate: {pet.dataResgate ?? '18/09/2024'} </div>
-            <div className="text-sm"> Tamanho: {pet.tamanho ?? 'Médio'} </div>
-            <div className="text-sm"> Endereço: {pet.endereço ?? 'rua -----'} </div>
+            <div className="text-sm">
+               <span className="font-semibold">Gênero: </span>{pet.genero ?? '?'}</div>
+            <div className="text-sm">
+               <span className="font-semibold">Tipo: </span>{pet.tipo ?? 'Cachorro'}</div>
+            <div className="text-sm">
+               <span className="font-semibold">Raça: </span>{pet.raca ?? 'Vira-lata'}</div>
+            <div className="text-sm">
+               <span className="font-semibold">Data de resgate: </span>{pet.dataResgate ?? '18/09/2024'}</div>
+            <div className="text-sm">
+               <span className="font-semibold">Tamanho: </span>{pet.tamanho ?? 'Médio'}</div>
+            <div className="text-sm">
+               <span className="font-semibold">Endereço: </span>{pet.endereço ?? 'rua -----'}</div>
           </div>
           <h3 className="text-xl">Descrição </h3>
           <p className="text-xs">
@@ -26,14 +32,19 @@ const AchadoDetails = ({pet}) => {
           </p>
         </div>
       </div>
-      <div className="border w-full p-2 flex flex-col gap-2">
+      <div className="bg-branco rounded-lg w-full p-2 flex flex-col gap-2">
       <h3 className="text-xl"> Contato Ong </h3>
           <div className="w-full grid grid-cols-2">
-            <div className="text-sm"> Nome Ong: {pet.ong ?? 'Cão sem Dono'} </div>
-            <div className="text-sm"> Celular: {pet.celular ?? '(11) 99999-9999'} </div>
-            <div className="text-sm"> Endereço: {pet.enderecoOng ?? 'rua ------'} </div>
-            <div className="text-sm"> Telefone: {pet.telefone ?? '(11) 9999-9999'} </div>
-            <div className="text-sm"> email: {pet.email ?? 'email@exemplo.com'} </div>
+            <div className="text-sm">
+               <span className="font-semibold">Nome Ong: </span>{pet.ong ?? 'Cão sem Dono'} </div>
+            <div className="text-sm">
+               <span className="font-semibold">Celular: </span>{pet.celular ?? '(11) 99999-9999'} </div>
+            <div className="text-sm">
+               <span className="font-semibold">Endereço: </span>{pet.enderecoOng ?? 'rua ------'} </div>
+            <div className="text-sm">
+               <span className="font-semibold">Telefone: </span>{pet.telefone ?? '(11) 9999-9999'} </div>
+            <div className="text-sm">
+               <span className="font-semibold">Email: </span>{pet.email ?? 'email@exemplo.com'} </div>
           </div>
         </div>
     </div>

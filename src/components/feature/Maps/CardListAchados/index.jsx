@@ -1,13 +1,13 @@
-const CardList = ({pet, chosenPet}) => {
+const CardList = ({ pet, chosenPet }) => {
   return (
-    <div className="border shadow-sm p-3 flex gap-5 w-full mb-3">
+    <div className="bg-branco rounded-lg shadow-sm p-3 flex gap-5 w-full mb-3">
       <img
         src="https://res.cloudinary.com/dddkrjki9/image/upload/v1726367700/pet_noha.png"
         alt="Pet Perdido"
         className="h-36 w-40"
       />
-      <div className="flex flex-col justify-between">
-        <h3 className="text-xl">{pet.nome}</h3>
+      <div className="flex flex-col justify-between items-start">
+        <h3 className="bg-beje p-2 rounded-lg text-lg w-fit font-semibold">{pet.raca ?? "Vira-Lata"}</h3>
         <ul>
           <li className="text-sm">Endereço</li>
           <li className="text-sm">Gênero: Masculino</li>
@@ -16,7 +16,7 @@ const CardList = ({pet, chosenPet}) => {
         <button className="inline-block rounded bg-azul-main px-6 py-2 text-sm font-medium 
         text-white transition hover:rotate-2 hover:scale-110 focus:outline-none focus:ring 
         active:bg-azul-main text-branco" onClick={chosenPet}>
-            Saiba mais
+          Saiba mais
         </button>
       </div>
     </div>
@@ -24,3 +24,4 @@ const CardList = ({pet, chosenPet}) => {
 };
 
 export default CardList;
+ 

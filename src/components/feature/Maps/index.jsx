@@ -7,30 +7,30 @@ import {
   Pin,
   useAdvancedMarkerRef,
 } from "@vis.gl/react-google-maps";
-import React, { useCallback, useEffect, useState } from "react";
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { PlaceAutocomplete } from "./PlaceAutocomplete";
 import { MapHandler } from "./MapHandler";
 import ClusteredPetsMarkers from "./ClusterMarker";
-import ListAchados from "./ListAchados";
 import useModal from "@/hooks/useModal";
 import useGeolocation from "@/hooks/useGeolocation";
 import { useLocation } from "react-router-dom";
+import { MoonLoader } from "react-spinners";
+
+const ListAchados = lazy(() => import('@/components/feature/Maps/ListAchados'));
 
 const MapaAchados = () => {
   const defaultPosition = { zoom: 19, center: { lat: -23.558052381604917, lng: -46.661807140459345 } };
-  
+
   const { position, error: geoError } = useGeolocation();
   const { state } = useLocation();
 
-  
+
   const [cameraProps, setCameraProps] = useState(state?.mapCenter || defaultPosition);
   const [pets, setPets] = useState([]);
   const [markerRef, marker] = useAdvancedMarkerRef();
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [nearbyPets, setNearbyPets] = useState([]);
-  const [isShowingModal, toogleModal] = useModal();
-
-  const ListAchadosMemo = React.memo(ListAchados);
+  const [isShowingModal, toggleModal] = useModal();
 
   const handleCameraChange = useCallback(
     (ev) => setCameraProps(ev.detail),
@@ -49,11 +49,11 @@ const MapaAchados = () => {
     } else if (geoError) {
       console.error("Geolocation error: ", geoError);
       alert("Não foi possível acessar sua localização");
-      setCameraProps(defaultPosition); 
+      setCameraProps(defaultPosition);
     }
   }, [position, geoError]);
 
-  
+
   useEffect(() => {
     const abortController = new AbortController();
     fetch("/pets.json", { signal: abortController.signal })
@@ -71,12 +71,13 @@ const MapaAchados = () => {
 
   const handlePlaceSelect = (place) => {
     setSelectedPlace(place);
-    if (!isShowingModal) toogleModal();
+    if (!isShowingModal) toggleModal();
   };
 
   return (
     <APIProvider apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}>
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center relative">
+
         <Map
           style={{ width: "100%", height: "100vh" }}
           zoom={cameraProps.zoom}
@@ -93,19 +94,22 @@ const MapaAchados = () => {
           </MapControl>
 
           <MapControl position={ControlPosition.RIGHT_CENTER}>
-            <ListAchadosMemo
-              pets={nearbyPets}
-              show={isShowingModal}
-              onClose={toogleModal}
-            />
+            <Suspense fallback={<MoonLoader speedMultiplier={1} />}>
+              <ListAchados
+                pets={nearbyPets}
+                show={isShowingModal}
+                onClose={toggleModal}
+              />
+            </Suspense>
           </MapControl>
 
           <ClusteredPetsMarkers pets={pets} />
 
-          <AdvancedMarker ref={markerRef} position={null} onClick={toogleModal}>
+          <AdvancedMarker ref={markerRef} position={null} onClick={toggleModal}>
             <Pin />
           </AdvancedMarker>
         </Map>
+
         <MapHandler
           place={selectedPlace}
           marker={marker}

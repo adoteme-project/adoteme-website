@@ -26,32 +26,32 @@ function App() {
     <BrowserRouter>
       <NotificationProvider>
         <AuthProvider>
-    <CardProvider>
-          <Routes>
-            <Route path="/" element={<Institucional />}>
-              <Route path="/" element={<Inicio />} />
-              <Route path="/pets" element={<Pets />} />
-              <Route path="/doacoes" element={<Doacoes />} />
-              <Route path="/ongs" element={<Ongs />} />
-              <Route path="/achados" element={<Achados />} />
-              <Route path="/pagina-pet/:id" element={<PaginaPet />} />
-            </Route>
+          <CardProvider>
+            <Routes>
+              <Route path="/" element={<Institucional />}>
+                <Route path="/" element={<Inicio />} />
+                <Route path="/pets" element={<Pets />} />
+                <Route path="/doacoes" element={<Doacoes />} />
+                <Route path="/ongs" element={<Ongs />} />
+                <Route path="/achados" element={<Achados />} />
+                <Route path="/pagina-pet/:id" element={<PaginaPet />} />
+              </Route>
 
-            <Route path="/login" element={<LoginLayout />}>
-              <Route path="/login" element={<LoginSelection />} />
-              <Route path="/login/adotante" element={<LoginAdotante />} />
-              <Route path="/login/ong" element={<LoginOng />} />
-              <Route path="/login/cadastro-adotante" element={<CadastroAdotante />} />
-              <Route path="/login/redefinir" element={<RedefinirAcesso />} />
-            </Route>
+              <Route path="/login" element={<LoginLayout />}>
+                <Route path="/login" element={<LoginSelection />} />
+                <Route path="/login/adotante" element={<LoginAdotante />} />
+                <Route path="/login/ong" element={<LoginOng />} />
+                <Route path="/login/cadastro-adotante" element={<CadastroAdotante />} />
+                <Route path="/login/redefinir" element={<RedefinirAcesso />} />
+              </Route>
 
-            <Route path="/teste" element={<PrivateRoute />}>
-              <Route path="/teste" element={<Teste />} />
-            </Route>
+              <Route path="/teste" element={<PrivateRoute />}>
+                <Route path="/teste" element={<Teste />} />
+              </Route>
 
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-</CardProvider>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </CardProvider>
         </AuthProvider>
       </NotificationProvider>
     </BrowserRouter>
