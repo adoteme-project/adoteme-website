@@ -6,7 +6,7 @@ import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 
 const PerfilUsuario = () => {
-  const firstStepData = CadastroData[0];
+  const firstStepData = CadastroData[1];
   const [editando, setEditando] = useState(false);
 
   const renderForm = (stepData) => {

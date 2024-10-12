@@ -15,7 +15,9 @@ import RedefinirAcesso from "./pages/RedefinirAcesso";
 import CadastroAdotante from "./pages/CadastroAdotante";
 import PaginaPet from "./pages/PaginaPet"
 import PerfilUsuario from "./pages/PerfilUsuario"
-import FormularioUsuario from "./pages/FormularioUsuario";
+import FormularioUsuario from "./pages/PerfilFormulario";
+import PerfilAplicacao from "./pages/PerfilAplicacao";
+
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
           <Route path="/pagina-pet" element={<PaginaPet />} />
           <Route path="/perfil" element={<PerfilUsuario />}/>
           <Route path="/perfil-formulario" element={<FormularioUsuario/>}/>
+          <Route path="/perfil-aplicacao" element={<PerfilAplicacao/>}/>
         </Route>
 
         <Route path="/login" element={<LoginLayout/>}>
