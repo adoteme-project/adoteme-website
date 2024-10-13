@@ -1,7 +1,9 @@
 import { api } from "./configs/axiosConfig"
 
-export function getPetPerdido() {
-
+export function getPetsPerdido() {
     return api.get("/animais-perdidos")
+}
 
+export function getPetPerdidoPorId(ongId) {
+    return api.get(`/animais-perdidos/animal-perdido-achados-perdidos/${ongId}`)
 }

@@ -7,16 +7,16 @@ import {
   Pin,
   useAdvancedMarkerRef,
 } from "@vis.gl/react-google-maps";
-import { lazy, Suspense, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { PlaceAutocomplete } from "./PlaceAutocomplete";
 import { MapHandler } from "./MapHandler";
 import ClusteredPetsMarkers from "./ClusterMarker";
 import useModal from "@/hooks/useModal";
 import useGeolocation from "@/hooks/useGeolocation";
 import { useLocation } from "react-router-dom";
-import { MoonLoader } from "react-spinners";
+import { getPetsPerdido } from "@/services/pets";
+import ListAchados from "./ListAchados";
 
-const ListAchados = lazy(() => import('@/components/feature/Maps/ListAchados'));
 
 const MapaAchados = () => {
   const defaultPosition = { zoom: 19, center: { lat: -23.558052381604917, lng: -46.661807140459345 } };
@@ -53,21 +53,19 @@ const MapaAchados = () => {
     }
   }, [position, geoError]);
 
-
   useEffect(() => {
-    const abortController = new AbortController();
-    fetch("/pets.json", { signal: abortController.signal })
-      .then((response) => response.json())
-      .then((data) => setPets(data))
-      .catch((error) => {
-        if (error.name === "AbortError") return;
-        console.error("Erro ao buscar pets.json", error);
-      });
+    const fetchPetsPerdidos = async () => {
+      try {
+        const response = await getPetsPerdido();
+        console.log(response.data);
+        setPets(response.data);
+      } catch (error) {
+        console.log("Erro ao trazer os pets perdidos: ", error);
+      }
+    }
 
-    return () => {
-      abortController.abort();
-    };
-  }, []);
+    fetchPetsPerdidos();
+  }, [])
 
   const handlePlaceSelect = (place) => {
     setSelectedPlace(place);
@@ -94,13 +92,11 @@ const MapaAchados = () => {
           </MapControl>
 
           <MapControl position={ControlPosition.RIGHT_CENTER}>
-            <Suspense fallback={<MoonLoader speedMultiplier={1} />}>
               <ListAchados
                 pets={nearbyPets}
                 show={isShowingModal}
                 onClose={toggleModal}
               />
-            </Suspense>
           </MapControl>
 
           <ClusteredPetsMarkers pets={pets} />

@@ -1,15 +1,18 @@
+import { DEFAULT_IMAGE } from "@/mocks/petsMocks";
 import { InfoWindow } from "@vis.gl/react-google-maps";
 
-const JanelaInfo = ({ posicao, setOpen, pet }) => {
+const JanelaInfo = ({ setOpen, pet }) => {
+  const position = {lat: pet.latitude, lng: pet.longitude}
+
   return (
     <InfoWindow
-      position={posicao}
+      position={position}
       onCloseClick={() => setOpen(false)}
       maxWidth={450}
     >
       <div className="flex gap-4">
         <img
-          src="https://res.cloudinary.com/dddkrjki9/image/upload/v1726367700/pet_noha.png"
+          src={pet ? pet.fotoPerfil.url : DEFAULT_IMAGE}
           alt="Pet perdido"
           className="h-28 w-36"
         />
@@ -24,7 +27,7 @@ const JanelaInfo = ({ posicao, setOpen, pet }) => {
             </p>
             <p>
               <span className="font-bold">Data de resgate: </span>
-              {pet.dataResgate ?? "01/01/2024"}
+              {pet.cadastro ?? "01/01/2024"}
             </p>
           </div>
         </div>

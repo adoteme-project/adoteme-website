@@ -1,19 +1,13 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import CardList from "../CardListAchados";
 import { faArrowLeft, faClose } from "@fortawesome/free-solid-svg-icons";
 import AchadoDetails from "../AchadosDetails";
-import { useState, useEffect } from "react";
+import { lazy, Suspense, useState } from "react";
 import { MoonLoader } from "react-spinners";
 
-const ListAchados = ({ pets, show, onClose, endereco }) => {
-  const [selectedPet, setSelectedPet] = useState(null);
-  const [loading, setLoading] = useState(true);
+const CardList = lazy(() => import('@/components/feature/Maps/CardListAchados'))
 
-  useEffect(() => {
-    if (pets.length > 0) {
-      setTimeout(() => setLoading(false), 1000);
-    }
-  }, [pets]);
+const ListAchados = ({ show, onClose, endereco, pets }) => {
+  const [selectedPet, setSelectedPet] = useState(null);
 
   if (!show) {
     return null;
@@ -58,21 +52,19 @@ const ListAchados = ({ pets, show, onClose, endereco }) => {
       </div>
 
       <div className="overflow-y-auto max-h-[calc(100%-100px)] no-scrollbar">
-        {loading ? (
-          <div className="flex justify-center items-center h-[300px]">
-            <MoonLoader speedMultiplier={1}/>
-          </div>
-        ) : selectedPet ? (
+        {selectedPet ? (
           <AchadoDetails pet={selectedPet} />
         ) : (
           <div>
-            {pets.map((pet) => (
-              <CardList
-                key={pet.id}
-                pet={pet}
-                chosenPet={() => setSelectedPet(pet)}
-              />
-            ))}
+            <Suspense fallback={<MoonLoader speedMultiplier={1} />}>
+              {pets.map((pet) => (
+                <CardList
+                  key={pet.id}
+                  pet={pet}
+                  chosenPet={(data) => setSelectedPet(data)}
+                />
+              ))}
+            </Suspense>
           </div>
         )}
       </div>
