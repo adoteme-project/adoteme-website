@@ -21,8 +21,8 @@ const MapHandler = ({ place, marker, pets, setNearbyPets }) => {
       const distance = calculateDistance(
         selectedLocation.lat(),
         selectedLocation.lng(),
-        pet.position.lat,
-        pet.position.lng
+        pet.latitude,
+        pet.longitude
       );
       return distance <= 1; // 1 km radius
     });

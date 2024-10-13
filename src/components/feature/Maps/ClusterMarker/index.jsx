@@ -65,7 +65,6 @@ const ClusteredPetsMarkers = ({ pets }) => {
 
       {selectedPet && (
         <JanelaInfo
-          posicao={selectedPet.position}
           setOpen={handleInfoWindowClose}
           pet={selectedPet}
         />

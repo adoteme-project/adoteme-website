@@ -3,6 +3,7 @@ import { useCallback } from "react";
 
 const CustomMarker = (props) => {
   const { pet, onClick, setMarkerRef } = props;
+  const position = {lat: pet.latitude, lng: pet.longitude}
 
   const handleShowInfo = useCallback(() => onClick(pet), [onClick, pet]);
     
@@ -12,8 +13,8 @@ const CustomMarker = (props) => {
   );
 
   return (
-    <AdvancedMarker position={pet.position} ref={ref} onClick={handleShowInfo}>
-      <span className="text-2xl">🐶</span>
+    <AdvancedMarker position={position} ref={ref} onClick={handleShowInfo}>
+      <span className="text-2xl">{pet.especie === 'Cachorro' ? `🐶` : `🐱`}</span>
     </AdvancedMarker>
   );
 };
