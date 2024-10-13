@@ -3,6 +3,7 @@ import { InfoWindow } from "@vis.gl/react-google-maps";
 
 const JanelaInfo = ({ setOpen, pet }) => {
   const position = {lat: pet.latitude, lng: pet.longitude}
+  const enderecoFormatado = `${pet.ruaPerdido} ${pet.bairroPerdido}, ${pet.cidadePerdido}, ${pet.estadoPerdido}`
 
   return (
     <InfoWindow
@@ -23,7 +24,7 @@ const JanelaInfo = ({ setOpen, pet }) => {
           <div className="flex flex-col gap-2">
             <p>
               <span className="font-bold">Endereço: </span>
-              Rua Petrópolis Jardim Iporanga, Guarulhos - SP
+              {enderecoFormatado}
             </p>
             <p>
               <span className="font-bold">Data de resgate: </span>
