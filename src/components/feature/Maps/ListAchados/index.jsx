@@ -17,6 +17,8 @@ const ListAchados = ({ show, onClose, endereco, pets }) => {
     setSelectedPet(null);
   }
 
+  const enderecoFormatado = endereco
+
   return (
     <div className="bg-beje rounded-lg p-5 shadow-lg font-nunito mr-8
       sm:h-[150px] sm:w-[100px] md:h-[200px] md:w-[150px] 
@@ -30,7 +32,7 @@ const ListAchados = ({ show, onClose, endereco, pets }) => {
             <div>
               <h4 className="text-azul-main text-xl">Pets da região</h4>
               <p className="text-base">
-                {`Foram encontrados ${pets.length} pets próximos de ${endereco ?? 'nome da região'}`}
+                {`Foram encontrados ${pets.length} pets próximos de ${enderecoFormatado ?? 'nome da região'}`}
               </p>
             </div>
           )}

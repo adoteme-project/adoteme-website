@@ -6,9 +6,9 @@ const CardList = ({ pet, chosenPet }) => {
 
   const fetchPetPerdidoPorId = async () => {
     try {
-      const response = await getPetPerdidoPorId(pet.ongId);
-      console.log(response.data[pet.id]);
-      chosenPet(response.data.find(({id}) => id === pet.id));
+      const response = await getPetPerdidoPorId(pet.id);
+      console.log(response.data);
+      chosenPet(response.data);
     } catch (error) {
       console.error("Erro ao trazer os pets perdidos: ", error);
     }
