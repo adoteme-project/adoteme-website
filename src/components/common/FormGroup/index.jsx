@@ -16,6 +16,7 @@ const FormGroup = ({
   register,
   control,
   errors,
+  editMode
 }) => {
   const gridTemplateColumns = column === 2 ? "1fr 1fr" : "1fr";
 
@@ -23,7 +24,7 @@ const FormGroup = ({
     <div className="max-w-screen-lg w-full px-14 py-8 flex flex-col gap-8 bg-beje shadow-md rounded-2xl">
       <h1 className="text-2xl font-bold">{title}</h1>
 
-      <div className="grid gap-4 w-full" style={{ gridTemplateColumns }}>
+      <fieldset disabled={!editMode} className="grid gap-4 w-full" style={{ gridTemplateColumns }}>
         {fields.length > 0 &&
           fields.map((field, index) => (
             <Input
@@ -45,6 +46,7 @@ const FormGroup = ({
               <Controller
                 rules={{ required: true }}
                 control={control}
+                defaultValue=""
                 name={radio.name}
                 render={({ field }) => {
                   return (
@@ -65,7 +67,7 @@ const FormGroup = ({
               />
             </FormControl>
           ))}
-      </div>
+      </fieldset>
     </div>
   );
 };
