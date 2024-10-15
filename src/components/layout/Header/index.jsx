@@ -28,7 +28,7 @@ const Header = () => {
                 className="cursor-pointer"
               />
 
-              {isShowing && <ModalPerfil isOpen={isShowing} />}
+              {isShowing && <ModalPerfil isOpen={isShowing} toggleModal={toggleModal}/>}
             </div>
 
             <Link
