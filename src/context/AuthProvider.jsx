@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (context, data) => {
         try {
+            // Pegar o id do usuário na response
             const response = await loginService(context, data);
             const { token } = response.data;
 
