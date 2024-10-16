@@ -43,7 +43,7 @@ const PaginaOng = () => {
             if (name === 'species' && value) return animal.especie === value;
             if (name === 'sex' && value) return animal.sexo === value;
             if (name === 'city' && value) return animal.cidade === value;
-            return true; // Para outros filtros, retorna true para manter
+            return true;
         });
         setFilteredAnimals(filtered);
     };
@@ -68,11 +68,11 @@ const PaginaOng = () => {
 
             <h2 className="text-center font-bold text-3xl mt-6 mb-4">{ong.nome}</h2>
 
-            {/* Adicionando o componente de filtro */}
+            
             <Filter onFilterChange={handleFilterChange} />
 
             <GridLayout
-                items={filteredAnimals} // Usando animais filtrados
+                items={filteredAnimals}
                 tipoCard="animal"
             />
 
