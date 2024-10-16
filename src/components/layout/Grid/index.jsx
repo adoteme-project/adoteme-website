@@ -1,7 +1,7 @@
-import { useCardContext } from '@/contextCard/index';
+import { useCardContext } from '@/context/CardProvider';
 import Card from "@/components/common/Card";
 
-const GridLayout = ({ onDoarClick, titulo,tipoCard}) => {
+const GridLayout = ({ onDoarClick, titulo, tipoCard }) => {
   const { sugestoes } = useCardContext();
   const cores = ["#FFC55E", "#A9B949", "#B2DED3", "#EC5A49"];
   console.log("tipo card", tipoCard)

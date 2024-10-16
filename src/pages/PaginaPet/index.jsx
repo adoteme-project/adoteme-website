@@ -4,7 +4,7 @@ import BreadCrumb from '@/components/common/BreadCrumb';
 import Card from '@/components/common/Card';
 import Doacao from '@/components/section/Donation';
 import Avaliacao from '@/components/feature/Rating';
-import { useCardContext } from '@/contextCard/index';
+import { useCardContext } from '@/context/CardProvider';
 import Carousel from '@/components/common/Carrossel';
 
 const PaginaPet = () => {

@@ -1,70 +1,70 @@
 [
-    {
-      "key": 1,
-      "nome": "NOHA",
-      "idade": "2 anos",
-      "imagem": "",
-      "distancia": "600m",
-      "personalidade": [
-        {
-          "primeiraPersonalidade": "Sociável",
-          "valor": 4
-        },
-        {
-          "segundaPersonalidade": "Brincalhão",
-          "valor": 3
-        }
-      ]
-    },
-    {
-      "key": 2,
-      "nome": "PUDIM",
-      "idade": "2 anos",
-      "imagem": "",
-      "distancia": "700m",
-      "personalidade": [
-        {
-          "primeiraPersonalidade": "Brincalhão",
-          "valor": 5
-        },
-        {
-          "segundaPersonalidade": "Sociável",
-          "valor": 4
-        }
-      ]
-    },
-    {
-      "key": 3,
-      "nome": "ALFREDO",
-      "idade": "2 anos",
-      "imagem": "",
-      "distancia": "1Km",
-      "personalidade": [
-        {
-          "primeiraPersonalidade": "Brincalhão",
-          "valor": 3
-        },
-        {
-          "segundaPersonalidade": "Leal",
-          "valor": 3
-        }
-      ]
-    },
-    {
-      "key": 4,
-      "nome": "PAÇOCA",
-      "idade": "2 anos",
-      "imagem": "",
-      "distancia": "1.2km",
-      "personalidade": [
-        {
-          "primeiraPersonalidade": "Obediante",
-          "valor": 4
-        },
-        {
-          "segundaPersonalidade": "Territorial",
-          "valor": 2
-        }
-      ]
-    }
-  ]
+  {
+    "id": 1,
+    "nome": "NOHA",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "600m",
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Sociável",
+        "valor": 4
+      },
+      {
+        "segundaPersonalidade": "Brincalhão",
+        "valor": 3
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "nome": "PUDIM",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "700m",
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Brincalhão",
+        "valor": 5
+      },
+      {
+        "segundaPersonalidade": "Sociável",
+        "valor": 4
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "nome": "ALFREDO",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "1Km",
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Brincalhão",
+        "valor": 3
+      },
+      {
+        "segundaPersonalidade": "Leal",
+        "valor": 3
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "nome": "PAÇOCA",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "1.2km",
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Obediante",
+        "valor": 4
+      },
+      {
+        "segundaPersonalidade": "Territorial",
+        "valor": 2
+      }
+    ]
+  }
+]

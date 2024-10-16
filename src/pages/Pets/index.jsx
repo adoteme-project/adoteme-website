@@ -4,7 +4,7 @@ import Categorias from '@/components/section/Categories';
 import BreadCrumb from '@/components/common/BreadCrumb';
 import Doacao from '@/components/section/Donation';
 import Grid from '@/components/layout/Grid/index'
-import { useCardContext } from '@/contextCard';
+import { useCardContext } from '@/context/CardProvider';
 // import AnimaisProximos from '@/components/section/Near-Animals/index'
 
 
