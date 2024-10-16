@@ -24,6 +24,8 @@ import PerfilUsuario from "./pages/PerfilUsuario"
 import FormularioUsuario from "./pages/PerfilFormulario";
 import PerfilAplicacao from "./pages/PerfilAplicacao";
 import OngLayout from "./components/layout/OngLayout";
+import OngDashboard from "./pages/OngDashboard";
+import OngPet from "./pages/OngPet";
 
 function App() {
   return (
@@ -57,8 +59,8 @@ function App() {
               </Route>
 
               <Route path="/ong" element={<OngLayout/>}>
-                <Route path="/ong/dashboard"/>
-                <Route path="/ong/pet"/>
+                <Route path="/ong/dashboard" element={<OngDashboard/>}/>
+                <Route path="/ong/pet" element={<OngPet/>}/>
                 <Route path="/ong/aplicacoes"/>
                 <Route path="/ong/contatos"/>
                 <Route path="/ong/configuracoes"/>
