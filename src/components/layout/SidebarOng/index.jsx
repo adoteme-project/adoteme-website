@@ -18,7 +18,7 @@ const SidebarOng = () => {
       <nav className='flex flex-col gap-4 font-nunito'>
         <hr className='my-2 border-ong-div' />
         <NavItem icon={faChartLine} label="Dashboard" pathTo="dashboard"/>
-        <NavItem icon={faPaw} label="Pets" pathTo="pet"/>
+        <NavItem icon={faPaw} label="Pets" pathTo="pets"/>
         <NavItem icon={faFileLines} label="Aplicações" pathTo="aplicacoes"/>
         <NavItem icon={faAddressBook} label="Contatos" pathTo="contatos"/>
         <hr className='my-2 border-ong-div' />

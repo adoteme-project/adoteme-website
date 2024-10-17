@@ -1,26 +1,26 @@
-import { Link, useMatches } from "react-router-dom";
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useLocation } from 'react-router-dom';
 
-const BreadCrumbOng = () => {
-    const matches = useMatches();
+const Breadcrumb = () => {
+  const location = useLocation();
+  const pathnames = location.pathname.split('/').filter((x) => x);
 
-    const crumbs = matches
-        .filter((match) => Boolean(match.handle?.crumb))
-        .map((match) => ({
-            crumb: match.handle.crumb,
-            path: match.pathname
-        }));
-
-    return (
-        <nav aria-label="breadcrumb">
-            <ol>
-                {crumbs.map((crumb, index) => (
-                    <li key={index}>
-                        <Link to={crumb.path}>{crumb.crumb}</Link>
-                    </li>
-                ))}
-            </ol>
-        </nav>
-    );
+  return (
+    <nav className="flex items-center">
+      {pathnames.map((name, index) => {
+        const formattedName = name.charAt(0).toUpperCase() + name.slice(1);
+        return (
+          <span key={index} className="text-preto font-nunito">
+            {formattedName}
+            {index < pathnames.length - 1 && (
+              <span className="mx-2"> {<FontAwesomeIcon icon={faChevronRight} size='sm'/>} </span>
+            )}
+          </span>
+        );
+      })}
+    </nav>
+  );
 };
 
-export default BreadCrumbOng;
+export default Breadcrumb;

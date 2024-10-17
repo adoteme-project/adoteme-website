@@ -60,7 +60,7 @@ function App() {
 
               <Route path="/ong" element={<OngLayout/>}>
                 <Route path="/ong/dashboard" element={<OngDashboard/>}/>
-                <Route path="/ong/pet" element={<OngPet/>}/>
+                <Route path="/ong/pets" element={<OngPet/>}/>
                 <Route path="/ong/aplicacoes"/>
                 <Route path="/ong/contatos"/>
                 <Route path="/ong/configuracoes"/>
