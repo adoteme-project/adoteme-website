@@ -1,7 +1,7 @@
 const OngDashboard = () => {
     return (
         <div>
-            <h1>Ong Dashboard</h1>
+            <h1>Ong dashboard</h1>
         </div>
     )
 }

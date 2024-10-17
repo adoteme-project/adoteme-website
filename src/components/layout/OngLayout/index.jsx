@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom"
 import SidebarOng from "../SidebarOng"
 import HeaderOng from "../HeaderOng";
+import PageTitle from "../PageTitle";
 
 const userData = {
     nome: 'Fernando',
@@ -13,10 +14,12 @@ const OngLayout = () => {
         <div className="w-full flex h-svh max-h-svh">
             <SidebarOng />
             <div className="h-full flex-1">
-                <div className="flex h-full flex-col justify-between overflow-y-auto no-scrollbar">
+                <div className="flex h-full flex-col overflow-y-auto no-scrollbar">
                     <HeaderOng userData={userData} />
-
-                    <Outlet />
+                    <div className="p-6 flex flex-col gap-8">
+                        <PageTitle title='Pets' actionName='+ Adicionar pet' />
+                        <Outlet />
+                    </div>
                 </div>
             </div>
         </div>
