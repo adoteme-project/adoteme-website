@@ -56,7 +56,8 @@ axiosAuth.interceptors.response.use(
       const { setAuth, logout } = useContext(AuthContext);
 
       try {
-        const refreshToken = localStorage.getItem("refreshToken");
+        const refreshToken = localStorage.getItem("token");
+        console.log(refreshToken);
         const response = await axiosAuth.post("/login/refresh", {
           refreshToken,
         });
