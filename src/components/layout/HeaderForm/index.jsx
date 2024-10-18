@@ -3,8 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useGoBack from "../../../hooks/useBackNavigation";
 import logoAdoteme from "../../../assets/logo_adotme.png";
 
-const HeaderFrom = ({ hasIcon, hasBackButton }) => {
-  const goBackAction = useGoBack("/"); // Passa o parâmetro de volta default
+const HeaderForm = ({ hasIcon, hasBackButton }) => {
+  const goBackAction = useGoBack("/");
 
   return (
     <div className="shadow-md p-3 w-full flex justify-between items-center">
@@ -22,4 +22,4 @@ const HeaderFrom = ({ hasIcon, hasBackButton }) => {
   );
 };
 
-export default HeaderFrom;
+export default HeaderForm;

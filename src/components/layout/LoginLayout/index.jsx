@@ -1,12 +1,12 @@
 import { Outlet, useLocation } from "react-router-dom";
-import HeaderFrom from "../HeaderForm";
+import HeaderForm from "../HeaderForm";
 
 const LoginLayout = () => {
   let location = useLocation().pathname;
 
   return (
     <>
-      <HeaderFrom hasBackButton={true} hasIcon={location != '/login'}/>
+      <HeaderForm hasBackButton={true} hasIcon={location != '/login'}/>
       <Outlet />
     </>
   );
