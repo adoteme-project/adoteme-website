@@ -1,5 +1,5 @@
 import { axiosAuth } from "./configs/axiosConfig"
 
-export const getUserData = (id) => {
-    return axiosAuth.get(`/adotantes/${id}`);
+export const getUserData = () => {
+    return axiosAuth.get(`/adotantes/me`);
 }
