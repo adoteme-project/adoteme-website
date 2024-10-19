@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { RegistrationAdotanteSchema } from "@/utils/formValidations";
 
 const CadastroFoto = lazy(() => import('@/pages/CadastroAdotante/CadastroFoto'));
+const CadastroPerguntas = lazy(() => import('@/pages/CadastroAdotante/CadastroPerguntas'));
 const CadastroDados = lazy(() => import('@/pages/CadastroAdotante/CadastroDados'));
 
 const CadastroAdotante = () => {
@@ -20,7 +21,8 @@ const CadastroAdotante = () => {
 
   const steps = [
     <CadastroDados key={0} />,
-    <CadastroFoto key={1} />,
+    <CadastroPerguntas key={1} />,
+    <CadastroFoto key={2} />,
   ];
 
   const nextStep = () => {
