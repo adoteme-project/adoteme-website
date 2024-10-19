@@ -26,6 +26,8 @@ import PerfilAplicacao from "./pages/PerfilAplicacao";
 import OngLayout from "./components/layout/OngLayout";
 import OngDashboard from "./pages/OngDashboard";
 import OngPet from "./pages/OngPet";
+import OngAplicacoes from "./pages/OngAplicacoes";
+import OngConfiguracoes from "./pages/OngConfiguracoes";
 
 function App() {
   return (
@@ -61,9 +63,8 @@ function App() {
               <Route path="/ong" element={<OngLayout/>}>
                 <Route path="/ong/dashboard" element={<OngDashboard/>}/>
                 <Route path="/ong/pets" element={<OngPet/>}/>
-                <Route path="/ong/aplicacoes"/>
-                <Route path="/ong/contatos"/>
-                <Route path="/ong/configuracoes"/>
+                <Route path="/ong/aplicacoes" element={<OngAplicacoes/>}/>
+                <Route path="/ong/configuracoes" element={<OngConfiguracoes/>}/>
               </Route>
 
               <Route path="*" element={<NotFound />} />

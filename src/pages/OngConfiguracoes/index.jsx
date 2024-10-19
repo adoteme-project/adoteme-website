@@ -1,9 +1,11 @@
+import PageTitle from "@/components/layout/PageTitle";
+
 const OngConfiguracoes = () => {
     return (
-        <div>
-            <h1> Ong Configurações </h1>
-        </div>
-    )
+        <>
+          <PageTitle title="Configurações" />
+        </>
+      );
 } 
 
 export default OngConfiguracoes;

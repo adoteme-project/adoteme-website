@@ -1,6 +1,6 @@
 const HeaderOng = ({userData}) => {
     return (
-        <div className="sticky top-0 w-full shadow-sm">
+        <div className="w-full shadow-sm">
             <div className="flex justify-end py-3 px-8">
                 <div className="flex gap-4">
                     <img src={userData.image ?? ''} alt="Foto de Perfil" 

@@ -1,0 +1,83 @@
+[
+    {
+      "id": 1001,
+      "nome": "Tob",
+      "especie": "Cachorro",
+      "raca": "Vira-lata",
+      "taxa": "70 R$",
+      "dataDeEntrada": "21/05/2024",
+      "situacao": "Adoção",
+      "visibilidade": true
+    },
+    {
+      "id": 1002,
+      "nome": "Bela",
+      "especie": "Gato",
+      "raca": "Persa",
+      "taxa": "120 R$",
+      "dataDeEntrada": "15/06/2024",
+      "situacao": "Adotado",
+      "visibilidade": false
+    },
+    {
+      "id": 1003,
+      "nome": "Max",
+      "especie": "Cachorro",
+      "raca": "Golden Retriever",
+      "taxa": "200 R$",
+      "dataDeEntrada": "01/07/2024",
+      "situacao": "Adoção",
+      "visibilidade": true
+    },
+    {
+      "id": 1004,
+      "nome": "Luna",
+      "especie": "Gato",
+      "raca": "Sphynx",
+      "taxa": "150 R$",
+      "dataDeEntrada": "10/08/2024",
+      "situacao": "Adoção",
+      "visibilidade": false
+    },
+    {
+      "id": 1005,
+      "nome": "Rex",
+      "especie": "Cachorro",
+      "raca": "Bulldog Francês",
+      "taxa": "180 R$",
+      "dataDeEntrada": "22/05/2024",
+      "situacao": "Adotado",
+      "visibilidade": true
+    },
+    {
+      "id": 1006,
+      "nome": "Mia",
+      "especie": "Gato",
+      "raca": "Maine Coon",
+      "taxa": "130 R$",
+      "dataDeEntrada": "30/06/2024",
+      "situacao": "Adoção",
+      "visibilidade": true
+    },
+    {
+      "id": 1007,
+      "nome": "Thor",
+      "especie": "Cachorro",
+      "raca": "Labrador",
+      "taxa": "190 R$",
+      "dataDeEntrada": "05/07/2024",
+      "situacao": "Adoção",
+      "visibilidade": false
+    },
+    {
+      "id": 1008,
+      "nome": "Nina",
+      "especie": "Gato",
+      "raca": "Siamês",
+      "taxa": "110 R$",
+      "dataDeEntrada": "18/08/2024",
+      "situacao": "Adotado",
+      "visibilidade": true
+    }
+  ]
+  

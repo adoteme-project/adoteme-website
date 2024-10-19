@@ -1,7 +1,7 @@
 import logoOng from '@/assets/logo_adotme.png';
 import NavItem from '@/components/common/NavItem';
 import AuthContext from '@/context/AuthProvider';
-import { faAddressBook, faFileLines } from '@fortawesome/free-regular-svg-icons';
+import { faFileLines } from '@fortawesome/free-regular-svg-icons';
 import { faArrowRightFromBracket, faChartLine, faGear, faPaw } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';
 
@@ -20,9 +20,8 @@ const SidebarOng = () => {
         <NavItem icon={faChartLine} label="Dashboard" pathTo="dashboard"/>
         <NavItem icon={faPaw} label="Pets" pathTo="pets"/>
         <NavItem icon={faFileLines} label="Aplicações" pathTo="aplicacoes"/>
-        <NavItem icon={faAddressBook} label="Contatos" pathTo="contatos"/>
         <hr className='my-2 border-ong-div' />
-        <NavItem icon={faGear} label="Configurações" pathTo="contatos"/>
+        <NavItem icon={faGear} label="Configurações" pathTo="configuracoes"/>
         <NavItem icon={faArrowRightFromBracket} label="Sair" action={logout}/>
       </nav>
 
