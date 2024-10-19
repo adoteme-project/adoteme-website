@@ -23,6 +23,11 @@ import { NotificationProvider } from "./context/NotificationProvider";
 import PerfilUsuario from "./pages/PerfilUsuario"
 import FormularioUsuario from "./pages/PerfilFormulario";
 import PerfilAplicacao from "./pages/PerfilAplicacao";
+import OngLayout from "./components/layout/OngLayout";
+import OngDashboard from "./pages/OngDashboard";
+import OngPet from "./pages/OngPet";
+import OngAplicacoes from "./pages/OngAplicacoes";
+import OngConfiguracoes from "./pages/OngConfiguracoes";
 
 function App() {
   return (
@@ -53,6 +58,13 @@ function App() {
 
               <Route path="/teste" element={<PrivateRoute />}>
                 <Route path="/teste" element={<Teste />} />
+              </Route>
+
+              <Route path="/ong" element={<OngLayout/>}>
+                <Route path="/ong/dashboard" element={<OngDashboard/>}/>
+                <Route path="/ong/pets" element={<OngPet/>}/>
+                <Route path="/ong/aplicacoes" element={<OngAplicacoes/>}/>
+                <Route path="/ong/configuracoes" element={<OngConfiguracoes/>}/>
               </Route>
 
               <Route path="*" element={<NotFound />} />
