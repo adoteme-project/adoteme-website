@@ -4,13 +4,13 @@ import Banner from '@/components/section/Banner';
 import BreadCrumb from '@/components/common/BreadCrumb';
 import axios from 'axios';
 import GridLayout from '@/components/layout/Grid';
-import Filter from '@/components/common/Filter';
+// import Filter from '@/components/common/Filter';
 
 const PaginaOng = () => {
     const { id } = useParams();
     const [ong, setOng] = useState(null);
     const [animais, setAnimais] = useState([]);
-    const [filteredAnimals, setFilteredAnimals] = useState([]);
+    // const [filteredAnimals, setFilteredAnimals] = useState([]);
 
     useEffect(() => {
         const fetchOng = async () => {
@@ -37,16 +37,16 @@ const PaginaOng = () => {
         fetchOng();
     }, [id]);
 
-    const handleFilterChange = (name, value) => {
-        const filtered = animais.filter(animal => {
-            if (name === 'size' && value) return animal.tamanho === value;
-            if (name === 'species' && value) return animal.especie === value;
-            if (name === 'sex' && value) return animal.sexo === value;
-            if (name === 'city' && value) return animal.cidade === value;
-            return true;
-        });
-        setFilteredAnimals(filtered);
-    };
+    // const handleFilterChange = (name, value) => {
+    //     const filtered = animais.filter(animal => {
+    //         if (name === 'size' && value) return animal.tamanho === value;
+    //         if (name === 'species' && value) return animal.especie === value;
+    //         if (name === 'sex' && value) return animal.sexo === value;
+    //         if (name === 'city' && value) return animal.cidade === value;
+    //         return true;
+    //     });
+    //     setFilteredAnimals(filtered);
+    // };
 
 
     if (!ong) {
@@ -68,11 +68,11 @@ const PaginaOng = () => {
 
             <h2 className="text-center font-bold text-3xl mt-6 mb-4">{ong.nome}</h2>
 
-            
-            <Filter onFilterChange={handleFilterChange} />
+
+            {/* <Filter onFilterChange={handleFilterChange} /> */}
 
             <GridLayout
-                items={filteredAnimals}
+                items={animais}
                 tipoCard="animal"
             />
 
@@ -86,31 +86,31 @@ const PaginaOng = () => {
                         <div className="my-3">
                             <input
                                 type="text"
-                                value="chavepix@exemplo.com"
+                                value={ong.chavePix}
                                 className="border p-2 rounded w-full text-center"
                                 readOnly
                             />
                             <button
                                 className="mt-2 bg-[#4C8EB5] text-white py-2 px-4 rounded"
-                                onClick={() => navigator.clipboard.writeText("chavepix@exemplo.com")}
+                                onClick={() => navigator.clipboard.writeText(ong.chavePix)}
                             >
                                 Copiar chave PIX
                             </button>
                         </div>
                         <div className="mt-4">
                             <img src="/path/to/qr-code.png" alt="QR Code PIX" className="mx-auto w-32 h-32" />
-                            <p className="text-sm text-gray-500 mt-2">QR Code PIX</p>
+                            <p className="text-sm text-gray-500 mt-2">{ong.qrCode}</p>
                         </div>
                     </div>
 
                     <div className="bg-[#FFE0B3] p-6 rounded-lg text-center w-full md:w-[400px] shadow-lg">
                         <h4 className="font-semibold text-lg mb-2">TED ou depósito em conta</h4>
                         <div className="text-sm text-gray-700">
-                            <p>Banco: XXXX</p>
-                            <p>Agência: XXXX</p>
-                            <p>Conta corrente: XXXXX-X</p>
-                            <p>Razão social: Nome da ONG</p>
-                            <p>CNPJ: 00.000.000/0000-00</p>
+                            <p>Banco: {ong.banco}</p>
+                            <p>Agência: {ong.agencia}</p>
+                            <p>Conta corrente: {ong.tipoConta}</p>
+                            <p>Razão social: {ong.nome}</p>
+                            <p>CNPJ: {ong.cnpj}</p>
                         </div>
                     </div>
                 </div>

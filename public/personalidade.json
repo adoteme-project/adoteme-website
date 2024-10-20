@@ -1,0 +1,52 @@
+[
+    {
+        "id": 1,
+        "energia": 5,
+        "inteligencia": 4,
+        "obediente": 3,
+        "sociabilidade": 4,
+        "territorial": 2,
+        "tolerante": 5,
+        "brincalhao": 3
+    },
+    {
+        "id": 2,
+        "energia": 3,
+        "inteligencia": 5,
+        "obediente": 4,
+        "sociabilidade": 3,
+        "territorial": 3,
+        "tolerante": 4,
+        "brincalhao": 2
+    },
+    {
+        "id": 3,
+        "energia": 4,
+        "inteligencia": 3,
+        "obediente": 5,
+        "sociabilidade": 5,
+        "territorial": 1,
+        "tolerante": 3,
+        "brincalhao": 5
+    },
+    {
+        "id": 4,
+        "energia": 2,
+        "inteligencia": 2,
+        "obediente": 4,
+        "sociabilidade": 2,
+        "territorial": 5,
+        "tolerante": 2,
+        "brincalhao": 5
+    },
+    {
+        "id": 5,
+        "energia": 1,
+        "inteligencia": 4,
+        "obediente": 2,
+        "sociabilidade": 1,
+        "territorial": 4,
+        "tolerante": 1,
+        "brincalhao": 2
+    }
+]

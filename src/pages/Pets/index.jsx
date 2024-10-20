@@ -5,12 +5,11 @@ import BreadCrumb from '@/components/common/BreadCrumb';
 import Doacao from '@/components/section/Donation';
 import Grid from '@/components/layout/Grid/index'
 import { useCardContext } from '@/context/CardProvider';
-// import AnimaisProximos from '@/components/section/Near-Animals/index'
 
 
 const Pets = () => {
   
-  const {context} = useCardContext();
+  const { context } = useCardContext();
 
   const validItems = context.filter(item => item.tipo === 'animal');
 
@@ -22,6 +21,7 @@ const Pets = () => {
      <DropDown items={validItems} titulo="Animais">
        <Grid
        items={validItems}
+       tipoCard="animal"
        />
      <DropDown/>    
      <Doacao/>

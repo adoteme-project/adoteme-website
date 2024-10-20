@@ -1,10 +1,8 @@
-import Avaliacao from "@/components/feature/Rating";
 import { Link } from "react-router-dom";
 import Botao from "../Button";
 
-const Card = ({ colorBg, data = [], onDoarClick }) => {
-    // Verificar se é um pet (animal) ou ONG com base nos dados fornecidos
-    const isPet = data.tipo === 'animal' || data.personalidade?.length > 0;
+const Card = ({ colorBg, data = [], onDoarClick, tipoCard }) => {
+    const isPet = tipoCard === 'animal' || data.personalidade?.length > 0;
 
     return (
         <div className="w-[41vw] h-[50.59vh] bg-beje rounded-lg grid grid-cols-2 gap-4 px-5 py-3 mb-5">
@@ -32,15 +30,9 @@ const Card = ({ colorBg, data = [], onDoarClick }) => {
                     {isPet ? (
                         <>
                             <h3>Idade: {data.idade}</h3>
-                            {data.personalidade?.map((p, index) => (
-                                <div key={index}>
-                                    <h3>{p.primeiraPersonalidade || p.segundaPersonalidade}:</h3>
-                                    <Avaliacao
-                                        avaliacao={p.valor}
-                                        cor={index === 0 ? "#A9B949" : "#EC5A49"}
-                                    />
-                                </div>
-                            ))}
+                            <h3>Tamanho: {data.porte}</h3>
+                            <h3>Sexo: {data.sexo}</h3>
+                            <h3>Espécie: {data.especie}</h3>
                         </>
                     ) : (
                         <div className="flex flex-col py-5 gap-2">

@@ -1,87 +1,106 @@
 {
-    "ong": {
+  "ong": {
+    "id": 1,
+    "nome": "ONG A",
+    "email": "contato@onga.com",
+    "telefone": "123456789",
+    "cnpj": "12.345.678/0001-11",
+    "banco": "bradesco",
+    "agencia": "8424",
+    "conta": "5245", 
+    "tipoConta" : "corrente",
+    "nomeTitular" :  "Rafael",
+    "qrCode": "foto",
+    "chavePix": "4515",
+    "endereco": {
+      "id": 101,
+      "cep": "12345-678",
+      "estado": "SP",
+      "cidade": "São Paulo",
+      "bairro": "Centro",
+      "rua": "Rua A"
+    },
+    "animais": [
+      {
         "id": 1,
-        "nome": "ONG A",
-        "email": "contato@onga.com",
-        "telefone": "123456789",
-        "cnpj": "12.345.678/0001-11",
-        "endereco": {
-            "id": 101,
-            "cep": "12345-678",
-            "estado": "SP",
-            "cidade": "São Paulo",
-            "bairro": "Centro",
-            "rua": "Rua A"
-        },
-        "animais": [
-            {
-              "id": 1,
-              "nome": "NOAH",
-              "idade": "2 anos",
-              "imagem": "",
-              "distancia": "600m",
-              "personalidade": [
-                {
-                  "primeiraPersonalidade": "Sociável",
-                  "valor": 4
-                },
-                {
-                  "segundaPersonalidade": "Brincalhão",
-                  "valor": 3
-                }
-              ]
-            },
-            {
-              "id": 2,
-              "nome": "PUDIM",
-              "idade": "2 anos",
-              "imagem": "",
-              "distancia": "700m",
-              "personalidade": [
-                {
-                  "primeiraPersonalidade": "Brincalhão",
-                  "valor": 5
-                },
-                {
-                  "segundaPersonalidade": "Sociável",
-                  "valor": 4
-                }
-              ]
-            },
-            {
-              "id": 3,
-              "nome": "ALFREDO",
-              "idade": "2 anos",
-              "imagem": "",
-              "distancia": "1Km",
-              "personalidade": [
-                {
-                  "primeiraPersonalidade": "Brincalhão",
-                  "valor": 3
-                },
-                {
-                  "segundaPersonalidade": "Leal",
-                  "valor": 3
-                }
-              ]
-            },
-            {
-              "id": 4,
-              "nome": "PAÇOCA",
-              "idade": "2 anos",
-              "imagem": "",
-              "distancia": "1.2km",
-              "personalidade": [
-                {
-                  "primeiraPersonalidade": "Obediente",
-                  "valor": 4
-                },
-                {
-                  "segundaPersonalidade": "Territorial",
-                  "valor": 2
-                }
-              ]
-            }
+        "nome": "NOAH",
+        "idade": "2 anos",
+        "imagem": "",
+        "distancia": "600m",
+        "porte": "grande",
+        "sexo": "macho",
+        "especie": "gato",
+        "personalidade": [
+          {
+            "primeiraPersonalidade": "Sociável",
+            "valor": 4
+          },
+          {
+            "segundaPersonalidade": "Brincalhão",
+            "valor": 3
+          }
         ]
-    }
+      },
+      {
+        "id": 2,
+        "nome": "PUDIM",
+        "idade": "2 anos",
+        "imagem": "",
+        "distancia": "700m",
+        "porte": "grande",
+        "sexo": "macho",
+        "especie": "gato",
+        "personalidade": [
+          {
+            "primeiraPersonalidade": "Brincalhão",
+            "valor": 5
+          },
+          {
+            "segundaPersonalidade": "Sociável",
+            "valor": 4
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "nome": "ALFREDO",
+        "idade": "2 anos",
+        "imagem": "",
+        "distancia": "1Km",
+        "porte": "grande",
+        "sexo": "macho",
+        "especie": "gato",
+        "personalidade": [
+          {
+            "primeiraPersonalidade": "Brincalhão",
+            "valor": 3
+          },
+          {
+            "segundaPersonalidade": "Leal",
+            "valor": 3
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "nome": "PAÇOCA",
+        "idade": "2 anos",
+        "imagem": "",
+        "distancia": "1.2km",
+        "porte": "grande",
+        "sexo": "macho",
+        "especie": "gato",
+        "personalidade": [
+          {
+            "primeiraPersonalidade": "Obediente",
+            "valor": 4
+          },
+          {
+            "segundaPersonalidade": "Territorial",
+            "valor": 2
+          }
+        ]
+      }
+    ]
+  }
 }

@@ -66,7 +66,7 @@ const PaginaPet = () => {
                         <p className="mt-2">Espécie: {animal.especie}</p>
                         <p>Sexo: {animal.sexo}</p>
                         <p>Idade: {animal.idade}</p>
-                        <p>Tamanho: {animal.tamanho}</p>
+                        <p>Tamanho: {animal.porte}</p>
 
                         <div className="flex flex-col gap-4 mt-4">
                             <div className="flex items-center">
@@ -74,6 +74,12 @@ const PaginaPet = () => {
                             </div>
                             <div className="flex items-center">
                                 Sociável: <Avaliacao avaliacao={animal.sociavel} cor='#A9B949' />
+                            </div>
+                            <div className="flex items-center">
+                                Tolerante: <Avaliacao avaliacao={animal.tolerante} cor='#A9B949' />
+                            </div>
+                            <div className="flex items-center">
+                                Obediente: <Avaliacao avaliacao={animal.obediente} cor='#A9B949' />
                             </div>
                             <div className="flex items-center">
                                 Territorialista: <Avaliacao avaliacao={animal.territorialista} cor='#A9B949' />
@@ -100,7 +106,7 @@ const PaginaPet = () => {
                 {sugestoes.length > 0 ? (
                     <Carousel
                         items={sugestoes.filter(sugestao => sugestao.tipo === 'animal')}
-                        renderItem={(sugestao) => <Card key={sugestao.animal} data={sugestao} colorBg={cores[sugestao.id % cores.length]} />}
+                        renderItem={(sugestao) => <Card key={sugestao.animal} data={sugestao} tipoCard="animal" colorBg={cores[sugestao.id % cores.length]} />}
                         slidesPerView={2}
                         spaceBetween={10}
                     />

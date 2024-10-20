@@ -24,6 +24,7 @@ import PerfilUsuario from "./pages/PerfilUsuario"
 import FormularioUsuario from "./pages/PerfilFormulario";
 import PerfilAplicacao from "./pages/PerfilAplicacao";
 import PaginaOng from "./pages/PaginaOng";
+import Categorias from "./pages/Categorias";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/pets" element={<Pets />} />
                 <Route path="/doacoes" element={<Doacoes />} />
                 <Route path="/ongs" element={<Ongs />} />
+                <Route path="/categorias" element={<Categorias />} />
                 <Route path="/achados" element={<Achados />} />
                 <Route path="/pagina-pet/:id" element={<PaginaPet />} />
                 <Route path="/pagina-ong/:id" element={<PaginaOng />} />

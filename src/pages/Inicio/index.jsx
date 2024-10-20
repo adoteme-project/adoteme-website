@@ -7,7 +7,7 @@ import { useCardContext } from "@/context/CardProvider.jsx";
 const Inicio = () => {
   const {sugestoes } = useCardContext();
 
-  const animal = sugestoes.filter(item => item.tipo === 'ong');
+  const animal = sugestoes.filter(item => item.tipo === 'animal');
 
   return (
     <>
