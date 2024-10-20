@@ -9,14 +9,14 @@ import Carousel from '@/components/common/Carrossel';
 
 const PaginaPet = () => {
     const { id } = useParams();
-    const { sugestoes } = useCardContext();
+    const { data } = useCardContext();
     const [animal, setAnimal] = useState(null);
     const cores = ["#FFC55E", "#A9B949", "#B2DED3", "#EC5A49"];
 
 
     useEffect(() => {
-        if (sugestoes.length > 0) {
-            const animalEncontrado = sugestoes
+        if (data.length > 0) {
+            const animalEncontrado = data
                 .filter(sugestao => sugestao.tipo === 'animal')
                 .find(animal => animal.id === parseInt(id));
 
@@ -24,7 +24,7 @@ const PaginaPet = () => {
                 setAnimal(animalEncontrado);
             }
         }
-    }, [id, sugestoes]);
+    }, [id, data]);
 
     if (!animal) {
         return <p>Carregando...</p>
@@ -85,9 +85,9 @@ const PaginaPet = () => {
 
             <section className="mt-10 p-10 bg-gray-100">
                 <h2 className="text-3xl font-bold mb-6 text-center">Sugestão</h2>
-                {sugestoes.length > 0 ? (
+                {data.length > 0 ? (
                     <Carousel
-                        items={sugestoes.filter(sugestao => sugestao.tipo === 'animal')}
+                        items={data.filter(sugestao => sugestao.tipo === 'animal')}
                         renderItem={(sugestao) => <Card key={sugestao.animal} data={sugestao} colorBg={cores[sugestao.id % cores.length]} />}
                         slidesPerView={2}
                         spaceBetween={10}

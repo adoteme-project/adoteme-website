@@ -4,7 +4,7 @@ import axios from 'axios';
 const CardContext = createContext();
 
 export const CardProvider = ({ children }) => {
-    const [sugestoes, setSugestoes] = useState([]);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         const fetchDados = async () => {
@@ -29,7 +29,7 @@ export const CardProvider = ({ children }) => {
                     ...responseOngs.data.map(ong => ({ ...ong, tipo: 'ong' })),
                 ];
 
-                setSugestoes(dadosCombinados);
+                setData(dadosCombinados);
                 
                 
             } catch (error) {
@@ -42,7 +42,7 @@ export const CardProvider = ({ children }) => {
     }, []);
 
     return (
-        <CardContext.Provider value={{ sugestoes }}>
+        <CardContext.Provider value={{ data }}>
             {children}
         </CardContext.Provider>
     );

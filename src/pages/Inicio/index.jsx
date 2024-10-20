@@ -5,9 +5,9 @@ import Carousel from "../../components/section/Categories/index.jsx";
 import { useCardContext } from "@/contextCard/index.jsx";
 
 const Inicio = () => {
-  const {sugestoes } = useCardContext();
+  const {data } = useCardContext();
 
-  const animal = sugestoes.filter(item => item.tipo === 'ong');
+  const animal = data.filter(item => item.tipo === 'animal');
 
   return (
     <>

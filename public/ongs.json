@@ -3,24 +3,84 @@
     "id": "1",
     "nome": "Amor Animal",
     "descricao": "ONG dedicada ao resgate e adoção de animais abandonados, focando em cães e gatos em situação de risco.",
-    "endereco": "Rua das Flores, 123, São Paulo, SP"
+    "endereco": "Rua das Flores, 123, São Paulo, SP",
+    "cidade": "São Paulo"
   },
   {
     "id": "2",
     "nome": "Vida de Patas",
     "descricao": "Organização sem fins lucrativos que promove o bem-estar animal e a adoção responsável de pets.",
-    "endereco": "Avenida Central, 456, Rio de Janeiro, RJ"
+    "endereco": "Avenida Central, 456, Rio de Janeiro, RJ",
+    "cidade": "Rio de Janeiro"
   },
   {
     "id": "3",
     "nome": "Lar dos Peludos",
     "descricao": "Grupo de voluntários que acolhe animais de rua, oferecendo tratamento veterinário e lares temporários.",
-    "endereco": "Praça da Liberdade, 789, Belo Horizonte, MG"
+    "endereco": "Praça da Liberdade, 789, Belo Horizonte, MG",
+    "cidade": "Belo Horizonte"
   },
   {
     "id": "4",
     "nome": "Patas e Focinhos",
     "descricao": "ONG voltada para o resgate de animais abandonados, com programas de adoção e conscientização sobre maus-tratos.",
-    "endereco": "Rua Verde, 321, Porto Alegre, RS"
+    "endereco": "Rua Verde, 321, Porto Alegre, RS",
+    "cidade": "Porto Alegre"
+  },
+  {
+    "id": "5",
+    "nome": "Amigos Peludos",
+    "descricao": "ONG que acolhe animais resgatados das ruas e promove eventos de adoção em todo o estado.",
+    "endereco": "Rua das Palmeiras, 25, Curitiba, PR",
+    "cidade": "Curitiba"
+  },
+  {
+    "id": "6",
+    "nome": "Proteção Animal",
+    "descricao": "Organização focada em resgatar e reabilitar animais em situação de abandono.",
+    "endereco": "Avenida das Américas, 987, Salvador, BA",
+    "cidade": "Salvador"
+  },
+  {
+    "id": "7",
+    "nome": "Cãopanheiros",
+    "descricao": "Projeto de acolhimento de cães e gatos de rua, com foco na adoção e cuidados veterinários.",
+    "endereco": "Avenida Paulista, 132, São Paulo, SP",
+    "cidade": "São Paulo"
+  },
+  {
+    "id": "8",
+    "nome": "Acolhe Patinhas",
+    "descricao": "ONG que acolhe animais abandonados e promove eventos de conscientização sobre guarda responsável.",
+    "endereco": "Rua Nova, 77, Fortaleza, CE",
+    "cidade": "Fortaleza"
+  },
+  {
+    "id": "9",
+    "nome": "Peludos da Serra",
+    "descricao": "Organização que resgata e reabilita animais de rua na região serrana.",
+    "endereco": "Estrada das Montanhas, 999, Petrópolis, RJ",
+    "cidade": "Petrópolis"
+  },
+  {
+    "id": "10",
+    "nome": "Bem-estar Animal",
+    "descricao": "ONG voltada para a proteção e adoção de animais de pequeno porte, com foco em saúde e bem-estar.",
+    "endereco": "Alameda dos Anjos, 22, Brasília, DF",
+    "cidade": "Brasília"
+  },
+  {
+    "id": "11",
+    "nome": "Adote com Amor",
+    "descricao": "Projeto comunitário dedicado a encontrar lares para animais abandonados e conscientizar sobre maus-tratos.",
+    "endereco": "Rua do Sol, 45, Recife, PE",
+    "cidade": "Recife"
+  },
+  {
+    "id": "12",
+    "nome": "Peludos do Sertão",
+    "descricao": "Organização que atua na proteção animal em áreas rurais, promovendo campanhas de castração e adoção.",
+    "endereco": "Rua das Acácias, 789, Juazeiro, BA",
+    "cidade": "Juazeiro"
   }
 ]

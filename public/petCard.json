@@ -1,70 +1,212 @@
 [
-    {
-      "key": 1,
-      "nome": "NOHA",
-      "idade": "2 anos",
-      "imagem": "",
-      "distancia": "600m",
-      "personalidade": [
-        {
-          "primeiraPersonalidade": "Sociável",
-          "valor": 4
-        },
-        {
-          "segundaPersonalidade": "Brincalhão",
-          "valor": 3
-        }
-      ]
-    },
-    {
-      "key": 2,
-      "nome": "PUDIM",
-      "idade": "2 anos",
-      "imagem": "",
-      "distancia": "700m",
-      "personalidade": [
-        {
-          "primeiraPersonalidade": "Brincalhão",
-          "valor": 5
-        },
-        {
-          "segundaPersonalidade": "Sociável",
-          "valor": 4
-        }
-      ]
-    },
-    {
-      "key": 3,
-      "nome": "ALFREDO",
-      "idade": "2 anos",
-      "imagem": "",
-      "distancia": "1Km",
-      "personalidade": [
-        {
-          "primeiraPersonalidade": "Brincalhão",
-          "valor": 3
-        },
-        {
-          "segundaPersonalidade": "Leal",
-          "valor": 3
-        }
-      ]
-    },
-    {
-      "key": 4,
-      "nome": "PAÇOCA",
-      "idade": "2 anos",
-      "imagem": "",
-      "distancia": "1.2km",
-      "personalidade": [
-        {
-          "primeiraPersonalidade": "Obediante",
-          "valor": 4
-        },
-        {
-          "segundaPersonalidade": "Territorial",
-          "valor": 2
-        }
-      ]
-    }
-  ]
+  {
+    "id": 1,
+    "nome": "NOHA",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "600m",
+    "tamanho": "Médio",
+    "sexo": "Macho",
+    "especie": "Cachorro",
+    "cidade": "São Paulo",  
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Sociável",
+        "valor": 4
+      },
+      {
+        "segundaPersonalidade": "Brincalhão",
+        "valor": 3
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "nome": "PUDIM",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "700m",
+    "tamanho": "Pequeno",
+    "sexo": "Macho",
+    "especie": "Cachorro",
+    "cidade": "Rio de Janeiro",  
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Brincalhão",
+        "valor": 5
+      },
+      {
+        "segundaPersonalidade": "Sociável",
+        "valor": 4
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "nome": "ALFREDO",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "1Km",
+    "tamanho": "Grande",
+    "sexo": "Macho",
+    "especie": "Cachorro",
+    "cidade": "Belo Horizonte",  
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Brincalhão",
+        "valor": 3
+      },
+      {
+        "segundaPersonalidade": "Leal",
+        "valor": 3
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "nome": "PAÇOCA",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "1.2km",
+    "tamanho": "Médio",
+    "sexo": "Fêmea",
+    "especie": "Gato",
+    "cidade": "Curitiba",  
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Obediente",
+        "valor": 4
+      },
+      {
+        "segundaPersonalidade": "Territorial",
+        "valor": 2
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "nome": "MIA",
+    "idade": "1 ano",
+    "imagem": "",
+    "distancia": "500m",
+    "tamanho": "Pequeno",
+    "sexo": "Fêmea",
+    "especie": "Gato",
+    "cidade": "São Paulo",  
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Aconchegante",
+        "valor": 5
+      },
+      {
+        "segundaPersonalidade": "Curiosa",
+        "valor": 4
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "nome": "BONGO",
+    "idade": "3 anos",
+    "imagem": "",
+    "distancia": "800m",
+    "tamanho": "Grande",
+    "sexo": "Macho",
+    "especie": "Cachorro",
+    "cidade": "Recife",  
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Leal",
+        "valor": 5
+      },
+      {
+        "segundaPersonalidade": "Protetor",
+        "valor": 4
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "nome": "FLOR",
+    "idade": "4 anos",
+    "imagem": "",
+    "distancia": "2Km",
+    "tamanho": "Pequeno",
+    "sexo": "Fêmea",
+    "especie": "Pássaro",
+    "cidade": "Belo Horizonte",  
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Sociável",
+        "valor": 4
+      },
+      {
+        "segundaPersonalidade": "Cantora",
+        "valor": 5
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "nome": "ZÉ",
+    "idade": "5 anos",
+    "imagem": "",
+    "distancia": "3Km",
+    "tamanho": "Médio",
+    "sexo": "Macho",
+    "especie": "Coelho",
+    "cidade": "Curitiba",  
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Brincalhão",
+        "valor": 4
+      },
+      {
+        "segundaPersonalidade": "Amigável",
+        "valor": 4
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "nome": "LILI",
+    "idade": "1 ano",
+    "imagem": "",
+    "distancia": "400m",
+    "tamanho": "Pequeno",
+    "sexo": "Fêmea",
+    "especie": "Gato",
+    "cidade": "São Paulo",  
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Sociável",
+        "valor": 5
+      },
+      {
+        "segundaPersonalidade": "Brincalhona",
+        "valor": 3
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "nome": "ROCKY",
+    "idade": "3 anos",
+    "imagem": "",
+    "distancia": "1.5Km",
+    "tamanho": "Grande",
+    "sexo": "Macho",
+    "especie": "Cachorro",
+    "cidade": "Fortaleza",  
+    "personalidade": [
+      {
+        "primeiraPersonalidade": "Protetor",
+        "valor": 5
+      },
+      {
+        "segundaPersonalidade": "Inteligente",
+        "valor": 4
+      }
+    ]
+  }
+]
