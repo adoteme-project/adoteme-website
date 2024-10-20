@@ -36,10 +36,13 @@ const Teste = () => {
 
   return (
     <>
-      <TableOng rows={dataPets} columns={petsColumns} />
-      <button onClick={logout} className="bg-azul-main p-4 text-branco">
-        Logout
-      </button>
+      <div className="w-[90%] ml-10">
+        <TableOng rows={dataPets} columns={petsColumns} />
+        <button onClick={logout} className="bg-azul-main p-4 text-branco">
+          Logout
+        </button>
+      </div>
+
     </>
   );
 };

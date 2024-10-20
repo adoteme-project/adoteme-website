@@ -1,7 +1,8 @@
 import InputOng from "@/components/common/InputOng";
+import TableOng from "@/components/common/TableOng";
 import PageTitle from "@/components/layout/PageTitle";
 import SearchLayout from "@/components/layout/SearchLayout";
-import TableComponent from "@/components/layout/Table";
+import { petsColumns } from "@/mocks/tableColumns";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -16,8 +17,12 @@ const OngPet = () => {
         const response = await axios.get('/petsOng.json', { signal: abortController.signal });
         const data = response.data;
 
+        const dataFormat = data.map((pet) => ({
+          ...pet,
+          visibilidade: pet.visibilidade ? 'Visível' : 'Escondido',
+        }));
 
-        setDataPets(data);
+        setDataPets(dataFormat);
       } catch (error) {
         if (error.name === 'AbortError') return;
         console.error('Erro ao buscar os dados da API', error);
@@ -40,7 +45,7 @@ const OngPet = () => {
       <SearchLayout numberResults={dataPets.length} registerName="Pets">
         <InputOng />
       </SearchLayout>
-      <TableComponent dataPets={dataPets} />
+      <TableOng rows={dataPets} columns={petsColumns} />
     </>
   );
 };

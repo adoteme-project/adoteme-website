@@ -1,46 +1,52 @@
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Edit } from "@mui/icons-material";
+import { GridActionsCellItem, GridDeleteIcon } from "@mui/x-data-grid";
 
 const petsColumns = [
     {
         field: 'id',
         headerName: 'ID',
-        width: 80,
-        headerClassName: 'super-app-theme--header',
     },
-    { field: 'nome', headerName: 'Nome', width: 130, headerClassName: 'super-app-theme--header', },
-    { field: 'especie', headerName: 'Espécie', width: 130, headerClassName: 'super-app-theme--header', },
-    { field: 'raca', headerName: 'Raça', width: 130, headerClassName: 'super-app-theme--header', },
-    { field: 'taxa', headerName: 'Taxa', width: 100, headerClassName: 'super-app-theme--header', },
-    { field: 'dataDeEntrada', headerName: 'Data de Entrada', width: 160, headerClassName: 'super-app-theme--header', },
+    { field: 'nome', headerName: 'Nome', flex: 0.2, },
+    { field: 'especie', headerName: 'Espécie', flex: 0.1, },
+    { field: 'raca', headerName: 'Raça', flex: 0.2, },
+    { field: 'taxa', headerName: 'Taxa', flex: 0.1, },
+    { field: 'dataDeEntrada', headerName: 'Data de Entrada', flex: 0.2, },
     {
         field: 'situacao',
         headerName: 'Situação',
-        headerClassName: 'super-app-theme--header',
         type: 'singleSelect',
         valueOptions: ['Sem Aplicação', 'Revisão', 'Aprovado', 'Documentação', 'Adotado'],
-        width: 160,
+        flex: 0.2,
         editable: true,
     },
     {
         field: 'visibilidade',
         headerName: 'Visibilidade',
-        headerClassName: 'super-app-theme--header',
         type: 'singleSelect',
         valueOptions: ['Visível', 'Escondido'],
-        width: 130,
         editable: true,
+        flex: 0.1,
     },
     {
         field: 'actions',
         headerName: '',
-        headerClassName: 'super-app-theme--header',
-        width: 50,
-        renderCell: () =>
-            <FontAwesomeIcon
-                icon={faEllipsisVertical}
-                className="cursor-pointer"
+        type: 'actions',
+        headerAlign: 'center',
+        flex: 0.1,
+        getActions: () => [
+            <GridActionsCellItem
+                key={0}
+                icon={<Edit />}
+                label="Editar"
+                showInMenu
             />,
+            <GridActionsCellItem
+                key={1}
+                icon={<GridDeleteIcon />}
+                label="Delete"
+                showInMenu
+            />,
+        ],
     },
 ];
 
