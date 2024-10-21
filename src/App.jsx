@@ -20,7 +20,7 @@ import { CardProvider } from "@/contextCard/index";
 import { AuthProvider } from "./context/AuthProvider";
 import PrivateRoute from "@/components/wrapper/RotaPrivada";
 import { NotificationProvider } from "./context/NotificationProvider";
-import PerfilUsuario from "./pages/PerfilUsuario"
+import PerfilUsuario from "./pages/PerfilUsuario";
 import FormularioUsuario from "./pages/PerfilFormulario";
 import PerfilAplicacao from "./pages/PerfilAplicacao";
 import OngLayout from "./components/layout/OngLayout";
@@ -28,6 +28,7 @@ import OngDashboard from "./pages/OngDashboard";
 import OngPet from "./pages/OngPet";
 import OngAplicacoes from "./pages/OngAplicacoes";
 import OngConfiguracoes from "./pages/OngConfiguracoes";
+import PetsImagesStep from "./components/feature/MultiStep/PetImagesStep";
 
 function App() {
   return (
@@ -44,7 +45,10 @@ function App() {
                 <Route path="/achados" element={<Achados />} />
                 <Route path="/pagina-pet/:id" element={<PaginaPet />} />
                 <Route path="/perfil" element={<PerfilUsuario />} />
-                <Route path="/perfil-formulario" element={<FormularioUsuario />} />
+                <Route
+                  path="/perfil-formulario"
+                  element={<FormularioUsuario />}
+                />
                 <Route path="/perfil-aplicacao" element={<PerfilAplicacao />} />
               </Route>
 
@@ -52,19 +56,27 @@ function App() {
                 <Route path="/login" element={<LoginSelection />} />
                 <Route path="/login/adotante" element={<LoginAdotante />} />
                 <Route path="/login/ong" element={<LoginOng />} />
-                <Route path="/login/cadastro-adotante" element={<CadastroAdotante />} />
+                <Route
+                  path="/login/cadastro-adotante"
+                  element={<CadastroAdotante />}
+                />
                 <Route path="/login/redefinir" element={<RedefinirAcesso />} />
               </Route>
 
               <Route path="/teste" element={<PrivateRoute />}>
-                <Route path="/teste" element={<Teste />} />
+                <Route path="/teste" element={<Teste />}>
+                  <Route path="/teste/pet-images" element={<PetsImagesStep />}/>
+                </Route>
               </Route>
 
-              <Route path="/ong" element={<OngLayout/>}>
-                <Route path="/ong/dashboard" element={<OngDashboard/>}/>
-                <Route path="/ong/pets" element={<OngPet/>}/>
-                <Route path="/ong/aplicacoes" element={<OngAplicacoes/>}/>
-                <Route path="/ong/configuracoes" element={<OngConfiguracoes/>}/>
+              <Route path="/ong" element={<OngLayout />}>
+                <Route path="/ong/dashboard" element={<OngDashboard />} />
+                <Route path="/ong/pets" element={<OngPet />} />
+                <Route path="/ong/aplicacoes" element={<OngAplicacoes />} />
+                <Route
+                  path="/ong/configuracoes"
+                  element={<OngConfiguracoes />}
+                />
               </Route>
 
               <Route path="*" element={<NotFound />} />
