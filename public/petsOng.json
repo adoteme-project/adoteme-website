@@ -6,7 +6,7 @@
       "raca": "Vira-lata",
       "taxa": "70 R$",
       "dataDeEntrada": "21/05/2024",
-      "situacao": "Adoção",
+      "situacao": "Sem Aplicação",
       "visibilidade": true
     },
     {
@@ -16,7 +16,7 @@
       "raca": "Persa",
       "taxa": "120 R$",
       "dataDeEntrada": "15/06/2024",
-      "situacao": "Adotado",
+      "situacao": "Revisão",
       "visibilidade": false
     },
     {
@@ -26,7 +26,7 @@
       "raca": "Golden Retriever",
       "taxa": "200 R$",
       "dataDeEntrada": "01/07/2024",
-      "situacao": "Adoção",
+      "situacao": "Aprovado",
       "visibilidade": true
     },
     {
@@ -36,7 +36,7 @@
       "raca": "Sphynx",
       "taxa": "150 R$",
       "dataDeEntrada": "10/08/2024",
-      "situacao": "Adoção",
+      "situacao": "Documentação",
       "visibilidade": false
     },
     {
@@ -56,7 +56,7 @@
       "raca": "Maine Coon",
       "taxa": "130 R$",
       "dataDeEntrada": "30/06/2024",
-      "situacao": "Adoção",
+      "situacao": "Revisão",
       "visibilidade": true
     },
     {
@@ -66,7 +66,7 @@
       "raca": "Labrador",
       "taxa": "190 R$",
       "dataDeEntrada": "05/07/2024",
-      "situacao": "Adoção",
+      "situacao": "Revisão",
       "visibilidade": false
     },
     {
