@@ -29,6 +29,7 @@ import OngPet from "./pages/OngPet";
 import OngAplicacoes from "./pages/OngAplicacoes";
 import OngConfiguracoes from "./pages/OngConfiguracoes";
 import PetsImagesStep from "./components/feature/MultiStep/PetImagesStep";
+import PetInfoStep from "./components/feature/MultiStep/PetInforStep";
 
 function App() {
   return (
@@ -66,6 +67,7 @@ function App() {
               <Route path="/teste" element={<PrivateRoute />}>
                 <Route path="/teste" element={<Teste />}>
                   <Route path="/teste/pet-images" element={<PetsImagesStep />}/>
+                  <Route path="/teste/pet-informacoes" element={<PetInfoStep />}/>
                 </Route>
               </Route>
 
