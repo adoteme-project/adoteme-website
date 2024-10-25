@@ -1,6 +1,5 @@
-import AuthContext from "@/context/AuthProvider";
 import axios from "axios";
-import { useContext } from "react";
+
 
 const api = axios.create({
   baseURL: "/api",
@@ -34,6 +33,7 @@ const axiosAuth = axios.create({
   withCredentials: true,
 });
 
+/* Configuração para enviar token no header da instância */
 axiosAuth.interceptors.request.use(
   (config) => {
       const token = localStorage.getItem("token");
@@ -45,42 +45,4 @@ axiosAuth.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-axiosAuth.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    const originalRequest = error.config;
-
-    if (error.response.status === 401 && !originalRequest._retry) {
-      originalRequest._retry = true;
-
-      const { setAuth, logout } = useContext(AuthContext);
-
-      try {
-        const refreshToken = localStorage.getItem("refreshToken");
-        const response = await axiosAuth.post("/api/refresh-token", {
-          refreshToken,
-        });
-
-        const { token } = response.data;
-        localStorage.setItem("token", token);
-
-        setAuth((prevAuth) => ({
-          ...prevAuth,
-          token,
-        }));
-
-        originalRequest.headers.Authorization = `Bearer ${token}`;
-        return axiosAuth(originalRequest);
-
-      } catch (refreshError) {
-        console.error("Erro ao tentar renovar o token", refreshError);
-        logout(); // Fazer logout se o refresh token falhar
-      }
-    }
-
-    return Promise.reject(error);
-  }
-);
-
-
-export { axiosAuth, viaCep, api, axiosForm};
+export { axiosAuth, viaCep, api, axiosForm };

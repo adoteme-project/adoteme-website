@@ -1,45 +1,14 @@
-import stepsData from "@/mocks/stepFormRegister";
+import { stepsData } from "@/mocks/stepFormRegister";
 import FormGroup from "@/components/common/FormGroup";
-import { useFormContext, useWatch } from "react-hook-form";
-import { viaCep } from "@/services/configs/axiosConfig";
-import { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 import { MoonLoader } from "react-spinners";
+import useCep from "@/hooks/useCep";
 
 const CadastroDados = () => {
     const { register, setValue, control, formState: {errors} } = useFormContext();
     const formsDadosUsuario = stepsData.find(step => step.step === 1);
-    const cep = useWatch({ control, name: "cep" });
-    const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        if (cep) {
-            setValue("endereco", '');
-            setValue("cidade", '');
-            setValue("estado", '');
-        }
-
-        if (cep && cep.length === 8) {
-            async function getEndereco(cep) {
-                try {
-                    setLoading(true);
-                    const { data } = await viaCep.get(`${cep}/json`);
-                    if (data.erro) {
-                        console.log("CEP inválido");
-                        return;
-                    }
-                    const endereco = `${data.logradouro}, ${data.bairro}`;
-                    setValue("endereco", endereco);
-                    setValue("cidade", data.localidade);
-                    setValue("estado", data.uf);
-                } catch (error) {
-                    console.log("Erro ao buscar o CEP:", error);
-                } finally {
-                    setLoading(false);
-                }
-            }
-            getEndereco(cep);
-        }
-    }, [cep, setValue]);
+    const { loading } = useCep(control, setValue);
 
     return (
         <>
@@ -51,6 +20,7 @@ const CadastroDados = () => {
                     fields={formGroup.fields}
                     errors={errors}
                     register={register}
+                    editMode={true}
                 />
             ))}
             {loading && (
