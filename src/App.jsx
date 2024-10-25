@@ -15,7 +15,7 @@ import RedefinirAcesso from "./pages/RedefinirAcesso";
 import CadastroAdotante from "./pages/CadastroAdotante";
 
 import PaginaPet from "./pages/PaginaPet";
-import { CardProvider } from "@/contextCard/index";
+import { CardProvider } from "@/context/CardProvider";
 
 import { AuthProvider } from "./context/AuthProvider";
 import PrivateRoute from "@/components/wrapper/RotaPrivada";
@@ -23,6 +23,8 @@ import { NotificationProvider } from "./context/NotificationProvider";
 import PerfilUsuario from "./pages/PerfilUsuario";
 import FormularioUsuario from "./pages/PerfilFormulario";
 import PerfilAplicacao from "./pages/PerfilAplicacao";
+import PaginaOng from "./pages/PaginaOng";
+import Categorias from "./pages/Categorias";
 import OngLayout from "./components/layout/OngLayout";
 import OngDashboard from "./pages/OngDashboard";
 import OngPet from "./pages/OngPet";
@@ -43,8 +45,11 @@ function App() {
                 <Route path="/pets" element={<Pets />} />
                 <Route path="/doacoes" element={<Doacoes />} />
                 <Route path="/ongs" element={<Ongs />} />
+                <Route path="/categorias" element={<Categorias />} />
                 <Route path="/achados" element={<Achados />} />
                 <Route path="/pagina-pet/:id" element={<PaginaPet />} />
+                <Route path="/pagina-ong/:id" element={<PaginaOng />} />
+                <Route path="/achados" element={<Achados />} />
                 <Route path="/perfil" element={<PerfilUsuario />} />
                 <Route
                   path="/perfil-formulario"
@@ -71,14 +76,11 @@ function App() {
                 </Route>
               </Route>
 
-              <Route path="/ong" element={<OngLayout />}>
-                <Route path="/ong/dashboard" element={<OngDashboard />} />
-                <Route path="/ong/pets" element={<OngPet />} />
-                <Route path="/ong/aplicacoes" element={<OngAplicacoes />} />
-                <Route
-                  path="/ong/configuracoes"
-                  element={<OngConfiguracoes />}
-                />
+              <Route path="/ong" element={<OngLayout/>}>
+                <Route path="/ong/dashboard" element={<OngDashboard/>}/>
+                <Route path="/ong/pets" element={<OngPet/>}/>
+                <Route path="/ong/aplicacoes" element={<OngAplicacoes/>}/>
+                <Route path="/ong/configuracoes" element={<OngConfiguracoes/>}/>
               </Route>
 
               <Route path="*" element={<NotFound />} />

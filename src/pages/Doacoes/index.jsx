@@ -3,7 +3,7 @@ import Banner from '@/components/section/Banner';
 import DropDown from "@/components/common/DropDown-ONG/index"
 import Doacao from "@/components/section/Donation"
 import useModal from '@/hooks/useModal';
-import { useCardContext } from '@/contextCard';
+import { useCardContext } from '@/context/CardProvider';
 
 const Doacoes = () => {
   const [isShowing, toggleModal] = useModal(); // Precisa passar isso para o card da ong par abrir o mdoal
