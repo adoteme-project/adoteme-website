@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
 
+const options = {
+  enableHighAccuracy: true,
+}
+
 const useGeolocation = () => {
   const [position, setPosition] = useState(null);
   const [error, setError] = useState(null);
@@ -19,7 +23,7 @@ const useGeolocation = () => {
       setError(err.message || "Error getting geolocation.");
     };
 
-    navigator.geolocation.getCurrentPosition(success, error);
+    navigator.geolocation.getCurrentPosition(success, error, options);
   }, []);
 
   return { position, error };
