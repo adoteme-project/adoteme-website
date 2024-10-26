@@ -4,6 +4,7 @@ import { useMapsLibrary } from "@vis.gl/react-google-maps";
 const useGeocoding = (address) => {
   const geocodingLib = useMapsLibrary("geocoding");
   const [coordinates, setCoordinates] = useState(null);
+  const [currentAdress, setCurrentAdress] = useState('');
   const [error, setError] = useState(null);
 
   const geocoder = useMemo(
@@ -32,7 +33,28 @@ const useGeocoding = (address) => {
       });
   };
 
-  return { coordinates, error, geocodeAddress };
+const geocodePosition = async (location) => {
+  if (!geocoder || !location) {
+    setError("Não foi possível encontrar este endereço ! Por favor inserir endereço válido");
+    return;
+  }
+
+  try {
+    const response = await geocoder.geocode({ location });
+    if (response.results && response.results.length > 0) {
+      const address = response.results[0].formatted_address;
+      setCurrentAdress(address);
+      return address; // Retorna o endereço para uso externo
+    } else {
+      setError("Não foi possível encontrar resultados");
+    }
+  } catch (error) {
+    setError("Erro no Geocoder: " + error.message);
+  }
+};
+
+
+  return { coordinates, error, geocodeAddress, geocodePosition, currentAdress };
 };
 
 export default useGeocoding;
