@@ -3,13 +3,13 @@ import Banner from '@/components/section/Banner';
 import Grid from '@/components/layout/Grid';
 import Doacao from "@/components/section/Donation"
 import BannerImage from "@/assets/banner-ong.svg"
-import { useCardContext } from '@/contextCard';
+import { useCardContext } from '@/context/CardProvider';
 import { SearchInput } from '@/components/common/SearchInput';
 import { useState } from 'react';
 
 const Ongs = () => {
-  const {data} = useCardContext();
-  const validItems = data.filter((item) => item.tipo === "ong");
+  const {sugestoes} = useCardContext();
+  const validItems = sugestoes.filter((item) => item.tipo === "ong");
   const [filteredOngs,setFilteredOngs] = useState(validItems);
 
 

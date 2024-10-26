@@ -1,15 +1,14 @@
-import ModalPerfil from "@/components/common/ModalPerfil";
-import AuthContext from "@/context/AuthProvider";
-import useModal from "@/hooks/useModal";
-import Button from "@/components/common/Button";
-import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { faHeart, faUser } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import ModalPerfil from "@/components/common/ModalPerfil";
+import useModal from "@/hooks/useModal";
+import AuthContext from "@/context/AuthProvider";
 
 const Header = () => {
-  const [isModalShowing, toggleModal] = useModal();
-  const { auth } = useContext(AuthContext);
+  const [isShowing, toggleModal] = useModal();
+  const { auth } = useContext(AuthContext); 
 
   return (
     <nav className="bg-branco py-6 w-full flex justify-center h-[20px]">
@@ -17,6 +16,7 @@ const Header = () => {
         <Link to="/">Logo</Link>
         <div className="flex gap-10 items-center">
           <Link to="/pets">Animais</Link>
+          <Link to="/doacoes">Doações</Link>
           <Link to="/ongs">Ongs</Link>
           <Link to="/achados">Achados e Perdidos</Link>
 
@@ -32,30 +32,17 @@ const Header = () => {
                   onClick={toggleModal}
                   className="cursor-pointer"
                 />
+
+                {isShowing && <ModalPerfil isOpen={isShowing} />}
               </div>
             </>
           ) : (
-            <>
-              <Link
-                to="/login/cadastro-adotante"
-                className="rounded bg-[#FFA607] text-branco py-0.5 h-[30px] text-center w-[116px]"
-              >
-                Cadastrar
-              </Link>
-              <Button
-                tamanho="100"
-                altura="30"
-                textColor="#FFFFFF"
-                color="#4C8EB5"
-                titulo="Entrar"
-                onClick={toggleModal}
-              >
-                Entrar
-              </Button>
-            </>
-          )}
-          {isModalShowing && (
-            <ModalPerfil isOpen={isModalShowing} toggleModal={toggleModal} />
+            <Link
+              to="/login"
+              className="rounded bg-azul-main text-branco py-0.5 h-[30px] text-center w-[80px]"
+            >
+              Entrar
+            </Link>
           )}
         </div>
       </ul>

@@ -4,45 +4,40 @@ import axios from 'axios';
 const CardContext = createContext();
 
 export const CardProvider = ({ children }) => {
-    const [data, setData] = useState([]);
+    const [sugestoes, setSugestoes] = useState([]);
 
     useEffect(() => {
         const fetchDados = async () => {
             try {
-                
-                const responseAnimais = await axios.get(`petCard.json`, {
+                const responseAnimais = await axios.get('/petCard.json', {
                     headers: {
                         'Content-Type': 'application/json',
                     },
                 });
 
-                
-                const responseOngs = await axios.get(`ongs.json`, {
+                const responseOngs = await axios.get('/ongs.json', {
                     headers: {
                         'Content-Type': 'application/json',
                     },
                 });
 
-                
                 const dadosCombinados = [
                     ...responseAnimais.data.map(animal => ({ ...animal, tipo: 'animal' })),
-                    ...responseOngs.data.map(ong => ({ ...ong, tipo: 'ong' })),
+                    ...responseOngs.data.map(ong => ({ ...ong, tipo: 'ong' }))
                 ];
 
-                setData(dadosCombinados);
-                
-                
+                setSugestoes(dadosCombinados);
             } catch (error) {
                 console.error('Erro ao buscar dados', error);
             }
         };
 
         fetchDados();
-
     }, []);
 
+
     return (
-        <CardContext.Provider value={{ data }}>
+        <CardContext.Provider value={{ sugestoes }}>
             {children}
         </CardContext.Provider>
     );

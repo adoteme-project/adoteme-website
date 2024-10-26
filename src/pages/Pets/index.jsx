@@ -3,7 +3,7 @@ import Banner from "@/components/section/Banner";
 import Categorias from "@/components/section/Categories";
 import BreadCrumb from "@/components/common/BreadCrumb";
 import Doacao from "@/components/section/Donation";
-import { useCardContext } from "@/contextCard";
+import { useCardContext } from '@/context/CardProvider';
 import { useEffect, useState } from "react";
 import Grid from "@/components/layout/Grid";
 import { SearchInput } from "@/components/common/SearchInput";
@@ -11,8 +11,8 @@ import BannerImage from "@/assets/banner-pets.svg"
 // import AnimaisProximos from '@/components/section/Near-Animals/index'
 
 const Pets = () => {
-  const { data } = useCardContext();
-  const validItems = data.filter((item) => item.tipo === "animal");
+  const { sugestoes } = useCardContext();
+  const validItems = sugestoes.filter((item) => item.tipo === "animal");
   const [filteredPets, setFilteredPets] = useState(validItems);
   const [filters, setFilters] = useState({});
 
@@ -28,7 +28,7 @@ const Pets = () => {
 
       setFilteredPets(result);
     }
-  }, [data, filters]);
+  }, [sugestoes, filters]);
 
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
@@ -81,11 +81,11 @@ const Pets = () => {
             placeholder="Cidade"
             name="Search"
             onSearch={handleSearchChange}
-            filterKey="cidade"
+            filterKey="nome"
           />
         </div>
       </div>
-      <Grid items={filteredPets} titulo="Animal" />
+      <Grid items={filteredPets} titulo="Animal" tipoCard="animal" />
       <Doacao />
     </>
   );

@@ -12,16 +12,16 @@ import { PlaceAutocomplete } from "./PlaceAutocomplete";
 import { MapHandler } from "./MapHandler";
 import ClusteredPetsMarkers from "./ClusterMarker";
 import useModal from "@/hooks/useModal";
-import useGeolocation from "@/hooks/useGeolocation";
 import { useLocation } from "react-router-dom";
 import { getPetsPerdido } from "@/services/pets";
 import ListAchados from "./ListAchados";
+import { useGeolocationContext } from "@/context/GeolocationProvider";
 
 
 const MapaAchados = () => {
   const defaultPosition = { zoom: 19, center: { lat: -23.558052381604917, lng: -46.661807140459345 } };
 
-  const { position, error: geoError } = useGeolocation();
+  const { position, error: geoError } = useGeolocationContext();
   const { state } = useLocation();
 
 

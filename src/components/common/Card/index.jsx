@@ -5,9 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Card = ({ colorBg, data = [], onDoarClick }) => {
+const Card = ({ colorBg, data = [], onDoarClick,tipoCard }) => {
   const [favorito,setFavorito] = useState(false);
-  const isPet = data.tipo === "animal";
+  const isPet = tipoCard === 'animal' || data.personalidade?.length > 0;
 
   const handleFavoriteClick = () => {
     setFavorito(!favorito);
@@ -39,7 +39,7 @@ const Card = ({ colorBg, data = [], onDoarClick }) => {
             <>
               <div className="font-nunito space-y-4 py-2">
                 <h3>Idade: {data.idade}</h3>
-                <h3>Tamanho: {data.tamanho}</h3>
+                <h3>Tamanho: {data.porte}</h3>
                 <h3>Sexo: {data.sexo}</h3>
                 <h3>Espécie: {data.especie}</h3>
               </div>
@@ -48,10 +48,10 @@ const Card = ({ colorBg, data = [], onDoarClick }) => {
             <>
               <div className="flex flex-col py-5 gap-2">
                 <h3 className="font-medium font-nunito ">
-                  Endereço: {data.endereco}
+                  Endereço: {data.endereco.cidade}
                 </h3>
                 <h3 className="font-medium font-nunito">
-                  Descrição: {data.descricao}
+                  Bairro: {data.endereco.bairro}
                 </h3>
               </div>
             </>
@@ -107,3 +107,4 @@ const Card = ({ colorBg, data = [], onDoarClick }) => {
 };
 
 export default Card;
+

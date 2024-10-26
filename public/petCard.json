@@ -5,20 +5,18 @@
     "idade": "2 anos",
     "imagem": "",
     "distancia": "600m",
-    "tamanho": "Médio",
-    "sexo": "Macho",
-    "especie": "Cachorro",
-    "cidade": "São Paulo",  
-    "personalidade": [
-      {
-        "primeiraPersonalidade": "Sociável",
-        "valor": 4
-      },
-      {
-        "segundaPersonalidade": "Brincalhão",
-        "valor": 3
-      }
-    ]
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "gato",
+    "personalidade": {
+      "Energia": 5,
+      "Inteligencia": 4,
+      "Obediente": 3,
+      "Sociabilidade": 4,
+      "Territorial": 2,
+      "Tolerante": 5,
+      "Brincalhao": 3
+    }
   },
   {
     "id": 2,
@@ -26,20 +24,18 @@
     "idade": "2 anos",
     "imagem": "",
     "distancia": "700m",
-    "tamanho": "Pequeno",
-    "sexo": "Macho",
-    "especie": "Cachorro",
-    "cidade": "Rio de Janeiro",  
-    "personalidade": [
-      {
-        "primeiraPersonalidade": "Brincalhão",
-        "valor": 5
-      },
-      {
-        "segundaPersonalidade": "Sociável",
-        "valor": 4
-      }
-    ]
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "gato",
+    "personalidade": {
+      "Energia": 3,
+      "Inteligencia": 5,
+      "Obediente": 4,
+      "Sociabilidade": 3,
+      "Territorial": 3,
+      "Tolerante": 4,
+      "Brincalhao": 2
+    }
   },
   {
     "id": 3,
@@ -47,20 +43,18 @@
     "idade": "2 anos",
     "imagem": "",
     "distancia": "1Km",
-    "tamanho": "Grande",
-    "sexo": "Macho",
-    "especie": "Cachorro",
-    "cidade": "Belo Horizonte",  
-    "personalidade": [
-      {
-        "primeiraPersonalidade": "Brincalhão",
-        "valor": 3
-      },
-      {
-        "segundaPersonalidade": "Leal",
-        "valor": 3
-      }
-    ]
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "gato",
+    "personalidade": {
+      "Energia": 4,
+      "Inteligencia": 3,
+      "Obediente": 5,
+      "Sociabilidade": 5,
+      "Territorial": 1,
+      "Tolerante": 3,
+      "Brincalhao": 5
+    }
   },
   {
     "id": 4,
@@ -68,145 +62,226 @@
     "idade": "2 anos",
     "imagem": "",
     "distancia": "1.2km",
-    "tamanho": "Médio",
-    "sexo": "Fêmea",
-    "especie": "Gato",
-    "cidade": "Curitiba",  
-    "personalidade": [
-      {
-        "primeiraPersonalidade": "Obediente",
-        "valor": 4
-      },
-      {
-        "segundaPersonalidade": "Territorial",
-        "valor": 2
-      }
-    ]
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "gato",
+    "personalidade": {
+      "Energia": 2,
+      "Inteligencia": 2,
+      "Obediente": 4,
+      "Sociabilidade": 2,
+      "Territorial": 5,
+      "Tolerante": 2,
+      "Brincalhao": 5
+    }
   },
   {
     "id": 5,
-    "nome": "MIA",
+    "nome": "TOM",
     "idade": "1 ano",
     "imagem": "",
-    "distancia": "500m",
-    "tamanho": "Pequeno",
-    "sexo": "Fêmea",
-    "especie": "Gato",
-    "cidade": "São Paulo",  
-    "personalidade": [
-      {
-        "primeiraPersonalidade": "Aconchegante",
-        "valor": 5
-      },
-      {
-        "segundaPersonalidade": "Curiosa",
-        "valor": 4
-      }
-    ]
+    "distancia": "800m",
+    "porte": "médio",
+    "sexo": "macho",
+    "especie": "cachorro",
+    "personalidade": {
+      "Energia": 1,
+      "Inteligencia": 4,
+      "Obediente": 2,
+      "Sociabilidade": 1,
+      "Territorial": 4,
+      "Tolerante": 1,
+      "Brincalhao": 2
+    }
   },
   {
     "id": 6,
-    "nome": "BONGO",
+    "nome": "LUNA",
     "idade": "3 anos",
     "imagem": "",
-    "distancia": "800m",
-    "tamanho": "Grande",
-    "sexo": "Macho",
-    "especie": "Cachorro",
-    "cidade": "Recife",  
-    "personalidade": [
-      {
-        "primeiraPersonalidade": "Leal",
-        "valor": 5
-      },
-      {
-        "segundaPersonalidade": "Protetor",
-        "valor": 4
-      }
-    ]
+    "distancia": "500m",
+    "porte": "pequeno",
+    "sexo": "fêmea",
+    "especie": "gato",
+    "personalidade": {
+      "Energia": 5,
+      "Inteligencia": 4,
+      "Obediente": 3,
+      "Sociabilidade": 4,
+      "Territorial": 2,
+      "Tolerante": 5,
+      "Brincalhao": 3
+    }
   },
   {
     "id": 7,
-    "nome": "FLOR",
+    "nome": "MAX",
     "idade": "4 anos",
     "imagem": "",
     "distancia": "2Km",
-    "tamanho": "Pequeno",
-    "sexo": "Fêmea",
-    "especie": "Pássaro",
-    "cidade": "Belo Horizonte",  
-    "personalidade": [
-      {
-        "primeiraPersonalidade": "Sociável",
-        "valor": 4
-      },
-      {
-        "segundaPersonalidade": "Cantora",
-        "valor": 5
-      }
-    ]
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "cachorro",
+    "personalidade": {
+      "Energia": 3,
+      "Inteligencia": 5,
+      "Obediente": 4,
+      "Sociabilidade": 3,
+      "Territorial": 3,
+      "Tolerante": 4,
+      "Brincalhao": 2
+    }
   },
   {
     "id": 8,
-    "nome": "ZÉ",
-    "idade": "5 anos",
+    "nome": "BELLA",
+    "idade": "2 anos",
     "imagem": "",
-    "distancia": "3Km",
-    "tamanho": "Médio",
-    "sexo": "Macho",
-    "especie": "Coelho",
-    "cidade": "Curitiba",  
-    "personalidade": [
-      {
-        "primeiraPersonalidade": "Brincalhão",
-        "valor": 4
-      },
-      {
-        "segundaPersonalidade": "Amigável",
-        "valor": 4
-      }
-    ]
+    "distancia": "300m",
+    "porte": "pequeno",
+    "sexo": "fêmea",
+    "especie": "gato",
+    "personalidade": {
+      "Energia": 4,
+      "Inteligencia": 3,
+      "Obediente": 5,
+      "Sociabilidade": 5,
+      "Territorial": 1,
+      "Tolerante": 3,
+      "Brincalhao": 5
+    }
   },
   {
     "id": 9,
-    "nome": "LILI",
+    "nome": "FLOKI",
     "idade": "1 ano",
     "imagem": "",
-    "distancia": "400m",
-    "tamanho": "Pequeno",
-    "sexo": "Fêmea",
-    "especie": "Gato",
-    "cidade": "São Paulo",  
-    "personalidade": [
-      {
-        "primeiraPersonalidade": "Sociável",
-        "valor": 5
-      },
-      {
-        "segundaPersonalidade": "Brincalhona",
-        "valor": 3
-      }
-    ]
+    "distancia": "1.5Km",
+    "porte": "médio",
+    "sexo": "macho",
+    "especie": "cachorro",
+    "personalidade": {
+      "Energia": 2,
+      "Inteligencia": 2,
+      "Obediente": 4,
+      "Sociabilidade": 2,
+      "Territorial": 5,
+      "Tolerante": 2,
+      "Brincalhao": 5
+    }
   },
   {
     "id": 10,
-    "nome": "ROCKY",
+    "nome": "ZOEY",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "2.5Km",
+    "porte": "pequeno",
+    "sexo": "fêmea",
+    "especie": "gato",
+    "personalidade": {
+      "Energia": 1,
+      "Inteligencia": 4,
+      "Obediente": 2,
+      "Sociabilidade": 1,
+      "Territorial": 4,
+      "Tolerante": 1,
+      "Brincalhao": 2
+    }
+  },
+  {
+    "id": 11,
+    "nome": "BAILEY",
     "idade": "3 anos",
     "imagem": "",
-    "distancia": "1.5Km",
-    "tamanho": "Grande",
-    "sexo": "Macho",
-    "especie": "Cachorro",
-    "cidade": "Fortaleza",  
-    "personalidade": [
-      {
-        "primeiraPersonalidade": "Protetor",
-        "valor": 5
-      },
-      {
-        "segundaPersonalidade": "Inteligente",
-        "valor": 4
-      }
-    ]
+    "distancia": "1Km",
+    "porte": "médio",
+    "sexo": "fêmea",
+    "especie": "cachorro",
+    "personalidade": {
+      "Energia": 5,
+      "Inteligencia": 4,
+      "Obediente": 3,
+      "Sociabilidade": 4,
+      "Territorial": 2,
+      "Tolerante": 5,
+      "Brincalhao": 3
+    }
+  },
+  {
+    "id": 12,
+    "nome": "ROCKY",
+    "idade": "4 anos",
+    "imagem": "",
+    "distancia": "1.8Km",
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "cachorro",
+    "personalidade": {
+      "Energia": 3,
+      "Inteligencia": 5,
+      "Obediente": 4,
+      "Sociabilidade": 3,
+      "Territorial": 3,
+      "Tolerante": 4,
+      "Brincalhao": 2
+    }
+  },
+  {
+    "id": 13,
+    "nome": "SOPHIE",
+    "idade": "1 ano",
+    "imagem": "",
+    "distancia": "600m",
+    "porte": "pequeno",
+    "sexo": "fêmea",
+    "especie": "gato",
+    "personalidade": {
+      "Energia": 4,
+      "Inteligencia": 3,
+      "Obediente": 5,
+      "Sociabilidade": 5,
+      "Territorial": 1,
+      "Tolerante": 3,
+      "Brincalhao": 5
+    }
+  },
+  {
+    "id": 14,
+    "nome": "CHARLIE",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "900m",
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "cachorro",
+    "personalidade": {
+      "Energia": 2,
+      "Inteligencia": 2,
+      "Obediente": 4,
+      "Sociabilidade": 2,
+      "Territorial": 5,
+      "Tolerante": 2,
+      "Brincalhao": 5
+    }
+  },
+  {
+    "id": 15,
+    "nome": "NINA",
+    "idade": "3 anos",
+    "imagem": "",
+    "distancia": "1.2Km",
+    "porte": "pequeno",
+    "sexo": "fêmea",
+    "especie": "gato",
+    "personalidade": {
+      "Energia": 1,
+      "Inteligencia": 4,
+      "Obediente": 2,
+      "Sociabilidade": 1,
+      "Territorial": 4,
+      "Tolerante": 1,
+      "Brincalhao": 2
+    }
   }
 ]
