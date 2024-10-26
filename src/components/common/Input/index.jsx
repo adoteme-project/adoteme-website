@@ -1,6 +1,6 @@
 import { useFormContext } from "react-hook-form";
 
-const Input = ({ label, placeholder, type, name, disabled, error, options }) => {
+const Input = ({ label, placeholder, type, name, disabled, error,handleInputChange, options }) => {
   const { register } = useFormContext() || {};
 
   return (
@@ -10,6 +10,7 @@ const Input = ({ label, placeholder, type, name, disabled, error, options }) => 
               <input
               className={`mt-1 w-full ${disabled && `bg-input-d`} rounded-md border-titulo border-2 px-3 py-2 shadow-md sm:text-sm`}
               placeholder={placeholder ?? ""}
+              onChange={handleInputChange}
               type={type}
               {...register(name, {
                 disabled: disabled

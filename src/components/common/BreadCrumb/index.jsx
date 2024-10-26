@@ -15,7 +15,7 @@ const BreadCrumb = (props) => {
 
     return (
         <>
-            <Breadcrumbs aria-label="breadcrumb" className='px-16'>
+            <Breadcrumbs aria-label="breadcrumb" className='px-16 pt-4'>
                 {paths.map((path, index) => (
                     <Link
                         key={index}
