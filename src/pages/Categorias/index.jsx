@@ -4,6 +4,7 @@ import BreadCrumb from "@/components/common/BreadCrumb";
 import Banner from "@/components/section/Banner";
 import Doacao from "@/components/section/Donation";
 import GridLayout from '@/components/layout/Grid';
+import Pagination from '@/components/common/Pagination';
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -77,9 +78,13 @@ const Categorias = () => {
                 caminho={`/`}
             />
 
-            <GridLayout
+            {/* Componente de Paginação */}
+            <Pagination
                 items={animaisFiltrados}
-                tipoCard="animal"
+                renderGrid={(currentItems) => (
+                    <GridLayout items={currentItems} titulo="Animal" tipoCard="animal" />
+                )}
+                itemsPerPageOptions={[2, 4, 6]} // Definindo que queremos 4 itens por página
             />
 
             <Doacao />
