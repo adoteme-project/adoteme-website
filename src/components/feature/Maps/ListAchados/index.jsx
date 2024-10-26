@@ -4,7 +4,7 @@ import AchadoDetails from "../AchadosDetails";
 import { lazy, Suspense, useState } from "react";
 import { MoonLoader } from "react-spinners";
 
-const CardList = lazy(() => import('@/components/feature/Maps/CardListAchados'))
+const CardList = lazy(() => import('@/components/feature/Maps/CardListAchados'));
 
 const ListAchados = ({ show, onClose, endereco, pets }) => {
   const [selectedPet, setSelectedPet] = useState(null);
@@ -17,7 +17,7 @@ const ListAchados = ({ show, onClose, endereco, pets }) => {
     setSelectedPet(null);
   }
 
-  const enderecoFormatado = endereco
+  const enderecoFormatado = endereco;
 
   return (
     <div className="bg-beje rounded-lg p-5 shadow-lg font-nunito mr-8
@@ -53,7 +53,7 @@ const ListAchados = ({ show, onClose, endereco, pets }) => {
         </div>
       </div>
 
-      <div className="overflow-y-auto max-h-[calc(100%-100px)] no-scrollbar">
+      <div className="overflow-y-auto max-h-[calc(100%-125px)] no-scrollbar">
         {selectedPet ? (
           <AchadoDetails pet={selectedPet} />
         ) : (
@@ -63,6 +63,7 @@ const ListAchados = ({ show, onClose, endereco, pets }) => {
                 <CardList
                   key={pet.id}
                   pet={pet}
+                  enderecoPerdido={enderecoFormatado}
                   chosenPet={(data) => setSelectedPet(data)}
                 />
               ))}

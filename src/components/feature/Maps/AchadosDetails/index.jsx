@@ -3,8 +3,6 @@ import { DEFAULT_IMAGE, DESCRICAO_LOREM } from "@/mocks/petsMocks";
 
 const AchadoDetails = ({ pet }) => {
 
-  const endereco = `${pet.ruaPerdido}, ${pet.bairroPerdido}, ${pet.cidadePerdido}, ${pet.estadoPerdido}`
-
   return (
     <div className="w-full flex flex-col gap-5 items-center">
       <div className="w-full h-56 bg-branco flex justify-center rounded-lg">
@@ -29,7 +27,7 @@ const AchadoDetails = ({ pet }) => {
             <div className="text-sm">
               <span className="font-semibold">Porte: </span>{pet.porte ?? 'Médio'}</div>
             <div className="text-sm">
-              <span className="font-semibold">Endereço: </span>{endereco ?? 'rua -----'}</div>
+              <span className="font-semibold">Endereço: </span>{pet.endereco ?? 'rua -----'}</div>
           </div>
           <h3 className="text-xl">Descrição </h3>
           <p className="text-xs">

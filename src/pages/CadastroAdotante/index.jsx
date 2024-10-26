@@ -39,6 +39,8 @@ const CadastroAdotante = () => {
     const data = methods.getValues();
     const { fotoPerfil, ...dadosAdotante } = data;
 
+    console.log(data);
+
     const formData = new FormData();
     formData.append("adotante", JSON.stringify(dadosAdotante));
 
