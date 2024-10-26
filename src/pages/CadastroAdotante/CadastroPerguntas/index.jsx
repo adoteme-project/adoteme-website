@@ -1,10 +1,10 @@
-import stepsData from "@/mocks/stepFormRegister";
+import { formQuestionsAdotante} from "@/mocks/stepFormRegister";
 import FormGroup from "@/components/common/FormGroup";
 import { useFormContext } from "react-hook-form"; 
 
 const CadastroPerguntas = () => {
     const { control } = useFormContext();
-    const formsDadosUsuario = stepsData.find(step => step.step === 2);
+    const formsDadosUsuario = formQuestionsAdotante.find(step => step.step === 2);
 
     return (
         <>
@@ -15,6 +15,7 @@ const CadastroPerguntas = () => {
                     column={formGroup.column}
                     radioControl={formGroup.radioControl}
                     control={control}
+                    editMode={true}
                 />
             ))}
         </>

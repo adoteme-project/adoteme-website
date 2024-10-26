@@ -10,6 +10,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { RegistrationAdotanteSchema } from "@/utils/formValidations";
 
 const CadastroFoto = lazy(() => import('@/pages/CadastroAdotante/CadastroFoto'));
+const CadastroPerguntas = lazy(() => import('@/pages/CadastroAdotante/CadastroPerguntas'));
 const CadastroDados = lazy(() => import('@/pages/CadastroAdotante/CadastroDados'));
 
 const CadastroAdotante = () => {
@@ -20,7 +21,8 @@ const CadastroAdotante = () => {
 
   const steps = [
     <CadastroDados key={0} />,
-    <CadastroFoto key={1} />,
+    <CadastroPerguntas key={1} />,
+    <CadastroFoto key={2} />,
   ];
 
   const nextStep = () => {
@@ -37,8 +39,31 @@ const CadastroAdotante = () => {
     const data = methods.getValues();
     const { fotoPerfil, ...dadosAdotante } = data;
 
+    const formulario = {
+      temCrianca: dadosAdotante.temCrianca,
+      moraEmCasa: dadosAdotante.moraEmCasa,
+      temPet: dadosAdotante.temPet,
+      seraResponsavel: dadosAdotante.seraResponsavel,
+      moradoresConcordam: dadosAdotante.moradoresConcordam,
+      isTelado: dadosAdotante.isTelado,
+      casaPortaoAlto: dadosAdotante.casaPortaoAlto
+    }
+
+    // Remover variaveis
+    // eslint-disable-next-line no-unused-vars
+    const { temCrianca, moraEmCasa, temPet, seraResponsavel, moradoresConcordam, isTelado, casaPortaoAlto, ...filteredAdotante } = dadosAdotante;
+
+
+    const completeData = {
+      ...filteredAdotante,
+      formulario
+    }
+
+    console.log(completeData);
+    console.log(JSON.stringify(completeData));
+
     const formData = new FormData();
-    formData.append("adotante", JSON.stringify(dadosAdotante));
+    formData.append("adotante", JSON.stringify(completeData));
 
     if (fotoPerfil instanceof File) {
       formData.append("fotoPerfil", fotoPerfil);
