@@ -1,6 +1,5 @@
 import DropDown from "@/components/section/DropDown/index";
 import Banner from "@/components/section/Banner";
-import Categorias from "@/components/section/Categories";
 import BreadCrumb from "@/components/common/BreadCrumb";
 import Doacao from "@/components/section/Donation";
 import { useCardContext } from '@/context/CardProvider';
@@ -50,7 +49,6 @@ const Pets = () => {
         cor="#B2DED3"
         caminho="/pets"
       />
-      <Categorias titulo="Categorias" tipo="categorias" />
       <div className="flex flex-row w-full justify-evenly gap-4 px-4">
         <div className="flex flex-row w-8/12 gap-4 ">
           <DropDown

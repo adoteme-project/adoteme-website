@@ -14,7 +14,7 @@ const Pagination = ({ items, renderItem, itemsPerPageOptions = [3, 6, 9] }) => {
 
     const handleItemsPerPageChange = (event) => {
         setItemsPerPage(Number(event.target.value));
-        setCurrentPage(1);  // Reseta para a primeira página ao mudar o número de itens por página
+        setCurrentPage(1);  
     };
 
     const startIndex = (currentPage - 1) * itemsPerPage;

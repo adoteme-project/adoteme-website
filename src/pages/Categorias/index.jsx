@@ -21,7 +21,16 @@ const Categorias = () => {
             try {
                 const response = await fetch('/petCard.json');
                 const data = await response.json();
-                setAnimais(data);
+
+                // Normalizar as chaves do objeto personalidade para minúsculas
+                const animaisNormalizados = data.map(animal => ({
+                    ...animal,
+                    personalidade: Object.fromEntries(
+                        Object.entries(animal.personalidade).map(([key, value]) => [key.toLowerCase(), value])
+                    )
+                }));
+
+                setAnimais(animaisNormalizados);
                 setLoading(false);
             } catch (error) {
                 console.error("Erro ao buscar os dados:", error);
@@ -34,14 +43,13 @@ const Categorias = () => {
 
     useEffect(() => {
         if (categoria && animais.length > 0) {
-
             const filtrados = animais.filter(animal => {
-                return animal.personalidade[categoria] !== undefined;
+                return animal.personalidade[categoria.toLowerCase()] !== undefined; // Use toLowerCase para garantir a correspondência
             });
 
             const ordenados = filtrados.sort((a, b) => {
-                const valorA = a.personalidade[categoria];
-                const valorB = b.personalidade[categoria];
+                const valorA = a.personalidade[categoria.toLowerCase()];
+                const valorB = b.personalidade[categoria.toLowerCase()];
 
                 return valorB - valorA;
             });

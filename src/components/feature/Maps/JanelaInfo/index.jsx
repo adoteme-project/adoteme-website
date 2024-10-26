@@ -1,9 +1,8 @@
 import { DEFAULT_IMAGE } from "@/mocks/petsMocks";
 import { InfoWindow } from "@vis.gl/react-google-maps";
 
-const JanelaInfo = ({ setOpen, pet }) => {
+const JanelaInfo = ({ setOpen, pet, enderecoFormatado}) => {
   const position = {lat: pet.latitude, lng: pet.longitude}
-  const enderecoFormatado = `${pet.ruaPerdido} ${pet.bairroPerdido}, ${pet.cidadePerdido}, ${pet.estadoPerdido}`
 
   return (
     <InfoWindow
@@ -13,7 +12,7 @@ const JanelaInfo = ({ setOpen, pet }) => {
     >
       <div className="flex gap-4">
         <img
-          src={pet ? pet.fotoPerfil.url : DEFAULT_IMAGE}
+          src={pet ? pet.imagem : DEFAULT_IMAGE}
           alt="Pet perdido"
           className="h-28 w-36"
         />
@@ -24,7 +23,7 @@ const JanelaInfo = ({ setOpen, pet }) => {
           <div className="flex flex-col gap-2">
             <p>
               <span className="font-bold">Endereço: </span>
-              {enderecoFormatado}
+              Liberdade, São Paulo 
             </p>
             <p>
               <span className="font-bold">Data de resgate: </span>

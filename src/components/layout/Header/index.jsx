@@ -13,10 +13,9 @@ const Header = () => {
   return (
     <nav className="bg-branco py-6 w-full flex justify-center h-[20px]">
       <ul className="w-11/12 flex justify-between items-center">
-        <Link to="/">Logo</Link>
+        <Link to="/">logo</Link>
         <div className="flex gap-10 items-center">
           <Link to="/pets">Animais</Link>
-          <Link to="/doacoes">Doações</Link>
           <Link to="/ongs">Ongs</Link>
           <Link to="/achados">Achados e Perdidos</Link>
 
@@ -25,7 +24,6 @@ const Header = () => {
               <Link to="/favoritos">
                 <FontAwesomeIcon icon={faHeart} className="text-vermelho" />
               </Link>
-
               <div className="relative flex justify-center items-center flex-col">
                 <FontAwesomeIcon
                   icon={faUser}
