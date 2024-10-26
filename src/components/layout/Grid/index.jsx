@@ -5,7 +5,7 @@ const GridLayout = ({ items, onDoarClick, titulo, tipoCard }) => {
 
   return (
     <>
-      <h1 className="text-center py-4 text-3xl font-nunito">{titulo}</h1>
+      <h1 className="text-center py-8 text-3xl font-nunito">{titulo}</h1>
       <div className="flex justify-center items-center">
         <section className="grid grid-cols-2 gap-10">
           {items.map((data, index) => (

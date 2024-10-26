@@ -1,7 +1,29 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
-// import { useState } from "react";
 
-const Selecao = (props) => {
+const Selecao = ({nome,tamanho,onSelect,data}) => {
+
+  const getFilteredOptions = () => {
+    let options = [];
+
+    if(nome === "Tamanhos"){
+      options = ["Pequeno", "Médio", "Grande"];
+    }else if(nome === "Sexo"){
+      options = ["Macho", "Fêmea"];
+    }else if(nome === "Espécies"){
+      options = [...new Set(data.map((item) => item.especie))]
+    }
+
+    return options;
+  }
+
+  const filteredOptions = getFilteredOptions();
+  console.log("Opções filtradas: ", filteredOptions)
+  const handleChange = (event) =>{
+    if(onselect){
+      onSelect(event.target.value);
+    }
+  }
+
   return (
     <section className="w-full">
       <Box sx={{ minWidth: 120 }}>
@@ -12,21 +34,28 @@ const Selecao = (props) => {
               fontSize: "15px",
             }}
           >
-            {props.nome}
+            {nome}
           </InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
-            label={props.nome}
+            label={nome}
+            onChange={handleChange}
             sx={{
-              width: `${props.tamanho}px`,
+              width: `${tamanho}px`,
               height: 40,
               fontSize: "12px",
             }}
           >
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
+          {filteredOptions.length > 0 ? (
+              filteredOptions.map((option, index) => (
+                <MenuItem key={index} value={option}>
+                  {option}
+                </MenuItem>
+              ))
+            ) : (
+              <MenuItem disabled>Nenhuma opção</MenuItem>
+            )}
           </Select>
         </FormControl>
       </Box>
