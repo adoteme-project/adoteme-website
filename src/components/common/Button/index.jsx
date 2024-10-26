@@ -4,7 +4,7 @@ const Botao = ({ color, textColor, fontWeight, tamanho, altura, titulo, fontSize
 
   return (
     <button
-      className={`font-${fontWeight} px-6 rounded-lg font-nunito text-center`}
+      className={`font-${fontWeight} px-6 rounded font-nunito text-center`}
       style={{
         width: `${tamanho}px`,
         height: `${altura}px `,
