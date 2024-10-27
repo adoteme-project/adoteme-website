@@ -142,7 +142,8 @@ export const AuthProvider = ({ children }) => {
         }
 
         if (auth.token && !auth.userData) {
-            const contextType = role != null || undefined ? 'ongusers' : 'adotantes';
+            /* Discutir uma solução sobre esta validação com o back-end */
+            const contextType = role != null || role == undefined ? 'ongusers' : 'adotantes';
             retriveUserData(contextType);
         }
     }, [auth.token, auth.userData]);
