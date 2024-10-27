@@ -1,4 +1,4 @@
-import logoOng from '@/assets/logo_adotme.png';
+import logoOng from '@/assets/icons/logo_adotme_nobg.png';
 import NavItem from '@/components/common/NavItem';
 import AuthContext from '@/context/AuthProvider';
 import { faFileLines } from '@fortawesome/free-regular-svg-icons';
