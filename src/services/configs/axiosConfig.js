@@ -57,4 +57,14 @@ axiosAuthenticated.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export { axiosAuth, axiosAuthenticated, viaCep, api, axiosForm };
+const axiosDownload = axios.create({
+  baseURL: "/api",
+  headers: {
+    "Content-Disposition": "attachment;filename=animais.xls",
+    "Content-Type": "application/octet-stream"
+  },
+  responseType: 'blob',
+  withCredentials: true
+})
+
+export { axiosAuth, axiosAuthenticated, viaCep, api, axiosForm, axiosDownload };

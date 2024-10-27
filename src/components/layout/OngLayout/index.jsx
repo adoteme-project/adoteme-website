@@ -11,10 +11,10 @@ const OngLayout = () => {
   const { auth } = useContext(AuthContext);
 
   const userInfo = {
-    nome: auth.userData.nome,
+    nome: auth?.userData?.nome || 'Nome',
     image: "https://res.cloudinary.com/dv5mhhq0h/image/upload/v1728944509/lonarayeyge3u5bbgrog.jpg",
-    cargo: translateCargo(auth.userData.role)
-  }
+    cargo: auth ? translateCargo(auth.userData?.role) : 'Cargo',
+  };
 
   return (
     <div className="w-full flex h-svh max-h-svh">
