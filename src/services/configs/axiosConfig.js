@@ -24,6 +24,8 @@ const viaCep = axios.create({
   }
 });
 
+
+/* Instância para método de login */
 const axiosAuth = axios.create({
   baseURL: "/api",
   headers: {
@@ -33,8 +35,18 @@ const axiosAuth = axios.create({
   withCredentials: true,
 });
 
+/* Instância para quando o usuário estiver autenticado */
+const axiosAuthenticated = axios.create({
+  baseURL: "/api",
+  headers: {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+  },
+  withCredentials: true,
+})
+
 /* Configuração para enviar token no header da instância */
-axiosAuth.interceptors.request.use(
+axiosAuthenticated.interceptors.request.use(
   (config) => {
       const token = localStorage.getItem("token");
       if (token) {
@@ -45,4 +57,4 @@ axiosAuth.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-export { axiosAuth, viaCep, api, axiosForm };
+export { axiosAuth, axiosAuthenticated, viaCep, api, axiosForm };
