@@ -16,7 +16,6 @@ const Header = () => {
         <Link to="/">Logo</Link>
         <div className="flex gap-10 items-center">
           <Link to="/pets">Animais</Link>
-          <Link to="/doacoes">Doações</Link>
           <Link to="/ongs">Ongs</Link>
           <Link to="/achados">Achados e Perdidos</Link>
 
