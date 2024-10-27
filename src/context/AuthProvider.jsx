@@ -3,7 +3,7 @@ import { login as loginService } from "@/services/authAPI";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getUserData } from "@/services/adotanteAPI";
-import { axiosAuth } from "@/services/configs/axiosConfig";
+import { axiosAuth, axiosAuthenticated } from "@/services/configs/axiosConfig";
 
 const AuthContext = createContext();
 
@@ -19,31 +19,38 @@ export const AuthProvider = ({ children }) => {
     const login = async (context, data) => {
         try {
             const response = await loginService(context, data);
-            const { token } = response.data;
 
-            setAuth((prevAuth) => ({
-                ...prevAuth,
-                token,
-            }));
-
-            toast.success("Login realizado com sucesso!");
-            localStorage.setItem("token", token);
-
-            const contextType = context !== 'adotante' ? 'ongusers' : 'adotantes';
-            await retriveUserData(contextType);
-
-            if (contextType == 'ongusers') {
-                navigate("/ong/dashboard");
+            if (response.status === 401) {
+                toast.error("Erro ao realizar o login! Verifique suas credenciais.");
             } else {
-                navigate("/");
+                const { token } = response.data;
+
+                setAuth((prevAuth) => ({
+                    ...prevAuth,
+                    token,
+                }));
+
+                toast.success("Login realizado com sucesso!");
+                localStorage.setItem("token", token);
+
+                const contextType = context !== 'adotante' ? 'ongusers' : 'adotantes';
+                await retriveUserData(contextType);
+
+                if (contextType === 'ongusers') {
+                    navigate("/ong/dashboard");
+                } else {
+                    navigate("/");
+                }
             }
 
         } catch (error) {
-            const errorMessage = error.response?.data || "Erro desconhecido";
-            toast.error("Erro ao realizar o login! Por favor, verifique suas credenciais.");
-            throw errorMessage;
+            const errorMessage = error.response?.data.message || "Erro desconhecido";
+            console.log(errorMessage);
+
+            toast.error("Erro ao realizar o login! Verifique suas credenciais.");
         }
     };
+
 
     const retriveUserData = async (contextType) => {
         try {
@@ -77,11 +84,16 @@ export const AuthProvider = ({ children }) => {
     const refreshToken = async () => {
         try {
             const refreshToken = localStorage.getItem("refreshToken");
-            const { data } = await axiosAuth.post("/login/refresh", { refreshToken });
 
+            if (!refreshToken) {
+                throw new Error("No refresh token available");
+            }
+
+            const { data } = await axiosAuthenticated.post("/login/refresh", { refreshToken });
             const { accessToken, refreshToken: newRefreshToken } = data;
 
-            localStorage.setItem("accessToken", accessToken);
+
+            localStorage.setItem("token", accessToken);
             localStorage.setItem("refreshToken", newRefreshToken);
 
             setAuth((prevAuth) => ({
@@ -97,12 +109,12 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    axiosAuth.interceptors.response.use(
+    axiosAuthenticated.interceptors.response.use(
         (response) => response,
         async (error) => {
             const originalRequest = error.config;
 
-            if (error.response.status === 401 && !originalRequest._retry) {
+            if (error.response.status === 401 && auth.token && !originalRequest._retry) {
                 originalRequest._retry = true;
 
                 try {
@@ -111,7 +123,7 @@ export const AuthProvider = ({ children }) => {
                     return axiosAuth(originalRequest);
                 } catch (refreshError) {
                     logout();
-                    toast.error("Sessão experida. Por favor faça o login novamente");
+                    toast.error("Sessão expirada. Por favor faça o login novamente");
                     return Promise.reject(refreshError);
                 }
             }
@@ -119,6 +131,7 @@ export const AuthProvider = ({ children }) => {
             return Promise.reject(error);
         }
     );
+
 
     useEffect(() => {
         const token = localStorage.getItem("token");

@@ -1,5 +1,5 @@
-import { axiosAuth } from "./configs/axiosConfig"
+import { axiosAuthenticated } from "./configs/axiosConfig"
 
 export const getUserData = (context) => {
-    return axiosAuth.get(`/${context}/me`);
+    return axiosAuthenticated.get(`/${context}/me`);
 }
