@@ -27,19 +27,9 @@
         "idade": "2 anos",
         "imagem": "",
         "distancia": "600m",
-        "porte": "grande",
-        "sexo": "macho",
-        "especie": "gato",
-        "personalidade": [
-          {
-            "primeiraPersonalidade": "Sociável",
-            "valor": 4
-          },
-          {
-            "segundaPersonalidade": "Brincalhão",
-            "valor": 3
-          }
-        ]
+        "porte": "medio",
+        "sexo": "femea",
+        "especie": "gato"
       },
       {
         "id": 2,
@@ -47,19 +37,9 @@
         "idade": "2 anos",
         "imagem": "",
         "distancia": "700m",
-        "porte": "grande",
+        "porte": "pequeno",
         "sexo": "macho",
-        "especie": "gato",
-        "personalidade": [
-          {
-            "primeiraPersonalidade": "Brincalhão",
-            "valor": 5
-          },
-          {
-            "segundaPersonalidade": "Sociável",
-            "valor": 4
-          }
-        ]
+        "especie": "cachorro"
       },
       {
         "id": 3,
@@ -68,18 +48,8 @@
         "imagem": "",
         "distancia": "1Km",
         "porte": "grande",
-        "sexo": "macho",
-        "especie": "gato",
-        "personalidade": [
-          {
-            "primeiraPersonalidade": "Brincalhão",
-            "valor": 3
-          },
-          {
-            "segundaPersonalidade": "Leal",
-            "valor": 3
-          }
-        ]
+        "sexo": "femea",
+        "especie": "gato"
       },
       {
         "id": 4,
@@ -89,17 +59,7 @@
         "distancia": "1.2km",
         "porte": "grande",
         "sexo": "macho",
-        "especie": "gato",
-        "personalidade": [
-          {
-            "primeiraPersonalidade": "Obediente",
-            "valor": 4
-          },
-          {
-            "segundaPersonalidade": "Territorial",
-            "valor": 2
-          }
-        ]
+        "especie": "cachorro"
       }
     ]
   }

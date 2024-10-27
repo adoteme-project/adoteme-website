@@ -55,13 +55,13 @@ const Pets = () => {
         </div>
       </div>
 
-      {/* Componente de Paginação */}
       <Pagination
         items={filteredPets}
         renderGrid={(currentItems) => (
           <GridLayout items={currentItems} titulo="Animal" tipoCard="animal" />
         )}
-        itemsPerPageOptions={[2, 4, 6]} // Definindo que queremos 4 itens por página
+        itemsPerPageOptions={[2, 4, 6]} 
+         itemLabel="Animais"
       />
 
       <Doacao />

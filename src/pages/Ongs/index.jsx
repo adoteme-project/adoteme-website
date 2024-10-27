@@ -46,7 +46,8 @@ const Ongs = () => {
         renderGrid={(currentItems) => (
           <GridLayout items={currentItems} titulo="Ongs" tipoCard="ong" />
         )}
-        itemsPerPageOptions={[2, 4, 6]} // Definindo que queremos 4 itens por página
+        itemsPerPageOptions={[2, 4, 6]} 
+         itemLabel="Ongs"
       />
       <Doacao />
     </>

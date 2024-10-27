@@ -70,22 +70,22 @@ const PaginaPet = () => {
 
                         <div className="flex flex-col gap-4 mt-4">
                             <div className="flex items-center">
-                                Energia: <Avaliacao avaliacao={animal.energia} cor='#A9B949' />
+                                Energia: <Avaliacao avaliacao={animal.personalidade.energia} cor='#A9B949' />
                             </div>
                             <div className="flex items-center">
-                                Sociável: <Avaliacao avaliacao={animal.sociavel} cor='#A9B949' />
+                                Sociável: <Avaliacao avaliacao={animal.personalidade.sociabilidade} cor='#A9B949' />
                             </div>
                             <div className="flex items-center">
-                                Tolerante: <Avaliacao avaliacao={animal.tolerante} cor='#A9B949' />
+                                Tolerante: <Avaliacao avaliacao={animal.personalidade.tolerante} cor='#A9B949' />
                             </div>
                             <div className="flex items-center">
-                                Obediente: <Avaliacao avaliacao={animal.obediente} cor='#A9B949' />
+                                Obediente: <Avaliacao avaliacao={animal.personalidade.obediente} cor='#A9B949' />
                             </div>
                             <div className="flex items-center">
-                                Territorialista: <Avaliacao avaliacao={animal.territorialista} cor='#A9B949' />
+                                Territorialista: <Avaliacao avaliacao={animal.personalidade.territorial} cor='#A9B949' />
                             </div>
                             <div className="flex items-center">
-                                Inteligente: <Avaliacao avaliacao={animal.inteligente} cor='#A9B949' />
+                                Inteligente: <Avaliacao avaliacao={animal.personalidade.inteligencia} cor='#A9B949' />
                             </div>
                         </div>
                         <p className="mt-4 font-bold text-[#EC5A49]">TAXA DE ADOÇÃO: R${animal.taxaAdocao}</p>
@@ -105,8 +105,18 @@ const PaginaPet = () => {
                 <h2 className="text-3xl font-bold mb-6 text-center">Sugestão</h2>
                 {sugestoes.length > 0 ? (
                     <Carousel
-                        items={sugestoes.filter(sugestao => sugestao.tipo === 'animal')}
-                        renderItem={(sugestao) => <Card key={sugestao.animal} data={sugestao} tipoCard="animal" colorBg={cores[sugestao.id % cores.length]} />}
+                        items={sugestoes
+                            .filter(sugestao => sugestao.tipo === 'animal')
+                            .slice(0, 8)
+                        }
+                        renderItem={(sugestao) => (
+                            <Card
+                                key={sugestao.id}
+                                data={sugestao}
+                                tipoCard="animal"
+                                colorBg={cores[sugestao.id % cores.length]}
+                            />
+                        )}
                         slidesPerView={2}
                         spaceBetween={10}
                     />
@@ -114,6 +124,7 @@ const PaginaPet = () => {
                     <p>Nenhuma sugestão disponível no momento.</p>
                 )}
             </section>
+
 
             <Doacao />
         </>
