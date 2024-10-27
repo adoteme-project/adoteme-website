@@ -137,13 +137,12 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem("token");
         const role = localStorage.getItem("role");
 
-
         if (token && !auth.token) {
             setAuth((prev) => ({ ...prev, token }));
         }
 
-        if (auth.token && !auth.userData && role) {
-            const contextType = role != null ? 'ongusers' : 'adotantes';
+        if (auth.token && !auth.userData) {
+            const contextType = role != null || undefined ? 'ongusers' : 'adotantes';
             retriveUserData(contextType);
         }
     }, [auth.token, auth.userData]);
