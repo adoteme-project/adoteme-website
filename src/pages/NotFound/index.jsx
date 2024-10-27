@@ -1,7 +1,18 @@
+import { useLocation } from "react-router-dom"
+
 const NotFound = () => {
+
+    const location = useLocation()
+
+    console.log(location.pathname)
+
     return (
         <div className="h-screen text-center flex items-center justify-center">
-            <h2 className="text-4xl"> Não foi possível encontar (404) 🙀</h2>
+            {location.pathname === '/403' ?
+                (<h2 className="text-4xl"> Sem permissão para este recurso (403) 👮‍♂️</h2>)
+                :
+                (<h2 className="text-4xl"> Página não encontrada (404) 🙀</h2>)
+            }
         </div>
     )
 }

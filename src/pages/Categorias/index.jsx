@@ -4,6 +4,7 @@ import BreadCrumb from "@/components/common/BreadCrumb";
 import Banner from "@/components/section/Banner";
 import Doacao from "@/components/section/Donation";
 import GridLayout from '@/components/layout/Grid';
+import Pagination from '@/components/common/Pagination';
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -44,7 +45,7 @@ const Categorias = () => {
     useEffect(() => {
         if (categoria && animais.length > 0) {
             const filtrados = animais.filter(animal => {
-                return animal.personalidade[categoria.toLowerCase()] !== undefined; // Use toLowerCase para garantir a correspondência
+                return animal.personalidade[categoria.toLowerCase()] !== undefined; 
             });
 
             const ordenados = filtrados.sort((a, b) => {
@@ -77,9 +78,13 @@ const Categorias = () => {
                 caminho={`/`}
             />
 
-            <GridLayout
+            
+            <Pagination
                 items={animaisFiltrados}
-                tipoCard="animal"
+                renderGrid={(currentItems) => (
+                    <GridLayout items={currentItems} titulo="Animal" tipoCard="animal" />
+                )}
+                itemsPerPageOptions={[2, 4, 6]} 
             />
 
             <Doacao />

@@ -69,16 +69,23 @@ function App() {
 
               <Route path="/teste" element={<PrivateRoute />}>
                 <Route path="/teste" element={<Teste />}>
-                  <Route path="/teste/pet-images" element={<PetsImagesStep />}/>
-                  <Route path="/teste/pet-informacoes" element={<PetInfoStep />}/>
+                  <Route path="/teste/pet-images" element={<PetsImagesStep />} />
+                  <Route path="/teste/pet-informacoes" element={<PetInfoStep />} />
                 </Route>
               </Route>
 
-              <Route path="/ong" element={<OngLayout/>}>
-                <Route path="/ong/dashboard" element={<OngDashboard/>}/>
-                <Route path="/ong/pets" element={<OngPet/>}/>
-                <Route path="/ong/aplicacoes" element={<OngAplicacoes/>}/>
-                <Route path="/ong/configuracoes" element={<OngConfiguracoes/>}/>
+              <Route path="/ong" element={<PrivateRoute allowedRoles={['ADMIN', 'MODERATOR', 'USER']} />}>
+                <Route element={<OngLayout />}>
+
+                  <Route element={<PrivateRoute allowedRoles={['ADMIN', 'MODERATOR']} />}>
+                    <Route path="/ong/dashboard" element={<OngDashboard />} />
+                    <Route path="/ong/configuracoes" element={<OngConfiguracoes />} />
+                  </Route>
+
+                  <Route path="/ong/pets" element={<OngPet />} />
+                  <Route path="/ong/aplicacoes" element={<OngAplicacoes />} />
+
+                </Route>
               </Route>
 
               <Route path="*" element={<NotFound />} />
