@@ -57,7 +57,7 @@ const Card = ({ colorBg, data = [], onDoarClick,tipoCard }) => {
             </>
           )}
 
-          {isPet ? (
+          {isPet ? ( 
             <>
             <div className="flex flex-row justify-between items-center">
               <Link to={`/pagina-pet/${data.id}`}>
@@ -79,7 +79,7 @@ const Card = ({ colorBg, data = [], onDoarClick,tipoCard }) => {
             </>
           ) : (
             <div className="flex gap-2">
-              <Link to={`/pagina-ong/${data.key}`}>
+              <Link to={`/pagina-ong/${data.id}`}>
                 <Botao
                   textColor="#FFFFFF"
                   color="#FFC55E"

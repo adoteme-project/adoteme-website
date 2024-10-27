@@ -11,14 +11,14 @@ import { lime } from '@mui/material/colors';
 
 const PaginaPet = () => {
     const { id } = useParams();
-    const { data } = useCardContext();
+    const { sugestoes } = useCardContext();
     const [animal, setAnimal] = useState(null);
     const cores = ["#FFC55E", "#A9B949", "#B2DED3", "#EC5A49"];
 
 
     useEffect(() => {
-        if (data.length > 0) {
-            const animalEncontrado = data
+        if (sugestoes.length > 0) {
+            const animalEncontrado = sugestoes
                 .filter(sugestao => sugestao.tipo === 'animal')
                 .find(animal => animal.id === parseInt(id));
 
@@ -26,7 +26,7 @@ const PaginaPet = () => {
                 setAnimal(animalEncontrado);
             }
         }
-    }, [id, data]);
+    }, [id, sugestoes]);
 
     if (!animal) {
         return <p>Carregando...</p>
@@ -103,7 +103,7 @@ const PaginaPet = () => {
 
             <section className="mt-10 p-10 bg-gray-100">
                 <h2 className="text-3xl font-bold mb-6 text-center">Sugestão</h2>
-                {data.length > 0 ? (
+                {sugestoes.length > 0 ? (
                     <Carousel
                         items={sugestoes.filter(sugestao => sugestao.tipo === 'animal')}
                         renderItem={(sugestao) => <Card key={sugestao.animal} data={sugestao} tipoCard="animal" colorBg={cores[sugestao.id % cores.length]} />}

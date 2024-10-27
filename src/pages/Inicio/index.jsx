@@ -13,10 +13,10 @@ const Inicio = () => {
     <>
       <Banner/>
       <Doacao/>
-      <Carousel titulo="Categorias" tipo= "categorias"/>
+      <Carousel titulo="Categorias" tipo="categorias"/>
       <AnimaisProximos items={animal} tipoCard="animal" titulo="Animais próximos a você"></AnimaisProximos>
       <Carousel titulo="Ongs" tipo="ongs"/>
-      </>
+    </>
   );
 };
 

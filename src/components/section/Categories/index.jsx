@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
-import Box from "@/components/feature/Box-Carousel";
-import Slider from "@/components/common/Carousel/index";
+import BoxCategoria from "@/components/feature/Box-Categoria";
+import BoxOng from "@/components/feature/Box-Ongs";
+import Carrosel from "@/components/common/Carousel/index";
 
 const Carousel = (props) => {
     const [personalidades, setPersonalidades] = useState([]);
     const [categorias, setCategorias] = useState([]);
+    const [ongs, setOngs] = useState([]);
     const cores = ['#FFC55E', '#C6D668', '#4C8EB5'];
 
     const carregarPersonalidades = async () => {
         try {
-            const response = await fetch('/personalidade.json'); 
+            const response = await fetch('/personalidade.json');
             const data = await response.json();
             setPersonalidades(data);
         } catch (error) {
@@ -17,7 +19,16 @@ const Carousel = (props) => {
         }
     };
 
-    
+    const carregarOngs = async () => {
+        try {
+            const response = await fetch('/ongs.json');
+            const data = await response.json();
+            setOngs(data);
+        } catch (error) {
+            console.error("Erro ao carregar o JSON de ongs:", error);
+        }
+    };
+
     const obterCategorias = (personalidades) => {
         if (personalidades.length === 0) return [];
 
@@ -34,6 +45,8 @@ const Carousel = (props) => {
     useEffect(() => {
         if (props.tipo === "categorias") {
             carregarPersonalidades();
+        } else if (props.tipo === "ongs") {
+            carregarOngs();
         }
     }, [props.tipo]);
 
@@ -49,17 +62,22 @@ const Carousel = (props) => {
             <h1 className="text-4xl text-center font-bold font-nunito text-azul-dark">
                 {props.titulo}
             </h1>
-            <Slider slidePerview={3} data={categorias} color={cores}>
-                {categorias.map((item, index) => (
-                    <Box
-                        key={item.id}
-                        id={item.id}
-                        color={cores[index % cores.length]}
-                        nome={item.nome}
-                        imagem={item.imagem}
-                    />
-                ))}
-            </Slider>
+
+            {props.tipo === "categorias" ? (
+                <Carrosel
+                    data={categorias}
+                    slidePerview={3}
+                    color={cores}
+                    BoxComponent={BoxCategoria}
+                />
+            ) : (
+                <Carrosel
+                    data={ongs}
+                    slidePerview={3}
+                    color={cores}
+                    BoxComponent={BoxOng}
+                />
+            )}
         </section>
     );
 };

@@ -4,13 +4,13 @@ import Banner from '@/components/section/Banner';
 import BreadCrumb from '@/components/common/BreadCrumb';
 import axios from 'axios';
 import GridLayout from '@/components/layout/Grid';
-// import Filter from '@/components/common/Filter';
+import Pagination from '@/components/common/Pagination';
 
 const PaginaOng = () => {
     const { id } = useParams();
     const [ong, setOng] = useState(null);
     const [animais, setAnimais] = useState([]);
-    // const [filteredAnimals, setFilteredAnimals] = useState([]);
+    const [mensagemCopiado, setMensagemCopiado] = useState('');
 
     useEffect(() => {
         const fetchOng = async () => {
@@ -37,17 +37,18 @@ const PaginaOng = () => {
         fetchOng();
     }, [id]);
 
-    // const handleFilterChange = (name, value) => {
-    //     const filtered = animais.filter(animal => {
-    //         if (name === 'size' && value) return animal.tamanho === value;
-    //         if (name === 'species' && value) return animal.especie === value;
-    //         if (name === 'sex' && value) return animal.sexo === value;
-    //         if (name === 'city' && value) return animal.cidade === value;
-    //         return true;
-    //     });
-    //     setFilteredAnimals(filtered);
-    // };
-
+    const handleCopy = () => {
+        navigator.clipboard.writeText(ong.chavePix)
+            .then(() => {
+                setMensagemCopiado('Copiado com sucesso!');
+                setTimeout(() => {
+                    setMensagemCopiado('');
+                }, 2000);
+            })
+            .catch(err => {
+                console.error('Erro ao copiar: ', err);
+            });
+    };
 
     if (!ong) {
         return <p>Carregando...</p>;
@@ -55,7 +56,6 @@ const PaginaOng = () => {
 
     return (
         <div>
-
             <Banner tamanho='700.25vh' />
             <BreadCrumb
                 tituloCaminho="Home"
@@ -65,17 +65,16 @@ const PaginaOng = () => {
                 caminho={`/pagina-ong/${ong.id}`}
             />
 
-
             <h2 className="text-center font-bold text-3xl mt-6 mb-4">{ong.nome}</h2>
 
-
-            {/* <Filter onFilterChange={handleFilterChange} /> */}
-
-            <GridLayout
+            {/* Componente de Paginação */}
+            <Pagination
                 items={animais}
-                tipoCard="animal"
+                renderGrid={(currentItems) => (
+                    <GridLayout items={currentItems} titulo="Animal" tipoCard="animal" />
+                )}
+                itemsPerPageOptions={[2, 4, 6]} // Definindo que queremos 4 itens por página
             />
-
 
             <div className="mt-10 bg-[#FFF7EC] py-10">
                 <h3 className="text-center font-bold text-2xl mb-6">Doações</h3>
@@ -92,10 +91,13 @@ const PaginaOng = () => {
                             />
                             <button
                                 className="mt-2 bg-[#4C8EB5] text-white py-2 px-4 rounded"
-                                onClick={() => navigator.clipboard.writeText(ong.chavePix)}
+                                onClick={handleCopy}
                             >
                                 Copiar chave PIX
                             </button>
+                            {mensagemCopiado && (
+                                <p className="text-green-500 mt-2">{mensagemCopiado}</p>
+                            )}
                         </div>
                         <div className="mt-4">
                             <img src="/path/to/qr-code.png" alt="QR Code PIX" className="mx-auto w-32 h-32" />

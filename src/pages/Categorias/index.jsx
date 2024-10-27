@@ -4,6 +4,7 @@ import BreadCrumb from "@/components/common/BreadCrumb";
 import Banner from "@/components/section/Banner";
 import Doacao from "@/components/section/Donation";
 import GridLayout from '@/components/layout/Grid';
+import Pagination from '@/components/common/Pagination';
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -21,7 +22,16 @@ const Categorias = () => {
             try {
                 const response = await fetch('/petCard.json');
                 const data = await response.json();
-                setAnimais(data);
+
+                // Normalizar as chaves do objeto personalidade para minúsculas
+                const animaisNormalizados = data.map(animal => ({
+                    ...animal,
+                    personalidade: Object.fromEntries(
+                        Object.entries(animal.personalidade).map(([key, value]) => [key.toLowerCase(), value])
+                    )
+                }));
+
+                setAnimais(animaisNormalizados);
                 setLoading(false);
             } catch (error) {
                 console.error("Erro ao buscar os dados:", error);
@@ -34,14 +44,13 @@ const Categorias = () => {
 
     useEffect(() => {
         if (categoria && animais.length > 0) {
-
             const filtrados = animais.filter(animal => {
-                return animal.personalidade[categoria] !== undefined;
+                return animal.personalidade[categoria.toLowerCase()] !== undefined; // Use toLowerCase para garantir a correspondência
             });
 
             const ordenados = filtrados.sort((a, b) => {
-                const valorA = a.personalidade[categoria];
-                const valorB = b.personalidade[categoria];
+                const valorA = a.personalidade[categoria.toLowerCase()];
+                const valorB = b.personalidade[categoria.toLowerCase()];
 
                 return valorB - valorA;
             });
@@ -69,9 +78,13 @@ const Categorias = () => {
                 caminho={`/`}
             />
 
-            <GridLayout
+            {/* Componente de Paginação */}
+            <Pagination
                 items={animaisFiltrados}
-                tipoCard="animal"
+                renderGrid={(currentItems) => (
+                    <GridLayout items={currentItems} titulo="Animal" tipoCard="animal" />
+                )}
+                itemsPerPageOptions={[2, 4, 6]} // Definindo que queremos 4 itens por página
             />
 
             <Doacao />

@@ -5,12 +5,10 @@ import { useLocation } from "react-router-dom";
 const Banner = ({tamanho, imagensBanner }) => {
   const location = useLocation();
   const isHome = location.pathname === "/";
-
-  const bannerImage = isHome ? imagemBannerHome : imagensBanner;
-
+  
   return (
     <section className={`h-[${tamanho}] w-full`}>
-      <div className="relative inline-block">
+      <div className="relative inline-block w-full">
         <img
           src={isHome ? imagemBannerHome : imagensBanner}
           alt="Banner"

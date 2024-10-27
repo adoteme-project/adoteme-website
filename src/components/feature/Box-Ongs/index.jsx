@@ -1,12 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
-const Box = ({ id, color, imagem, nome }) => {
+const BoxOng = ({ id, color, imagem, nome }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    // Redirecionar para a página Categorias com a categoria como parâmetro de consulta
-    navigate(`/categorias?categoria=${nome}`);
+    navigate(`/pagina-ong/${id}`);
   };
+
 
   return (
     <div
@@ -18,9 +18,9 @@ const Box = ({ id, color, imagem, nome }) => {
       <h1 className="text-left font-robot text-2xl px-3 py-4 font-semibold">
         {nome}
       </h1>
-      <img src={imagem} alt="Imagem do Box" className="w-full h-auto object-cover" />
+      <img src={imagem} alt="Imagem da ONG" className="w-full h-auto object-cover" />
     </div>
   );
 };
 
-export default Box;
+export default BoxOng;

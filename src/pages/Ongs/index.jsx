@@ -1,16 +1,17 @@
 import Breadcrumbs from '@/components/common/BreadCrumb/index';
 import Banner from '@/components/section/Banner';
-import Grid from '@/components/layout/Grid';
 import Doacao from "@/components/section/Donation"
 import BannerImage from "@/assets/banner-ong.svg"
 import { useCardContext } from '@/context/CardProvider';
 import { SearchInput } from '@/components/common/SearchInput';
 import { useState } from 'react';
+import Pagination from '@/components/common/Pagination';
+import GridLayout from '@/components/layout/Grid';
 
 const Ongs = () => {
   const {sugestoes} = useCardContext();
   const validItems = sugestoes.filter((item) => item.tipo === "ong");
-  const [filteredOngs,setFilteredOngs] = useState(validItems);
+  const [filteredOngs, setFilteredOngs] = useState(validItems);
 
 
 
@@ -39,7 +40,14 @@ const Ongs = () => {
             className="w-[200px]"
       />
       </div>
-      <Grid items={filteredOngs} titulo="Ongs" />
+      {/* Componente de Paginação */}
+      <Pagination
+        items={filteredOngs}
+        renderGrid={(currentItems) => (
+          <GridLayout items={currentItems} titulo="Ongs" tipoCard="ong" />
+        )}
+        itemsPerPageOptions={[2, 4, 6]} // Definindo que queremos 4 itens por página
+      />
       <Doacao />
     </>
   );

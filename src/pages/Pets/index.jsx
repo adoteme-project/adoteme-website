@@ -1,19 +1,20 @@
 import DropDown from "@/components/section/DropDown/index";
 import Banner from "@/components/section/Banner";
-import Categorias from "@/components/section/Categories";
 import BreadCrumb from "@/components/common/BreadCrumb";
 import Doacao from "@/components/section/Donation";
 import { useCardContext } from '@/context/CardProvider';
 import { useEffect, useState } from "react";
-import Grid from "@/components/layout/Grid";
+import GridLayout from "@/components/layout/Grid";
 import { SearchInput } from "@/components/common/SearchInput";
-import BannerImage from "@/assets/banner-pets.svg"
-// import AnimaisProximos from '@/components/section/Near-Animals/index'
+import BannerImage from "@/assets/banner-pets.svg";
+import Pagination from "@/components/common/Pagination";
+import Carousel from "@/components/section/Categories";
 
 const Pets = () => {
   const { sugestoes } = useCardContext();
   const validItems = sugestoes.filter((item) => item.tipo === "animal");
-  const [filteredPets, setFilteredPets] = useState(validItems);
+
+  const [filteredPets, setFilteredPets] = useState([]);
   const [filters, setFilters] = useState({});
 
   useEffect(() => {
@@ -26,7 +27,7 @@ const Pets = () => {
         }
       });
 
-      setFilteredPets(result);
+      setFilteredPets(result); // Atualiza os pets filtrados
     }
   }, [sugestoes, filters]);
 
@@ -40,52 +41,29 @@ const Pets = () => {
 
   return (
     <>
-      <Banner
-        tamanho="700.25vh"
-        imagensBanner={BannerImage}
-      />
-      <BreadCrumb
-        tituloCaminho="Home"
-        tituloCaminho2="Animais"
-        cor="#B2DED3"
-        caminho="/pets"
-      />
-      <Categorias titulo="Categorias" tipo="categorias" />
+      <Banner tamanho="700.25vh" imagensBanner={BannerImage} />
+      <BreadCrumb tituloCaminho="Home" tituloCaminho2="Animais" cor="#B2DED3" caminho="/pets" />
+      <Carousel titulo="Categorias" tipo="categorias" />
       <div className="flex flex-row w-full justify-evenly gap-4 px-4">
         <div className="flex flex-row w-8/12 gap-4 ">
-          <DropDown
-            filterKey="tamanho"
-            nome="Tamanho"
-            tamanho={200}
-            fetchOptions={null}
-            onFilterChange={handleFilterChange}
-          />
-          <DropDown
-            filterKey="sexo"
-            nome="Sexo"
-            tamanho={200}
-            fetchOptions={null}
-            onFilterChange={handleFilterChange}
-          />
-          <DropDown
-            filterKey="especie"
-            nome="Espécie"
-            tamanho={200}
-            fetchOptions={"/petCard.json"}
-            onFilterChange={handleFilterChange}
-          />
+          <DropDown filterKey="tamanho" nome="Tamanho" tamanho={200} fetchOptions={null} onFilterChange={handleFilterChange} />
+          <DropDown filterKey="sexo" nome="Sexo" tamanho={200} fetchOptions={null} onFilterChange={handleFilterChange} />
+          <DropDown filterKey="especie" nome="Espécie" tamanho={200} fetchOptions={"/petCard.json"} onFilterChange={handleFilterChange} />
         </div>
-        <div className="w-[200px] " >
-          <SearchInput
-            data={validItems}
-            placeholder="Cidade"
-            name="Search"
-            onSearch={handleSearchChange}
-            filterKey="nome"
-          />
+        <div className="w-[200px] ">
+          <SearchInput data={validItems} placeholder="Cidade" name="Search" onSearch={handleSearchChange} filterKey="nome" />
         </div>
       </div>
-      <Grid items={filteredPets} titulo="Animal" tipoCard="animal" />
+
+      {/* Componente de Paginação */}
+      <Pagination
+        items={filteredPets}
+        renderGrid={(currentItems) => (
+          <GridLayout items={currentItems} titulo="Animal" tipoCard="animal" />
+        )}
+        itemsPerPageOptions={[2, 4, 6]} // Definindo que queremos 4 itens por página
+      />
+
       <Doacao />
     </>
   );
