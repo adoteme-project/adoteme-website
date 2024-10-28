@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Pagination = ({ items, renderGrid, itemsPerPageOptions = [3, 6, 9] }) => {
+const Pagination = ({ items, renderGrid, itemsPerPageOptions = [3, 6, 9], itemLabel = "Cards" }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [itemsPerPage, setItemsPerPage] = useState(itemsPerPageOptions[0]);
 
@@ -22,14 +22,13 @@ const Pagination = ({ items, renderGrid, itemsPerPageOptions = [3, 6, 9] }) => {
 
     return (
         <div className="w-full">
-            {/* Renderizar o Grid com os itens da página atual */}
+
             {renderGrid(currentItems)}
 
-            {/* Controles de paginação */}
             <div className="flex flex-col items-center mt-8 gap-4">
-                {/* Seleção do número de itens por página */}
+
                 <div className="flex justify-center items-center gap-2 mb-4">
-                    <label className="font-medium text-gray-700">Cards por página:</label>
+                    <label className="font-medium text-gray-700">{itemLabel} por página:</label>
                     <select
                         value={itemsPerPage}
                         onChange={handleItemsPerPageChange}
@@ -43,7 +42,6 @@ const Pagination = ({ items, renderGrid, itemsPerPageOptions = [3, 6, 9] }) => {
                     </select>
                 </div>
 
-                {/* Controles de navegação */}
                 <div className="flex items-center gap-4">
                     <button
                         className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 ${currentPage === 1 ? 'bg-gray-400 text-gray-800 cursor-not-allowed' : 'bg-blue-700 text-white hover:bg-blue-800'

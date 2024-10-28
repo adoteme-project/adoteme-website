@@ -111,7 +111,8 @@ const Pets = () => {
         renderGrid={(currentItems) => (
           <GridLayout items={currentItems} titulo="Animal" tipoCard="animal" />
         )}
-        itemsPerPageOptions={[2, 4, 6]}
+        itemsPerPageOptions={[2, 4, 6]} 
+         itemLabel="Animais"
       />
 
       <Doacao />

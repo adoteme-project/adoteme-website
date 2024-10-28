@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { MoonLoader } from "react-spinners";
 import { useParams } from "react-router-dom";
-import { getUserById } from "@/services/adotanteAPI";
 
 const PerfilUsuario = () => {
   const { id } = useParams();
