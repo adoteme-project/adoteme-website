@@ -5,6 +5,7 @@ import Banner from "@/components/section/Banner";
 import Doacao from "@/components/section/Donation";
 import GridLayout from '@/components/layout/Grid';
 import Pagination from '@/components/common/Pagination';
+import image from '@/assets/banner-categoria.svg';
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -69,7 +70,7 @@ const Categorias = () => {
 
     return (
         <>
-            <Banner tamanho='700.25vh' />
+            <Banner imagensBanner={image} tamanho='700.25vh' />
             <BreadCrumb
                 tituloCaminho="Home"
                 tituloCaminho2="Animais"

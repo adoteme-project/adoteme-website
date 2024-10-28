@@ -4,7 +4,7 @@ import Doacao from "@/components/section/Donation"
 import BannerImage from "@/assets/banner-ong.svg"
 import { useCardContext } from '@/context/CardProvider';
 import { SearchInput } from '@/components/common/SearchInput';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Pagination from '@/components/common/Pagination';
 import GridLayout from '@/components/layout/Grid';
 
@@ -13,6 +13,9 @@ const Ongs = () => {
   const validItems = sugestoes.filter((item) => item.tipo === "ong");
   const [filteredOngs, setFilteredOngs] = useState(validItems);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
 
   const handleSearchChange = (validItems) => {

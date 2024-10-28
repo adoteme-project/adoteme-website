@@ -5,6 +5,8 @@ import BreadCrumb from '@/components/common/BreadCrumb';
 import axios from 'axios';
 import GridLayout from '@/components/layout/Grid';
 import Pagination from '@/components/common/Pagination';
+import BannerImage from "@/assets/banner-ong.svg"
+
 
 const PaginaOng = () => {
     const { id } = useParams();
@@ -56,7 +58,7 @@ const PaginaOng = () => {
 
     return (
         <div>
-            <Banner tamanho='700.25vh' />
+            <Banner tamanho='700.25vh' imagensBanner={BannerImage} />
             <BreadCrumb
                 tituloCaminho="Home"
                 tituloCaminho2="Ongs"

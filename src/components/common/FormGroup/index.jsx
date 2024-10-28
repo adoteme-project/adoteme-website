@@ -16,13 +16,15 @@ const FormGroup = ({
   register,
   control,
   errors,
-  editMode
+  editMode,
+  isPerfil = false,
 }) => {
   const gridTemplateColumns = column === 2 ? "1fr 1fr" : "1fr";
 
+  const titleClass = isPerfil ? "text-azul-main" : "text-black";
   return (
     <div className="max-w-screen-lg w-full px-14 py-8 flex flex-col gap-8 bg-beje shadow-md rounded-2xl">
-      <h1 className="text-2xl font-bold">{title}</h1>
+      <h1 className={`text-2xl font-bold ${titleClass}`}>{title}</h1>
 
       <fieldset disabled={!editMode} className="grid gap-4 w-full" style={{ gridTemplateColumns }}>
         {fields.length > 0 &&
@@ -36,6 +38,7 @@ const FormGroup = ({
               disabled={field.disabled}
               register={register}
               error={errors}
+              isPerfil = {isPerfil}
             />
           ))}
 

@@ -9,6 +9,7 @@ import { SearchInput } from "@/components/common/SearchInput";
 import BannerImage from "@/assets/banner-pets.svg";
 import Pagination from "@/components/common/Pagination";
 import Carousel from "@/components/section/Categories";
+import Botao from "@/components/common/Button";
 
 const Pets = () => {
   const { sugestoes } = useCardContext();
@@ -16,6 +17,11 @@ const Pets = () => {
 
   const [filteredPets, setFilteredPets] = useState([]);
   const [filters, setFilters] = useState({});
+  const [dropdownValues, setDropdownValues] = useState({
+    tamanho: "",
+    sexo: "",
+    especie: "",
+  });
 
   useEffect(() => {
     if (validItems.length > 0) {
@@ -27,16 +33,27 @@ const Pets = () => {
         }
       });
 
-      setFilteredPets(result); // Atualiza os pets filtrados
+      setFilteredPets(result);
     }
   }, [sugestoes, filters]);
 
   const handleFilterChange = (key, value) => {
     setFilters((prev) => ({ ...prev, [key]: value }));
+    setDropdownValues((prev) => ({ ...prev, [key]: value }));
   };
 
   const handleSearchChange = (filteredPets) => {
     setFilteredPets(filteredPets);
+  };
+
+  const handleClearFilters = () => {
+    setFilters({}); // Limpa o estado dos filtros
+    setDropdownValues({
+      tamanho: "",
+      sexo: "",
+      especie: "",
+    });
+    setFilteredPets(validItems); // Reseta a lista de pets filtrados
   };
 
   return (
@@ -45,23 +62,56 @@ const Pets = () => {
       <BreadCrumb tituloCaminho="Home" tituloCaminho2="Animais" cor="#B2DED3" caminho="/pets" />
       <Carousel titulo="Categorias" tipo="categorias" />
       <div className="flex flex-row w-full justify-evenly gap-4 px-4">
-        <div className="flex flex-row w-8/12 gap-4 ">
-          <DropDown filterKey="tamanho" nome="Tamanho" tamanho={200} fetchOptions={null} onFilterChange={handleFilterChange} />
-          <DropDown filterKey="sexo" nome="Sexo" tamanho={200} fetchOptions={null} onFilterChange={handleFilterChange} />
-          <DropDown filterKey="especie" nome="Espécie" tamanho={200} fetchOptions={"/petCard.json"} onFilterChange={handleFilterChange} />
+        <div className="flex flex-row w-8/12 gap-4 items-center">
+          <DropDown 
+            filterKey="tamanho" 
+            nome="Tamanho" 
+            tamanho={200} 
+            fetchOptions={null} 
+            onFilterChange={handleFilterChange} 
+            selectedValue={dropdownValues.tamanho} 
+          />
+          <DropDown 
+            filterKey="sexo" 
+            nome="Sexo" 
+            tamanho={200} 
+            fetchOptions={null} 
+            onFilterChange={handleFilterChange} 
+            selectedValue={dropdownValues.sexo}
+          />
+          <DropDown 
+            filterKey="especie" 
+            nome="Espécie" 
+            tamanho={200} 
+            fetchOptions={"/petCard.json"} 
+            onFilterChange={handleFilterChange} 
+            selectedValue={dropdownValues.especie}
+          />
+          <Botao 
+            tamanho="140" 
+            altura="30" 
+            titulo="Limpar filtro" 
+            onClick={handleClearFilters} 
+            color="#FFA607"
+          />
         </div>
-        <div className="w-[200px] ">
-          <SearchInput data={validItems} placeholder="Cidade" name="Search" onSearch={handleSearchChange} filterKey="nome" />
+        <div className="w-[200px]">
+          <SearchInput 
+            data={validItems} 
+            placeholder="Cidade" 
+            name="Search" 
+            onSearch={handleSearchChange} 
+            filterKey="nome" 
+          />
         </div>
       </div>
 
-      {/* Componente de Paginação */}
       <Pagination
         items={filteredPets}
         renderGrid={(currentItems) => (
           <GridLayout items={currentItems} titulo="Animal" tipoCard="animal" />
         )}
-        itemsPerPageOptions={[2, 4, 6]} // Definindo que queremos 4 itens por página
+        itemsPerPageOptions={[2, 4, 6]}
       />
 
       <Doacao />

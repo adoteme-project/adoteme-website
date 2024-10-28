@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-function CardList({filterKey, nome, tamanho, fetchOptions, onFilterChange }) {
+function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange, selectedValue }) {
   const [optionsList, setOptionsList] = useState([]);
   const [selectUtil, setSelectUtil] = useState("");
 
-  // Opções pré-definidas para 'tamanho' e 'sexo'
   const optionsMap = {
     tamanho: ["Pequeno", "Médio", "Grande"],
     sexo: ["Macho", "Fêmea"],
@@ -18,9 +17,9 @@ function CardList({filterKey, nome, tamanho, fetchOptions, onFilterChange }) {
       } else {
         try {
           const response = await fetch(fetchOptions);
-          if(!response.ok) throw new Error("Erro ao buscar opcoes de filtro!");
+          if (!response.ok) throw new Error("Erro ao buscar opcoes de filtro!");
           const cards = await response.json();
-          const options = new Set(cards.map(option => option[filterKey]));
+          const options = new Set(cards.map((option) => option[filterKey]));
           setOptionsList(Array.from(options));
         } catch (error) {
           console.error("Erro ao buscar opções de filtro", error);
@@ -30,10 +29,11 @@ function CardList({filterKey, nome, tamanho, fetchOptions, onFilterChange }) {
     };
 
     getFilterOptions();
+  }, [filterKey, fetchOptions]);
 
-  }, [filterKey, fetchOptions]); 
-
-  
+  useEffect(() => {
+    setSelectUtil(selectedValue);
+  }, [selectedValue]);
 
   const handleUtilChange = (event) => {
     const value = event.target.value;
@@ -41,7 +41,6 @@ function CardList({filterKey, nome, tamanho, fetchOptions, onFilterChange }) {
     onFilterChange(filterKey, value);
   };
 
-  console.log("options:", optionsList)
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>

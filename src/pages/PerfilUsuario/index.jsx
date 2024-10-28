@@ -1,17 +1,20 @@
 import Botao from "@/components/common/Button";
 import FormGroup from "@/components/common/FormGroup";
 import SidebarUsuario from "@/components/layout/SidebarUser";
-import CadastroFoto from "@/components/feature/UploadImage/RegisterImage"; // Importe o componente de cadastro de foto
+import CadastroFoto from "@/components/feature/UploadImage/RegisterImage"; 
 import useCep from "@/hooks/useCep";
 import { formMeuPerfilDados } from "@/mocks/stepFormRegister";
 import { RegistrationAdotanteSchema } from "@/utils/formValidations";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { MoonLoader } from "react-spinners";
+import { useParams } from "react-router-dom";
+import { getUserById } from "@/services/adotanteAPI";
 
 const PerfilUsuario = () => {
+  const { id } = useParams();
   const formsDadosUsuario = formMeuPerfilDados.find((step) => step.step === 1);
   const methods = useForm({
     resolver: zodResolver(RegistrationAdotanteSchema),
@@ -26,8 +29,26 @@ const PerfilUsuario = () => {
 
   const [editando, setEditando] = useState(false);
   const [initialValues, setInitialValues] = useState({});
-
   const { loading } = useCep(control, setValue);
+
+  // Função para buscar dados do usuário e preencher o formulário
+  const fetchUserData = async () => {
+    try {
+      const response = await getUserById(id);
+      const userData = response.data;
+
+      // Preenchendo o formulário com os dados do usuário
+      Object.entries(userData).forEach(([key, value]) => {
+        setValue(key, value);
+      });
+    } catch (error) {
+      console.error("Erro ao buscar dados do adotante: ", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchUserData(); // Chama a função ao montar o componente
+  }, [id]); // Dependência para chamar novamente caso o id mude
 
   const iniciarEdicao = () => {
     setInitialValues(getValues());
@@ -51,7 +72,7 @@ const PerfilUsuario = () => {
           <h1 className="text-3xl font-nunito py-10 text-azul-dark font-medium text-center">
             Meu perfil
           </h1>
-          <div className="flex items-center justify-between px-20">
+          <div className="flex flex-row-reverse items-center justify-between">
             <CadastroFoto control={control} tamanho="150px" altura="150px" />
             {!editando && (
               <Botao
@@ -76,6 +97,7 @@ const PerfilUsuario = () => {
                 errors={errors}
                 register={register}
                 editMode={editando}
+                isPerfil={true}
               />
             ))}
             {loading && (
