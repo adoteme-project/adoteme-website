@@ -12,7 +12,7 @@ const RedefinirAcesso = () => {
       <FormAuth
         title="Redefinição de senha"
         fields={[
-          { label: "Email", type: "email", placeholder: "email@exemplo.com" }
+          { label: "Email", type: "email", placeholder: "email@exemplo.com", name: 'email'}
         ]}
         onSubmit={handleReset}
         buttonLabel="Enviar"

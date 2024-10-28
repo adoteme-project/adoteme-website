@@ -4,7 +4,7 @@ import useGoBack from "../../../hooks/useBackNavigation";
 import logoAdoteme from "../../../assets/logo_adotme.png";
 
 const HeaderForm = ({ hasIcon, hasBackButton }) => {
-  const goBackAction = useGoBack("/");
+  const goBackAction = useGoBack();
 
   return (
     <div className="shadow-md p-3 w-full flex justify-between items-center">

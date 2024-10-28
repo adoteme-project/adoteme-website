@@ -2,37 +2,44 @@ import InputOng from "@/components/common/InputOng";
 import TableOng from "@/components/common/TableOng";
 import PageTitle from "@/components/layout/PageTitle";
 import SearchLayout from "@/components/layout/SearchLayout";
+import AuthContext from "@/context/AuthProvider";
 import { petsColumns } from "@/mocks/tableColumns";
+import { getPetsOng } from "@/services/ongAPI";
 import { exportacaoPets } from "@/services/onguserAPI";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const OngPet = () => {
   const [dataPets, setDataPets] = useState([]);
   const [filteredPets, setFilteredPets] = useState([]);
 
+  const { auth } = useContext(AuthContext);
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/petsOng.json");
-        const data = response.data;
+    if (auth?.userData?.ongId) {
+      const fetchData = async () => {
+        try {
+          const response = await getPetsOng(auth.userData.ongId);
+          const data = response.data;
 
-        const dataFormat = data.map((pet) => ({
-          ...pet,
-          visibilidade: pet.visibilidade ? "Visível" : "Escondido",
-        }));
+          console.log(response.data);
 
-        setDataPets(dataFormat);
-        setFilteredPets(dataFormat);
-      } catch (error) {
-        if (error.name === "AbortError") return;
-        console.error("Erro ao buscar os dados da API", error);
-      }
-    };
+          const dataFormat = data.map((pet) => ({
+            ...pet,
+            visibilidade: pet.visibilidade ? "Visível" : "Escondido",
+          }));
 
-    fetchData();
-  }, []);
+          setDataPets(dataFormat);
+          setFilteredPets(dataFormat);
+        } catch (error) {
+          if (error.name === "AbortError") return;
+          console.error("Erro ao buscar os dados da API", error);
+        }
+      };
+
+      fetchData();
+    }
+  }, [auth?.userData?.ongId]);
 
   const exportarPets = async (id) => {
     try {
@@ -57,7 +64,7 @@ const OngPet = () => {
       <PageTitle title="Pets" actionName="+ Adicionar pet">
         <button
           className="font-nunito px-3 py-2 rounded-lg bg-azul-main text-branco"
-          onClick={() => exportarPets(1)}
+          onClick={() => exportarPets(auth?.userData?.ongId)}
         >
           Exportar registros
         </button>
