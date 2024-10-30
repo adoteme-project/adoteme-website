@@ -1,26 +1,30 @@
 import Botao from "@/components/common/Button";
 import FormGroup from "@/components/common/FormGroup";
+import AuthContext from "@/context/AuthProvider";
 import { formQuestionsAdotante } from "@/mocks/stepFormRegister";
+import { getUserAdotanteFormulario } from "@/services/adotanteAPI";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 const PerfilUsuario = () => {
   const [editando, setEditando] = useState(false);
+  const [dadosForm, setDadosForm] = useState({});
+  const { auth } = useContext(AuthContext);
   const formQuestions = formQuestionsAdotante.find(step => step.step === 2);
   const methods = useForm({
     defaultValues: {
-      casaApartamento: '',
-      outrosPets: '',
-      criancas: '',
-      acordo: '',
-      outraPessoa: '',
-      telada: '',
-      portao: '',
+      moraEmCasa: '',
+      temPet: '',
+      temCrianca: '',
+      moradoresConcordam: '',
+      seraResponsavel: '',
+      isTelado: '',
+      casaPortaoAlto: '',
     },
   });
 
-  const { control, getValues } = methods;
+  const { control, getValues, reset } = methods;
 
   const [initialValues, setInitialValues] = useState({});
 
@@ -38,6 +42,37 @@ const PerfilUsuario = () => {
     console.log("Salvando alterações...");
     setEditando(false);
   };
+
+  useEffect(() => {
+    const fetchFormulario = async (id) => {
+      try {
+        const response = await getUserAdotanteFormulario(id);
+        
+        console.log(response.data);
+
+        setDadosForm(response.data);
+
+      } catch (err) {
+        console.log("Erro:", err);
+      }
+    }
+
+    fetchFormulario(auth?.userData?.id);
+  },[auth?.userData])
+
+  useEffect(() => {
+    if (dadosForm) {
+      reset({
+        moraEmCasa: dadosForm.moraEmCasa || false,
+        temPet: dadosForm.temPet || false,
+        temCrianca: dadosForm.temCrianca || false,
+        moradoresConcordam: dadosForm.moradoresConcordam || false,
+        seraResponsavel: dadosForm.seraResponsavel || false,
+        isTelado: dadosForm.isTelado || false,
+        casaPortaoAlto: dadosForm.casaPortaoAlto || false,
+      });
+    }
+  }, [dadosForm, reset]);
 
   return (
     <section className="flex justify-center w-full">

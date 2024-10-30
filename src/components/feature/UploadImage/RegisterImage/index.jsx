@@ -4,9 +4,15 @@ import { faAdd, faCamera, faPen } from "@fortawesome/free-solid-svg-icons";
 import { Controller } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 
-const FormRegisterImage = ({ control }) => {
+const FormRegisterImage = ({ control, userImage }) => {
   const location = useLocation();
   const [preview, setPreview] = useState(null);
+
+  console.log(userImage)
+
+  if(userImage && preview == null) {
+    setPreview(userImage)
+  }
 
   const handleFileChange = (file, onChange) => {
     if (file && file.size > 5 * 1024 * 1024) {

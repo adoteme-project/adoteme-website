@@ -22,7 +22,7 @@ const PerfilUsuario = () => {
     defaultValues: {
       nome: "",
       email: "",
-      dataNascimento: "",
+      dataNascimento: "1999-02-02",
       telefone: "",
       cep: "",
       numero: ""
@@ -58,14 +58,14 @@ const PerfilUsuario = () => {
     }
   }, [auth]);
 
+
   // Atualizar o formulário com os dados do usuário assim que "dadosPerfil" for carregado
   useEffect(() => {
     if (dadosPerfil) {
       reset({
         nome: dadosPerfil.nome || "",
         email: dadosPerfil.email || "",
-        senha: "",  // senha provavelmente será redefinida
-        dataNascimento: dadosPerfil.dataNascimento || "",
+        dataNascimento: dadosPerfil.dataNascimeto || "2002-02-02",
         telefone: dadosPerfil.telefone || "",
         cep: dadosPerfil.endereco?.cep || "",
         endereco: dadosPerfil.endereco?.bairro || "",
@@ -93,12 +93,12 @@ const PerfilUsuario = () => {
 
   return (
 
-    <div className="flex flex-col items-center gap-4 h-full px-16 pt-8">
+    <div className="flex flex-col items-center gap-8 h-full px-16 py-8">
       <div className="flex flex-col gap-8 items-center justify-between">
         <h1 className="text-3xl font-nunito text-azul-dark font-medium text-center">
           Meu perfil
         </h1>
-        <CadastroFoto control={control} tamanho="150px" altura="150px" />
+        <CadastroFoto control={control} userImage={dadosPerfil.urlFoto} tamanho="150px" altura="150px" />
       </div>
 
       {!editando && (
