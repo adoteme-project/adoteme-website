@@ -1,16 +1,18 @@
 import SideBarUsuario from "../SidebarUser";
-import { Outlet } from "react-router-dom"; 
+import { Outlet } from "react-router-dom";
 
 const LayoutUsuario = () => {
   return (
-    <section className="flex w-full h-full">
-      <div className="w-3/12">
-      <SideBarUsuario/>
+    <div className="w-full flex h-svh max-h-svh">
+      <SideBarUsuario />
+      <div className="h-full flex-1">
+        <div className="flex h-full flex-col overflow-y-auto no-scrollbar">
+          <div className="flex flex-col gap-10">
+            <Outlet />
+          </div>
+        </div>
       </div>
-      <div className="w-9/12">
-      <Outlet/>
-      </div>
-    </section>
+    </div>
   );
 };
 

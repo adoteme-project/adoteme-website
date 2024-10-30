@@ -64,8 +64,8 @@ const PaginaOng = () => {
 
             <div className="flex flex-row w-full justify-evenly gap-4 px-4">
                 <div className="flex flex-row w-8/12 gap-4">
-                    <DropDown filterKey="tamanho" nome="Tamanho" tamanho={200} fetchOptions={null} onFilterChange={handleFilterChange} />
-                    <DropDown filterKey="sexo" nome="Sexo" tamanho={200} fetchOptions={null} onFilterChange={handleFilterChange} />
+                    <DropDown filterKey="tamanho" nome="Tamanho" tamanho={200} fetchOptions={"/petCard.json"} onFilterChange={handleFilterChange} />
+                    <DropDown filterKey="sexo" nome="Sexo" tamanho={200} fetchOptions={"/petCard.json"} onFilterChange={handleFilterChange} />
                     <DropDown filterKey="especie" nome="Espécie" tamanho={200} fetchOptions={"/petCard.json"} onFilterChange={handleFilterChange} />
                 </div>
                 <div className="w-[200px]">
