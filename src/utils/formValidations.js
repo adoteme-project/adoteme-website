@@ -1,7 +1,7 @@
 import { z } from "zod"
 
 const RegistrationAdotanteSchema = z.object({
-    nome: z.string().min(2, { message: "Deve ser maior do que dois caracteres" }).regex(/^[a-zA-Z]+(?: [a-zA-Z]+)*$/),
+    nome: z.string().min(2, { message: "Deve ser maior do que dois caracteres" }),
     dtNasc: z.string().refine(
         (value) => !isNaN(Date.parse(value)),
         { message: "Deve ser uma data válida" }

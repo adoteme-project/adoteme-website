@@ -14,7 +14,7 @@ import AuthContext from "@/context/AuthProvider";
 import Button from "@/components/common/Button";
 
 export default function Modal() {
-  const { auth } = useContext(AuthContext);
+  const { auth, logout } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const handleMouseEnter = () => setIsOpen(true);
@@ -29,13 +29,14 @@ export default function Modal() {
       <div className="z-50 w-[240px] h-fit rounded-lg flex flex-col absolute top-5 py-4 right-0 px-4 mt-4 bg-[#FDF6F0] shadow-lg"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
-        <div className="flex flex-row items-center border-b-[1px] border-verde py-1 gap-2">
+        <div className="flex flex-row items-center py-1 gap-2">
           <FontAwesomeIcon
             icon={faCircleUser}
             className="text-[#307299] text-4xl"
           />
-          <h1 className="font-nunito text-1xl">Nome usuário</h1>
+          <h1 className="font-nunito text-1xl">{auth.userData.nome || "Nome"}</h1>
         </div>
+        <hr className="my-2 border-verde-border"/>
         <div className="flex flex-col gap-2 pt-2">
           <div className="flex flex-row items-center gap-4">
             <FontAwesomeIcon icon={faUser} className="text-azul-light " />
@@ -61,12 +62,12 @@ export default function Modal() {
               <FontAwesomeIcon icon={faAngleUp} rotation={90} />
             </Link>
           </div>
-          <div className="flex flex-row items-center gap-4">
+          <div className="flex flex-row items-center gap-4 cursor-pointer" onClick={logout}>
             <FontAwesomeIcon
               icon={faArrowRightFromBracket}
               className="text-vermelho font-bold text-1xl"
               rotation={180}
-            />{" "}
+            />
             Sair
           </div>
         </div>

@@ -12,7 +12,7 @@ const Header = () => {
   const { auth } = useContext(AuthContext);
 
   return (
-    <nav className="bg-branco py-6 w-full flex justify-center h-[20px]">
+    <nav className="bg-branco py-8 w-full flex justify-center h-[20px] shadow-sm">
       <ul className="w-11/12 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <Link className="flex gap-2" to="/">

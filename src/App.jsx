@@ -52,11 +52,12 @@ function App() {
                   <Route path="/pagina-ong/:id" element={<PaginaOng />} />
                   <Route path="/achados" element={<Achados />} />
                   <Route path="/perfil" element={<PerfilUsuario />} />
-                  <Route
-                    path="/perfil-formulario"
-                    element={<FormularioUsuario />}
-                  />
-                  <Route path="/perfil-aplicacao" element={<PerfilAplicacao />} />
+                </Route>
+
+                <Route path="/perfil" element={<UserLayout />}>
+                  <Route path="/perfil/usuario" element={<PerfilUsuario />} />
+                  <Route path="/perfil/formulario" element={<FormularioUsuario />} />
+                  <Route path="/perfil/aplicacao" element={<PerfilAplicacao />} />
                 </Route>
 
                 <Route path="/login" element={<LoginLayout />}>
