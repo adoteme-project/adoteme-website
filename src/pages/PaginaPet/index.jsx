@@ -5,9 +5,9 @@ import Card from '@/components/common/Card';
 import Doacao from '@/components/section/Donation';
 import Avaliacao from '@/components/feature/Rating';
 import { useCardContext } from '@/context/CardProvider';
-import Carousel from '@/components/common/Carrossel';
 import Botao from '@/components/common/Button';
 import { lime } from '@mui/material/colors';
+import Carrosel from '@/components/common/Carousel';
 
 const PaginaPet = () => {
     const { id } = useParams();
@@ -31,6 +31,21 @@ const PaginaPet = () => {
     if (!animal) {
         return <p>Carregando...</p>
     }
+
+    const generatePastelColorFromString = (str) => {
+        let hash = 0;
+        for (let i = 0; i < str.length; i++) {
+            hash = str.charCodeAt(i) + ((hash << 5) - hash);
+        }
+
+        let color = "#";
+        for (let i = 0; i < 3; i++) {
+            const value = ((hash >> (i * 8)) & 0xFF) + 127;
+            color += ("00" + (value % 256).toString(16)).slice(-2);
+        }
+        return color;
+    };
+
 
     return (
         <>
@@ -61,7 +76,17 @@ const PaginaPet = () => {
 
                     {/* Coluna dos Textos */}
                     <div>
-                        <h1 className="text-4xl font-bold bg-[#FFC55E] inline-block px-2 py-1">{animal.nome}</h1>
+                        <h1
+                            className="text-4xl font-bold inline-block px-4 py-1"
+                            style={{
+                                backgroundColor: generatePastelColorFromString(animal.nome),
+                                paddingLeft: "16px",
+                                paddingRight: "200px",
+                                borderRadius: "4px",
+                            }}
+                        >
+                            {animal.nome}
+                        </h1>
                         <p className="text-lg mt-2">{animal.localizacao}</p>
                         <p className="mt-2">Espécie: {animal.especie}</p>
                         <p>Sexo: {animal.sexo}</p>
@@ -89,7 +114,14 @@ const PaginaPet = () => {
                             </div>
                         </div>
                         <p className="mt-4 font-bold text-[#EC5A49]">TAXA DE ADOÇÃO: R${animal.taxaAdocao}</p>
-                        <Botao className="mt-6 bg-green-500 text-white py-2 px-6 rounded-lg" titulo={'Adotar'} color={lime} />
+                        <Botao
+                            className="bg-green-500 text-white py-2 px-6 rounded-lg"
+                            titulo="Adotar"
+                            color="#4C8EB5"
+                            textColor="white"
+                            fontWeight="bold"
+                            onClick={() => console.log("Adotar")}
+                        />
                     </div>
                 </div>
 
@@ -104,7 +136,7 @@ const PaginaPet = () => {
             <section className="mt-10 p-10 bg-gray-100">
                 <h2 className="text-3xl font-bold mb-6 text-center">Sugestão</h2>
                 {sugestoes.length > 0 ? (
-                    <Carousel
+                    <Carrosel
                         items={sugestoes
                             .filter(sugestao => sugestao.tipo === 'animal')
                             .slice(0, 8)
