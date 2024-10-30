@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAdd, faCamera } from "@fortawesome/free-solid-svg-icons";
-import { Controller } from "react-hook-form"; // Import Controller from react-hook-form
+import { faAdd, faCamera, faPen } from "@fortawesome/free-solid-svg-icons";
+import { Controller } from "react-hook-form";
+import { useLocation } from "react-router-dom";
 
 const FormRegisterImage = ({ control }) => {
+  const location = useLocation();
   const [preview, setPreview] = useState(null);
 
   const handleFileChange = (file, onChange) => {
@@ -18,15 +20,24 @@ const FormRegisterImage = ({ control }) => {
     }
 
     setPreview(file ? URL.createObjectURL(file) : null);
-    if(file) {
+    if (file) {
+      console.log(file);
       onChange(file);
     }
   };
 
+  const isProfilePage = location.pathname === "/perfil/usuario";
+
   return (
     <div className="flex flex-col items-center gap-10">
       <div className="relative">
-        <div className="w-72 h-72 bg-cinza rounded-full flex items-center justify-center overflow-hidden">
+        <div
+          className={`${
+            isProfilePage ? "w-40 h-40" : "w-72 h-72"
+          } rounded-full flex items-center justify-center overflow-hidden border-2 ${
+            isProfilePage ? "border-transparent" : "border-cinza"
+          }`}
+        >
           {preview ? (
             <img
               src={preview}
@@ -34,14 +45,18 @@ const FormRegisterImage = ({ control }) => {
               className="object-cover w-full h-full"
             />
           ) : (
-            <FontAwesomeIcon icon={faAdd} />
+            <FontAwesomeIcon icon={faAdd} size="4x" className="text-cinza" />
           )}
         </div>
         <label
           htmlFor="file-input"
-          className="bg-azul-dark text-branco rounded-full py-2 px-3 w-fit absolute top-2 right-6 cursor-pointer"
+          className={`bg-azul-dark text-branco rounded-full py-2 px-3 w-fit absolute cursor-pointer ${
+            isProfilePage
+              ? "bottom-2 right-0 transform -translate-x-1/2"
+              : "top-1 right-8" //
+          }`}
         >
-          <FontAwesomeIcon icon={faCamera} />
+          <FontAwesomeIcon icon={isProfilePage ? faPen : faCamera} />
         </label>
         <Controller
           name="fotoPerfil"

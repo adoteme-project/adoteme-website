@@ -6,7 +6,6 @@ import Doacao from '@/components/section/Donation';
 import Avaliacao from '@/components/feature/Rating';
 import { useCardContext } from '@/context/CardProvider';
 import Botao from '@/components/common/Button';
-import { lime } from '@mui/material/colors';
 import Carrosel from '@/components/common/Carousel';
 
 const PaginaPet = () => {

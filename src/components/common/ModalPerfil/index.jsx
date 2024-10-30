@@ -8,15 +8,17 @@ import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 import { faWpforms } from "@fortawesome/free-brands-svg-icons";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Input from "@/components/common/Input";
 import AuthContext from "@/context/AuthProvider";
 import Button from "@/components/common/Button";
 
-export default function Modal({ isOpen, toggleModal }) {
-  console.log("ModalPerfil isOpen", isOpen);
+export default function Modal() {
   const { auth } = useContext(AuthContext);
-  if (!isOpen) return null;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleMouseEnter = () => setIsOpen(true);
+  const handleMouseLeave = () => setIsOpen(false);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -24,7 +26,9 @@ export default function Modal({ isOpen, toggleModal }) {
 
   return auth?.token ? (
     <>
-      <div className="z-50 w-[240px] h-fit rounded-lg flex flex-col absolute top-5 py-4 px-4 mt-4 bg-[#FDF6F0] shadow-lg">
+      <div className="z-50 w-[240px] h-fit rounded-lg flex flex-col absolute top-5 py-4 right-0 px-4 mt-4 bg-[#FDF6F0] shadow-lg"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}>
         <div className="flex flex-row items-center border-b-[1px] border-verde py-1 gap-2">
           <FontAwesomeIcon
             icon={faCircleUser}
@@ -36,7 +40,7 @@ export default function Modal({ isOpen, toggleModal }) {
           <div className="flex flex-row items-center gap-4">
             <FontAwesomeIcon icon={faUser} className="text-azul-light " />
             Meu perfil
-            <Link to="/perfil" onClick={toggleModal}>
+            <Link to="/perfil/usuario" onClick={() => setIsOpen(false)}>
               <FontAwesomeIcon icon={faAngleUp} rotation={90} />
             </Link>
           </div>
@@ -46,14 +50,14 @@ export default function Modal({ isOpen, toggleModal }) {
               className="text-amarelo"
             />{" "}
             Aplicações
-            <Link to="/perfil-formulario onClick={toggleModal}">
-              <FontAwesomeIcon icon={faAngleUp} rotation={90} />
+            <Link to="/perfil-formulario onClick={toggleModal}" onClick={() => setIsOpen(false)}>
+              <FontAwesomeIcon icon={faAngleUp} rotation={90}/>
             </Link>
           </div>
           <div className="flex flex-row items-center gap-4">
             <FontAwesomeIcon icon={faWpforms} className="text-verde" />
             Formulário
-            <Link to="perfil-formulario onClick={toggleModal}">
+            <Link to="perfil-formulario onClick={toggleModal}" onClick={() => setIsOpen(false)}>
               <FontAwesomeIcon icon={faAngleUp} rotation={90} />
             </Link>
           </div>

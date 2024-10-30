@@ -2,7 +2,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
-const NavItem = ({ icon, label, pathTo, action }) => {
+const NavItem = ({ icon, label, pathTo, action, type }) => {
     return (
         <>
             {action ? (
@@ -19,7 +19,7 @@ const NavItem = ({ icon, label, pathTo, action }) => {
                 </button>
             ) : (
                 <Link
-                    to={`/ong/${pathTo}`}
+                    to={`/${type}${pathTo}`}
                     className='flex items-center w-full p-2 leading-tight transition-all 
                     rounded-full outline-none text-start select-none whitespace-nowrap 
                     bg-amarelo text-branco hover:bg-amarelo-select focus:bg-opacity-80'

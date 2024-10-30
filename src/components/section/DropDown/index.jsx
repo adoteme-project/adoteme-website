@@ -4,7 +4,7 @@ import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 const normalizeString = (str) => 
   str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
-function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange }) {
+function CardList({  filterKey, nome, tamanho, fetchOptions, onFilterChange, selectedValue }) {
   const [optionsList, setOptionsList] = useState([]);
   const [selectUtil, setSelectUtil] = useState("");
 
@@ -22,7 +22,7 @@ function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange }) {
           const response = await fetch(fetchOptions);
           if (!response.ok) throw new Error("Erro ao buscar opcoes de filtro!");
           const cards = await response.json();
-          const options = new Set(cards.map(option => normalizeString(option[filterKey])));
+          const options = new Set(cards.map((option) => normalizeString(option[filterKey])));
           setOptionsList(Array.from(options));
         } catch (error) {
           console.error("Erro ao buscar opções de filtro", error);
@@ -32,8 +32,11 @@ function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange }) {
     };
 
     getFilterOptions();
-
   }, [filterKey, fetchOptions]);
+
+  useEffect(() => {
+    setSelectUtil(selectedValue);
+  }, [selectedValue]);
 
   const handleUtilChange = (event) => {
     const value = event.target.value;

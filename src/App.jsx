@@ -19,6 +19,7 @@ import { CardProvider } from "@/context/CardProvider";
 import { AuthProvider } from "./context/AuthProvider";
 import PrivateRoute from "@/components/wrapper/RotaPrivada";
 import { NotificationProvider } from "./context/NotificationProvider";
+import UserLayout from "./components/layout/UserLayout/index"
 import PerfilUsuario from "./pages/PerfilUsuario";
 import FormularioUsuario from "./pages/PerfilFormulario";
 import PerfilAplicacao from "./pages/PerfilAplicacao";
@@ -48,22 +49,19 @@ function App() {
                 <Route path="/pagina-pet/:id" element={<PaginaPet />} />
                 <Route path="/pagina-ong/:id" element={<PaginaOng />} />
                 <Route path="/achados" element={<Achados />} />
-                <Route path="/perfil" element={<PerfilUsuario />} />
-                <Route
-                  path="/perfil-formulario"
-                  element={<FormularioUsuario />}
-                />
-                <Route path="/perfil-aplicacao" element={<PerfilAplicacao />} />
+              </Route>
+
+              <Route path="/perfil" element={<UserLayout />}>
+                <Route path="/perfil/usuario" element={<PerfilUsuario />}/>
+                <Route path="/perfil/formulario" element={<FormularioUsuario />}/>
+                <Route path="/perfil/aplicacao" element={<PerfilAplicacao />} />
               </Route>
 
               <Route path="/login" element={<LoginLayout />}>
                 <Route path="/login" element={<LoginSelection />} />
                 <Route path="/login/adotante" element={<LoginAdotante />} />
                 <Route path="/login/ong" element={<LoginOng />} />
-                <Route
-                  path="/login/cadastro-adotante"
-                  element={<CadastroAdotante />}
-                />
+                <Route path="/login/cadastro-adotante" element={<CadastroAdotante />}/>
                 <Route path="/login/redefinir" element={<RedefinirAcesso />} />
               </Route>
 
