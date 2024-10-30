@@ -1,13 +1,13 @@
 import logoOng from '@/assets/icons/logo_adotme_nobg.png';
 import NavItem from '@/components/common/NavItem';
-import AuthContext from '@/context/AuthProvider';
+import OngAuthContext from '@/context/AuthOngProvider';
 import { faFileLines } from '@fortawesome/free-regular-svg-icons';
 import { faArrowRightFromBracket, faChartLine, faGear, faPaw } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';
 
 const SidebarOng = () => {
 
-  const { logout } = useContext(AuthContext);
+  const { logout } = useContext(OngAuthContext);
 
   return (
     <div className="h-full flex-[0.2] p-4 bg-ong-color-bg flex flex-col gap-6">

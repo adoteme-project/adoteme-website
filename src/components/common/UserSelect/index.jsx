@@ -13,7 +13,7 @@ const UserSelect = (props) => {
         to={`/login/${props.context}`}
         className={`w-full p-3 text-center 
           ${props.context === "ong" ? "bg-amarelo" : "bg-azul-main"} 
-          rounded-md z-10 absolute bottom-0 font-bold`}
+          rounded-md z-10 absolute bottom-0 font-bold text-branco`}
         preventScrollReset={true}
       >
         {props.context.toUpperCase()}

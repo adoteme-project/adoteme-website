@@ -17,7 +17,7 @@ const petsColumns = [
         type: 'singleSelect',
         valueOptions: ['Sem Aplicação', 'Revisão', 'Aprovado', 'Documentação', 'Adotado'],
         flex: 0.2,
-        editable: true,
+
     },
     {
         field: 'visibilidade',

@@ -1,10 +1,10 @@
 import { useContext } from "react";
 import FormAuth from "../../components/common/FormAuth";
 import { useFormContext } from "react-hook-form";
-import AuthContext from "@/context/AuthProvider";
+import OngAuthContext from "@/context/AuthOngProvider";
 
 const LoginOng = () => {
-  const { login } = useContext(AuthContext);
+  const { login } = useContext(OngAuthContext);
   const methods = useFormContext();
 
   const handleLogin = async (data) => {

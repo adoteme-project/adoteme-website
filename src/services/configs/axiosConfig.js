@@ -24,6 +24,16 @@ const viaCep = axios.create({
   }
 });
 
+const axiosDownload = axios.create({
+  baseURL: "/api",
+  headers: {
+    "Content-Disposition": "attachment;filename=animais.xls",
+    "Content-Type": "application/octet-stream"
+  },
+  responseType: 'blob',
+  withCredentials: true
+})
+
 
 /* Instância para método de login */
 const axiosAuth = axios.create({
@@ -48,7 +58,7 @@ const axiosAuthenticated = axios.create({
 /* Configuração para enviar token no header da instância */
 axiosAuthenticated.interceptors.request.use(
   (config) => {
-      const token = localStorage.getItem("token");
+      const token = localStorage.getItem("adotanteToken");
       if (token) {
           config.headers.Authorization = `Bearer ${token}`;
       }
@@ -57,14 +67,25 @@ axiosAuthenticated.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-const axiosDownload = axios.create({
+const axiosAuthenticatedOng = axios.create({
   baseURL: "/api",
   headers: {
-    "Content-Disposition": "attachment;filename=animais.xls",
-    "Content-Type": "application/octet-stream"
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
   },
-  responseType: 'blob',
-  withCredentials: true
+  withCredentials: true,
 })
 
-export { axiosAuth, axiosAuthenticated, viaCep, api, axiosForm, axiosDownload };
+axiosAuthenticatedOng.interceptors.request.use(
+  (config) => {
+      const token = localStorage.getItem("ongToken");
+      if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+
+export { axiosAuth, axiosAuthenticated, axiosAuthenticatedOng, viaCep, api, axiosForm, axiosDownload };
