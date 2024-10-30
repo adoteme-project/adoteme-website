@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Card = ({ colorBg, data = [], onDoarClick,tipoCard }) => {
+const Card = ({ colorBg, data = [], onDoarClick, tipoCard }) => {
   const [favorito,setFavorito] = useState(false);
   const isPet = tipoCard === 'animal' || data.personalidade?.length > 0;
 

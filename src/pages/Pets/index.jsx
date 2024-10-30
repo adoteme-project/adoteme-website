@@ -11,6 +11,9 @@ import Pagination from "@/components/common/Pagination";
 import Carousel from "@/components/section/Categories";
 import Botao from "@/components/common/Button";
 
+const normalizeString = (str) =>
+  str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : str;
+
 const Pets = () => {
   const { sugestoes } = useCardContext();
   const validItems = sugestoes.filter((item) => item.tipo === "animal");
@@ -29,16 +32,18 @@ const Pets = () => {
 
       Object.keys(filters).forEach((key) => {
         if (filters[key]) {
-          result = result.filter((pet) => pet[key] === filters[key]);
+          result = result.filter((pet) => 
+            pet[key] && normalizeString(pet[key]) === filters[key]
+          );
         }
       });
 
       setFilteredPets(result);
     }
-  }, [sugestoes, filters]);
+  }, [validItems, filters]);
 
   const handleFilterChange = (key, value) => {
-    setFilters((prev) => ({ ...prev, [key]: value }));
+    setFilters((prev) => ({ ...prev, [key]: normalizeString(value) }));
     setDropdownValues((prev) => ({ ...prev, [key]: value }));
   };
 
@@ -64,10 +69,10 @@ const Pets = () => {
       <div className="flex flex-row w-full justify-evenly gap-4 px-4">
         <div className="flex flex-row w-8/12 gap-4 items-center">
           <DropDown 
-            filterKey="tamanho" 
-            nome="Tamanho" 
+            filterKey="porte" 
+            nome="Porte" 
             tamanho={200} 
-            fetchOptions={null} 
+            fetchOptions={"/petCard.json"} 
             onFilterChange={handleFilterChange} 
             selectedValue={dropdownValues.tamanho} 
           />
@@ -75,7 +80,7 @@ const Pets = () => {
             filterKey="sexo" 
             nome="Sexo" 
             tamanho={200} 
-            fetchOptions={null} 
+            fetchOptions={"/petCard.json"} 
             onFilterChange={handleFilterChange} 
             selectedValue={dropdownValues.sexo}
           />
@@ -112,7 +117,7 @@ const Pets = () => {
           <GridLayout items={currentItems} titulo="Animal" tipoCard="animal" />
         )}
         itemsPerPageOptions={[2, 4, 6]} 
-         itemLabel="Animais"
+        itemLabel="Animais"
       />
 
       <Doacao />

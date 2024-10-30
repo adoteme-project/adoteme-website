@@ -1,25 +1,28 @@
 import { useState, useEffect } from "react";
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange, selectedValue }) {
+const normalizeString = (str) => 
+  str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+function CardList({  filterKey, nome, tamanho, fetchOptions, onFilterChange, selectedValue }) {
   const [optionsList, setOptionsList] = useState([]);
   const [selectUtil, setSelectUtil] = useState("");
 
   const optionsMap = {
-    tamanho: ["Pequeno", "Médio", "Grande"],
+    porte: ["Pequeno", "Médio", "Grande"],
     sexo: ["Macho", "Fêmea"],
   };
 
   useEffect(() => {
     const getFilterOptions = async () => {
-      if (filterKey === "tamanho" || filterKey === "sexo") {
+      if (filterKey === "porte" || filterKey === "sexo") {
         setOptionsList(optionsMap[filterKey]);
       } else {
         try {
           const response = await fetch(fetchOptions);
           if (!response.ok) throw new Error("Erro ao buscar opcoes de filtro!");
           const cards = await response.json();
-          const options = new Set(cards.map((option) => option[filterKey]));
+          const options = new Set(cards.map((option) => normalizeString(option[filterKey])));
           setOptionsList(Array.from(options));
         } catch (error) {
           console.error("Erro ao buscar opções de filtro", error);
@@ -38,7 +41,7 @@ function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange, sele
   const handleUtilChange = (event) => {
     const value = event.target.value;
     setSelectUtil(value);
-    onFilterChange(filterKey, value);
+    onFilterChange(filterKey, normalizeString(value));
   };
 
   return (
@@ -62,7 +65,7 @@ function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange, sele
           {optionsList.length > 0 ? (
             optionsList.map((option, index) => (
               <MenuItem key={index} value={option}>
-                {option}
+                {option.charAt(0).toUpperCase() + option.slice(1)}
               </MenuItem>
             ))
           ) : (

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAdd, faCamera, faPen } from "@fortawesome/free-solid-svg-icons";
-import { faUserCircle } from "@fortawesome/free-regular-svg-icons"; 
 import { Controller } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 
