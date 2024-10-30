@@ -6,7 +6,6 @@ const Aplicacao = () => {
 
     return (
         <section className="flex flex-row">
-            <SideBarUsuario />
             <div className="w-full py-20 px-16">
                 <h1 className="text-center font-nunito font-medium text-3xl pb-16">Minhas Aplicações</h1>
                 <div className="w-full grid grid-cols-4 gap-8">

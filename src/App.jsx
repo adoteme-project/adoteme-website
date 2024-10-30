@@ -19,6 +19,7 @@ import { CardProvider } from "@/context/CardProvider";
 import { AuthProvider } from "./context/AuthProvider";
 import PrivateRoute from "@/components/wrapper/RotaPrivada";
 import { NotificationProvider } from "./context/NotificationProvider";
+import UserLayout from "./components/layout/UserLayout/index"
 import PerfilUsuario from "./pages/PerfilUsuario";
 import FormularioUsuario from "./pages/PerfilFormulario";
 import PerfilAplicacao from "./pages/PerfilAplicacao";
