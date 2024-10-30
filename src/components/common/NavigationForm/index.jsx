@@ -14,7 +14,7 @@ const NavigationForm = ({ prevStep, nextStep, step, totalSteps, handleSubmit }) 
       {prevStep && (
         <button
           type="button"
-          className="bg-amarelo px-4 py-3 rounded-md"
+          className="bg-amarelo px-4 py-3 rounded-md text-branco"
           onClick={prevStep}
         >
           Voltar
@@ -23,7 +23,7 @@ const NavigationForm = ({ prevStep, nextStep, step, totalSteps, handleSubmit }) 
 
       <button
         type="button"
-        className={`px-4 py-3 rounded-md ${isLastStep ? "bg-verde" : "bg-amarelo"}`}
+        className={`px-4 py-3 rounded-md text-branco ${isLastStep ? "bg-verde" : "bg-amarelo"}`}
         onClick={handleNextClick}
       >
         {isLastStep ? "Enviar" : "Avançar"}

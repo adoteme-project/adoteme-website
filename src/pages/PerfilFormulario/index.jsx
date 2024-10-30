@@ -42,9 +42,9 @@ const PerfilUsuario = () => {
   return (
     <section className="flex justify-center w-full">
       <div className="flex flex-col items-center w-8/12">
-        <div className="flex items-center justify-between w-full px-20">
+        <div className="flex items-center justify-between w-full">
           <h1 className="text-3xl font-nunito py-10 text-azul-dark font-medium text-center">
-            Meu perfil
+            Meu formulário
           </h1>
           {!editando && (
             <Botao

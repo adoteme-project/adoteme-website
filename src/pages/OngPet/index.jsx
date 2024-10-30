@@ -2,50 +2,80 @@ import InputOng from "@/components/common/InputOng";
 import TableOng from "@/components/common/TableOng";
 import PageTitle from "@/components/layout/PageTitle";
 import SearchLayout from "@/components/layout/SearchLayout";
+import OngAuthContext from "@/context/AuthOngProvider";
 import { petsColumns } from "@/mocks/tableColumns";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { getPetsOng } from "@/services/ongAPI";
+import { exportacaoPets } from "@/services/onguserAPI";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const OngPet = () => {
   const [dataPets, setDataPets] = useState([]);
+  const [filteredPets, setFilteredPets] = useState([]);
+
+  const { authOng } = useContext(OngAuthContext);
 
   useEffect(() => {
-    const abortController = new AbortController();
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('/petsOng.json', { signal: abortController.signal });
-        const data = response.data;
+    if (authOng?.userData?.ongId) {
+      const fetchData = async () => {
+        try {
+          const response = await getPetsOng(authOng.userData.ongId);
+          const data = response.data;
 
-        const dataFormat = data.map((pet) => ({
-          ...pet,
-          visibilidade: pet.visibilidade ? 'Visível' : 'Escondido',
-        }));
+          console.log(response.data);
 
-        setDataPets(dataFormat);
-      } catch (error) {
-        if (error.name === 'AbortError') return;
-        console.error('Erro ao buscar os dados da API', error);
-      }
-    };
+          const dataFormat = data.map((pet) => ({
+            ...pet,
+            visibilidade: pet.visibilidade ? "Visível" : "Escondido",
+          }));
 
-    fetchData();
+          setDataPets(dataFormat);
+          setFilteredPets(dataFormat);
+        } catch (error) {
+          if (error.name === "AbortError") return;
+          console.error("Erro ao buscar os dados da API", error);
+        }
+      };
 
-    return () => {
-      abortController.abort();
-    };
-  }, []);
+      fetchData();
+    }
+  }, [authOng?.userData?.ongId]);
+
+  const exportarPets = async (id) => {
+    try {
+      const response = await exportacaoPets(id);
+      const href = URL.createObjectURL(response.data);
+
+      const link = document.createElement("a");
+      link.href = href;
+      link.setAttribute("download", "pets.csv");
+      document.body.appendChild(link);
+      link.click();
+
+      document.body.removeChild(link);
+      URL.revokeObjectURL(href);
+    } catch (err) {
+      console.log("Não foi possível realizar o download, " + err);
+    }
+  };
 
   return (
     <>
       <PageTitle title="Pets" actionName="+ Adicionar pet">
-        <button className="font-nunito px-3 py-2 rounded-lg bg-azul-main text-branco">Exportar registros</button>
-        <Link className="font-nunito px-3 py-2 rounded-lg bg-amarelo-select text-branco">+ Adicionar pet</Link>
+        <button
+          className="font-nunito px-3 py-2 rounded-lg bg-azul-main text-branco"
+          onClick={() => exportarPets(authOng?.userData?.ongId)}
+        >
+          Exportar registros
+        </button>
+        <Link className="font-nunito px-3 py-2 rounded-lg bg-amarelo-select text-branco">
+          + Adicionar pet
+        </Link>
       </PageTitle>
-      <SearchLayout numberResults={dataPets.length} registerName="Pets">
-        <InputOng />
+      <SearchLayout numberResults={filteredPets.length} registerName="Pets">
+        <InputOng setTableData={setFilteredPets} originalData={dataPets} />
       </SearchLayout>
-      <TableOng rows={dataPets} columns={petsColumns} />
+      <TableOng rows={filteredPets} columns={petsColumns} />
     </>
   );
 };

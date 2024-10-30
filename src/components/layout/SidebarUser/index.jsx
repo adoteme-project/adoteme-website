@@ -7,14 +7,14 @@ import NavItem from "@/components/common/NavItem";
 import { useContext } from "react";
 
 const SideBarUsuario = () => {
-  const { logout } = useContext(AuthContext);
+  const { logout, auth } = useContext(AuthContext);
 
   return (
     <div className="h-screen flex-[0.2] p-4 bg-ong-color-bg flex flex-col gap-6">
       <div className="flex justify-center items-center gap-4">
         <img src="" alt="Imagem usuario" className="w-14 h-14 rounded-full " />
         <h4 className="font-nunito text-azul-main font-bold text-lg">
-          USUARIO
+          {auth?.userData?.nome || 'Nome'}
         </h4>
       </div>
       <nav className="flex flex-col gap-4 font-nunito">

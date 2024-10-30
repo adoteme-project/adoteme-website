@@ -49,14 +49,14 @@ const FormAuth = ({
         <div className="flex justify-between gap-8">
           <button
             type="submit"
-            className="w-full p-3 text-center bg-verde rounded-md font-bold"
+            className="w-full p-3 text-center bg-verde rounded-md font-bold text-branco"
           >
             {buttonLabel}
           </button>
           {linkTo && linkLabel && (
             <Link
               to={linkTo}
-              className="w-full p-3 text-center bg-amarelo rounded-md font-bold"
+              className="w-full p-3 text-center bg-amarelo rounded-md font-bold text-branco"
             >
               {linkLabel}
             </Link>

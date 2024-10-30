@@ -75,7 +75,7 @@
       step: 2,
       formGroups: [
         {
-          title: "Perguntas sobre o usuário",
+          title: "Formulário de Adoção",
           column: 1,
           radioControl: [
             {

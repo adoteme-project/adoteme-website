@@ -3,18 +3,18 @@ import SidebarOng from "../SidebarOng";
 import HeaderOng from "../HeaderOng";
 import BreadCrumbOng from "@/components/common/BreadCrumbOng";
 import { useContext } from "react";
-import AuthContext from "@/context/AuthProvider";
 import { translateCargo } from "@/utils/propsTranslate";
+import OngAuthContext from "@/context/AuthOngProvider";
 
 const OngLayout = () => {
 
-  const { auth } = useContext(AuthContext);
+  const { authOng } = useContext(OngAuthContext);
 
   const userInfo = {
-    nome: auth.userData.nome,
+    nome: authOng?.userData?.nome || 'Nome',
     image: "https://res.cloudinary.com/dv5mhhq0h/image/upload/v1728944509/lonarayeyge3u5bbgrog.jpg",
-    cargo: translateCargo(auth.userData.role)
-  }
+    cargo: authOng ? translateCargo(authOng.userData?.role) : 'Cargo',
+  };
 
   return (
     <div className="w-full flex h-svh max-h-svh">

@@ -9,15 +9,15 @@ const petsColumns = [
     { field: 'nome', headerName: 'Nome', flex: 0.2, },
     { field: 'especie', headerName: 'Espécie', flex: 0.1, },
     { field: 'raca', headerName: 'Raça', flex: 0.2, },
-    { field: 'taxa', headerName: 'Taxa', flex: 0.1, },
-    { field: 'dataDeEntrada', headerName: 'Data de Entrada', flex: 0.2, },
+    { field: 'taxaAdocao', headerName: 'Taxa', flex: 0.1, },
+    { field: 'dataEntrada', headerName: 'Data de Entrada', flex: 0.2, },
     {
         field: 'situacao',
         headerName: 'Situação',
         type: 'singleSelect',
         valueOptions: ['Sem Aplicação', 'Revisão', 'Aprovado', 'Documentação', 'Adotado'],
         flex: 0.2,
-        editable: true,
+
     },
     {
         field: 'visibilidade',

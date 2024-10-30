@@ -2,15 +2,16 @@ import { createContext, useEffect, useState } from "react";
 import { login as loginService } from "@/services/authAPI";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { getUserData } from "@/services/adotanteAPI";
-import { axiosAuth, axiosAuthenticated } from "@/services/configs/axiosConfig";
+import { axiosAuth, axiosAuthenticatedOng } from "@/services/configs/axiosConfig";
+import { getOngUserData } from "@/services/onguserAPI";
 
-const AuthContext = createContext();
+const OngAuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-    const [auth, setAuth] = useState({
-        token: localStorage.getItem("adotanteToken") || null,
+export const OngAuthProvider = ({ children }) => {
+    const [authOng, setAuthOng] = useState({
+        token: localStorage.getItem("ongToken") || null,
         userData: null,
+        role: localStorage.getItem("role") || null,
     });
 
     const navigate = useNavigate();
@@ -22,19 +23,21 @@ export const AuthProvider = ({ children }) => {
             if (response.status === 401) {
                 toast.error("Erro ao realizar o login! Verifique suas credenciais.");
             } else {
-                const { token } = response.data;
+                const { token, role } = response.data;
 
-                setAuth((prevAuth) => ({
+                setAuthOng((prevAuth) => ({
                     ...prevAuth,
                     token,
+                    role
                 }));
 
                 toast.success("Login realizado com sucesso!");
-                localStorage.setItem("adotanteToken", token);
+                localStorage.setItem("ongToken", token);
+                localStorage.setItem("role", role);
 
-                await retriveUserData("adotantes");
+                await retriveUserData("ongusers");
 
-                navigate("/")
+                navigate("/ong/dashboard")
             }
 
         } catch (error) {
@@ -48,12 +51,15 @@ export const AuthProvider = ({ children }) => {
 
     const retriveUserData = async (contextType) => {
         try {
-            const response = await getUserData(contextType);
+            const response = await getOngUserData(contextType);
+
+            const { role } = response.data; 
 
 
-            setAuth((prevAuth) => ({
+            setAuthOng((prevAuth) => ({
                 ...prevAuth,
                 userData: response.data,
+                role: role,
             }));
         } catch (error) {
             console.error("Erro ao buscar informações do usuário", error);
@@ -62,8 +68,9 @@ export const AuthProvider = ({ children }) => {
     };
 
     const logout = () => {
-        setAuth({ token: null, userData: null });
-        localStorage.removeItem("adotanteToken");
+        setAuthOng({ token: null, userData: null });
+        localStorage.removeItem("ongToken");
+        localStorage.removeItem("role");
         navigate("/login");
     };
 
@@ -75,14 +82,14 @@ export const AuthProvider = ({ children }) => {
                 throw new Error("No refresh token available");
             }
 
-            const { data } = await axiosAuthenticated.post("/login/refresh", { refreshToken });
+            const { data } = await axiosAuthenticatedOng.post("/login/refresh", { refreshToken });
             const { accessToken, refreshToken: newRefreshToken } = data;
 
 
             localStorage.setItem("token", accessToken);
             localStorage.setItem("refreshToken", newRefreshToken);
 
-            setAuth((prevAuth) => ({
+            setAuthOng((prevAuth) => ({
                 ...prevAuth,
                 token: accessToken,
             }));
@@ -95,12 +102,12 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    axiosAuthenticated.interceptors.response.use(
+    axiosAuthenticatedOng.interceptors.response.use(
         (response) => response,
         async (error) => {
             const originalRequest = error.config;
 
-            if (error.response.status === 401 && auth.token && !originalRequest._retry) {
+            if (error.response.status === 401 && authOng.token && !originalRequest._retry) {
                 originalRequest._retry = true;
 
                 try {
@@ -120,22 +127,22 @@ export const AuthProvider = ({ children }) => {
 
 
     useEffect(() => {
-        const token = localStorage.getItem("adotanteToken");
+        const token = localStorage.getItem("ongToken");
 
-        if (token && !auth.token) {
-            setAuth((prev) => ({ ...prev, token }));
+        if (token && !authOng.token) {
+            setAuthOng((prev) => ({ ...prev, token }));
         }
 
-        if (auth.token && !auth.userData) {
-            retriveUserData("adotantes");
+        if (authOng.token && !authOng.userData) {
+            retriveUserData("ongusers");
         }
-    }, [auth.token, auth.userData]);
+    }, [authOng.token, authOng.userData]);
 
     return (
-        <AuthContext.Provider value={{ auth, setAuth, login, logout }}>
+        <OngAuthContext.Provider value={{ authOng, setAuthOng, login, logout }}>
             {children}
-        </AuthContext.Provider>
+        </OngAuthContext.Provider>
     );
 };
 
-export default AuthContext;
+export default OngAuthContext;
