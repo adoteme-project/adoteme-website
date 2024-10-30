@@ -1,12 +1,14 @@
 import Botao from "@/components/common/Button";
+import AuthContext from "@/context/AuthProvider";
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Card = ({ colorBg, data = [], onDoarClick, tipoCard }) => {
-  const [favorito,setFavorito] = useState(false);
+  const { auth } = useContext(AuthContext);
+  const [favorito, setFavorito] = useState(false);
   const isPet = tipoCard === 'animal' || data.personalidade?.length > 0;
 
   const handleFavoriteClick = () => {
@@ -14,7 +16,7 @@ const Card = ({ colorBg, data = [], onDoarClick, tipoCard }) => {
   }
 
   return (
-    <div className="w-[41vw] h-[50.59vh] bg-beje rounded-lg grid grid-cols-2 gap-4 px-5 py-3 mb-5">
+    <div className="w-[41vw]  bg-beje rounded-lg grid grid-cols-2 gap-4 px-5 py-3 mb-5">
       <div className="h-[41.88vh] flex flex-col justify-center items-center py-4">
         <img
           src={data.imagem}
@@ -57,25 +59,26 @@ const Card = ({ colorBg, data = [], onDoarClick, tipoCard }) => {
             </>
           )}
 
-          {isPet ? ( 
+          {isPet ? (
             <>
-            <div className="flex flex-row justify-between items-center">
-              <Link to={`/pagina-pet/${data.id}`}>
-                <Botao
-                  textColor="#FFFFFF"
-                  color="#4C8EB5"
-                  tamanho="150"
-                  altura="40"
-                  nome="Ver mais"
-                  titulo={isPet ? "Saiba mais" : "Ver mais"}
-                />
-              </Link>
-              <FontAwesomeIcon
-                icon={favorito ? faHeartSolid : faHeartRegular}
-                className="text-2xl cursor-pointer text-vermelho"
-                onClick={handleFavoriteClick}
-              />
-            </div>
+              <div className="flex flex-row justify-between items-center">
+                <Link to={`/pagina-pet/${data.id}`}>
+                  <Botao
+                    textColor="#FFFFFF"
+                    color="#4C8EB5"
+                    tamanho="150"
+                    altura="40"
+                    nome="Ver mais"
+                    titulo={isPet ? "Saiba mais" : "Ver mais"}
+                  />
+                </Link>
+                {auth.token && (<FontAwesomeIcon
+                  icon={favorito ? faHeartSolid : faHeartRegular}
+                  className="text-2xl cursor-pointer text-vermelho"
+                  onClick={handleFavoriteClick}
+                />)}
+
+              </div>
             </>
           ) : (
             <div className="flex gap-2">

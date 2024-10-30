@@ -34,7 +34,7 @@ export default function Modal() {
             icon={faCircleUser}
             className="text-[#307299] text-4xl"
           />
-          <h1 className="font-nunito text-1xl">{auth.userData.nome || "Nome"}</h1>
+          <h1 className="font-nunito text-1xl">{auth?.userData?.nome || "Nome"}</h1>
         </div>
         <hr className="my-2 border-verde-border"/>
         <div className="flex flex-col gap-2 pt-2">
