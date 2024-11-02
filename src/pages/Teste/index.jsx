@@ -9,7 +9,7 @@ const Teste = () => {
   return (
     <>
       <div className="w-[90%] ml-10 mt-10">
-        <MultiStepForm currentStep={1}/>
+        <MultiStepForm currentStep={2}/>
         <button onClick={logout} className="bg-azul-main p-4 text-branco">
           Logout
         </button>

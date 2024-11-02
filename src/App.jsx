@@ -71,12 +71,12 @@ function App() {
                   <Route path="/login/redefinir" element={<RedefinirAcesso />} />
                 </Route>
 
-                <Route path="/teste" element={<PrivateRoute userType="adotante" />}>
+               {/*  <Route path="/teste" element={<PrivateRoute userType="adotante" />}> */}
                   <Route path="/teste" element={<Teste />}>
                     <Route path="/teste/pet-images" element={<PetsImagesStep />} />
                     <Route path="/teste/pet-informacoes" element={<PetInfoStep />} />
                   </Route>
-                </Route>
+               {/*  </Route> */}
 
                 <Route path="/ong" element={<PrivateRoute userType="ong" allowedRoles={['ADMIN', 'MODERATOR', 'USER']} />}>
                   <Route element={<OngLayout />}>
