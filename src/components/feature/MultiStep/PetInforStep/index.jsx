@@ -83,7 +83,7 @@ const PetInfoStep = () => {
       <div className="w-full flex justify-center">
         <nav className="w-[25%] flex justify-center gap-8">
           <Link to="/teste/pet-images" className="bg-amarelo-select px-4 py-3 text-center rounded-md text-branco w-full"> Voltar </Link>
-          <Link to="/teste/pet-informacoes" className="bg-verde px-4 py-3 rounded-md text-center text-branco w-full"> Continuar </Link>
+          <Link to="/teste/pet-taxa" className="bg-verde px-4 py-3 rounded-md text-center text-branco w-full"> Continuar </Link>
         </nav>
       </div>
     </div>

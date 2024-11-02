@@ -33,6 +33,7 @@ import OngConfiguracoes from "./pages/OngConfiguracoes";
 import PetsImagesStep from "./components/feature/MultiStep/PetImagesStep";
 import PetInfoStep from "./components/feature/MultiStep/PetInforStep";
 import { OngAuthProvider } from "./context/AuthOngProvider";
+import TaxaStep from "./components/feature/MultiStep/TaxaStep";
 
 function App() {
   return (
@@ -75,6 +76,7 @@ function App() {
                   <Route path="/teste" element={<Teste />}>
                     <Route path="/teste/pet-images" element={<PetsImagesStep />} />
                     <Route path="/teste/pet-informacoes" element={<PetInfoStep />} />
+                    <Route path="/teste/pet-taxa" element={<TaxaStep/>}/>
                   </Route>
                {/*  </Route> */}
 
