@@ -1,0 +1,23 @@
+{
+    "usuario_id": 1,
+    "favoritos_animais": [
+        {
+            "animal_id": 1,
+            "nome": "Max",
+            "idade": 3,
+            "especie": "Cachorro",
+            "sexo": "Macho",
+            "porte": "Grande",
+            "distancia": "5km"
+        },
+        {
+            "animal_id": 2,
+            "nome": "Luna",
+            "idade": 2,
+            "especie": "Gato",
+            "sexo": "Fêmea",
+            "porte": "Pequeno",
+            "distancia": "3km"
+        }
+    ]
+}

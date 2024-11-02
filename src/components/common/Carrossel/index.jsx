@@ -12,7 +12,7 @@ const Carousel = ({ items, renderItem, slidesPerView = 3, spaceBetween = 10 }) =
             slidesPerView={slidesPerView}
             navigation
             pagination={{ clickable: true }}
-            className='py-5'
+            className='py-5 w-[90%]'
         >
             {items.map((item, index) => (
                 <SwiperSlide key={index}>

@@ -21,7 +21,7 @@ const Carousel = (props) => {
 
     const carregarOngs = async () => {
         try {
-            const response = await fetch('/ongs.json');
+            const response = await fetch('http://localhost:8080/ongs/com-dados-bancarios');
             const data = await response.json();
             setOngs(data);
         } catch (error) {

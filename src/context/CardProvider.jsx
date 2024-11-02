@@ -9,19 +9,19 @@ export const CardProvider = ({ children }) => {
     useEffect(() => {
         const fetchDados = async () => {
             try {
-                const responseAnimais = await axios.get('/petCard.json', {
+                const responseAnimais = await axios.get('http://localhost:8080/animais/todos-animais-com-personalidade/', {
                     headers: {
                         'Content-Type': 'application/json',
                     },
                 });
 
-                const responseOngs = await axios.get('/ongs.json', {
+                const responseOngs = await axios.get('http://localhost:8080/ongs/com-dados-bancarios', {
                     headers: {
                         'Content-Type': 'application/json',
                     },
                 });
 
-                const dadosCombinados = [
+                const dadosCombinados = [   
                     ...responseAnimais.data.map(animal => ({ ...animal, tipo: 'animal' })),
                     ...responseOngs.data.map(ong => ({ ...ong, tipo: 'ong' }))
                 ];

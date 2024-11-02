@@ -21,10 +21,9 @@ const Categorias = () => {
     useEffect(() => {
         const fetchAnimais = async () => {
             try {
-                const response = await fetch('/petCard.json');
+                const response = await fetch('http://localhost:8080/animais/todos-animais-com-personalidade/');
                 const data = await response.json();
 
-                // Normalizar as chaves do objeto personalidade para minúsculas
                 const animaisNormalizados = data.map(animal => ({
                     ...animal,
                     personalidade: Object.fromEntries(

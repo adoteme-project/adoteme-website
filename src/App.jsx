@@ -33,6 +33,8 @@ import OngConfiguracoes from "./pages/OngConfiguracoes";
 import PetsImagesStep from "./components/feature/MultiStep/PetImagesStep";
 import PetInfoStep from "./components/feature/MultiStep/PetInforStep";
 import { OngAuthProvider } from "./context/AuthOngProvider";
+import FavoritosAnimais from "./pages/AnimaisFavoritos";
+import FavoritosOngs from "./pages/OngsFavoritos";
 
 function App() {
   return (
@@ -52,6 +54,8 @@ function App() {
                   <Route path="/pagina-ong/:id" element={<PaginaOng />} />
                   <Route path="/achados" element={<Achados />} />
                   <Route path="/perfil" element={<PerfilUsuario />} />
+                  <Route path="/animais-favoritos" element={<FavoritosAnimais />} />
+                  <Route path="/ongs-favoritos" element={<FavoritosOngs />} />
                 </Route>
 
                 <Route path="/perfil" element={<UserLayout />}>
