@@ -17,7 +17,11 @@ const BoxCategoria = ({ id, color, imagem, nome }) => {
       <h1 className="text-left font-robot text-2xl px-3 py-4 font-semibold">
         {nome}
       </h1>
-      <img src={imagem} alt="Imagem da Categoria" className="w-full h-auto object-cover" />
+      <img
+        src={imagem}
+        alt="Imagem da Categoria"
+        className="w-3/4 h-auto mx-auto object-contain"
+      />
     </div>
   );
 };

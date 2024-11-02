@@ -7,7 +7,6 @@ const BoxOng = ({ id, color, imagem, nome }) => {
     navigate(`/pagina-ong/${id}`);
   };
 
-
   return (
     <div
       id={id}
@@ -18,7 +17,11 @@ const BoxOng = ({ id, color, imagem, nome }) => {
       <h1 className="text-left font-robot text-2xl px-3 py-4 font-semibold">
         {nome}
       </h1>
-      <img src={imagem} alt="Imagem da ONG" className="w-full h-auto object-cover" />
+      <img 
+        src={imagem} 
+        alt="Imagem da ONG" 
+        className="w-3/4 h-auto mx-auto object-contain" 
+      />
     </div>
   );
 };
