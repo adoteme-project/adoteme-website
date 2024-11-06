@@ -25,7 +25,7 @@ const PetsImagesStep = () => {
       </div>
       <nav className="w-full flex justify-center">
         <Link 
-        to={'/teste/pet-informacoes'}
+        to={'/ong/cadastrar-pet/abrigo/abrigo-informacoes'}
         className="bg-verde px-4 py-3 rounded-md text-branco">
           Continuar
         </Link>

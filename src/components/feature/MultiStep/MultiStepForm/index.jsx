@@ -1,7 +1,16 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Pipeline from "../Pipeline";
 
-const MultiStepForm = ({ currentStep }) => {
+const MultiStepForm = () => {
+  const location = useLocation();
+  
+  const steps = {
+    "/ong/cadastrar-pet/abrigo/abrigo-imagens": 1,
+    "/ong/cadastrar-pet/abrigo/abrigo-informacoes": 2,
+    "/ong/cadastrar-pet/abrigo/abrigo-taxa": 3,
+  };
+  const currentStep = steps[location.pathname] || 1;
+
   return (
     <div className="w-full border border-amarelo-select rounded-2xl">
       <Pipeline currentStep={currentStep} />

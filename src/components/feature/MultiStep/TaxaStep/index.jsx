@@ -39,7 +39,7 @@ const TaxaStep = () => {
             </div>
             <div className="w-full flex justify-center">
                 <nav className="w-[25%] flex justify-center gap-8">
-                    <Link to="/teste/pet-informacoes" className="bg-amarelo-select px-4 py-3 text-center rounded-md text-branco w-full"> Voltar </Link>
+                    <Link to="/ong/cadastrar-pet/abrigo/abrigo-informacoes" className="bg-amarelo-select px-4 py-3 text-center rounded-md text-branco w-full"> Voltar </Link>
                     <Link to="/ong/pets" className="bg-verde px-4 py-3 rounded-md text-center text-branco w-full"> Finalizar </Link>
                 </nav>
             </div>

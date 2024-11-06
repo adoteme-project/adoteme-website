@@ -68,7 +68,7 @@ const OngPet = () => {
         >
           Exportar registros
         </button>
-        <Link className="font-nunito px-3 py-2 rounded-lg bg-amarelo-select text-branco">
+        <Link to={"/ong/cadastrar-pet"} className="font-nunito px-3 py-2 rounded-lg bg-amarelo-select text-branco">
           + Adicionar pet
         </Link>
       </PageTitle>
