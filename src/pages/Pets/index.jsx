@@ -5,7 +5,7 @@ import Doacao from "@/components/section/Donation";
 import { useCardContext } from '@/context/CardProvider';
 import { useEffect, useState } from "react";
 import GridLayout from "@/components/layout/Grid";
-import { SearchInput } from "@/components/common/SearchInput";
+// import { SearchInput } from "@/components/common/SearchInput";
 import BannerImage from "@/assets/banner-pets.svg";
 import Pagination from "@/components/common/Pagination";
 import Carousel from "@/components/section/Categories";
@@ -47,18 +47,18 @@ const Pets = () => {
     setDropdownValues((prev) => ({ ...prev, [key]: value }));
   };
 
-  const handleSearchChange = (filteredPets) => {
-    setFilteredPets(filteredPets);
-  };
+  // const handleSearchChange = (filteredPets) => {
+  //   setFilteredPets(filteredPets);
+  // };
 
   const handleClearFilters = () => {
-    setFilters({}); // Limpa o estado dos filtros
-    setDropdownValues({
-      tamanho: "",
+    setFilters({});
+    setDropdownValues({   
+      porte: "",
       sexo: "",
       especie: "",
     });
-    setFilteredPets(validItems); // Reseta a lista de pets filtrados
+    setFilteredPets(validItems); 
   };
 
   return (
@@ -68,19 +68,19 @@ const Pets = () => {
       <Carousel titulo="Categorias" tipo="categorias" />
       <div className="flex flex-row w-full justify-evenly gap-4 px-4">
         <div className="flex flex-row w-8/12 gap-4 items-center">
-          <DropDown 
+{/*           <DropDown 
             filterKey="porte" 
             nome="Porte" 
             tamanho={200} 
-            fetchOptions={"/petCard.json"} 
+            fetchOptions={"http://localhost:8080/animais/todos-animais-com-personalidade/"} 
             onFilterChange={handleFilterChange} 
-            selectedValue={dropdownValues.tamanho} 
+            selectedValue={dropdownValues.porte} 
           />
           <DropDown 
             filterKey="sexo" 
             nome="Sexo" 
             tamanho={200} 
-            fetchOptions={"/petCard.json"} 
+            fetchOptions={"http://localhost:8080/animais/todos-animais-com-personalidade/"} 
             onFilterChange={handleFilterChange} 
             selectedValue={dropdownValues.sexo}
           />
@@ -88,7 +88,7 @@ const Pets = () => {
             filterKey="especie" 
             nome="Espécie" 
             tamanho={200} 
-            fetchOptions={"/petCard.json"} 
+            fetchOptions={"http://localhost:8080/animais/todos-animais-com-personalidade/"} 
             onFilterChange={handleFilterChange} 
             selectedValue={dropdownValues.especie}
           />
@@ -98,9 +98,9 @@ const Pets = () => {
             titulo="Limpar filtro" 
             onClick={handleClearFilters} 
             color="#FFA607"
-          />
+          /> */}
         </div>
-        <div className="w-[200px]">
+        {/* <div className="w-[200px]">
           <SearchInput 
             data={validItems} 
             placeholder="Cidade" 
@@ -108,7 +108,7 @@ const Pets = () => {
             onSearch={handleSearchChange} 
             filterKey="nome" 
           />
-        </div>
+        </div> */}
       </div>
 
       <Pagination

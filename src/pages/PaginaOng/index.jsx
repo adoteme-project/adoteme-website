@@ -3,14 +3,13 @@ import Banner from "@/components/section/Banner";
 import BreadCrumb from "@/components/common/BreadCrumb";
 import { useEffect, useState } from "react";
 import GridLayout from "@/components/layout/Grid";
-import { SearchInput } from "@/components/common/SearchInput";
 import Pagination from "@/components/common/Pagination";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import imgTeste from "@/assets/pexels-chevanon-1108099.jpg";
+import imgBanner from "@/assets/banner-ong.svg";
 
 const normalizeString = (str) =>
-  str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : str;
+    str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : str;
 
 const PaginaOng = () => {
     const { id } = useParams();
@@ -23,12 +22,16 @@ const PaginaOng = () => {
     useEffect(() => {
         const fetchOng = async () => {
             try {
-                const response = await axios.get('/animaisOngs.json');
-                const ongData = response.data.ong;
-                if (ongData.id === Number(id)) {
+                const response = await axios.get('http://localhost:8080/ongs/listagem-ongs-com-animais-dados-bancarios');
+                const ongsData = response.data;
+
+                const ongData = ongsData.find(ong => ong.id === Number(id));
+                if (ongData) {
                     setOng(ongData);
                     setAnimais(ongData.animais || []);
                     setFilteredAnimals(ongData.animais || []);
+                } else {
+                    console.error(`ONG com id ${id} não encontrada`);
                 }
             } catch (error) {
                 console.error("Erro ao buscar dados da ONG", error);
@@ -38,13 +41,14 @@ const PaginaOng = () => {
         fetchOng();
     }, [id]);
 
+
     useEffect(() => {
         if (animais.length > 0) {
             let result = [...animais];
 
             Object.keys(filters).forEach((key) => {
                 if (filters[key]) {
-                    result = result.filter((animal) => 
+                    result = result.filter((animal) =>
                         animal[key] && normalizeString(animal[key]) === filters[key]
                     );
                 }
@@ -58,9 +62,6 @@ const PaginaOng = () => {
         setFilters((prev) => ({ ...prev, [key]: normalizeString(value) }));
     };
 
-    const handleSearchChange = (searchResults) => {
-        setFilteredAnimals(searchResults);
-    };
 
     if (!ong) return <p>Carregando...</p>;
 
@@ -77,24 +78,16 @@ const PaginaOng = () => {
             })
     }
 
-    const handleClearFilters = () => {
-        setFilters({});
-        setFilteredAnimals(animais);
-    }
-
     return (
         <div>
-            <Banner tamanho="700.25vh" imagensBanner={imgTeste} />
+            <Banner tamanho="700.25vh" imagensBanner={imgBanner} />
             <BreadCrumb tituloCaminho="Home" tituloCaminho2="Ongs" tituloCaminho3={ong.nome} cor="#B2DED3" caminho={`/pagina-ong/${ong.id}`} />
 
             <div className="flex flex-row w-full justify-evenly gap-4 px-4 mt-16">
                 <div className="flex flex-row w-8/12 gap-4">
-                    <DropDown filterKey="porte" nome="Porte" tamanho={200} fetchOptions={"/petCard.json"} onFilterChange={handleFilterChange} />
-                    <DropDown filterKey="sexo" nome="Sexo" tamanho={200} fetchOptions={"/petCard.json"} onFilterChange={handleFilterChange} />
-                    <DropDown filterKey="especie" nome="Espécie" tamanho={200} fetchOptions={"/petCard.json"} onFilterChange={handleFilterChange} />
-                </div>
-                <div className="w-[200px]">
-                    <SearchInput data={animais} placeholder="Cidade" name="Search" onSearch={handleSearchChange} filterKey="cidade" />
+                 {/*    <DropDown filterKey="porte" nome="Porte" tamanho={200} fetchOptions={"http://localhost:8080/animais/todos-animais-com-personalidade/"} onFilterChange={handleFilterChange} />
+                    <DropDown filterKey="sexo" nome="Sexo" tamanho={200} fetchOptions={"http://localhost:8080/animais/todos-animais-com-personalidade/"} onFilterChange={handleFilterChange} />
+                    <DropDown filterKey="especie" nome="Espécie" tamanho={200} fetchOptions={"http://localhost:8080/animais/todos-animais-com-personalidade/"} onFilterChange={handleFilterChange} /> */}
                 </div>
             </div>
 
@@ -131,8 +124,7 @@ const PaginaOng = () => {
                             )}
                         </div>
                         <div className="mt-4">
-                            <img src="/path/to/qr-code.png" alt="QR Code PIX" className="mx-auto w-32 h-32" />
-                            <p className="text-sm text-gray-500 mt-2">{ong.qrCode}</p>
+                            <img src={ong.qrCode} alt="QR Code PIX" className="mx-auto w-32 h-32" />
                         </div>
                     </div>
                     <div className="bg-[#FFE0B3] p-6 rounded-lg text-center w-full md:w-[400px] shadow-lg">

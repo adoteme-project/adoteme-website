@@ -1,26 +1,27 @@
 import { useState, useEffect } from "react";
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 
-const normalizeString = (str) => 
-  str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+const normalizeString = (str) =>
+  str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : "";
 
-function CardList({  filterKey, nome, tamanho, fetchOptions, onFilterChange, selectedValue }) {
+function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange, selectedValue }) {
   const [optionsList, setOptionsList] = useState([]);
   const [selectUtil, setSelectUtil] = useState("");
 
   const optionsMap = {
     porte: ["Pequeno", "Médio", "Grande"],
     sexo: ["Macho", "Fêmea"],
+    especie: ["Cachorro", "Gato"],
   };
 
   useEffect(() => {
     const getFilterOptions = async () => {
-      if (filterKey === "porte" || filterKey === "sexo") {
+      if (optionsMap[filterKey]) {
         setOptionsList(optionsMap[filterKey]);
-      } else {
+      } else if (fetchOptions) {
         try {
           const response = await fetch(fetchOptions);
-          if (!response.ok) throw new Error("Erro ao buscar opcoes de filtro!");
+          if (!response.ok) throw new Error("Erro ao buscar opções de filtro!");
           const cards = await response.json();
           const options = new Set(cards.map((option) => normalizeString(option[filterKey])));
           setOptionsList(Array.from(options));

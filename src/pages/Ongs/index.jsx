@@ -34,14 +34,14 @@ const Ongs = () => {
         caminho="/doacoes"
       />
       <div className="flex flex-row-reverse px-16">
-      <SearchInput
+{/*       <SearchInput
             data={validItems}
             placeholder="Cidade"
             name="Search"
             onSearch={handleSearchChange}
             filterKey="endereco"
             className="w-[200px]"
-      />
+      /> */}
       </div>
       {/* Componente de Paginação */}
       <Pagination

@@ -6,7 +6,7 @@ import Doacao from '@/components/section/Donation';
 import Avaliacao from '@/components/feature/Rating';
 import { useCardContext } from '@/context/CardProvider';
 import Botao from '@/components/common/Button';
-import Carrosel from '@/components/common/Carousel';
+import Carousel from '@/components/common/Carrossel';
 
 const PaginaPet = () => {
     const { id } = useParams();
@@ -43,7 +43,7 @@ const PaginaPet = () => {
             color += ("00" + (value % 256).toString(16)).slice(-2);
         }
         return color;
-    };
+    };  
 
 
     return (
@@ -61,14 +61,14 @@ const PaginaPet = () => {
                     {/* Coluna da Imagem e Ações */}
                     <div className="flex flex-col items-center">
                         <img
-                            src={animal.imagemUrl}
+                            src={animal.imagem}
                             alt={`Imagem de ${animal.nome}`}
                             className="w-[350px] h-auto rounded-lg"
                         />
                         <div className="flex gap-4 mt-4 justify-center">
-                            <img src={animal.miniatura} alt="Miniatura 1" className="w-20 h-20 rounded-lg" />
-                            <img src={animal.miniatura2} alt="Miniatura 2" className="w-20 h-20 rounded-lg" />
-                            <img src={animal.miniatura3} alt="Miniatura 3" className="w-20 h-20 rounded-lg" />
+                            <img src={animal.imagem} alt="Miniatura 1" className="w-20 h-20 rounded-lg" />
+                            <img src={animal.imagem} alt="Miniatura 2" className="w-20 h-20 rounded-lg" />
+                            <img src={animal.imagem} alt="Miniatura 3" className="w-20 h-20 rounded-lg" />
                         </div>
 
                     </div>
@@ -92,7 +92,7 @@ const PaginaPet = () => {
                         <p>Idade: {animal.idade}</p>
                         <p>Tamanho: {animal.porte}</p>
 
-                        <div className="flex flex-col gap-4 mt-4">
+                        <div className="flex flex-col gap-4 mt-4 mb-4">
                             <div className="flex items-center">
                                 Energia: <Avaliacao avaliacao={animal.personalidade.energia} cor='#A9B949' />
                             </div>
@@ -112,7 +112,7 @@ const PaginaPet = () => {
                                 Inteligente: <Avaliacao avaliacao={animal.personalidade.inteligencia} cor='#A9B949' />
                             </div>
                         </div>
-                        <p className="mt-4 font-bold text-[#EC5A49]">TAXA DE ADOÇÃO: R${animal.taxaAdocao}</p>
+                        {/* <p className="mt-4 font-bold text-[#EC5A49]">TAXA DE ADOÇÃO: R${animal.taxaAdocao}</p> */}
                         <Botao
                             className="bg-green-500 text-white py-2 px-6 rounded-lg"
                             titulo="Adotar"
@@ -124,10 +124,10 @@ const PaginaPet = () => {
                     </div>
                 </div>
 
-                <div className="mt-10">
+{/*                 <div className="mt-10">
                     <h2 className="text-3xl font-bold">História</h2>
                     <p className="mt-4 text-lg">{animal.historico}</p>
-                </div>
+                </div> */}
             </section>
 
 
@@ -135,11 +135,8 @@ const PaginaPet = () => {
             <section className="mt-10 p-10 bg-gray-100">
                 <h2 className="text-3xl font-bold mb-6 text-center">Sugestão</h2>
                 {sugestoes.length > 0 ? (
-                    <Carrosel
-                        items={sugestoes
-                            .filter(sugestao => sugestao.tipo === 'animal')
-                            .slice(0, 8)
-                        }
+                    <Carousel
+                        items   ={sugestoes.filter(sugestao => sugestao.tipo === 'animal').slice(0, 8)}
                         renderItem={(sugestao) => (
                             <Card
                                 key={sugestao.id}
@@ -154,7 +151,7 @@ const PaginaPet = () => {
                 ) : (
                     <p>Nenhuma sugestão disponível no momento.</p>
                 )}
-            </section>
+            </section>  
 
 
             <Doacao />
