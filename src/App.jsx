@@ -35,6 +35,8 @@ import PetInfoStep from "./components/feature/MultiStep/PetInforStep";
 import { OngAuthProvider } from "./context/AuthOngProvider";
 import FavoritosAnimais from "./pages/AnimaisFavoritos";
 import FavoritosOngs from "./pages/OngsFavoritos";
+import RedefinirAcessoCodigo from "./pages/RedefinirAcessoCodigo";
+import RedefinirAcessoSenha from "./pages/RedefinirAcessoSenha";
 
 function App() {
   return (
@@ -73,6 +75,8 @@ function App() {
                     element={<CadastroAdotante />}
                   />
                   <Route path="/login/redefinir" element={<RedefinirAcesso />} />
+                  <Route path="/login/redefinir-codigo" element={<RedefinirAcessoCodigo />} />
+                  <Route path="/login/redefinir-senha" element={<RedefinirAcessoSenha />} />
                 </Route>
 
                 <Route path="/teste" element={<PrivateRoute userType="adotante" />}>
