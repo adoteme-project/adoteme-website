@@ -10,7 +10,6 @@ import LoginSelection from "./pages/LoginSelection";
 import LoginLayout from "./components/layout/LoginLayout";
 import LoginAdotante from "./pages/LoginAdotante";
 import LoginOng from "./pages/LoginOng";
-import RedefinirAcesso from "./pages/RedefinirAcesso";
 import CadastroAdotante from "./pages/CadastroAdotante";
 
 import PaginaPet from "./pages/PaginaPet";
@@ -35,8 +34,11 @@ import PetInfoStep from "./components/feature/MultiStep/PetInforStep";
 import { OngAuthProvider } from "./context/AuthOngProvider";
 import FavoritosAnimais from "./pages/AnimaisFavoritos";
 import FavoritosOngs from "./pages/OngsFavoritos";
-import RedefinirAcessoCodigo from "./pages/RedefinirAcessoCodigo";
-import RedefinirAcessoSenha from "./pages/RedefinirAcessoSenha";
+import RedefinirSenha from "./pages/RedefinirAcesso";
+import InserirCodigo from "./pages/RedefinirAcessoCodigo";
+import NovaSenha from "./pages/RedefinirAcessoSenha";
+import '@/services/mockAPI'; // Mock da API
+import OngEditarConfiguracoes from "./pages/OngEditarConfiguracoes";
 
 function App() {
   return (
@@ -74,9 +76,9 @@ function App() {
                     path="/login/cadastro-adotante"
                     element={<CadastroAdotante />}
                   />
-                  <Route path="/login/redefinir" element={<RedefinirAcesso />} />
-                  <Route path="/login/redefinir-codigo" element={<RedefinirAcessoCodigo />} />
-                  <Route path="/login/redefinir-senha" element={<RedefinirAcessoSenha />} />
+                  <Route path="/login/redefinir" element={<RedefinirSenha />} />
+                  <Route path="/login/inserir-codigo" element={<InserirCodigo/>} />
+                  <Route path="/login/redefinir-senha" element={<NovaSenha />} />
                 </Route>
 
                 <Route path="/teste" element={<PrivateRoute userType="adotante" />}>
