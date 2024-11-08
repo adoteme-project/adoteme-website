@@ -1,0 +1,45 @@
+[
+    {
+      "mes": "Abril, 2024",
+      "totalAplicacoes": 35,
+      "totalAdocoes": 17,
+      "taxaConversao": 48.57
+    },
+    {
+      "mes": "Maio, 2024",
+      "totalAplicacoes": 34,
+      "totalAdocoes": 24,
+      "taxaConversao": 70.58
+    },
+    {
+      "mes": "Junho, 2024",
+      "totalAplicacoes": 48,
+      "totalAdocoes": 28,
+      "taxaConversao": 58.33
+    },
+    {
+      "mes": "Julho, 2024",
+      "totalAplicacoes": 23,
+      "totalAdocoes": 8,
+      "taxaConversao": 34.78
+    },
+    {
+      "mes": "Agosto, 2024",
+      "totalAplicacoes": 35,
+      "totalAdocoes": 35,
+      "taxaConversao": 59.93
+    },
+    {
+      "mes": "Setembro, 2024",
+      "totalAplicacoes": 35,
+      "totalAdocoes": 16,
+      "taxaConversao": 45.71
+    },
+    {
+      "mes": "Outubro, 2024",
+      "totalAplicacoes": 42,
+      "totalAdocoes": 24,
+      "taxaConversao": 57.14
+    }
+  ]
+  
