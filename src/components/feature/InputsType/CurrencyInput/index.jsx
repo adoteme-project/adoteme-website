@@ -1,4 +1,9 @@
-const CurrencyInput = ({label}) => {
+import { useFormContext } from "react-hook-form";
+
+const CurrencyInput = ({label, name}) => {
+
+    const { register } = useFormContext();
+
     return (
         <div >
             <label className="text-xl font-medium">{label}</label>
@@ -8,6 +13,7 @@ const CurrencyInput = ({label}) => {
                     type="text"
                     placeholder="0.00"
                     className="flex-1 px-2 py-1 border-none focus:outline-none focus:ring-0"
+                    {...register(name)}
                 />
             </div>
         </div>

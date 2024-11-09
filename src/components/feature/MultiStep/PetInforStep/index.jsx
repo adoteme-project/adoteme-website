@@ -25,8 +25,8 @@ const PetInfoStep = () => {
     }
   };
 
-  const saveData = () => {
-    console.log("enviou")
+  const saveData = (data) => {
+    console.log(data)
     navigate("/ong/cadastrar-pet/abrigo/abrigo-taxa");
   };
 
