@@ -12,7 +12,7 @@ const MultiStepForm = () => {
   const currentStep = steps[location.pathname] || 1;
 
   return (
-    <div className="w-full border border-amarelo-select rounded-2xl">
+    <div className="w-full border-2 border-amarelo-select rounded-2xl">
       <Pipeline currentStep={currentStep} />
       <div className="w-full px-5 py-10 flex flex-col gap-6">
         <Outlet />

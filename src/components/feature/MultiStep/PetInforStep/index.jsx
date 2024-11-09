@@ -5,10 +5,25 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import TextArea from "../../InputsType/TextArea";
 import RatingInput from "../../InputsType/RatingInput";
+import { useState } from "react";
+import { racasCachorro, racasGato } from "@/mocks/racasMocks";
 
 const PetInfoStep = () => {
   const methods = useForm();
   const navigate = useNavigate();
+  const [racaOpritons, setRacaOptions] = useState(racasCachorro);
+
+  const handleEspecieChange = (event) => {
+    const especieSelecionada = event.target.value;
+    console.log(especieSelecionada);
+    if (especieSelecionada === "CACHORRO") {
+      setRacaOptions(racasCachorro);
+    } else if (especieSelecionada === "GATO") {
+      setRacaOptions(racasGato);
+    } else {
+      setRacaOptions();
+    }
+  };
 
   const saveData = () => {
     navigate("/teste");
@@ -40,6 +55,7 @@ const PetInfoStep = () => {
                 { label: 'Cachorro', value: 'CACHORRO' },
                 { label: 'Gato', value: 'GATO' }
               ]}
+              onChange={handleEspecieChange}
             />
 
             <Select
@@ -55,9 +71,7 @@ const PetInfoStep = () => {
             <Select
               label="Raça"
               name="raca"
-              options={[{ label: "Labrador", value: "labrador" },
-              { label: "Bulldog", value: "bulldog" },
-              { label: "Poodle", value: "poodle" },]}
+              options={racaOpritons}
             />
 
             <Input label="Cor" type="text" name="cor" placeholder="Cor" />

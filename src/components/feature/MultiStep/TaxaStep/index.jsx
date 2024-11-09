@@ -9,8 +9,7 @@ const TaxaStep = () => {
             <div className="flex flex-col gap-10 justify-center w-1/2" >
                 <div className="border-b-2 border-amarelo-select p-3 w-full flex justify-between items-center">
                     <span> Não possui taxa de adoção </span>
-                    <input className="appearance-none h-5 w-5 rounded-sm
-                border-amarelo-select border-2 " type="checkbox" />
+                    <input className="accent-amarelo h-5 w-5 rounded-sm" type="checkbox" />
                 </div>
                 <CurrencyInput label="Taxa de Adoção" />
                 <div>
@@ -22,8 +21,7 @@ const TaxaStep = () => {
                                 Disponibilizar adoção do pet pelo site  publicamente
                             </p>
                         </div>
-                        <input className="appearance-none h-5 w-5 rounded-sm
-                        border-amarelo-select border-2 " type="checkbox" />
+                        <input className="accent-amarelo h-5 w-5 rounded-sm" type="checkbox" />
                     </div>
                     <div className="border-b-2 border-amarelo-select p-3 w-full flex justify-between items-center">
                         <div>
@@ -32,8 +30,7 @@ const TaxaStep = () => {
                                 Pet será cadastrado, mas não estará visível no site
                             </p>
                         </div>
-                        <input className="appearance-none h-5 w-5 rounded-sm
-                        border-amarelo-select border-2 " type="checkbox" />
+                        <input className="accent-amarelo h-5 w-5 rounded-sm" type="checkbox" />
                     </div>
                 </div>
             </div>

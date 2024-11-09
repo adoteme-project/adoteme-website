@@ -9,8 +9,7 @@ const Checkbox = ({ label, name }) => {
         <div>
             <p className="text-xl font-medium"> {label} </p>
             <div className="flex gap-2 items-center mt-2">
-                <input className="appearance-none h-5 w-5 rounded-sm
-                border-amarelo-select border-2 " type="checkbox" {...register(name)} />
+                <input className="accent-amarelo h-5 w-5 rounded-sm" type="checkbox" {...register(name)} />
                 <label> Sim </label>
             </div>
         </div>
