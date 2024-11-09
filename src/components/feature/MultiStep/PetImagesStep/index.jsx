@@ -1,13 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import ImageWidget from "../../UploadImage/ImageWidget";
 import { useForm, FormProvider } from "react-hook-form";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useFormState } from "@/context/FormStateProvider";
 
 const PetsImagesStep = () => {
   const navigate = useNavigate();
   const methods = useForm();
-  const { handleSubmit, setValue } = methods;
-  const [images, setImages] = useState([]);
+  const { handleSubmit, setValue, reset } = methods;
+  const {formState, setFormState } = useFormState();
+  const [images, setImages] = useState(formState.images || []);
+
 
   const handleImageChange = (file, index) => {
     if (file) {
@@ -18,8 +21,22 @@ const PetsImagesStep = () => {
     }
   };
 
+  const { isSubmitting } = methods.formState;
+
+  useEffect(() => {
+    reset({ ...images.reduce((acc, img, index) => {
+      acc[`imagem${index}`] = img;
+      return acc;
+    }, {}) });
+  }, [images, reset]);
+
   const saveImages = () => {
-    console.log(images);
+    setFormState({
+      ...formState,
+      images,
+    })
+
+    console.log("Dados enviados:", formState);
     navigate("/ong/cadastrar-pet/abrigo/abrigo-informacoes");
   };
 
@@ -35,13 +52,17 @@ const PetsImagesStep = () => {
               key={index}
               control={methods.control}
               onChange={(file) => handleImageChange(file, index)}
-              image={images[index]}
-              colSpan={index == 0 ? 'row-span-2 col-span-2' : 'col-span-1'}
+              image={images[index] || null} 
+              colSpan={index === 0 ? 'row-span-2 col-span-2' : 'col-span-1'}
             />
           ))}
         </div>
         <nav className="w-full flex justify-center mt-4">
-          <button className="bg-verde px-4 py-3 rounded-md text-branco" type="submit">
+          <button
+            className="bg-verde px-4 py-3 rounded-md text-branco"
+            type="submit"
+            disabled={isSubmitting}
+          >
             Continuar
           </button>
         </nav>

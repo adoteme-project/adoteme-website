@@ -1,9 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CurrencyInput from "../../InputsType/CurrencyInput";
 import { FormProvider, useForm } from "react-hook-form";
+import { useFormState } from "@/context/FormStateProvider";
+import { useEffect } from "react";
 
 const TaxaStep = () => {
     const methods = useForm();
+    const { formState, setFormState } = useFormState();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      methods.reset(formState);
+    }, [formState, methods]);
 
     const handleVisibilityChange = (event) => {
         const { name } = event.target;
@@ -15,7 +23,9 @@ const TaxaStep = () => {
     };
 
     const submitData = (data) => {
+        setFormState({...formState, data});
         console.log(data);
+        navigate('/ong/pets')
     };
 
     return (

@@ -5,28 +5,39 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import TextArea from "../../InputsType/TextArea";
 import RatingInput from "../../InputsType/RatingInput";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { racasCachorro, racasGato } from "@/mocks/racasMocks";
+import { useFormState } from "@/context/FormStateProvider";
 
 const PetInfoStep = () => {
   const methods = useForm();
   const navigate = useNavigate();
-  const [racaOpritons, setRacaOptions] = useState(racasCachorro);
+  const [racaOptions, setRacaOptions] = useState(racasCachorro);
+  const { formState, setFormState } = useFormState();
+
+  useEffect(() => {
+    methods.reset(formState);
+  }, [formState, methods]);
 
   const handleEspecieChange = (event) => {
     const especieSelecionada = event.target.value;
-    console.log(especieSelecionada);
-    if (especieSelecionada === "CACHORRO") {
-      setRacaOptions(racasCachorro);
-    } else if (especieSelecionada === "GATO") {
-      setRacaOptions(racasGato);
-    } else {
-      setRacaOptions();
-    }
+    setRacaOptions(especieSelecionada === "CACHORRO" ? racasCachorro : racasGato);
   };
 
   const saveData = (data) => {
-    console.log(data)
+    
+    const formattedData = {
+      ...data,
+       personalidade: {
+        inteligente: data.inteligente || 0,
+        obediente: data.obediente || 0,
+        sociavel: data.sociavel || 0,
+        territorial: data.territorial || 0,
+        tolerante: data.tolerante || 0,
+      }, 
+    }
+  
+    setFormState({...formState, ...formattedData});
     navigate("/ong/cadastrar-pet/abrigo/abrigo-taxa");
   };
 
@@ -72,7 +83,7 @@ const PetInfoStep = () => {
             <Select
               label="Raça"
               name="raca"
-              options={racaOpritons}
+              options={racaOptions}
             />
 
             <Input label="Cor" type="text" name="cor" placeholder="Cor" />
@@ -82,15 +93,14 @@ const PetInfoStep = () => {
             <TextArea label="Descrição" name="descricao" rows={5} />
           </fieldset>
 
-
-            <h1 className="text-center text-azul-main font-nunito text-3xl font-semibold"> Personalidade </h1>
-            <div className="w-full flex justify-around">
-              <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="sociavel" title="Sociável" />
-              <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="obediente" title="Obediente" />
-              <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="inteligente" title="Inteligente" />
-              <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="tolerante" title="Tolerante" />
-              <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="territorial" title="Territorial" />
-            </div>
+          <h1 className="text-center text-azul-main font-nunito text-3xl font-semibold"> Personalidade </h1>
+          <div className="w-full flex justify-around">
+            <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="sociavel" title="Sociável" />
+            <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="obediente" title="Obediente" />
+            <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="inteligente" title="Inteligente" />
+            <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="tolerante" title="Tolerante" />
+            <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="territorial" title="Territorial" />
+          </div>
 
           <div className="w-full flex justify-center">
             <nav className="w-[25%] flex justify-center gap-8">

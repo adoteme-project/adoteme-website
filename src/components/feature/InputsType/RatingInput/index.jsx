@@ -12,8 +12,8 @@ const RatingInput = ({ name, disabled, color, title, control }) => {
                 render={({ field }) => (
                     <Rating
                         {...field}
-                        value={field.value ?? 3}
-                        defaultValue={3}
+                        value={field.value ?? 0}
+                        defaultValue={0}
                         onChange={(_, newValue) => field.onChange(newValue)}
                         disabled={disabled}
                         icon={<PetsIcon fontSize="inherit" style={{ color: color }} />}
