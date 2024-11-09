@@ -94,6 +94,7 @@ function App() {
                     <Route element={<PrivateRoute userType="ong" allowedRoles={['ADMIN', 'MODERATOR']} />}>
                       <Route path="/ong/dashboard" element={<OngDashboard />} />
                       <Route path="/ong/configuracoes" element={<OngConfiguracoes />} />
+                      <Route path="/ong/organizacao" element={<OngEditarConfiguracoes />} />
                     </Route>
 
                     <Route path="/ong/pets" element={<OngPet />} />
