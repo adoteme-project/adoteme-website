@@ -1,36 +1,52 @@
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import ImageWidget from "../../UploadImage/ImageWidget";
+import { useForm, FormProvider } from "react-hook-form";
+import { useState } from "react";
 
 const PetsImagesStep = () => {
+  const navigate = useNavigate();
+  const methods = useForm();
+  const { handleSubmit, setValue } = methods;
+  const [images, setImages] = useState([]);
+
+  const handleImageChange = (file, index) => {
+    if (file) {
+      const newImages = [...images];
+      newImages[index] = file;
+      setImages(newImages);
+      setValue(`imagem${index}`, file);
+    }
+  };
+
+  const saveImages = () => {
+    console.log(images);
+    navigate("/ong/cadastrar-pet/abrigo/abrigo-informacoes");
+  };
+
   return (
-    <>
-      <h1 className="text-center text-azul-main font-nunito text-2xl font-semibold">
-        Imagens do Pet
-      </h1>
-      <div className="w-full grid grid-rows-2 grid-flow-col gap-4 gap-x-10 h-96">
-        <div className="border-2 border-dotted border-azul-main row-span-2 col-span-2">
-          Foto1
+    <FormProvider {...methods}>
+      <form onSubmit={handleSubmit(saveImages)}>
+        <h1 className="text-center text-azul-main font-nunito text-2xl mb-4 font-semibold">
+          Imagens do Pet
+        </h1>
+        <div className="w-full grid grid-rows-2 grid-cols-4 gap-4 gap-x-10 h-96">
+          {[...Array(5)].map((_, index) => (
+            <ImageWidget
+              key={index}
+              control={methods.control}
+              onChange={(file) => handleImageChange(file, index)}
+              image={images[index]}
+              colSpan={index == 0 ? 'row-span-2 col-span-2' : 'col-span-1'}
+            />
+          ))}
         </div>
-        <div className="border-2 border-dotted border-azul-main col-span-1">
-          Foto2
-        </div>
-        <div className="border-2 border-dotted border-azul-main col-span-1">
-          Foto3
-        </div>
-        <div className="border-2 border-dotted border-azul-main col-span-1">
-          Foto4
-        </div>
-        <div className="border-2 border-dotted border-azul-main col-span-1">
-          Foto5
-        </div>
-      </div>
-      <nav className="w-full flex justify-center">
-        <Link 
-        to={'/ong/cadastrar-pet/abrigo/abrigo-informacoes'}
-        className="bg-verde px-4 py-3 rounded-md text-branco">
-          Continuar
-        </Link>
-      </nav>
-    </>
+        <nav className="w-full flex justify-center mt-4">
+          <button className="bg-verde px-4 py-3 rounded-md text-branco" type="submit">
+            Continuar
+          </button>
+        </nav>
+      </form>
+    </FormProvider>
   );
 };
 

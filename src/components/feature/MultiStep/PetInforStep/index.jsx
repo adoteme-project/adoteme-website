@@ -26,7 +26,8 @@ const PetInfoStep = () => {
   };
 
   const saveData = () => {
-    navigate("/teste");
+    console.log("enviou")
+    navigate("/ong/cadastrar-pet/abrigo/abrigo-taxa");
   };
 
   return (
@@ -35,7 +36,7 @@ const PetInfoStep = () => {
         Informações do Pet
       </h1>
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(saveData)}>
+        <form className="w-full flex flex-col gap-8" onSubmit={methods.handleSubmit(saveData)}>
           <fieldset className="grid grid-cols-2 gap-6 w-full">
             <Input label="Nome" type="text" name="nomePet" placeholder="Nome" />
 
@@ -80,26 +81,25 @@ const PetInfoStep = () => {
             <Checkbox label="Castrado ?" name="castrado" />
             <TextArea label="Descrição" name="descricao" rows={5} />
           </fieldset>
+
+
+            <h1 className="text-center text-azul-main font-nunito text-3xl font-semibold"> Personalidade </h1>
+            <div className="w-full flex justify-around">
+              <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="sociavel" title="Sociável" />
+              <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="obediente" title="Obediente" />
+              <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="inteligente" title="Inteligente" />
+              <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="tolerante" title="Tolerante" />
+              <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="territorial" title="Territorial" />
+            </div>
+
+          <div className="w-full flex justify-center">
+            <nav className="w-[25%] flex justify-center gap-8">
+              <Link to="/ong/cadastrar-pet/abrigo/abrigo-imagens" className="bg-amarelo-select px-4 py-3 text-center rounded-md text-branco w-full"> Voltar </Link>
+              <button type="submit" className="bg-verde px-4 py-3 rounded-md text-center text-branco w-full"> Continuar </button>
+            </nav>
+          </div>
         </form>
       </FormProvider>
-
-      <div className="w-full flex flex-col gap-8">
-        <h1 className="text-center text-azul-main font-nunito text-3xl font-semibold"> Personalidade </h1>
-        <div className="w-full flex justify-around">
-          <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="sociavel" title="Sociável" />
-          <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="obediente" title="Obediente" />
-          <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="inteligente" title="Inteligente" />
-          <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="tolerante" title="Tolerante" />
-          <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="territorial" title="Territorial" />
-        </div>
-      </div>
-
-      <div className="w-full flex justify-center">
-        <nav className="w-[25%] flex justify-center gap-8">
-          <Link to="/ong/cadastrar-pet/abrigo/abrigo-imagens" className="bg-amarelo-select px-4 py-3 text-center rounded-md text-branco w-full"> Voltar </Link>
-          <Link to="/ong/cadastrar-pet/abrigo/abrigo-taxa" className="bg-verde px-4 py-3 rounded-md text-center text-branco w-full"> Continuar </Link>
-        </nav>
-      </div>
     </div>
   );
 };
