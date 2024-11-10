@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState, useEffect } from "react";
 import { Controller } from "react-hook-form";
 
-const ImageWidget = ({ control, onChange, image, colSpan }) => {
+const ImageWidget = ({ control, onChange, image, colSpan, contextPath }) => {
   const [preview, setPreview] = useState(null);
 
   useEffect(() => {
@@ -31,7 +31,8 @@ const ImageWidget = ({ control, onChange, image, colSpan }) => {
   };
 
   return (
-    <div className={`flex justify-center items-center shadow-xl bg-cinza rounded-md relative ${colSpan}`}>
+    <div className={`flex justify-center items-center shadow-xl bg-cinza 
+    rounded-md relative ${contextPath === 'abrigo' ? colSpan : 'w-1/2'}`}>
       {preview ? (
         <img src={preview} alt="Preview" className="object-fill h-full w-full rounded-md" />
       ) : (

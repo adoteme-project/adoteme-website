@@ -27,20 +27,28 @@ const PetInfoStep = () => {
   };
 
   const saveData = (data) => {
-    
+
     const formattedData = {
       ...data,
-       personalidade: {
+      personalidade: {
         inteligente: data.inteligente || 0,
         obediente: data.obediente || 0,
         sociavel: data.sociavel || 0,
         territorial: data.territorial || 0,
         tolerante: data.tolerante || 0,
-      }, 
+      },
     }
-  
-    setFormState({...formState, ...formattedData});
-    navigate(`/ong/cadastrar-pet/${contextPath}/${contextPath}-taxa`);
+
+    setFormState({ ...formState, ...formattedData });
+
+    if (contextPath === 'abrigo') {
+      console.log("Dados do pet do abrigo:", { ...formState, ...data });
+      navigate(`/ong/cadastrar-pet/${contextPath}/${contextPath}-taxa`);
+    } else {
+      console.log("Dados do pet perdido:", { ...formState, ...data });
+      navigate("/ong/pets")
+    }
+
   };
 
   return (
@@ -89,25 +97,35 @@ const PetInfoStep = () => {
             />
 
             <Input label="Cor" type="text" name="cor" placeholder="Cor" />
-            <Input label="Ano de Nascimento" type="date" name="anoNascimento" />
+
+            {
+            contextPath === 'abrigo' ?
+              (<Input label="Ano de Nascimento" type="date" name="anoNascimento" />) : null
+            }
+
             <Input label="Tamanho do Pelo" name="tamanhoPelo" />
             <Checkbox label="Castrado ?" name="castrado" />
             <TextArea label="Descrição" name="descricao" rows={5} />
           </fieldset>
 
-          <h1 className="text-center text-azul-main font-nunito text-3xl font-semibold"> Personalidade </h1>
-          <div className="w-full flex justify-around">
-            <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="sociavel" title="Sociável" />
-            <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="obediente" title="Obediente" />
-            <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="inteligente" title="Inteligente" />
-            <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="tolerante" title="Tolerante" />
-            <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="territorial" title="Territorial" />
-          </div>
+          {contextPath === 'abrigo' ? (
+            <>
+              <h1 className="text-center text-azul-main font-nunito text-3xl font-semibold"> Personalidade </h1><div className="w-full flex justify-around">
+                <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="sociavel" title="Sociável" />
+                <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="obediente" title="Obediente" />
+                <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="inteligente" title="Inteligente" />
+                <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="tolerante" title="Tolerante" />
+                <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="territorial" title="Territorial" />
+              </div>
+            </>) : null
+          }
 
           <div className="w-full flex justify-center">
             <nav className="w-[25%] flex justify-center gap-8">
               <Link to={`/ong/cadastrar-pet/${contextPath}/${contextPath}-imagens`} className="bg-amarelo-select px-4 py-3 text-center rounded-md text-branco w-full"> Voltar </Link>
-              <button type="submit" className="bg-verde px-4 py-3 rounded-md text-center text-branco w-full"> Continuar </button>
+              <button type="submit" className="bg-verde px-4 py-3 rounded-md text-center text-branco w-full">
+                {contextPath === 'abrigo' ? "Continuar" : 'Enviar'}
+              </button>
             </nav>
           </div>
         </form>
@@ -116,4 +134,4 @@ const PetInfoStep = () => {
   );
 };
 
-export default PetInfoStep;
+export default PetInfoStep; 

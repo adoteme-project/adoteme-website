@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ImageWidget from "../../UploadImage/ImageWidget";
 import { useForm, FormProvider } from "react-hook-form";
 import { useEffect, useState } from "react";
@@ -9,7 +9,7 @@ const PetsImagesStep = () => {
   const navigate = useNavigate();
   const methods = useForm();
   const { handleSubmit, setValue, reset } = methods;
-  const {formState, setFormState } = useFormState();
+  const { formState, setFormState } = useFormState();
   const [images, setImages] = useState(formState.images || []);
   const contextPath = useContextPath();
 
@@ -25,10 +25,12 @@ const PetsImagesStep = () => {
   const { isSubmitting } = methods.formState;
 
   useEffect(() => {
-    reset({ ...images.reduce((acc, img, index) => {
-      acc[`imagem${index}`] = img;
-      return acc;
-    }, {}) });
+    reset({
+      ...images.reduce((acc, img, index) => {
+        acc[`imagem${index}`] = img;
+        return acc;
+      }, {})
+    });
   }, [images, reset]);
 
   const saveImages = () => {
@@ -43,30 +45,47 @@ const PetsImagesStep = () => {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={handleSubmit(saveImages)}>
+      <form onSubmit={handleSubmit(saveImages)} className="flex flex-col gap-10">
         <h1 className="text-center text-azul-main font-nunito text-2xl mb-4 font-semibold">
-          Imagens do Pet
+          {contextPath === 'abrigo' ? 'Imagens do Pet' : 'Imagem do Pet'}
         </h1>
-        <div className="w-full grid grid-rows-2 grid-cols-4 gap-4 gap-x-10 h-96">
-          {[...Array(5)].map((_, index) => (
+        <div className={`w-full ${contextPath === 'abrigo' ? 'grid grid-rows-2 grid-cols-4' : 
+          'flex justify-center'} gap-4 gap-x-10 h-96`}>
+          {[...Array(contextPath === 'abrigo' ? 5 : 1)].map((_, index) => (
             <ImageWidget
               key={index}
               control={methods.control}
               onChange={(file) => handleImageChange(file, index)}
-              image={images[index] || null} 
+              image={images[index] || null}
               colSpan={index === 0 ? 'row-span-2 col-span-2' : 'col-span-1'}
+              contextPath={contextPath}
             />
           ))}
         </div>
-        <nav className="w-full flex justify-center mt-4">
-          <button
-            className="bg-verde px-4 py-3 rounded-md text-branco"
-            type="submit"
-            disabled={isSubmitting}
-          >
-            Continuar
-          </button>
-        </nav>
+        {contextPath === 'abrigo' ?
+          (
+            <nav className="w-full flex justify-center">
+              <button
+                className="bg-verde px-4 py-3 rounded-md text-branco"
+                type="submit"
+                disabled={isSubmitting}
+              >
+                Continuar
+              </button>
+            </nav>
+          ) : (
+            <div className="w-full flex justify-center">
+              <nav className="w-[25%] flex justify-center gap-8">
+                <Link to={`/ong/cadastrar-pet/resgatado/resgatado-local`}
+                  className="bg-amarelo-select px-4 py-3 text-center rounded-md text-branco w-full">
+                  Voltar
+                </Link>
+                <button type="submit" className="bg-verde px-4 py-3 rounded-md text-center text-branco w-full">
+                  Continuar
+                </button>
+              </nav>
+            </div>
+          )}
       </form>
     </FormProvider>
   );

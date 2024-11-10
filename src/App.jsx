@@ -38,6 +38,7 @@ import FavoritosOngs from "./pages/OngsFavoritos";
 import TaxaStep from "./components/feature/MultiStep/TaxaStep";
 import CadastroPet from "./pages/CadastroPet";
 import MultiStepForm from "./components/feature/MultiStep/MultiStepForm";
+import PetsLocalStep from "./components/feature/MultiStep/PetLocalStep";
 
 function App() {
   return (
@@ -105,10 +106,10 @@ function App() {
                   </Route>
 
                   <Route path="/ong/cadastrar-pet/resgatado" element={<MultiStepForm />}>
-                    <Route index element={<Navigate to="/ong/cadastrar-pet/resgatado-imagens" />} />
+                    <Route index element={<Navigate to="/ong/cadastrar-pet/resgatado-local" />} />
+                    <Route path="resgatado-local" element={<PetsLocalStep />} />
                     <Route path="resgatado-imagens" element={<PetsImagesStep />} />
                     <Route path="resgatado-informacoes" element={<PetInfoStep />} />
-                    <Route path="resgatado-taxa" element={<TaxaStep />} />
                   </Route>
 
                   <Route path="/ong/aplicacoes" element={<OngAplicacoes />} />

@@ -11,7 +11,10 @@ const Breadcrumb = () => {
     'abrigo': 'Abrigo',
     'abrigo-imagens': 'Imagens do Pet',
     'abrigo-informacoes': 'Informações do Pet',
-    'abrigo-taxa': 'Taxa de Adoção'
+    'abrigo-taxa': 'Taxa de Adoção',
+    'resgatado-imagens': 'Imagens do Pet',
+    'resgatado-informacoes': 'Informações do Pet',
+    'resgatado-local': 'Localização do Pet'
   };
 
   const pathnames = location.pathname.split('/').filter((x) => x);

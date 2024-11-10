@@ -3,6 +3,8 @@ import Pipeline from "../Pipeline";
 import { FormStateProvider } from "@/context/FormStateProvider";
 import { useEffect, useMemo } from "react";
 import { ContextPathProvider } from "@/context/PathContextProvider";
+import { GeoLocationProvider } from "@/context/GeolocationProvider";
+
 
 const MultiStepForm = () => {
   const location = useLocation();
@@ -15,9 +17,9 @@ const MultiStepForm = () => {
       "/ong/cadastrar-pet/abrigo/abrigo-taxa"
     ],
     "/ong/cadastrar-pet/resgatado": [
+      "/ong/cadastrar-pet/resgatado/resgatado-local",
       "/ong/cadastrar-pet/resgatado/resgatado-imagens",
-      "/ong/cadastrar-pet/resgatado/resgatado-informacoes",
-      "/ong/cadastrar-pet/resgatado/resgatado-taxa"
+      "/ong/cadastrar-pet/resgatado/resgatado-informacoes"
     ]
   }), []);
 
@@ -38,12 +40,14 @@ const MultiStepForm = () => {
   return (
     <FormStateProvider>
       <ContextPathProvider>
-        <div className="w-full border-2 border-amarelo-select rounded-2xl">
-          <Pipeline currentStep={currentStepIndex} totalSteps={stepsMapping[currentBase]?.length || 1} />
-          <div className="w-full px-5 py-10 flex flex-col gap-6">
-            <Outlet />
+        <GeoLocationProvider>
+          <div className="w-full border-2 border-amarelo-select rounded-2xl">
+            <Pipeline currentStep={currentStepIndex} steps={stepsMapping[currentBase]} />
+            <div className="w-full px-5 py-10 flex flex-col gap-6">
+              <Outlet />
+            </div>
           </div>
-        </div>
+        </GeoLocationProvider>
       </ContextPathProvider>
     </FormStateProvider>
   );
