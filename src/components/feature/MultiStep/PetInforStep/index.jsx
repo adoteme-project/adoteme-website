@@ -8,12 +8,14 @@ import RatingInput from "../../InputsType/RatingInput";
 import { useState, useEffect } from "react";
 import { racasCachorro, racasGato } from "@/mocks/racasMocks";
 import { useFormState } from "@/context/FormStateProvider";
+import { useContextPath } from "@/context/PathContextProvider";
 
 const PetInfoStep = () => {
   const methods = useForm();
   const navigate = useNavigate();
   const [racaOptions, setRacaOptions] = useState(racasCachorro);
   const { formState, setFormState } = useFormState();
+  const contextPath = useContextPath();
 
   useEffect(() => {
     methods.reset(formState);
@@ -38,7 +40,7 @@ const PetInfoStep = () => {
     }
   
     setFormState({...formState, ...formattedData});
-    navigate("/ong/cadastrar-pet/abrigo/abrigo-taxa");
+    navigate(`/ong/cadastrar-pet/${contextPath}/${contextPath}-taxa`);
   };
 
   return (
@@ -104,7 +106,7 @@ const PetInfoStep = () => {
 
           <div className="w-full flex justify-center">
             <nav className="w-[25%] flex justify-center gap-8">
-              <Link to="/ong/cadastrar-pet/abrigo/abrigo-imagens" className="bg-amarelo-select px-4 py-3 text-center rounded-md text-branco w-full"> Voltar </Link>
+              <Link to={`/ong/cadastrar-pet/${contextPath}/${contextPath}-imagens`} className="bg-amarelo-select px-4 py-3 text-center rounded-md text-branco w-full"> Voltar </Link>
               <button type="submit" className="bg-verde px-4 py-3 rounded-md text-center text-branco w-full"> Continuar </button>
             </nav>
           </div>

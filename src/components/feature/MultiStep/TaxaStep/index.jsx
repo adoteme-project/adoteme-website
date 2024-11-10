@@ -3,11 +3,13 @@ import CurrencyInput from "../../InputsType/CurrencyInput";
 import { FormProvider, useForm } from "react-hook-form";
 import { useFormState } from "@/context/FormStateProvider";
 import { useEffect } from "react";
+import { useContextPath } from "@/context/PathContextProvider";
 
 const TaxaStep = () => {
     const methods = useForm();
     const { formState, setFormState } = useFormState();
     const navigate = useNavigate();
+    const contextPath = useContextPath();
 
     useEffect(() => {
       methods.reset(formState);
@@ -75,7 +77,7 @@ const TaxaStep = () => {
                     </div>
                     <div className="w-full flex justify-center">
                         <nav className="w-[50%] flex justify-center gap-8">
-                            <Link to="/ong/cadastrar-pet/abrigo/abrigo-informacoes" className="bg-amarelo-select px-4 py-3 text-center rounded-md text-branco w-full"> Voltar </Link>
+                            <Link to={`/ong/cadastrar-pet/${contextPath}/${contextPath}-informacoes`} className="bg-amarelo-select px-4 py-3 text-center rounded-md text-branco w-full"> Voltar </Link>
                             <button type="submit" className="bg-verde px-4 py-3 rounded-md text-center text-branco w-full"> Finalizar </button>
                         </nav>
                     </div>

@@ -89,24 +89,28 @@ function App() {
                 {/*                 <Route path="/ong" element={<PrivateRoute userType="ong" allowedRoles={['ADMIN', 'MODERATOR', 'USER']} />}> */}
                 <Route element={<OngLayout />}>
 
-{/*                   <Route element={<PrivateRoute userType="ong" allowedRoles={['ADMIN', 'MODERATOR']} />}> */}
-                    <Route path="/ong/dashboard" element={<OngDashboard />} />
-                    <Route path="/ong/configuracoes" element={<OngConfiguracoes />} />
-{/*                   </Route>
+                  {/*                   <Route element={<PrivateRoute userType="ong" allowedRoles={['ADMIN', 'MODERATOR']} />}> */}
+                  <Route path="/ong/dashboard" element={<OngDashboard />} />
+                  <Route path="/ong/configuracoes" element={<OngConfiguracoes />} />
+                  {/*                   </Route>
  */}
                   <Route path="/ong/pets" element={<OngPet />} />
+
                   <Route path="/ong/cadastrar-pet" element={<CadastroPet />} />
-
                   <Route path="/ong/cadastrar-pet/abrigo" element={<MultiStepForm />}>
-                    <Route index element={<Navigate to="abrigo-imagens" />} />
-
+                    <Route index element={<Navigate to="/ong/cadastrar-pet/abrigo-imagens" />} />
                     <Route path="abrigo-imagens" element={<PetsImagesStep />} />
                     <Route path="abrigo-informacoes" element={<PetInfoStep />} />
                     <Route path="abrigo-taxa" element={<TaxaStep />} />
                   </Route>
 
+                  <Route path="/ong/cadastrar-pet/resgatado" element={<MultiStepForm />}>
+                    <Route index element={<Navigate to="/ong/cadastrar-pet/resgatado-imagens" />} />
+                    <Route path="resgatado-imagens" element={<PetsImagesStep />} />
+                    <Route path="resgatado-informacoes" element={<PetInfoStep />} />
+                    <Route path="resgatado-taxa" element={<TaxaStep />} />
+                  </Route>
 
-                  <Route path="/ong/cadastrar-pet/resgatado" />
                   <Route path="/ong/aplicacoes" element={<OngAplicacoes />} />
 
                 </Route>

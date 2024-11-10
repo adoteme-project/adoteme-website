@@ -16,7 +16,7 @@ const CadastroPet = () => {
             <p> Cadastrar pet de um abrigo </p>
           </div>
         </Link>
-        <Link to={'/ong/cadastrar-pet/resgatado'} className="w-full px-12 py-20 bg-ong-div border-2 border-amarelo rounded-xl flex flex-col gap-3 items-center justify-center">
+        <Link to={'/ong/cadastrar-pet/resgatado/resgatado-imagens'} className="w-full px-12 py-20 bg-ong-div border-2 border-amarelo rounded-xl flex flex-col gap-3 items-center justify-center">
           <span className="rounded-full p-8 flex justify-center items-center bg-amarelo-select">
             <img src={iconeCadastroResgatado} />
           </span>

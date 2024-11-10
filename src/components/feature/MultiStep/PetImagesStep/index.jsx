@@ -3,6 +3,7 @@ import ImageWidget from "../../UploadImage/ImageWidget";
 import { useForm, FormProvider } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useFormState } from "@/context/FormStateProvider";
+import { useContextPath } from "@/context/PathContextProvider";
 
 const PetsImagesStep = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const PetsImagesStep = () => {
   const { handleSubmit, setValue, reset } = methods;
   const {formState, setFormState } = useFormState();
   const [images, setImages] = useState(formState.images || []);
-
+  const contextPath = useContextPath();
 
   const handleImageChange = (file, index) => {
     if (file) {
@@ -37,7 +38,7 @@ const PetsImagesStep = () => {
     })
 
     console.log("Dados enviados:", formState);
-    navigate("/ong/cadastrar-pet/abrigo/abrigo-informacoes");
+    navigate(`/ong/cadastrar-pet/${contextPath}/${contextPath}-informacoes`);
   };
 
   return (
