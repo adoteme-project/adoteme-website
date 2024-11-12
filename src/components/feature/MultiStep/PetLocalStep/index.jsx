@@ -8,7 +8,9 @@ import { PlaceAutocomplete } from "../../Maps/PlaceAutocomplete";
 const PetsLocalStep = () => {
     const navigate = useNavigate();
     const { formState, setFormState } = useFormState();
+
     const [selectedPlace, setSelectedPlace] = useState(null);
+    const [marker, setMarker] = useState({ position: { lat: 0, lng: 0 } });
 
     const defaultPosition = { zoom: 19, center: { lat: -23.558052381604917, lng: -46.661807140459345 } };
     const { position, error: geoError } = useGeolocationContext();
@@ -46,19 +48,37 @@ const PetsLocalStep = () => {
                 zoom: 19,
             }));
         }
-    }
+    };
 
-    const saveLocal = () => {
+    const onMarkerDragEnd = (coord) => {
+        const { latLng } = coord;
+        const lat = latLng.lat();
+        const lng = latLng.lng();
+        const newPosition = { lat, lng };
 
-        const posicao = {latitude: selectedPlace.lat, longitude: selectedPlace.lng }
+        setMarker({ position: newPosition });
 
         setFormState({
             ...formState,
-            posicao
+            posicao: {
+                latitude: lat,
+                longitude: lng,
+            },
         });
-        console.log(posicao);
-        navigate("/ong/cadastrar-pet/resgatado/resgatado-imagens");
-    }
+    };
+
+    const saveLocal = () => {
+        if (selectedPlace) {
+            const posicao = { latitude: selectedPlace.lat, longitude: selectedPlace.lng };
+
+            setFormState({
+                ...formState,
+                posicao,
+            });
+            console.log(posicao);
+            navigate("/ong/cadastrar-pet/resgatado/resgatado-imagens");
+        }
+    };
 
     return (
         <div className="flex flex-col gap-10">
@@ -75,17 +95,17 @@ const PetsLocalStep = () => {
                     reuseMaps={true}
                 >
                     {selectedPlace && (
-                        <AdvancedMarker position={selectedPlace}>
+                        <AdvancedMarker draggable={true} onDragEnd={onMarkerDragEnd} position={selectedPlace}>
                             <Pin />
                         </AdvancedMarker>
                     )}
                 </Map>
             </APIProvider>
-            <nav>
-                <button onClick={saveLocal}>Continuar</button>
+            <nav className="w-full flex justify-center">
+                <button className="bg-verde px-4 py-3 w-[25%] rounded-md text-center text-branco" onClick={saveLocal}>Continuar</button>
             </nav>
         </div>
-    )
-}
+    );
+};
 
 export default PetsLocalStep;
