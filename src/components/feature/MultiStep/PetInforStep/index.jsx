@@ -28,21 +28,23 @@ const PetInfoStep = () => {
 
   const saveData = (data) => {
 
+    const {inteligente, obediente, sociavel, territorial, tolerante, ...rest} = data;
+
     const formattedData = {
-      ...data,
+      ...rest,
       personalidade: {
-        inteligente: data.inteligente || 0,
-        obediente: data.obediente || 0,
-        sociavel: data.sociavel || 0,
-        territorial: data.territorial || 0,
-        tolerante: data.tolerante || 0,
+        inteligente: inteligente || 0,
+        obediente: obediente || 0,
+        sociavel: sociavel || 0,
+        territorial: territorial || 0,
+        tolerante: tolerante || 0,
       },
     }
 
     setFormState({ ...formState, ...formattedData });
 
     if (contextPath === 'abrigo') {
-      console.log("Dados do pet do abrigo:", { ...formState, ...data });
+      console.log("Dados do pet do abrigo:", {...formState});
       navigate(`/ong/cadastrar-pet/${contextPath}/${contextPath}-taxa`);
     } else {
       console.log("Dados do pet perdido:", { ...formState, ...data });
