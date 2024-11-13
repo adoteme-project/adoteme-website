@@ -10,7 +10,7 @@ export default {
     extend: {
       fontFamily: {
         roboto: ['Roboto', 'sans-serif'],
-        nunito: ['Nunito', 'sans-serif'], // Adiciona a fonte 'Roboto'
+        nunito: ['Nunito', 'sans-serif'], 
       },
     },
     colors: {
