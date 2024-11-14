@@ -81,7 +81,7 @@ function App() {
                     element={<CadastroAdotante />}
                   />
                   <Route path="/login/redefinir" element={<RedefinirSenha />} />
-                  <Route path="/login/inserir-codigo" element={<InserirCodigo/>} />
+                  <Route path="/login/inserir-codigo" element={<InserirCodigo />} />
                   <Route path="/login/redefinir-senha" element={<NovaSenha />} />
                 </Route>
 
@@ -99,8 +99,16 @@ function App() {
                   {/*                   <Route element={<PrivateRoute userType="ong" allowedRoles={['ADMIN', 'MODERATOR']} />}> */}
                   <Route path="/ong/dashboard" element={<OngDashboard />} />
                   <Route path="/ong/configuracoes" element={<OngConfiguracoes />} />
+
                   {/*                   </Route>
  */}
+
+{/*                   <Route element={<PrivateRoute userType="ong" allowedRoles={['ADMIN', 'MODERATOR']} />}> */}
+                    <Route path="/ong/dashboard" element={<OngDashboard />} />
+                    <Route path="/ong/configuracoes" element={<OngConfiguracoes />} />
+                    <Route path="/ong/organizacao" element={<OngEditarConfiguracoes />} />
+{/*                   </Route> */}
+
                   <Route path="/ong/pets" element={<OngPet />} />
 
                   <Route path="/ong/cadastrar-pet" element={<CadastroPet />} />
@@ -110,11 +118,6 @@ function App() {
                     <Route path="abrigo-informacoes" element={<PetInfoStep />} />
                     <Route path="abrigo-taxa" element={<TaxaStep />} />
                   </Route>
-                    <Route element={<PrivateRoute userType="ong" allowedRoles={['ADMIN', 'MODERATOR']} />}>
-                      <Route path="/ong/dashboard" element={<OngDashboard />} />
-                      <Route path="/ong/configuracoes" element={<OngConfiguracoes />} />
-                      <Route path="/ong/organizacao" element={<OngEditarConfiguracoes />} />
-                    </Route>
 
                   <Route path="/ong/cadastrar-pet/resgatado" element={<MultiStepForm />}>
                     <Route index element={<Navigate to="/ong/cadastrar-pet/resgatado-local" />} />

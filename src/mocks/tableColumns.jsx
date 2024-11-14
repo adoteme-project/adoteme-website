@@ -15,9 +15,8 @@ const petsColumns = [
         field: 'situacao',
         headerName: 'Situação',
         type: 'singleSelect',
-        valueOptions: ['Sem Aplicação', 'Revisão', 'Aprovado', 'Documentação', 'Adotado'],
+        valueOptions: ['Sem Aplicação', 'Revisão', 'Adotado'],
         flex: 0.2,
-
     },
     {
         field: 'visibilidade',
@@ -50,4 +49,20 @@ const petsColumns = [
     },
 ];
 
-export { petsColumns }
+const aplicacoesColumns = [
+    { field: 'id', headerName: 'ID', flex: 0.1, },
+    { field: 'nomePet', headerName: 'Nome do Pet', flex: 0.2, },
+    { field: 'qtdAplicacao', headerName: 'Aplicações', flex: 0.1, },
+    { field: 'dtEnviado', headerName: 'Enviado', flex: 0.2, },
+    { field: 'taxaPet', headerName: 'Taxa', flex: 0.1},
+    { field: 'dtEntreda', headerName: 'Dada de Entretada', flex: 0.2},
+    {
+        field: 'situacao',
+        headerName: 'Situação',
+        type: 'singleSelect',
+        valueOptions: ['Descartado', 'Nova', 'Revisão', 'Concluído'],
+        flex: 0.2,            
+    },
+]
+
+export { petsColumns, aplicacoesColumns }
