@@ -3,6 +3,7 @@ import TableOng from "@/components/common/TableOng";
 import PageTitle from "@/components/layout/PageTitle";
 import SearchLayout from "@/components/layout/SearchLayout";
 import { aplicacoesColumns } from "@/mocks/tableColumns";
+import { useNavigate } from "react-router-dom";
 
 const dataAplicaoes = [
   {
@@ -17,6 +18,15 @@ const dataAplicaoes = [
 ]
 
 const OngAplicacoes = () => {
+  // Trocar por useQuery
+  const navigation = useNavigate();
+
+  const handleNavigationPet = () => {
+    console.log("Evento registrado");
+    navigation("/ong/pet/1");
+  }
+
+
   return (
     <>
       <PageTitle title="Aplicações">
@@ -25,7 +35,7 @@ const OngAplicacoes = () => {
       <SearchLayout numberResults={0} registerName="Aplicações">
         <InputOng />
       </SearchLayout>
-      <TableOng rows={dataAplicaoes} columns={aplicacoesColumns}/>
+      <TableOng rows={dataAplicaoes} columns={aplicacoesColumns} eventRow={handleNavigationPet}/>
     </>
   );
 }

@@ -43,6 +43,7 @@ import InserirCodigo from "./pages/RedefinirAcessoCodigo";
 import NovaSenha from "./pages/RedefinirAcessoSenha";
 import '@/services/mockAPI'; // Mock da API
 import OngEditarConfiguracoes from "./pages/OngEditarConfiguracoes";
+import OngPetDetalhes from "./pages/OngPetDetalhes";
 
 function App() {
   return (
@@ -127,6 +128,7 @@ function App() {
                   </Route>
 
                   <Route path="/ong/aplicacoes" element={<OngAplicacoes />} />
+                  <Route path="/ong/pet/:id" element={<OngPetDetalhes/>} />
 
                 </Route>
                 {/*                 </Route> */}

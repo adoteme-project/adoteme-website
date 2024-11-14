@@ -12,7 +12,7 @@ const tableTheme = createTheme(
 );
 
 
-export default function TableOng({ rows, columns }) {
+export default function TableOng({ rows, columns, eventRow }) {
     return (
         <ThemeProvider theme={tableTheme}>
             <Box
@@ -45,6 +45,7 @@ export default function TableOng({ rows, columns }) {
                     editMode="row"
                     disableColumnResize={true}
                     disableAutosize={true}
+                    onRowClick={eventRow}
                 />
             </Box>
         </ThemeProvider>
