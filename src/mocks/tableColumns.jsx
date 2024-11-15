@@ -1,3 +1,4 @@
+import ButtonAvaliacao from "@/components/feature/AvaliacaoPet/ButtonAvaliacao";
 import { Edit } from "@mui/icons-material";
 import { GridActionsCellItem, GridDeleteIcon } from "@mui/x-data-grid";
 
@@ -82,9 +83,7 @@ const aplicacoesPetColumns = [
         headerAlign: 'center',
         sortable: false,
         flex: 0.1,
-        renderCell: () => {
-            return (<p className="text-azul-main font-bold underline"> Avaliar </p>)
-        }
+        renderCell: (params) => <ButtonAvaliacao toggleModal={params.toggleModal}/>
     },
 ]
 

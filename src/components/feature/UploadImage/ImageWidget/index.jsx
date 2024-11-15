@@ -51,7 +51,7 @@ const ImageWidget = ({ control, onChange, image, colSpan, contextPath }) => {
           <MoonLoader speedMultiplier={1}/>
         </div>
       ) : preview ? (
-        <img src={preview} alt="Preview" className="object-fill h-full w-full rounded-md" />
+        <img src={preview} alt="Preview" className="object-cover h-full w-full rounded-md" />
       ) : (
         <FontAwesomeIcon icon={faCamera} size="2x" />
       )}

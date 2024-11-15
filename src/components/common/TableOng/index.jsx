@@ -31,7 +31,8 @@ export default function TableOng({ rows, columns, eventRow, height }) {
                         borderColor: '#FFC55E',
                     },
                     "& .MuiDataGrid-columnHeader": {
-                        backgroundColor: '#FFC55E',
+                        backgroundColor: '#FFBB1C',
+                        fontWeight: 'bold'
                     },
                 }}
             >

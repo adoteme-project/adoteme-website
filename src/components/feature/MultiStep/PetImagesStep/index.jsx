@@ -50,7 +50,7 @@ const PetsImagesStep = () => {
           {contextPath === 'abrigo' ? 'Imagens do Pet' : 'Imagem do Pet'}
         </h1>
         <div className={`w-full ${contextPath === 'abrigo' ? 'grid grid-rows-2 grid-cols-4' : 
-          'flex justify-center'} gap-4 gap-x-10 h-96`}>
+          'flex justify-center'} gap-6 h-96`}>
           {[...Array(contextPath === 'abrigo' ? 5 : 1)].map((_, index) => (
             <ImageWidget
               key={index}
