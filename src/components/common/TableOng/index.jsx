@@ -12,12 +12,12 @@ const tableTheme = createTheme(
 );
 
 
-export default function TableOng({ rows, columns, eventRow }) {
+export default function TableOng({ rows, columns, eventRow, height }) {
     return (
         <ThemeProvider theme={tableTheme}>
             <Box
                 sx={{
-                    height: 500,
+                    height: height,
                     width: 'auto',
                     '.MuiDataGrid-columnSeparator': {
                         display: 'none',
@@ -46,6 +46,7 @@ export default function TableOng({ rows, columns, eventRow }) {
                     disableColumnResize={true}
                     disableAutosize={true}
                     onRowClick={eventRow}
+                    getRowId={(row) => row.id}
                 />
             </Box>
         </ThemeProvider>

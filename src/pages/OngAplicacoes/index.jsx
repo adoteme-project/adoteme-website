@@ -18,24 +18,23 @@ const dataAplicaoes = [
 ]
 
 const OngAplicacoes = () => {
-  // Trocar por useQuery
   const navigation = useNavigate();
 
-  const handleNavigationPet = () => {
-    console.log("Evento registrado");
-    navigation("/ong/pet/1");
+  const handleNavigationPet = (params) => {
+    console.log("Evento registrado " + params.row.id);
+    navigation(`/ong/pet/${params.row.id}`);
   }
 
 
   return (
     <>
       <PageTitle title="Aplicações">
-        <button className="font-nunito px-3 py-2 rounded-lg bg-azul-main text-branco">Exportar registros</button>
+        <button className="font-nunito px-3 py-2  rounded-lg bg-azul-main text-branco">Exportar registros</button>
       </PageTitle>
       <SearchLayout numberResults={0} registerName="Aplicações">
         <InputOng />
       </SearchLayout>
-      <TableOng rows={dataAplicaoes} columns={aplicacoesColumns} eventRow={handleNavigationPet}/>
+      <TableOng rows={dataAplicaoes} columns={aplicacoesColumns} eventRow={handleNavigationPet} height={500}/>
     </>
   );
 }

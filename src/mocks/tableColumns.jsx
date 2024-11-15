@@ -65,4 +65,27 @@ const aplicacoesColumns = [
     },
 ]
 
-export { petsColumns, aplicacoesColumns }
+const aplicacoesPetColumns = [
+    { field: 'adotanteNome', headerName: 'Adotante', flex: 0.1, },
+    { field: 'tempoEnvio', headerName: 'Enviado', flex: 0.1, },
+    { field: 'adotanteEmail', headerName: 'Email', flex: 0.2, },
+    {
+        field: 'situacao',
+        headerName: 'Situação',
+        type: 'singleSelect',
+        valueOptions: ['Novo', 'Revisão', 'Concluído'],
+        flex: 0.1,            
+    },
+    {
+        field: 'actions',
+        headerName: '',
+        headerAlign: 'center',
+        sortable: false,
+        flex: 0.1,
+        renderCell: () => {
+            return (<p className="text-azul-main font-bold underline"> Avaliar </p>)
+        }
+    },
+]
+
+export { petsColumns, aplicacoesColumns, aplicacoesPetColumns }
