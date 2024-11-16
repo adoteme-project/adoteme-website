@@ -37,8 +37,9 @@ import FavoritosOngs from "./pages/OngsFavoritos";
 import RedefinirSenha from "./pages/RedefinirAcesso";
 import InserirCodigo from "./pages/RedefinirAcessoCodigo";
 import NovaSenha from "./pages/RedefinirAcessoSenha";
-import '@/services/mockAPI'; // Mock da API
 import OngEditarConfiguracoes from "./pages/OngEditarConfiguracoes";
+import OngUsuarios from "./pages/OngUsuarios";
+import AdicionarUsuario from "./pages/OngAdicionarUsuario";
 
 function App() {
   return (
@@ -98,6 +99,8 @@ function App() {
                     </Route>
 
                     <Route path="/ong/pets" element={<OngPet />} />
+                    <Route path="/ong/usuarios" element={<OngUsuarios />} />
+                    <Route path="/ong/adicionar-usuario" element={<AdicionarUsuario />} />
                     <Route path="/ong/aplicacoes" element={<OngAplicacoes />} />
 
                   </Route>
