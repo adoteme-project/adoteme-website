@@ -7,11 +7,13 @@ import { petsColumns } from "@/mocks/tableColumns";
 import { getPetsOng } from "@/services/ongAPI";
 import { exportacaoPets } from "@/services/onguserAPI";
 import { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const OngPet = () => {
+  const navigation = useNavigate();
   const [dataPets, setDataPets] = useState([]);
   const [filteredPets, setFilteredPets] = useState([]);
+
 
   const { authOng } = useContext(OngAuthContext);
 
@@ -59,6 +61,11 @@ const OngPet = () => {
     }
   };
 
+  const handleNavigationPet = (params) => {
+    console.log("Evento registrado " + params.row.id);
+    navigation(`/ong/pet/${params.row.id}`);
+  }
+
   return (
     <>
       <PageTitle title="Pets" actionName="+ Adicionar pet">
@@ -75,7 +82,7 @@ const OngPet = () => {
       <SearchLayout numberResults={filteredPets.length} registerName="Pets">
         <InputOng setTableData={setFilteredPets} originalData={dataPets} />
       </SearchLayout>
-      <TableOng rows={filteredPets} columns={petsColumns} />
+      <TableOng rows={filteredPets} columns={petsColumns} eventRow={handleNavigationPet} height={500}/>
     </>
   );
 };
