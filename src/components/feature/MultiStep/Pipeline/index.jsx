@@ -5,47 +5,44 @@ import {
   faDog,
   faFileInvoiceDollar,
   faFilePen,
+  faMapMarkerAlt,
 } from "@fortawesome/free-solid-svg-icons";
+import React from "react";
 
-const Pipeline = ({ currentStep }) => {
-  const steps = [
-    {
-      id: 1,
-      icon: <FontAwesomeIcon icon={faDog} />,
-      nameStep: "Imagens do pet",
-    },
-    {
-      id: 2,
-      icon: <FontAwesomeIcon icon={faFilePen} />,
-      nameStep: "Informações",
-    },
-    {
-      id: 3,
-      icon: <FontAwesomeIcon icon={faFileInvoiceDollar} />,
-      nameStep: "Taxa",
-    },
-  ];
+const Pipeline = ({ currentStep, steps }) => {
+  const stepsConfig = {
+    "abrigo": [
+      { icon: <FontAwesomeIcon icon={faDog} />, nameStep: "Imagens do pet" },
+      { icon: <FontAwesomeIcon icon={faFilePen} />, nameStep: "Informações" },
+      { icon: <FontAwesomeIcon icon={faFileInvoiceDollar} />, nameStep: "Taxa" },
+    ],
+    "resgatado": [
+      { icon: <FontAwesomeIcon icon={faMapMarkerAlt} />, nameStep: "Local" },
+      { icon: <FontAwesomeIcon icon={faDog} />, nameStep: "Imagens do pet" },
+      { icon: <FontAwesomeIcon icon={faFilePen} />, nameStep: "Informações" },
+    ]
+  };
+
+  const context = steps[0]?.split('/')[3];
 
   return (
     <div className="bg-amarelo-select p-8 flex justify-center items-center gap-4 rounded-t-2xl">
-      {steps.map((step, index) => {
-        return (
-          <>
-            <div key={index}>
-              <IconStep
-                icon={step.icon}
-                nameStep={step.nameStep}
-                active={currentStep == step.id}
-              />
-            </div>
-            {index < steps.length - 1 && (
-              <span>
-                <FontAwesomeIcon icon={faArrowRight} width={75} color="white" />
-              </span>
-            )}
-          </>
-        );
-      })}
+      {stepsConfig[context]?.map((step, index) => (
+        <React.Fragment key={index}>
+          <div>
+            <IconStep
+              icon={step.icon}
+              nameStep={step.nameStep}
+              active={currentStep === index + 1}
+            />
+          </div>
+          {index < stepsConfig[context].length - 1 && (
+            <span>
+              <FontAwesomeIcon icon={faArrowRight} width={75} color="white" />
+            </span>
+          )}
+        </React.Fragment>
+      ))}
     </div>
   );
 };

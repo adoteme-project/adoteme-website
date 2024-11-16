@@ -17,7 +17,7 @@ const OngLayout = () => {
   };
 
   return (
-    <div className="w-full flex h-svh max-h-svh">
+    <div className="w-full flex h-svh max-h-svh relative">
       <SidebarOng />
       <div className="h-full flex-1">
         <div className="flex h-full flex-col overflow-y-auto no-scrollbar">

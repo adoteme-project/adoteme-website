@@ -27,7 +27,7 @@ const PlaceAutocomplete = ({ onPlaceSelect }) => {
 
   return (
     <div className="box-border w-[100%]">
-      <input ref={inputRef} placeholder="Inserir Endereço" className="w-full h-10 p-3"/>
+      <input ref={inputRef} placeholder="Inserir Endereço" className="w-full h-10 p-3 bg-input-d rounded-lg"/>
     </div>
   );
 };

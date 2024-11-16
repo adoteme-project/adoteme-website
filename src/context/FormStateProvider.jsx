@@ -1,22 +1,19 @@
 import { createContext, useContext, useState } from "react";
 
-export const FormStateContext = createContext({});
+const FormStateContext = createContext();
 
-export const FormStateProvider = ({ children }) => {
-  const value = useState({});
-
-  return (
-    <FormStateContext.Provider value={value}>
-        { children}
-    </FormStateContext.Provider>
-);
+export const useFormState = () => {
+  return useContext(FormStateContext);
 };
 
-// eslint-disable-next-line react-refresh/only-export-components
-export const useFormState = () => {
-    const context = useContext(FormStateContext);
-    if (!context) {
-        throw new Error("useFormState deve ser utilizado com um FormStateProvider");
-    }
-    return context;
-}
+export const FormStateProvider = ({ children }) => {
+  const [formState, setFormState] = useState({});
+
+  console.log(formState);
+
+  return (
+    <FormStateContext.Provider value={{ formState, setFormState }}>
+      {children}
+    </FormStateContext.Provider>
+  );
+};
