@@ -55,14 +55,14 @@ const aplicacoesColumns = [
     { field: 'nomePet', headerName: 'Nome do Pet', flex: 0.2, },
     { field: 'qtdAplicacao', headerName: 'Aplicações', flex: 0.1, },
     { field: 'dtEnviado', headerName: 'Enviado', flex: 0.2, },
-    { field: 'taxaPet', headerName: 'Taxa', flex: 0.1},
-    { field: 'dtEntreda', headerName: 'Dada de Entretada', flex: 0.2},
+    { field: 'taxaPet', headerName: 'Taxa', flex: 0.1 },
+    { field: 'dtEntreda', headerName: 'Dada de Entretada', flex: 0.2 },
     {
         field: 'situacao',
         headerName: 'Situação',
         type: 'singleSelect',
         valueOptions: ['Descartado', 'Nova', 'Revisão', 'Concluído'],
-        flex: 0.2,            
+        flex: 0.2,
     },
 ]
 
@@ -75,7 +75,7 @@ const aplicacoesPetColumns = [
         headerName: 'Situação',
         type: 'singleSelect',
         valueOptions: ['Novo', 'Revisão', 'Concluído'],
-        flex: 0.1,            
+        flex: 0.1,
     },
     {
         field: 'actions',
@@ -83,32 +83,32 @@ const aplicacoesPetColumns = [
         headerAlign: 'center',
         sortable: false,
         flex: 0.1,
-        renderCell: (params) => <ButtonAvaliacao toggleModal={params.toggleModal}/>
+        renderCell: (params) => <ButtonAvaliacao toggleModal={params.toggleModal} />
     },
 ]
 
 const usersColumns = [
     {
-      field: 'email',
-      headerName: 'Email',
-      flex: 0.3,
+        field: 'email',
+        headerName: 'Email',
+        flex: 0.3,
     },
     {
-      field: 'celular',
-      headerName: 'Celular',
-      flex: 0.2,
+        field: 'celular',
+        headerName: 'Celular',
+        flex: 0.2,
     },
     {
-      field: 'dataEntrada',
-      headerName: 'Data de Entrada',
-      flex: 0.2,
+        field: 'dataEntrada',
+        headerName: 'Data de Entrada',
+        flex: 0.2,
     },
     {
-      field: 'funcao',
-      headerName: 'Função',
-      type: 'singleSelect',
-      valueOptions: ['Voluntário', 'Administrador', 'Funcionário'], 
-      flex: 0.2,
+        field: 'funcao',
+        headerName: 'Função',
+        type: 'singleSelect',
+        valueOptions: ['Voluntário', 'Administrador', 'Funcionário'],
+        flex: 0.2,
     },
     // {
     //   field: 'actions',
@@ -131,6 +131,6 @@ const usersColumns = [
     //     />,
     //   ],
     // },
-  ];
+];
 
 export { petsColumns, aplicacoesColumns, aplicacoesPetColumns, usersColumns }

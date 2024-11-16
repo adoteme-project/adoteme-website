@@ -87,54 +87,47 @@ function App() {
                   <Route path="/login/redefinir-senha" element={<NovaSenha />} />
                 </Route>
 
-                {/*  <Route path="/teste" element={<PrivateRoute userType="adotante" />}> */}
-                <Route path="/teste" element={<Teste />}>
-                  <Route path="/teste/pet-images" element={<PetsImagesStep />} />
-                  <Route path="/teste/pet-informacoes" element={<PetInfoStep />} />
-                  <Route path="/teste/pet-taxa" element={<TaxaStep />} />
-                </Route>
-                {/*  </Route> */}
-
-                {/*                 <Route path="/ong" element={<PrivateRoute userType="ong" allowedRoles={['ADMIN', 'MODERATOR', 'USER']} />}> */}
-                <Route element={<OngLayout />}>
-
-                  {/*                   <Route element={<PrivateRoute userType="ong" allowedRoles={['ADMIN', 'MODERATOR']} />}> */}
-                  <Route path="/ong/dashboard" element={<OngDashboard />} />
-                  <Route path="/ong/configuracoes" element={<OngConfiguracoes />} />
-
-                  {/*                   </Route>
- */}
-
-{/*                   <Route element={<PrivateRoute userType="ong" allowedRoles={['ADMIN', 'MODERATOR']} />}> */}
-                    <Route path="/ong/dashboard" element={<OngDashboard />} />
-                    <Route path="/ong/configuracoes" element={<OngConfiguracoes />} />
-                    <Route path="/ong/organizacao" element={<OngEditarConfiguracoes />} />
-{/*                   </Route> */}
-
-                  <Route path="/ong/pets" element={<OngPet />} />
-                  <Route path="/ong/usuarios" element={<OngUsuarios />} />
-                  <Route path="/ong/adicionar-usuario" element={<AdicionarUsuario />} />
-
-                  <Route path="/ong/cadastrar-pet" element={<CadastroPet />} />
-                  <Route path="/ong/cadastrar-pet/abrigo" element={<MultiStepForm />}>
-                    <Route index element={<Navigate to="/ong/cadastrar-pet/abrigo-imagens" />} />
-                    <Route path="abrigo-imagens" element={<PetsImagesStep />} />
-                    <Route path="abrigo-informacoes" element={<PetInfoStep />} />
-                    <Route path="abrigo-taxa" element={<TaxaStep />} />
+                <Route path="/teste" element={<PrivateRoute userType="adotante" />}>
+                  <Route path="/teste" element={<Teste />}>
+                    <Route path="/teste/pet-images" element={<PetsImagesStep />} />
+                    <Route path="/teste/pet-informacoes" element={<PetInfoStep />} />
+                    <Route path="/teste/pet-taxa" element={<TaxaStep />} />
                   </Route>
-
-                  <Route path="/ong/cadastrar-pet/resgatado" element={<MultiStepForm />}>
-                    <Route index element={<Navigate to="/ong/cadastrar-pet/resgatado-local" />} />
-                    <Route path="resgatado-local" element={<PetsLocalStep />} />
-                    <Route path="resgatado-imagens" element={<PetsImagesStep />} />
-                    <Route path="resgatado-informacoes" element={<PetInfoStep />} />
-                  </Route>
-
-                  <Route path="/ong/aplicacoes" element={<OngAplicacoes />} />
-                  <Route path="/ong/pet/:id" element={<OngPetDetalhes/>} />
-
                 </Route>
-                {/*                 </Route> */}
+
+                <Route path="/ong" element={<PrivateRoute userType="ong" allowedRoles={['ADMIN', 'MODERATOR', 'USER']} />}>
+                  <Route element={<OngLayout />}>
+
+                    <Route element={<PrivateRoute userType="ong" allowedRoles={['ADMIN', 'MODERATOR']} />}>
+                      <Route path="/ong/dashboard" element={<OngDashboard />} />
+                      <Route path="/ong/configuracoes" element={<OngConfiguracoes />} />
+                      <Route path="/ong/organizacao" element={<OngEditarConfiguracoes />} />
+                      <Route path="/ong/usuarios" element={<OngUsuarios />} />
+                      <Route path="/ong/adicionar-usuario" element={<AdicionarUsuario />} />
+                    </Route>
+
+                    <Route path="/ong/pets" element={<OngPet />} />
+
+                    <Route path="/ong/cadastrar-pet" element={<CadastroPet />} />
+                    <Route path="/ong/cadastrar-pet/abrigo" element={<MultiStepForm />}>
+                      <Route index element={<Navigate to="/ong/cadastrar-pet/abrigo-imagens" />} />
+                      <Route path="abrigo-imagens" element={<PetsImagesStep />} />
+                      <Route path="abrigo-informacoes" element={<PetInfoStep />} />
+                      <Route path="abrigo-taxa" element={<TaxaStep />} />
+                    </Route>
+
+                    <Route path="/ong/cadastrar-pet/resgatado" element={<MultiStepForm />}>
+                      <Route index element={<Navigate to="/ong/cadastrar-pet/resgatado-local" />} />
+                      <Route path="resgatado-local" element={<PetsLocalStep />} />
+                      <Route path="resgatado-imagens" element={<PetsImagesStep />} />
+                      <Route path="resgatado-informacoes" element={<PetInfoStep />} />
+                    </Route>
+
+                    <Route path="/ong/aplicacoes" element={<OngAplicacoes />} />
+                    <Route path="/ong/pet/:id" element={<OngPetDetalhes />} />
+
+                  </Route>
+                </Route>
 
                 <Route path="*" element={<NotFound />} />
               </Routes>
