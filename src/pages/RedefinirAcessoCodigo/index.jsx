@@ -68,7 +68,7 @@ const InserirCodigo = () => {
             <button
               type="submit"
               disabled={loading}
-              className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-md"
+              className="bg-[#A9B949] hover:bg-[#95A344] text-white font-medium py-2 px-4 rounded-md"
             >
               {loading ? "Verificando..." : "Enviar"}
             </button>

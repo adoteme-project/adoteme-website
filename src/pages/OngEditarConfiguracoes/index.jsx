@@ -172,21 +172,21 @@ const OngEditarConfiguracoes = () => {
 
         <div className="flex gap-4 mt-8 lg:max-w-3xl lg:mx-auto">
           <button
-            className="px-6 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 w-full sm:w-auto"
+            className="px-6 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 w-full sm:w-auto"
             onClick={() => setIsEditing(false)} 
           >
             Voltar
           </button>
           {isEditing ? (
             <button
-              className="px-6 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 w-full sm:w-auto"
+              className="px-6 py-2 bg-[#B2CF06] text-white rounded-md hover:bg-[#95A344] w-full sm:w-auto"
               onClick={handleSave}
             >
               Salvar
             </button>
           ) : (
             <button
-              className="px-6 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 w-full sm:w-auto"
+              className="px-6 py-2 bg-[#A9B949] text-white rounded-md hover:bg-[#95A344] w-full sm:w-auto"
               onClick={() => setIsEditing(true)} 
             >
               Editar

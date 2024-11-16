@@ -48,7 +48,7 @@ const RedefinirSenha = () => {
           <div className="flex justify-between mt-6">
             <button
               type="button"
-              className="bg-red-500 hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg"
+              className="bg-[#EC5A49] hover:bg-red-600 text-white font-medium py-2 px-4 rounded-lg"
               onClick={() => navigate("/")}
             >
               Cancelar
@@ -56,7 +56,7 @@ const RedefinirSenha = () => {
             <button
               type="submit"
               disabled={loading}
-              className="bg-green-500 hover:bg-green-600 text-white font-medium py-2 px-4 rounded-lg"
+              className="bg-[#A9B949] hover:bg-[#95A344] text-white font-medium py-2 px-4 rounded-lg"
             >
               {loading ? "Enviando..." : "Enviar"}
             </button>

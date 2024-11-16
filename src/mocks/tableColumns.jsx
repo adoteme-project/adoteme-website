@@ -87,4 +87,50 @@ const aplicacoesPetColumns = [
     },
 ]
 
-export { petsColumns, aplicacoesColumns, aplicacoesPetColumns }
+const usersColumns = [
+    {
+      field: 'email',
+      headerName: 'Email',
+      flex: 0.3,
+    },
+    {
+      field: 'celular',
+      headerName: 'Celular',
+      flex: 0.2,
+    },
+    {
+      field: 'dataEntrada',
+      headerName: 'Data de Entrada',
+      flex: 0.2,
+    },
+    {
+      field: 'funcao',
+      headerName: 'Função',
+      type: 'singleSelect',
+      valueOptions: ['Voluntário', 'Administrador', 'Funcionário'], 
+      flex: 0.2,
+    },
+    // {
+    //   field: 'actions',
+    //   headerName: 'Ações',
+    //   type: 'actions',
+    //   headerAlign: 'center',
+    //   flex: 0.1,
+    //   getActions: () => [
+    //     <GridActionsCellItem
+    //       key={0}
+    //       icon={<Edit />}
+    //       label="Editar"
+    //       showInMenu
+    //     />,
+    //     <GridActionsCellItem
+    //       key={1}
+    //       icon={<GridDeleteIcon />}
+    //       label="Excluir"
+    //       showInMenu
+    //     />,
+    //   ],
+    // },
+  ];
+
+export { petsColumns, aplicacoesColumns, aplicacoesPetColumns, usersColumns }
