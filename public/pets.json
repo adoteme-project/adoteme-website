@@ -1,0 +1,110 @@
+[
+  {
+    "id": 1,
+    "nome": "Bobby",
+    "dataResgate": "15/09/2024",
+    "position": {
+      "lat": -23.439065,
+      "lng": -46.532241
+    }
+  },
+  {
+    "id": 2,
+    "nome": "Luna",
+    "dataResgate": "12/09/2024",
+    "position": {
+      "lat": -23.438885,
+      "lng": -46.532101
+    }
+  },
+  {
+    "id": 3,
+    "nome": "Max",
+    "dataResgate": "10/09/2024",
+    "position": {
+      "lat": -23.438975,
+      "lng": -46.532181
+    }
+  },
+  {
+    "id": 4,
+    "nome": "Molly",
+    "dataResgate": "08/09/2024",
+    "position": {
+      "lat": -23.438955,
+      "lng": -46.532161
+    }
+  },
+  {
+    "id": 5,
+    "nome": "Buddy",
+    "dataResgate": "07/09/2024",
+    "position": {
+      "lat": -23.438895,
+      "lng": -46.532201
+    }
+  },
+  {
+    "id": 6,
+    "nome": "Charlie",
+    "dataResgate": "05/09/2024",
+    "position": {
+      "lat": -23.439015,
+      "lng": -46.532221
+    }
+  },
+  {
+    "id": 7,
+    "nome": "Daisy",
+    "dataResgate": "03/09/2024",
+    "position": {
+      "lat": -23.438945,
+      "lng": -46.532251
+    }
+  },
+  {
+    "id": 8,
+    "nome": "Rocky",
+    "dataResgate": "01/09/2024",
+    "position": {
+      "lat": -23.438905,
+      "lng": -46.532131
+    }
+  },
+  {
+    "id": 9,
+    "nome": "Bella",
+    "dataResgate": "30/08/2024",
+    "position": {
+      "lat": -23.438975,
+      "lng": -46.532101
+    }
+  },
+  {
+    "id": 10,
+    "nome": "Oscar",
+    "dataResgate": "28/08/2024",
+    "position": {
+      "lat": -23.439025,
+      "lng": -46.532181
+    }
+  },
+  {
+    "id": 11,
+    "nome": "Tob",
+    "dataResgate": "17/09/2024",
+    "position": {
+      "lat": -23.44230198689736,
+      "lng": -46.542816352026726
+    }
+  },
+  {
+    "id": 12,
+    "nome": "Mey",
+    "dataResgate": "21/10/2024",
+    "position": {
+      "lat": -23.55771477726636,
+      "lng": -46.661493542891684
+    }
+  }
+]

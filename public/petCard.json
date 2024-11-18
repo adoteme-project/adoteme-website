@@ -1,0 +1,287 @@
+[
+  {
+    "id": 1,
+    "nome": "NOHA",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "600m",
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "gato",
+    "personalidade": {
+      "energia": 5,
+      "inteligencia": 4,
+      "obediente": 3,
+      "sociabilidade": 4,
+      "territorial": 2,
+      "tolerante": 5,
+      "brincalhao": 3
+    }
+  },
+  {
+    "id": 2,
+    "nome": "PUDIM",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "700m",
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "gato",
+    "personalidade": {
+      "energia": 3,
+      "inteligencia": 5,
+      "obediente": 4,
+      "sociabilidade": 3,
+      "territorial": 3,
+      "tolerante": 4,
+      "brincalhao": 2
+    }
+  },
+  {
+    "id": 3,
+    "nome": "ALFREDO",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "1Km",
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "gato",
+    "personalidade": {
+      "energia": 4,
+      "inteligencia": 3,
+      "obediente": 5,
+      "sociabilidade": 5,
+      "territorial": 1,
+      "tolerante": 3,
+      "brincalhao": 5
+    }
+  },
+  {
+    "id": 4,
+    "nome": "PAÇOCA",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "1.2km",
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "gato",
+    "personalidade": {
+      "energia": 2,
+      "inteligencia": 2,
+      "obediente": 4,
+      "sociabilidade": 2,
+      "territorial": 5,
+      "tolerante": 2,
+      "brincalhao": 5
+    }
+  },
+  {
+    "id": 5,
+    "nome": "TOM",
+    "idade": "1 ano",
+    "imagem": "",
+    "distancia": "800m",
+    "porte": "médio",
+    "sexo": "macho",
+    "especie": "cachorro",
+    "personalidade": {
+      "energia": 1,
+      "inteligencia": 4,
+      "obediente": 2,
+      "sociabilidade": 1,
+      "territorial": 4,
+      "tolerante": 1,
+      "brincalhao": 2
+    }
+  },
+  {
+    "id": 6,
+    "nome": "LUNA",
+    "idade": "3 anos",
+    "imagem": "",
+    "distancia": "500m",
+    "porte": "pequeno",
+    "sexo": "fêmea",
+    "especie": "gato",
+    "personalidade": {
+      "energia": 5,
+      "inteligencia": 4,
+      "obediente": 3,
+      "sociabilidade": 4,
+      "territorial": 2,
+      "tolerante": 5,
+      "brincalhao": 3
+    }
+  },
+  {
+    "id": 7,
+    "nome": "MAX",
+    "idade": "4 anos",
+    "imagem": "",
+    "distancia": "2Km",
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "cachorro",
+    "personalidade": {
+      "energia": 3,
+      "inteligencia": 5,
+      "obediente": 4,
+      "sociabilidade": 3,
+      "territorial": 3,
+      "tolerante": 4,
+      "brincalhao": 2
+    }
+  },
+  {
+    "id": 8,
+    "nome": "BELLA",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "300m",
+    "porte": "pequeno",
+    "sexo": "fêmea",
+    "especie": "gato",
+    "personalidade": {
+      "energia": 4,
+      "inteligencia": 3,
+      "obediente": 5,
+      "sociabilidade": 5,
+      "territorial": 1,
+      "tolerante": 3,
+      "brincalhao": 5
+    }
+  },
+  {
+    "id": 9,
+    "nome": "FLOKI",
+    "idade": "1 ano",
+    "imagem": "",
+    "distancia": "1.5Km",
+    "porte": "médio",
+    "sexo": "macho",
+    "especie": "cachorro",
+    "personalidade": {
+      "energia": 2,
+      "inteligencia": 2,
+      "obediente": 4,
+      "sociabilidade": 2,
+      "territorial": 5,
+      "tolerante": 2,
+      "brincalhao": 5
+    }
+  },
+  {
+    "id": 10,
+    "nome": "ZOEY",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "2.5Km",
+    "porte": "pequeno",
+    "sexo": "fêmea",
+    "especie": "gato",
+    "personalidade": {
+      "energia": 1,
+      "inteligencia": 4,
+      "obediente": 2,
+      "sociabilidade": 1,
+      "territorial": 4,
+      "tolerante": 1,
+      "brincalhao": 2
+    }
+  },
+  {
+    "id": 11,
+    "nome": "BAILEY",
+    "idade": "3 anos",
+    "imagem": "",
+    "distancia": "1Km",
+    "porte": "médio",
+    "sexo": "fêmea",
+    "especie": "cachorro",
+    "personalidade": {
+      "energia": 5,
+      "inteligencia": 4,
+      "obediente": 3,
+      "sociabilidade": 4,
+      "territorial": 2,
+      "tolerante": 5,
+      "brincalhao": 3
+    }
+  },
+  {
+    "id": 12,
+    "nome": "ROCKY",
+    "idade": "4 anos",
+    "imagem": "",
+    "distancia": "1.8Km",
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "cachorro",
+    "personalidade": {
+      "energia": 3,
+      "inteligencia": 5,
+      "obediente": 4,
+      "sociabilidade": 3,
+      "territorial": 3,
+      "tolerante": 4,
+      "brincalhao": 2
+    }
+  },
+  {
+    "id": 13,
+    "nome": "SOPHIE",
+    "idade": "1 ano",
+    "imagem": "",
+    "distancia": "600m",
+    "porte": "pequeno",
+    "sexo": "fêmea",
+    "especie": "gato",
+    "personalidade": {
+      "energia": 4,
+      "inteligencia": 3,
+      "obediente": 5,
+      "sociabilidade": 5,
+      "territorial": 1,
+      "tolerante": 3,
+      "brincalhao": 5
+    }
+  },
+  {
+    "id": 14,
+    "nome": "CHARLIE",
+    "idade": "2 anos",
+    "imagem": "",
+    "distancia": "900m",
+    "porte": "grande",
+    "sexo": "macho",
+    "especie": "cachorro",
+    "personalidade": {
+      "energia": 2,
+      "inteligencia": 2,
+      "obediente": 4,
+      "sociabilidade": 2,
+      "territorial": 5,
+      "tolerante": 2,
+      "brincalhao": 5
+    }
+  },
+  {
+    "id": 15,
+    "nome": "NINA",
+    "idade": "3 anos",
+    "imagem": "",
+    "distancia": "1.2Km",
+    "porte": "pequeno",
+    "sexo": "fêmea",
+    "especie": "gato",
+    "personalidade": {
+      "energia": 1,
+      "inteligencia": 4,
+      "obediente": 2,
+      "sociabilidade": 1,
+      "territorial": 4,
+      "tolerante": 1,
+      "brincalhao": 2
+    }
+  }
+]

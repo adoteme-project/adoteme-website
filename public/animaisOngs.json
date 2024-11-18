@@ -1,0 +1,66 @@
+{
+  "ong": {
+    "id": 1,
+    "nome": "ONG A",
+    "email": "contato@onga.com",
+    "telefone": "123456789",
+    "cnpj": "12.345.678/0001-11",
+    "banco": "bradesco",
+    "agencia": "8424",
+    "conta": "5245", 
+    "tipoConta" : "corrente",
+    "nomeTitular" :  "Rafael",
+    "qrCode": "foto",
+    "chavePix": "4515",
+    "endereco": {
+      "id": 101,
+      "cep": "12345-678",
+      "estado": "SP",
+      "cidade": "São Paulo",
+      "bairro": "Centro",
+      "rua": "Rua A"
+    },
+    "animais": [
+      {
+        "id": 1,
+        "nome": "NOAH",
+        "idade": "2 anos",
+        "imagem": "",
+        "distancia": "600m",
+        "porte": "medio",
+        "sexo": "femea",
+        "especie": "gato"
+      },
+      {
+        "id": 2,
+        "nome": "PUDIM",
+        "idade": "2 anos",
+        "imagem": "",
+        "distancia": "700m",
+        "porte": "pequeno",
+        "sexo": "macho",
+        "especie": "cachorro"
+      },
+      {
+        "id": 3,
+        "nome": "ALFREDO",
+        "idade": "2 anos",
+        "imagem": "",
+        "distancia": "1Km",
+        "porte": "grande",
+        "sexo": "femea",
+        "especie": "gato"
+      },
+      {
+        "id": 4,
+        "nome": "PAÇOCA",
+        "idade": "2 anos",
+        "imagem": "",
+        "distancia": "1.2km",
+        "porte": "grande",
+        "sexo": "macho",
+        "especie": "cachorro"
+      }
+    ]
+  }
+}

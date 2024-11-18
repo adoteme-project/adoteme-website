@@ -1,0 +1,112 @@
+[
+  {
+    "id": 1,
+    "nome": "ONG A",
+    "email": "contato@onga.com",
+    "telefone": "123456789",
+    "cnpj": "12.345.678/0001-11",
+    "banco": "bradesco",
+    "agencia": "8424",
+    "conta": "5245", 
+    "tipoConta" : "corrente",
+    "nomeTitular" :  "Rafael",
+    "qrCode": "foto",
+    "chavePix": "4515",
+    "endereco": {
+      "id": 101,
+      "cep": "12345-678",
+      "estado": "SP",
+      "cidade": "São Paulo",
+      "bairro": "Centro",
+      "rua": "Rua A"
+    }
+  },
+  {
+    "id": 2,
+    "nome": "ONG B",
+    "email": "contato@ongb.com",
+    "telefone": "987654321",
+    "cnpj": "98.765.432/0001-22",
+    "banco": "bradesco",
+    "agencia": "8424",
+    "conta": "5245", 
+    "tipoConta" : "corrente",
+    "nomeTitular" :  "Rafael",
+    "qrcode": "foto",
+    "chavePix": "4515",
+    "endereco": {
+      "id": 102,
+      "cep": "23456-789",
+      "estado": "RJ",
+      "cidade": "Rio de Janeiro",
+      "bairro": "Copacabana",
+      "rua": "Rua B"
+    }
+  },
+  {
+    "id": 3,
+    "nome": "ONG C",
+    "email": "contato@ongc.com",
+    "telefone": "123123123",
+    "cnpj": "34.567.890/0001-33",
+    "banco": "bradesco",
+    "agencia": "8424",
+    "conta": "5245", 
+    "tipoConta" : "corrente",
+    "nomeTitular" :  "Rafael",
+    "qrcode": "foto",
+    "chavePix": "4515",
+    "endereco": {
+      "id": 103,
+      "cep": "34567-890",
+      "estado": "MG",
+      "cidade": "Belo Horizonte",
+      "bairro": "Savassi",
+      "rua": "Rua C"
+    }
+  },
+  {
+    "id": 4,
+    "nome": "ONG D",
+    "email": "contato@ongd.com",
+    "telefone": "456456456",
+    "cnpj": "45.678.901/0001-44",
+    "banco": "bradesco",
+    "agencia": "8424",
+    "conta": "5245", 
+    "tipoConta" : "corrente",
+    "nomeTitular" :  "Rafael",
+    "qrcode": "foto",
+    "chavePix": "4515",
+    "endereco": {
+      "id": 104,
+      "cep": "45678-901",
+      "estado": "BA",
+      "cidade": "Salvador",
+      "bairro": "Pelourinho",
+      "rua": "Rua D"
+    }
+  },
+  {
+    "id": 5,
+    "nome": "ONG E",
+    "email": "contato@onge.com",
+    "telefone": "789789789",
+    "cnpj": "56.789.012/0001-55",
+    "banco": "bradesco",
+    "agencia": "8424",
+    "conta": "5245", 
+    "tipoConta" : "corrente",
+    "nomeTitular" :  "Rafael",
+    "qrcode": "foto",
+    "chavePix": "4515",
+    "endereco": {
+      "id": 105,
+      "cep": "56789-012",
+      "estado": "RS",
+      "cidade": "Porto Alegre",
+      "bairro": "Moinhos de Vento",
+      "rua": "Rua E"
+    }
+  }
+]
