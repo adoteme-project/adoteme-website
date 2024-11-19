@@ -4,10 +4,13 @@ import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mu
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faClose } from '@fortawesome/free-solid-svg-icons';
+import useModal from '@/hooks/useModal';
+import ModalRejectAvaliacao from '../ModalReject';
 
 const ModalAvaliacao = ({ show, onClose }) => {
     const methods = useForm();
     const [modalState, setModalState] = useState('info');
+    const [isShowingModal, toggleModal] = useModal();
 
     if (!show) {
         return null;
@@ -67,9 +70,10 @@ const ModalAvaliacao = ({ show, onClose }) => {
                             </div>
                         </div>
                         <div className="w-full flex justify-between mt-16">
-                            <button className="bg-amarelo px-16 py-3 rounded-md text-branco"> Rejeitar </button>
+                            <button onClick={toggleModal} className="bg-amarelo px-16 py-3 rounded-md text-branco"> Rejeitar </button>
                             <button onClick={handleAvaliarClick} className="bg-verde-border px-16 py-3 rounded-md text-branco"> Avaliar </button>
                         </div>
+                        <ModalRejectAvaliacao show={isShowingModal} onCloseModal={toggleModal}/>
                     </>
                 ) : (
                     <>
