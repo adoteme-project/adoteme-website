@@ -87,5 +87,25 @@ axiosAuthenticatedOng.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
+const axiosAuthenticatedOngMultiPart = axios.create({
+  baseURL: "/api",
+  headers: {
+    "Content-Type": "multipart/form-data",
+    "Access-Control-Allow-Origin": "*",
+  },
+  withCredentials: true,
+})
 
-export { axiosAuth, axiosAuthenticated, axiosAuthenticatedOng, viaCep, api, axiosForm, axiosDownload };
+axiosAuthenticatedOngMultiPart.interceptors.request.use(
+  (config) => {
+      const token = localStorage.getItem("ongToken");
+      if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+  },
+  (error) => Promise.reject(error)
+);
+
+
+export { axiosAuth, axiosAuthenticated, axiosAuthenticatedOng, viaCep, api, axiosForm, axiosDownload, axiosAuthenticatedOngMultiPart};
