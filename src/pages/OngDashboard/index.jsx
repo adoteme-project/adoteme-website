@@ -8,7 +8,7 @@ const OngDashboard = () => {
   const [selectedMonth, setSelectedMonth] = useState("All");
 
   useEffect(() => {
-    axios.get("/dadosGrafico.json")
+    axios.get("http://localhost:8080/adocoes/dados-adocao-dashboard/1?ano=2024")
       .then(response => {
         setData(response.data);
       })
