@@ -4,7 +4,6 @@ import { InfoWindow } from "@vis.gl/react-google-maps";
 const JanelaInfo = ({ setOpen, pet, enderecoFormatado}) => {
   const position = {lat: pet.latitude, lng: pet.longitude}
   
-  console.log(pet);
 
   return (
     <InfoWindow

@@ -7,3 +7,7 @@ export function getPetsOng(id) {
 export function cadastroPetAbrigo(especie, formData) {
     return axiosAuthenticatedOngMultiPart.post(`/animais/${especie}`, formData);
 }
+
+export function cadastroPetResgatado(especie, formData) {
+    return axiosAuthenticatedOngMultiPart.post(`/animais-perdidos/${especie}`, formData);
+}

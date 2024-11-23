@@ -5,10 +5,13 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import TextArea from "../../InputsType/TextArea";
 import RatingInput from "../../InputsType/RatingInput";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { racasCachorro, racasGato } from "@/mocks/racasMocks";
 import { useFormState } from "@/context/FormStateProvider";
 import { useContextPath } from "@/context/PathContextProvider";
+import { cadastroPetResgatado } from "@/services/ongAPI";
+import { useNotification } from "@/context/NotificationProvider";
+import OngAuthContext from "@/context/AuthOngProvider";
 
 const PetInfoStep = () => {
   const methods = useForm();
@@ -16,6 +19,9 @@ const PetInfoStep = () => {
   const [racaOptions, setRacaOptions] = useState(racasCachorro);
   const { formState, setFormState } = useFormState();
   const contextPath = useContextPath();
+  const { error, promise } = useNotification();
+
+  const { authOng } = useContext(OngAuthContext);
 
   useEffect(() => {
     methods.reset(formState);
@@ -28,7 +34,7 @@ const PetInfoStep = () => {
 
   const saveData = (data) => {
 
-    const {energia, inteligencia, obediente, sociabilidade, territorial, tolerante, ...rest} = data;
+    const { energia, inteligencia, obediente, sociabilidade, territorial, tolerante, ...rest } = data;
 
     const formattedData = {
       ...rest,
@@ -45,11 +51,53 @@ const PetInfoStep = () => {
     setFormState({ ...formState, ...formattedData });
 
     if (contextPath === 'abrigo') {
-      console.log("Dados do pet do abrigo:", {...formState});
+      console.log("Dados do pet do abrigo:", { ...formState });
       navigate(`/ong/cadastrar-pet/${contextPath}/${contextPath}-taxa`);
     } else {
       console.log("Dados do pet perdido:", { ...formState, ...data });
-      navigate("/ong/pets")
+
+      const formattedDataResgatado = {
+        nome: data.nome,
+        sexo: data.sexo,
+        especie: data.especie,
+        cep: data.cep,
+        posicao: {
+          latitude: data.posicao.latitude,
+          longitude: data.posicao.longitude,
+        },
+        raca: data.raca,
+        descricao: data.descricao,
+        isEncontrado: false,
+        porte: data.porte,
+        ongId: authOng?.userData?.ongId,
+      }
+
+
+      const formData = new FormData();
+      formData.append(data.especie.toLowerCase(), JSON.stringify(formattedDataResgatado))
+
+
+      if (data.images && data.images[0] instanceof File) {
+        formData.append("fotoPerfil", data.images[0]);
+      }
+
+      const cadastroPromise = cadastroPetResgatado(data.especie.toLowerCase(), formData)
+        .then((response) => {
+          if (response.status === 201) {
+            navigate("/ong/pets")
+          }
+        })
+        .catch((err) => {
+          error("Erro ao cadastrar pet resgatado!");
+          console.error("Erro ao cadastrar Pet Resgatado:", err);
+        });
+
+      promise(cadastroPromise, {
+        pending: "Enviando dados...",
+        success: "Cadastro realizado com sucesso!",
+        error: "Erro ao cadastrar! Por favor, tente novamente.",
+      });
+
     }
 
   };
@@ -99,14 +147,17 @@ const PetInfoStep = () => {
               options={racaOptions}
             />
 
-            <Input label="Idade" type="text" name="anoNascimento" placeholder="Idade" />
-
             {
-            contextPath === 'abrigo' ?
-              (<Input label="Data no Abrigo" type="date" name="dataAbrigo" />) : null
+              contextPath === 'abrigo' ?
+                (<>
+                  <Input label="Idade" type="text" name="anoNascimento" placeholder="Idade" />
+                  <Input label="Data no Abrigo" type="date" name="dataAbrigo" />
+                  <Checkbox label="Castrado ?" name="isCastrado" />
+                </>
+                ) : null
             }
 
-            <Checkbox label="Castrado ?" name="isCastrado" />
+
             <TextArea label="Descrição" name="descricao" rows={5} />
           </fieldset>
 
