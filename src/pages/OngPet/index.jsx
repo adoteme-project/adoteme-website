@@ -14,7 +14,6 @@ const OngPet = () => {
   const [dataPets, setDataPets] = useState([]);
   const [filteredPets, setFilteredPets] = useState([]);
 
-
   const { authOng } = useContext(OngAuthContext);
 
   useEffect(() => {
@@ -23,8 +22,6 @@ const OngPet = () => {
         try {
           const response = await getPetsOng(authOng.userData.ongId);
           const data = response.data;
-
-          console.log(response.data);
 
           const dataFormat = data.map((pet) => ({
             ...pet,
