@@ -14,7 +14,7 @@ const CustomMarker = (props) => {
 
   return (
     <AdvancedMarker position={position} ref={ref} onClick={handleShowInfo}>
-      <span className="text-2xl">{pet.especie === 'Cachorro' ? `🐶` : `🐱`}</span>
+      <span className="text-2xl">{pet.especie === 'Cachorro'.toUpperCase() ? `🐶` : `🐱`}</span>
     </AdvancedMarker>
   );
 };

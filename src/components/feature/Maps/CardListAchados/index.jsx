@@ -12,7 +12,6 @@ const CardList = ({ pet, chosenPet, enderecoPerdido }) => {
         endereco: enderecoPerdido
       }
 
-
       chosenPet(infoPet);
 
     } catch (error) {
@@ -26,11 +25,13 @@ const CardList = ({ pet, chosenPet, enderecoPerdido }) => {
       cursor-pointer"
       onClick={fetchPetPerdidoPorId}
     >
-      <img
-        src={pet ? pet.imagem : DEFAULT_IMAGE}
-        alt="Pet Perdido"
-        className="h-36 w-40 rounded-xl"
-      />
+      <div className="w-[30%]">
+        <img
+          src={pet ? pet.imagem : DEFAULT_IMAGE}
+          alt="Pet Perdido"
+          className="h-36 w-full object-cover rounded-xl"
+        />
+      </div>
       <div className="flex flex-col justify-between items-start">
         <h3 className="bg-beje p-2 rounded-lg text-lg w-fit font-semibold">{pet.raca ?? "Vira-Lata"}</h3>
         <ul>
