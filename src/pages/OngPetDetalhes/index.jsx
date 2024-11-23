@@ -57,7 +57,7 @@ const OngPetDetalhes = () => {
                         <ul className="grid grid-cols-2 gap-2">
                             <li><span className="font-semibold">ID:</span> 1001</li>
                             <li><span className="font-semibold">Tipo:</span> Cachorro</li>
-                            <li><span className="font-semibold">Gênero:</span> Masculino</li>
+                            <li><span className="font-semibold">Sexo:</span> Masculino</li>
                             <li><span className="font-semibold">Tempo no abrigo:</span> 3 meses</li>
                             <li><span className="font-semibold">Raça:</span> Vira-Lata</li>
                             <li><span className="font-semibold">Taxa de adoção:</span> 0R$</li>

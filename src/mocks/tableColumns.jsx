@@ -50,6 +50,37 @@ const petsColumns = [
     },
 ];
 
+const lostPetsColumns = [
+    { field: "id", headerName: "ID", flex: 0.1 },
+    { field: "apelido", headerName: "Apelido", flex: 0.2 },
+    { field: "especie", headerName: "Espécie", flex: 0.1 },
+    { field: "raca", headerName: "Raça", flex: 0.1 },
+    { field: "porte", headerName: "Porte", flex: 0.1 },
+    { field: "dataResgate", headerName: "Data do Resgate", flex: 0.1 },
+    { field: "endereco", headerName: "Endereço", flex: 0.3 },
+    {
+        field: 'actions',
+        headerName: '',
+        type: 'actions',
+        headerAlign: 'center',
+        flex: 0.1,
+        getActions: () => [
+            <GridActionsCellItem
+                key={0}
+                icon={<Edit />}
+                label="Editar"
+                showInMenu
+            />,
+            <GridActionsCellItem
+                key={1}
+                icon={<GridDeleteIcon />}
+                label="Delete"
+                showInMenu
+            />,
+        ],
+    },
+];
+
 const aplicacoesColumns = [
     { field: 'id', headerName: 'ID', flex: 0.1, },
     { field: 'nome', headerName: 'Nome do Pet', flex: 0.2, },
@@ -110,27 +141,6 @@ const usersColumns = [
         valueOptions: ['Voluntário', 'Administrador', 'Funcionário'],
         flex: 0.2,
     },
-    // {
-    //   field: 'actions',
-    //   headerName: 'Ações',
-    //   type: 'actions',
-    //   headerAlign: 'center',
-    //   flex: 0.1,
-    //   getActions: () => [
-    //     <GridActionsCellItem
-    //       key={0}
-    //       icon={<Edit />}
-    //       label="Editar"
-    //       showInMenu
-    //     />,
-    //     <GridActionsCellItem
-    //       key={1}
-    //       icon={<GridDeleteIcon />}
-    //       label="Excluir"
-    //       showInMenu
-    //     />,
-    //   ],
-    // },
 ];
 
-export { petsColumns, aplicacoesColumns, aplicacoesPetColumns, usersColumns }
+export { petsColumns, aplicacoesColumns, aplicacoesPetColumns, usersColumns, lostPetsColumns }

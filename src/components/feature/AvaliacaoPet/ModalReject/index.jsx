@@ -20,7 +20,7 @@ const ModalRejectAvaliacao = ({ show, onCloseModal }) => {
                 <button
                     className="bg-amarelo px-16 py-3 rounded-md text-branco w-[30%]"
                     onClick={handleReject}>
-                    Reijeitar
+                    <Ri:v></Ri:v>ejeitar
                 </button>
             </div>
         </>

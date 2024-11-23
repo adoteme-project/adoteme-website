@@ -15,3 +15,7 @@ export function cadastroPetResgatado(especie, formData) {
 export function listarAplicacoesOng(ongId) {
     return axiosAuthenticatedOng.get(`/animais/todos-animais-pela-aplicacao-por-ong/${ongId}`);
 }
+
+export function getPetsPerdidosOng(ongId) {
+    return axiosAuthenticatedOng.get(`/animais-perdidos/animal-perdido-achados-perdidos-por-ong-tabela/${ongId}`);
+}
