@@ -19,3 +19,11 @@ export function listarAplicacoesOng(ongId) {
 export function getPetsPerdidosOng(ongId) {
     return axiosAuthenticatedOng.get(`/animais-perdidos/animal-perdido-achados-perdidos-por-ong-tabela/${ongId}`);
 }
+
+export function getPetDetalhesOng(idPet) {
+    return axiosAuthenticatedOng.get(`/animais/animal-com-lista-aplicacao/${idPet}`)
+}
+
+export function getDadosAdotanteRequisicao(idAdotante) {
+    return axiosAuthenticatedOng.get(`adotantes/form-adotante/${idAdotante}`);
+}

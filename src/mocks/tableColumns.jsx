@@ -98,11 +98,11 @@ const aplicacoesColumns = [
 ]
 
 const aplicacoesPetColumns = [
-    { field: 'adotanteNome', headerName: 'Adotante', flex: 0.1, },
-    { field: 'tempoEnvio', headerName: 'Enviado', flex: 0.1, },
+    { field: 'nomeAdotante', headerName: 'Adotante', flex: 0.1, },
+    { field: 'dataRequisicao', headerName: 'Enviado', flex: 0.1, },
     { field: 'adotanteEmail', headerName: 'Email', flex: 0.2, },
     {
-        field: 'situacao',
+        field: 'status',
         headerName: 'Situação',
         type: 'singleSelect',
         valueOptions: ['Sem aplicação', 'Revisão', 'Adotado'],
