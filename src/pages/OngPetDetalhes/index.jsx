@@ -7,10 +7,12 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { getPetDetalhesOng } from "@/services/ongAPI";
 import { formatarHorarioPassado } from "@/utils/formatMessageTime";
+import ButtonAvaliacao from "@/components/feature/AvaliacaoPet/ButtonAvaliacao";
 
 
 const OngPetDetalhes = () => {
     const [isShowingModal, toggleModal] = useModal();
+    const [infoReq, setInfoReq] = useState({});
     const [infoPet, setInfoPet] = useState({});
 
     let params = useParams();
@@ -20,9 +22,19 @@ const OngPetDetalhes = () => {
             try {
                 const response = await getPetDetalhesOng(params.id);
 
-                console.log(response.data);
+                const timeFormat = response.data.requisicoes.map((req) => ({
+                    ...req,
+                    dataRequisicao: formatarHorarioPassado(req.dataRequisicao),
+                }));
 
-                setInfoPet(response.data);
+                const dataFormat = {
+                    ...response.data,
+                    requisicoes: timeFormat
+                }
+
+                console.log(dataFormat);
+
+                setInfoPet(dataFormat);
 
             } catch (error) {
                 if (error.name === "AbortError") return;
@@ -68,23 +80,31 @@ const OngPetDetalhes = () => {
                     </div>
 
                     <div className="col-span-3 h-80 max-h-80 ">
-                        <TableOng rows={infoPet.requisicoes} columns={aplicacoesPetColumns} height={300} eventRow={() => toggleModal()} />
+                        <TableOng
+                            rows={infoPet.requisicoes}
+                            columns={aplicacoesPetColumns.map((col) =>
+                                col.field === 'actions'
+                                    ? { ...col, renderCell: (params) => <ButtonAvaliacao toggleModal={toggleModal} idForm={params.row.formularioId} setInfoReq={setInfoReq}/> }
+                                    : col
+                            )}
+                            height={300}
+                        />
                     </div>
 
                 </div>
                 <div className="flex flex-col gap-4 mt-4">
                     <h1 className="text-center text-azul-main font-nunito text-3xl font-semibold"> Personalidade </h1>
-                    <div className="w-full flex justify-around">
-                        <RatingInput color={'#FFBB1C'} disabled={true} defaultValue={infoPet.personalidade?.energia} name="energia" title="Energia" />
-                        <RatingInput color={'#FFBB1C'} disabled={true} defaultValue={infoPet.personalidade?.sociabilidade} name="sociabilidade" title="Sociável" />
-                        <RatingInput color={'#FFBB1C'} disabled={true} defaultValue={infoPet.personalidade?.obediente} name="obediente" title="Obediente" />
-                        <RatingInput color={'#FFBB1C'} disabled={true} defaultValue={infoPet.personalidade?.inteligencia} name="inteligencia" title="Inteligente" />
-                        <RatingInput color={'#FFBB1C'} disabled={true} defaultValue={infoPet.personalidade?.tolerante} name="tolerante" title="Tolerante" />
-                        <RatingInput color={'#FFBB1C'} disabled={true} defaultValue={infoPet.personalidade?.territorial} name="territorial" title="Territorial" />
-                    </div>
+                    <fieldset className="w-full flex justify-around" disabled={true}>
+                        <RatingInput color={'#FFBB1C'}  defaultValue={infoPet.personalidade?.energia} name="energia" title="Energia" />
+                        <RatingInput color={'#FFBB1C'}  defaultValue={infoPet.personalidade?.sociabilidade} name="sociabilidade" title="Sociável" />
+                        <RatingInput color={'#FFBB1C'}  defaultValue={infoPet.personalidade?.obediente} name="obediente" title="Obediente" />
+                        <RatingInput color={'#FFBB1C'}  defaultValue={infoPet.personalidade?.inteligencia} name="inteligencia" title="Inteligente" />
+                        <RatingInput color={'#FFBB1C'}  defaultValue={infoPet.personalidade?.tolerante} name="tolerante" title="Tolerante" />
+                        <RatingInput color={'#FFBB1C'}  defaultValue={infoPet.personalidade?.territorial} name="territorial" title="Territorial" />
+                    </fieldset>
                 </div>
             </div>
-            <ModalAvaliacao show={isShowingModal} onClose={toggleModal} />
+            <ModalAvaliacao show={isShowingModal} onClose={toggleModal} infoAdocao={infoReq}/>
         </>
     )
 }
