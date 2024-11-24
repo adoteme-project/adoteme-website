@@ -7,6 +7,7 @@ import { faArrowLeft, faClose } from '@fortawesome/free-solid-svg-icons';
 import useModal from '@/hooks/useModal';
 import ModalRejectAvaliacao from '../ModalReject';
 import { celularMask, formatarEndereco } from '@/utils/textMask';
+import { calcularIdadeDataCompleta } from '@/utils/calcularIdade';
 
 const ModalAvaliacao = ({ show, onClose, infoAdocao }) => {
     const [modalState, setModalState] = useState('info');
@@ -59,7 +60,7 @@ const ModalAvaliacao = ({ show, onClose, infoAdocao }) => {
                                 <h4 className="font-medium text-xl mb-4">Informações do Adotante </h4>
                                 <ul>
                                     <li className="text-base leading-loose"><span className="font-semibold">Nome Completo:</span> {infoAdocao.nome}</li>
-                                    <li className="text-base leading-loose"><span className="font-semibold">Idade:</span> {infoAdocao.dataNascimento}</li>
+                                    <li className="text-base leading-loose"><span className="font-semibold">Idade:</span> {calcularIdadeDataCompleta(infoAdocao.dataNascimento)}</li>
                                     <li className="text-base leading-loose"><span className="font-semibold">Celular:</span> {celularMask(infoAdocao.telefone)} </li>
                                     <li className="text-base leading-loose"><span className="font-semibold">Endereço:</span> {formatarEndereco(infoAdocao.endereco)}</li>
                                     <li className="text-base leading-loose"><span className="font-semibold">Email:</span> {infoAdocao.email}</li>
@@ -77,7 +78,7 @@ const ModalAvaliacao = ({ show, onClose, infoAdocao }) => {
                         </div>
                         <div className="w-full flex justify-between mt-16">
                             <button onClick={toggleModal} className="bg-amarelo px-16 py-3 rounded-md text-branco"> Rejeitar </button>
-                            <button onClick={handleAvaliarClick} className="bg-verde-border px-16 py-3 rounded-md text-branco"> Avaliar </button>
+                            <button onClick={handleAvaliarClick} className="bg-verde-border px-16 py-3 rounded-md text-branco"> Aprovar </button>
                         </div>
                         <ModalRejectAvaliacao show={isShowingModal} onCloseModal={toggleModal} />
                     </>

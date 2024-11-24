@@ -5,11 +5,11 @@ import SearchLayout from "@/components/layout/SearchLayout";
 import OngAuthContext from "@/context/AuthOngProvider";
 import { aplicacoesColumns } from "@/mocks/tableColumns";
 import { listarAplicacoesOng } from "@/services/ongAPI";
+import { formatarHorarioPassado } from "@/utils/formatMessageTime";
 import { AssignmentTurnedIn, NewReleases, PendingActions } from "@mui/icons-material";
 import { Tab, Tabs } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 
 const OngAplicacoes = () => {
   const navigation = useNavigate();
@@ -20,24 +20,28 @@ const OngAplicacoes = () => {
   const [aplicacoes, setAplicacoes] = useState([])
   const [filteredAplicacoes, setFilteredAplicacoes] = useState([]);
   const [value, setValue] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if(ongId) {
+    if (ongId) {
       const fetchData = async () => {
+        setLoading(true);
         try {
           const response = await listarAplicacoesOng(ongId);
           const data = response.data;
 
           const dataFormat = data.map((appl) => ({
             ...appl,
-            enviado: appl.enviado == null ? "Sem requisições" : appl.enviado,
+            enviado: appl.enviado == null ? "Sem requisições" : formatarHorarioPassado(appl.enviado),
           }));
-          
+
           setAplicacoes(dataFormat);
           setFilteredAplicacoes(dataFormat);
-          
+
         } catch (error) {
           console.error("Erro ao buscar dados da API", error);
+        } finally {
+          setLoading(false);
         }
       }
 
@@ -75,15 +79,15 @@ const OngAplicacoes = () => {
             color: "#FFBB1C",
           }
         }} value={value} onChange={handleChange}>
-          <Tab icon={<NewReleases color="#FFBB1C"/>} label={"Novo"} iconPosition="start" />
-          <Tab icon={<PendingActions color="#FFBB1C"/>} label={"Revisão"} iconPosition="start" />
-          <Tab icon={<AssignmentTurnedIn color="#FFBB1C"/>} label={"Concluído"} iconPosition="start" />
+          <Tab icon={<NewReleases color="#FFBB1C" />} label={"Novo"} iconPosition="start" />
+          <Tab icon={<PendingActions color="#FFBB1C" />} label={"Revisão"} iconPosition="start" />
+          <Tab icon={<AssignmentTurnedIn color="#FFBB1C" />} label={"Concluído"} iconPosition="start" />
         </Tabs>
       </PageTitle>
       <SearchLayout numberResults={filteredAplicacoes.length} registerName="Aplicações">
         <InputOng setTableData={setFilteredAplicacoes} originalData={aplicacoes} />
       </SearchLayout>
-      <TableOng rows={filteredAplicacoes} columns={aplicacoesColumns} eventRow={handleNavigationPet} height={500} />
+      <TableOng rows={filteredAplicacoes} columns={aplicacoesColumns} eventRow={handleNavigationPet} height={500} loading={loading} />
     </>
   );
 }

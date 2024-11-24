@@ -25,5 +25,13 @@ export function getPetDetalhesOng(idPet) {
 }
 
 export function getDadosAdotanteRequisicao(idAdotante) {
-    return axiosAuthenticatedOng.get(`adotantes/form-adotante/${idAdotante}`);
+    return axiosAuthenticatedOng.get(`/adotantes/form-adotante/${idAdotante}`);
+}
+
+export function deletePetOng(idPet) {
+    return axiosAuthenticatedOng.delete(`/animais/${idPet}`);
+}
+
+export function deletePetPerdidoOng(idPetPerdido) {
+    return axiosAuthenticatedOng.delete(`/animais-perdidos/${idPetPerdido}`);
 }

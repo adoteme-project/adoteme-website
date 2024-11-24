@@ -5,7 +5,6 @@ const ButtonAvaliacao = ({ toggleModal, idForm, setInfoReq }) => {
     const handleModalAvaliacao = async () => {
         try {
             const response = await getDadosAdotanteRequisicao(idForm);
-            console.log(response);
             setInfoReq(response.data);
             toggleModal();
         } catch (error) {

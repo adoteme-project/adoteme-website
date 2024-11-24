@@ -2,16 +2,16 @@ import ButtonAvaliacao from "@/components/feature/AvaliacaoPet/ButtonAvaliacao";
 import { Edit } from "@mui/icons-material";
 import { GridActionsCellItem, GridDeleteIcon } from "@mui/x-data-grid";
 
-const petsColumns = [
+const petsColumns = (userRole, handleDeletePet) => [
     {
         field: 'id',
         headerName: 'ID',
     },
-    { field: 'nome', headerName: 'Nome', flex: 0.2, },
-    { field: 'especie', headerName: 'Espécie', flex: 0.1, },
-    { field: 'raca', headerName: 'Raça', flex: 0.2, },
-    { field: 'taxaAdocao', headerName: 'Taxa', flex: 0.1, },
-    { field: 'dataEntrada', headerName: 'Data de Entrada', flex: 0.2, },
+    { field: 'nome', headerName: 'Nome', flex: 0.2 },
+    { field: 'especie', headerName: 'Espécie', flex: 0.1 },
+    { field: 'raca', headerName: 'Raça', flex: 0.2 },
+    { field: 'taxaAdocao', headerName: 'Taxa', flex: 0.1 },
+    { field: 'dataEntrada', headerName: 'Data de Entrada', flex: 0.2 },
     {
         field: 'situacao',
         headerName: 'Situação',
@@ -33,24 +33,34 @@ const petsColumns = [
         type: 'actions',
         headerAlign: 'center',
         flex: 0.1,
-        getActions: () => [
-            <GridActionsCellItem
-                key={0}
-                icon={<Edit />}
-                label="Editar"
-                showInMenu
-            />,
-            <GridActionsCellItem
-                key={1}
-                icon={<GridDeleteIcon />}
-                label="Delete"
-                showInMenu
-            />,
-        ],
+        getActions: (params) => {
+            const actions = [
+                <GridActionsCellItem
+                    key={0}
+                    icon={<Edit />}
+                    label="Editar"
+                    showInMenu
+                />,
+            ];
+
+            if (userRole.role === 'MODERATOR' || userRole.role === 'ADMIN') {
+                actions.push(
+                    <GridActionsCellItem
+                        key={1}
+                        icon={<GridDeleteIcon />}
+                        label="Deletar"
+                        onClick={() => handleDeletePet(params.row.id)}
+                        showInMenu
+                    />
+                );
+            }
+
+            return actions;
+        },
     },
 ];
 
-const lostPetsColumns = [
+const lostPetsColumns = (userRole, handleDeletePet) =>  [
     { field: "id", headerName: "ID", flex: 0.1 },
     { field: "apelido", headerName: "Apelido", flex: 0.2 },
     { field: "especie", headerName: "Espécie", flex: 0.1 },
@@ -64,20 +74,30 @@ const lostPetsColumns = [
         type: 'actions',
         headerAlign: 'center',
         flex: 0.1,
-        getActions: () => [
-            <GridActionsCellItem
-                key={0}
-                icon={<Edit />}
-                label="Editar"
-                showInMenu
-            />,
-            <GridActionsCellItem
-                key={1}
-                icon={<GridDeleteIcon />}
-                label="Delete"
-                showInMenu
-            />,
-        ],
+        getActions: (params) => {
+            const actions = [
+                <GridActionsCellItem
+                    key={0}
+                    icon={<Edit />}
+                    label="Editar"
+                    showInMenu
+                />,
+            ];
+
+            if (userRole.role === 'MODERATOR' || userRole.role === 'ADMIN') {
+                actions.push(
+                    <GridActionsCellItem
+                        key={1}
+                        icon={<GridDeleteIcon />}
+                        label="Deletar"
+                        onClick={() => handleDeletePet(params.row.id)}
+                        showInMenu
+                    />
+                );
+            }
+
+            return actions;
+        },
     },
 ];
 
