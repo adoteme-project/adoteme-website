@@ -7,7 +7,7 @@ const dataPet = {
     "imagem": "",
     "distancia": "600m",
     "porte": "grande",
-    "sexo": "macho",
+    "sexo": "Macho",
     "especie": "gato",
     "personalidade": {
         "energia": 5,

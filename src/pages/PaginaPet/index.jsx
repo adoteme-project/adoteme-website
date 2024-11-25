@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import BreadCrumb from '@/components/common/BreadCrumb';
 import Card from '@/components/common/Card';
 import Doacao from '@/components/section/Donation';
@@ -7,13 +7,18 @@ import Avaliacao from '@/components/feature/Rating';
 import { useCardContext } from '@/context/CardProvider';
 import Botao from '@/components/common/Button';
 import Carousel from '@/components/common/Carrossel';
+import AuthContext from '@/context/AuthProvider';
+import useModal from '@/hooks/useModal';
+import ModalLogin from '@/components/common/ModalLogin';
+import ModalAdocao from '@/components/feature/AdotarPet/ModalAdoacao';
 
 const PaginaPet = () => {
     const { id } = useParams();
     const { sugestoes } = useCardContext();
     const [animal, setAnimal] = useState(null);
+    const [isShowing, toggleModal] = useModal();
+    const { auth } = useContext(AuthContext);
     const cores = ["#FFC55E", "#A9B949", "#B2DED3", "#EC5A49"];
-
 
     useEffect(() => {
         if (sugestoes.length > 0) {
@@ -28,7 +33,7 @@ const PaginaPet = () => {
     }, [id, sugestoes]);
 
     if (!animal) {
-        return <p>Carregando...</p>
+        return <p>Carregando...</p>;
     }
 
     const generatePastelColorFromString = (str) => {
@@ -43,8 +48,22 @@ const PaginaPet = () => {
             color += ("00" + (value % 256).toString(16)).slice(-2);
         }
         return color;
-    };  
+    };
 
+    const renderModal = () => {
+        if (auth?.token) {
+            return <ModalAdocao isOpen={isShowing} />;
+        }
+        return <ModalLogin isOpen={isShowing} />;
+    };
+
+    const handleAdoptClick = (event) => {
+        event.preventDefault();
+        if (auth?.token) {
+            console.log("ta passando aqui!")
+            toggleModal(); 
+        }
+    };
 
     return (
         <>
@@ -70,7 +89,6 @@ const PaginaPet = () => {
                             <img src={animal.imagem} alt="Miniatura 2" className="w-20 h-20 rounded-lg" />
                             <img src={animal.imagem} alt="Miniatura 3" className="w-20 h-20 rounded-lg" />
                         </div>
-
                     </div>
 
                     {/* Coluna dos Textos */}
@@ -112,31 +130,41 @@ const PaginaPet = () => {
                                 Inteligente: <Avaliacao avaliacao={animal.personalidade.inteligencia} cor='#A9B949' />
                             </div>
                         </div>
-                        {/* <p className="mt-4 font-bold text-[#EC5A49]">TAXA DE ADOÇÃO: R${animal.taxaAdocao}</p> */}
-                        <Botao
-                            className="bg-green-500 text-white py-2 px-6 rounded-lg"
-                            titulo="Adotar"
-                            color="#4C8EB5"
-                            textColor="white"
-                            fontWeight="bold"
-                            onClick={() => console.log("Adotar")}
-                        />
+
+                        {auth?.token ? (
+                            <>
+                                <Botao
+                                    className="bg-green-500 text-white py-2 px-6 rounded-lg"
+                                    titulo="Adotar"
+                                    color="#4C8EB5"
+                                    textColor="white"
+                                    fontWeight="bold"
+                                    onClick={handleAdoptClick}
+                                />
+                                {isShowing && renderModal && <ModalAdocao isOpen={isShowing} />}
+                            </>
+                        ) : (
+                            <>
+                                <Botao
+                                    className="bg-green-500 text-white py-2 px-6 rounded-lg"
+                                    titulo="Adotar"
+                                    color="#4C8EB5"
+                                    textColor="white"
+                                    fontWeight="bold"
+                                    onClick={handleAdoptClick} 
+                                />
+                                {isShowing && <ModalLogin isOpen={isShowing} />}
+                            </>
+                        )}
                     </div>
                 </div>
-
-{/*                 <div className="mt-10">
-                    <h2 className="text-3xl font-bold">História</h2>
-                    <p className="mt-4 text-lg">{animal.historico}</p>
-                </div> */}
             </section>
-
-
 
             <section className="mt-10 p-10 bg-gray-100">
                 <h2 className="text-3xl font-bold mb-6 text-center">Sugestão</h2>
                 {sugestoes.length > 0 ? (
                     <Carousel
-                        items   ={sugestoes.filter(sugestao => sugestao.tipo === 'animal').slice(0, 8)}
+                        items={sugestoes.filter(sugestao => sugestao.tipo === 'animal').slice(0, 8)}
                         renderItem={(sugestao) => (
                             <Card
                                 key={sugestao.id}
@@ -152,7 +180,6 @@ const PaginaPet = () => {
                     <p>Nenhuma sugestão disponível no momento.</p>
                 )}
             </section>  
-
 
             <Doacao />
         </>

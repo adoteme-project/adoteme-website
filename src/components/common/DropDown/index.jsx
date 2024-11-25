@@ -1,30 +1,29 @@
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { useEffect, useState } from "react";
 
-const Selecao = ({ nome, tamanho, onSelect, data, resetValue }) => {
+const DropDown = ({ nome, tamanho, onSelect, data, resetValue }) => {
   const [selectedValue, setSelectedValue] = useState("");
 
   useEffect(() => {
-    setSelectedValue("");
+    if (resetValue) {
+      setSelectedValue("");
+    } 
   }, [resetValue]);
 
   const getFilteredOptions = () => {
     let options = [];
-
     if (nome === "Tamanhos") {
-      options = ["", "Pequeno", "Médio", "Grande"];
+      options = ["Pequeno", "Médio", "Grande"];
     } else if (nome === "Sexo") {
-      options = ["", "Macho", "Fêmea"];
+      options = ["Macho", "Fêmea"];
     } else if (nome === "Espécies") {
-      options = ["", ...new Set(data.map((item) => item.especie))];
+      options = [...new Set(data.map((item) => item.especie))];
     }
-
     return options;
   };
 
-  const filteredOptions = getFilteredOptions();
-  console.log("Opções filtradas: ", filteredOptions);
-  
+  const filteredOptions = ["", ...getFilteredOptions()];
+
   const handleChange = (event) => {
     const value = event.target.value;
     setSelectedValue(value);
@@ -38,19 +37,19 @@ const Selecao = ({ nome, tamanho, onSelect, data, resetValue }) => {
       <Box sx={{ minWidth: 120 }}>
         <FormControl fullWidth>
           <InputLabel
-            id="demo-simple-select-label"
+            id={`select-label-${nome}`}
             sx={{
               fontSize: "15px",
             }}
           >
-            {nome}
+            {selectedValue || nome} 
           </InputLabel>
           <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            label={nome}
-            value={selectedValue}
-            onChange={handleChange}
+            labelId={`select-label-${nome}`}
+            id={`select-${nome}`}
+            value={selectedValue} 
+            onChange={handleChange} 
+            displayEmpty 
             sx={{
               width: `${tamanho}px`,
               height: 40,
@@ -58,17 +57,13 @@ const Selecao = ({ nome, tamanho, onSelect, data, resetValue }) => {
             }}
           >
             <MenuItem value="">
-              {/* Opção vazia para limpar o filtro */}
+              <em>Selecionar</em>
             </MenuItem>
-            {filteredOptions.length > 0 ? (
-              filteredOptions.map((option, index) => (
-                <MenuItem key={index} value={option}>
-                  {option}
-                </MenuItem>
-              ))
-            ) : (
-              <MenuItem disabled>Nenhuma opção</MenuItem>
-            )}
+            {filteredOptions.map((option, index) => (
+              <MenuItem key={index} value={option}>
+                {option}
+              </MenuItem>
+            ))}
           </Select>
         </FormControl>
       </Box>
@@ -76,4 +71,4 @@ const Selecao = ({ nome, tamanho, onSelect, data, resetValue }) => {
   );
 };
 
-export default Selecao;
+export default DropDown;
