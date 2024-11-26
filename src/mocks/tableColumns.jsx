@@ -136,7 +136,8 @@ const aplicacoesPetColumns = [
         flex: 0.1,
         renderCell: (params) => {
             const idForm = params.row.formularioId;
-            <ButtonAvaliacao toggleModal={params.toggleModal} idForm={idForm} />
+            const idReq = params.row.id;
+            <ButtonAvaliacao toggleModal={params.toggleModal} idReq={idReq} idForm={idForm} />
         }
     },
 ]

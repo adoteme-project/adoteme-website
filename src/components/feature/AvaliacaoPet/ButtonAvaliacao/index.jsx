@@ -1,11 +1,19 @@
 import { getDadosAdotanteRequisicao } from "@/services/ongAPI";
+import { iniciarAvaliacao } from "@/services/onguserAPI";
 
-const ButtonAvaliacao = ({ toggleModal, idForm, setInfoReq }) => {
+const ButtonAvaliacao = ({ toggleModal, idReq, idForm, idUser, setInfoReq }) => {
 
     const handleModalAvaliacao = async () => {
         try {
             const response = await getDadosAdotanteRequisicao(idForm);
-            setInfoReq(response.data);
+            iniciarAvaliacao(idUser, idReq)
+
+            const dataReq = {
+                idReq: idReq,
+                ...response.data
+            }
+
+            setInfoReq(dataReq);
             toggleModal();
         } catch (error) {
             console.error('Error fetching adopter data:', error);

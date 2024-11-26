@@ -1,13 +1,32 @@
+import { rejeitarRequisicao } from "@/services/onguserAPI";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 
-const ModalRejectAvaliacao = ({ show, onCloseModal }) => {
+const ModalRejectAvaliacao = ({ show, onCloseModal, idReq }) => {
+    const [selectValue, setSelectValue] = useState('');
+
     if (!show) return null;
 
-    const handleReject = () => {
-        console.log("Reijeitado");
+    const handleReject = async () => {
+        console.log("Reijeitado", idReq);
+
+        try {
+            const response = rejeitarRequisicao(idReq, selectValue);
+
+            if (response.status == 200) {
+                console.log("Rejeitado com sucesso");
+            }
+
+        } catch (err) {
+            console.error("Erro ao reijeitar", err);
+        }
+
+
         onCloseModal();
     }
+
+    console.log(selectValue);
 
     return (
         <>
@@ -19,11 +38,11 @@ const ModalRejectAvaliacao = ({ show, onCloseModal }) => {
                 <div className="flex flex-col items-center w-full">
                     <h3 className="text-xl text-azul-main font-semibold text-center">Motivo de rejeição</h3>
                     <p className="text-sm text-center my-4">Selecione o motivo da rejeição abaixo</p>
-                    <select className="w-[70%] my-8 rounded-md border-amarelo border-2 px-3 py-2">
-                        <option>Incompatibilidade de perfil</option>
-                        <option>Negligência em relação à segurança</option>
-                        <option>Falta de autorização de outros moradores</option>
-                        <option>Ambiente inadequado</option>
+                    <select onChange={e => setSelectValue(e.target.value)} id="motivos" className="w-[70%] my-8 rounded-md border-amarelo border-2 px-3 py-2">
+                        <option value="Incompatibilidade de perfil" >Incompatibilidade de perfil</option>
+                        <option value="Negligência em relação à segurança">Negligência em relação à segurança</option>
+                        <option value="Falta de autorização de outros moradores">Falta de autorização de outros moradores</option>
+                        <option value="Ambiente inadequado">Ambiente inadequado</option>
                     </select>
                     <button
                         className="bg-amarelo px-16 py-3 rounded-md text-branco w-[30%]"

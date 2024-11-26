@@ -80,7 +80,7 @@ const ModalAvaliacao = ({ show, onClose, infoAdocao }) => {
                             <button onClick={toggleModal} className="bg-amarelo px-16 py-3 rounded-md text-branco"> Rejeitar </button>
                             <button onClick={handleAvaliarClick} className="bg-verde-border px-16 py-3 rounded-md text-branco"> Aprovar </button>
                         </div>
-                        <ModalRejectAvaliacao show={isShowingModal} onCloseModal={toggleModal} />
+                        <ModalRejectAvaliacao show={isShowingModal} onCloseModal={toggleModal} idReq={infoAdocao.idReq}/>
                     </>
                 ) : (
                     <>
