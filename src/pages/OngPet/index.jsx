@@ -86,7 +86,7 @@ const OngPet = () => {
   };
 
   const handleNavigationPet = (params) => {
-    navigation(`/ong/pet/${params.row.id}`);
+    navigation(`/ong/pets/${params.row.id}`);
   };
 
   const handleDelete = async (id, type) => {

@@ -52,7 +52,7 @@ const OngAplicacoes = () => {
 
   const handleNavigationPet = (params) => {
     console.log("Evento registrado " + params.row.id);
-    navigation(`/ong/pet/${params.row.id}`);
+    navigation(`/ong/pets/${params.row.id}`);
   }
 
   const situacoes = ["Sem aplicação", "Revisão", "Adotado"];

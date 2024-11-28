@@ -3,8 +3,8 @@ import axios from "axios";
 import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import PageTitle from "@/components/layout/PageTitle";
 import OngAuthContext from "@/context/AuthOngProvider";
-import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; 
+import { useNotification } from "@/context/NotificationProvider";
 
 const OngDashboard = () => {
   const [data, setData] = useState([]);
@@ -13,6 +13,7 @@ const OngDashboard = () => {
   const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   const [loading, setLoading] = useState(true);
   const { authOng } = useContext(OngAuthContext);
+  const { error, warn } = useNotification();
 
   const ongId = authOng?.userData?.ongId;
 
@@ -30,8 +31,9 @@ const OngDashboard = () => {
           params: { ano: selectedYear },
         });
         setData(response.data);
-      } catch (error) {
-        toast.error("Erro ao carregar os dados da dashboard. Tente novamente mais tarde.");
+      } catch (err) {
+        console.log(err)
+        error("Erro ao carregar os dados da dashboard. Tente novamente mais tarde.");
       } finally {
         setLoading(false);
       }
@@ -51,7 +53,7 @@ const OngDashboard = () => {
     if (year >= 2000 && year <= currentYear) {
       setSelectedYear(year);
     } else {
-      toast.warning("Digite um ano válido entre 2000 e o ano atual.");
+      warn("Digite um ano válido entre 2000 e o ano atual.");
       setInputYear(String(selectedYear));
     }
   };
@@ -70,7 +72,7 @@ const OngDashboard = () => {
     <>
       <PageTitle title="Dashboard" />
 
-      <ToastContainer />
+      {/* <ToastContainer /> */}
 
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "1rem" }}>
         <div>
