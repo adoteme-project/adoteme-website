@@ -38,7 +38,7 @@
         "imagem": "",
         "distancia": "700m",
         "porte": "pequeno",
-        "sexo": "macho",
+        "sexo": "Macho",
         "especie": "cachorro"
       },
       {
@@ -58,7 +58,7 @@
         "imagem": "",
         "distancia": "1.2km",
         "porte": "grande",
-        "sexo": "macho",
+        "sexo": "Macho",
         "especie": "cachorro"
       }
     ]

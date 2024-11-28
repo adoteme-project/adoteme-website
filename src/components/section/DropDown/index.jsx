@@ -6,12 +6,12 @@ const normalizeString = (str) =>
 
 function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange, selectedValue }) {
   const [optionsList, setOptionsList] = useState([]);
-  const [selectUtil, setSelectUtil] = useState("");
+  const [selectUtil, setSelectUtil] = useState(selectedValue || "");
 
   const optionsMap = {
-    porte: ["Pequeno", "Médio", "Grande"],
-    sexo: ["Macho", "Fêmea"],
-    especie: ["Cachorro", "Gato"],
+    porte: ["pequeno", "médio", "grande"],
+    sexo: ["macho", "fêmea"],
+    especie: ["cachorro", "gato"],
   };
 
   useEffect(() => {
@@ -23,7 +23,12 @@ function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange, sele
           const response = await fetch(fetchOptions);
           if (!response.ok) throw new Error("Erro ao buscar opções de filtro!");
           const cards = await response.json();
-          const options = new Set(cards.map((option) => normalizeString(option[filterKey])));
+          console.log("Cards:", cards);
+          const options = new Set(
+            cards.map((option) =>
+              normalizeString(option[filterKey]).charAt(0).toUpperCase() + option.slice(1)
+            )
+          );
           setOptionsList(Array.from(options));
         } catch (error) {
           console.error("Erro ao buscar opções de filtro", error);
@@ -31,19 +36,29 @@ function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange, sele
         }
       }
     };
-
     getFilterOptions();
-  }, [filterKey, fetchOptions]);
+  }, []);
 
   useEffect(() => {
-    setSelectUtil(selectedValue);
-  }, [selectedValue]);
+    if (selectedValue !== undefined && selectedValue != selectUtil) {
+      
+      setSelectUtil(selectedValue);
+    }
+  }, []);
 
   const handleUtilChange = (event) => {
-    const value = event.target.value;
-    setSelectUtil(value);
-    onFilterChange(filterKey, normalizeString(value));
+    let value = event.target.value;
+    if (value !== selectUtil) {
+      setSelectUtil(value);
+      onFilterChange(filterKey, normalizeString(value));
+    }
   };
+
+
+  // useEffect(() => {
+  //   setSelectUtil(selectedValue);
+  // }, [selectedValue]);
+
 
   return (
     <Box sx={{ minWidth: 120 }}>
@@ -54,22 +69,25 @@ function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange, sele
         <Select
           labelId="dropdown-label"
           id="dropdown"
-          value={selectUtil}
+          value={selectUtil || ""}
           onChange={handleUtilChange}
-          label={nome}
+          label={selectUtil}
           sx={{
             width: `${tamanho}px`,
             height: 40,
             fontSize: "12px",
           }}
         >
-          {optionsList.length > 0 ? (
-            optionsList.map((option, index) => (
-              <MenuItem key={index} value={option}>
-                {option.charAt(0).toUpperCase() + option.slice(1)}
-              </MenuItem>
-            ))
-          ) : (
+        {optionsList.length > 0 ? (
+        optionsList.map((option, index) => {
+          const formattedOption = option.charAt(0).toUpperCase() + option.slice(1);
+          return (
+            <MenuItem key={index} value={formattedOption}>
+              {formattedOption}
+            </MenuItem>
+          );
+        })
+      )  : (
             <MenuItem disabled>Nenhuma opção</MenuItem>
           )}
         </Select>
