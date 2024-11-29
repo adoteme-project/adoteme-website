@@ -7,12 +7,13 @@ const Banner = ({tamanho, imagensBanner }) => {
   const isHome = location.pathname === "/";
   
   return (
-    <section className={`h-[${tamanho}] w-full`}>
-      <div className="relative inline-block w-full">
+    <section className={`h-[${tamanho}] w-full inline-block`}>
+      <div className="relative  w-full">
         <img
           src={isHome ? imagemBannerHome : imagensBanner}
           alt="Banner"
           className="w-full h-auto block"
+          loading="lazy"
         />
         {isHome && (
           <div className="absolute inset-0 flex flex-col justify-center items-start pl-8 gap-4">

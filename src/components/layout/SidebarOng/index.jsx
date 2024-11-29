@@ -5,7 +5,7 @@ import { faFileLines } from '@fortawesome/free-regular-svg-icons';
 import { faArrowRightFromBracket, faChartLine, faGear, faPaw } from '@fortawesome/free-solid-svg-icons';
 import { useContext } from 'react';
 
-const SidebarOng = () => {
+const SidebarOng = ({ role }) => {
 
   const { logout } = useContext(OngAuthContext);
 
@@ -17,12 +17,18 @@ const SidebarOng = () => {
       </div>
       <nav className='flex flex-col gap-4 font-nunito'>
         <hr className='my-2 border-ong-div' />
-        <NavItem icon={faChartLine} label="Dashboard" pathTo="/dashboard" type="ong"/>
-        <NavItem icon={faPaw} label="Pets" pathTo="/pets" type="ong"/>
-        <NavItem icon={faFileLines} label="Aplicações" pathTo="/aplicacoes" type="ong"/>
-        <hr className='my-2 border-ong-div' />
-        <NavItem icon={faGear} label="Configurações" pathTo="/configuracoes" type="ong"/>
-        <NavItem icon={faArrowRightFromBracket} label="Sair" action={logout} type="ong"/>
+        {role === 'MODERATOR' || role === 'ADMIN' ? (<NavItem icon={faChartLine} label="Dashboard" pathTo="/dashboard" type="ong" />) : null}
+        <NavItem icon={faPaw} label="Pets" pathTo="/pets" type="ong" />
+        <NavItem icon={faFileLines} label="Aplicações" pathTo="/aplicacoes" type="ong" />
+        {role === 'MODERATOR' || role === 'ADMIN' ? (
+          <>
+            <hr className='my-2 border-ong-div' />
+            <NavItem icon={faGear} label="Configurações" pathTo="/configuracoes" type="ong" />
+          </>
+        ) : null
+        }
+
+        <NavItem icon={faArrowRightFromBracket} label="Sair" action={logout} type="ong" />
       </nav>
 
     </div>

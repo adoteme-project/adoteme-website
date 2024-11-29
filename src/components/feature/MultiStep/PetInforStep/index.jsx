@@ -116,8 +116,8 @@ const PetInfoStep = () => {
               label="Sexo"
               name="sexo"
               options={[
-                { label: 'Masculino', value: 'masculino' },
-                { label: 'Feminino', value: 'feminino' },
+                { label: 'Masculino', value: 'Masculino' },
+                { label: 'Feminino', value: 'Feminino' },
               ]}
             />
 
@@ -135,9 +135,9 @@ const PetInfoStep = () => {
               label="Porte"
               name="porte"
               options={[
-                { label: 'Grande', value: 'grande' },
-                { label: 'Médio', value: 'medio' },
-                { label: 'Pequeno', value: 'pequeno' }
+                { label: 'Grande', value: 'Grande' },
+                { label: 'Médio', value: 'Médio' },
+                { label: 'Pequeno', value: 'Pequeno' }
               ]}
             />
 

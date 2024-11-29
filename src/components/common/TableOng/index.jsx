@@ -11,8 +11,7 @@ const tableTheme = createTheme(
     ptBR
 );
 
-
-export default function TableOng({ rows, columns, eventRow, height }) {
+export default function TableOng({ rows, columns, eventRow, height, loading }) {
     return (
         <ThemeProvider theme={tableTheme}>
             <Box
@@ -43,6 +42,7 @@ export default function TableOng({ rows, columns, eventRow, height }) {
                     scrollbarSize={0}
                     rows={rows}
                     columns={columns}
+                    loading={loading}
                     editMode="row"
                     disableColumnResize={true}
                     disableAutosize={true}

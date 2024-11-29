@@ -53,12 +53,12 @@ const TaxaStep = () => {
             porte: data.porte || "Médio",
             taxaAdocao: enableTaxa ? data.taxaAdocao : 0,
             personalidade: {
-                energia: data.energia || 3,
-                sociabilidade: data.sociabilidade || 3,
-                tolerante: data.tolerante || 3,
-                obediente: data.obediente || 3,
-                territorial: data.territorial || 3,
-                inteligencia: data.inteligencia || 3,
+                energia: data.personalidade.energia || 3,
+                sociabilidade: data.personalidade.sociabilidade || 3,
+                tolerante: data.personalidade.tolerante || 3,
+                obediente: data.personalidade.obediente || 3,
+                territorial: data.personalidade.territorial || 3,
+                inteligencia: data.personalidade.inteligencia || 3,
             },
             ongId: authOng?.userData?.ongId,
         }
