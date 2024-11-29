@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const Doacao = () => {
       
     return (
-        <section className="bg-beje w-full h-[86.15vh] flex flex-col items-center justify-center gap-5" >
+        <section className="bg-beje w-full p-36 flex flex-col items-center justify-center gap-5" >
             <img src={imagem} alt="imagem logo " />
             <h1 className= "font-nunito text-3xl font-bold text-azul-dark ">Apoie uma ONG</h1>
             <Link 

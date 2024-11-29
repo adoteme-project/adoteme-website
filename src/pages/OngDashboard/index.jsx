@@ -40,7 +40,7 @@ const OngDashboard = () => {
     };
 
     fetchData();
-  }, [ongId, selectedYear]);
+  }, [ongId, selectedYear, error]);
 
   const handleYearInput = (e) => {
     setInputYear(e.target.value);
