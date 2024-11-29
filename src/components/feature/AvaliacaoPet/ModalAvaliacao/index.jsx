@@ -1,20 +1,31 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { formQuestionsAdotante } from "@/mocks/stepFormRegister";
 import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup } from '@mui/material';
 import { Controller, FormProvider, useForm } from 'react-hook-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faClose } from '@fortawesome/free-solid-svg-icons';
+import useModal from '@/hooks/useModal';
+import ModalRejectAvaliacao from '../ModalReject';
+import { celularMask, formatarEndereco } from '@/utils/textMask';
+import { calcularIdadeDataCompleta } from '@/utils/calcularIdade';
 
-const ModalAvaliacao = ({ show, onClose }) => {
-    const methods = useForm();
+const ModalAvaliacao = ({ show, onClose, infoAdocao }) => {
     const [modalState, setModalState] = useState('info');
+    const [isShowingModal, toggleModal] = useModal();
+
+    const methods = useForm({
+        defaultValues: infoAdocao.formulario,
+    });
+
+    useEffect(() => {
+        methods.reset(infoAdocao.formulario);
+    }, [infoAdocao, methods]);
 
     if (!show) {
         return null;
     }
 
     const formAdotante = formQuestionsAdotante[0].formGroups[0].radioControl;
-
 
     const handleAvaliarClick = () => {
         setModalState('formulario');
@@ -32,7 +43,6 @@ const ModalAvaliacao = ({ show, onClose }) => {
                             onClick={onClose}
                             className="cursor-pointer text-lg text-end"
                         />
-
                     ) : (
                         <FontAwesomeIcon
                             icon={faArrowLeft}
@@ -49,14 +59,14 @@ const ModalAvaliacao = ({ show, onClose }) => {
                             <div>
                                 <h4 className="font-medium text-xl mb-4">Informações do Adotante </h4>
                                 <ul>
-                                    <li className="text-base leading-loose"><span className="font-semibold">Nome Completo:</span> Ricardo</li>
-                                    <li className="text-base leading-loose"><span className="font-semibold">Idade:</span> 28 anos</li>
-                                    <li className="text-base leading-loose"><span className="font-semibold">Celular:</span> (11) 98007-2157</li>
-                                    <li className="text-base leading-loose"><span className="font-semibold">Endereço:</span> São Paulo - SP</li>
-                                    <li className="text-base leading-loose"><span className="font-semibold">Email:</span> ricardo@gmail.com</li>
+                                    <li className="text-base leading-loose"><span className="font-semibold">Nome Completo:</span> {infoAdocao.nome}</li>
+                                    <li className="text-base leading-loose"><span className="font-semibold">Idade:</span> {calcularIdadeDataCompleta(infoAdocao.dataNascimento)}</li>
+                                    <li className="text-base leading-loose"><span className="font-semibold">Celular:</span> {celularMask(infoAdocao.telefone)} </li>
+                                    <li className="text-base leading-loose"><span className="font-semibold">Endereço:</span> {formatarEndereco(infoAdocao.endereco)}</li>
+                                    <li className="text-base leading-loose"><span className="font-semibold">Email:</span> {infoAdocao.email}</li>
                                 </ul>
                             </div>
-                            <img src={'https://res.cloudinary.com/dv5mhhq0h/image/upload/v1728944509/lonarayeyge3u5bbgrog.jpg'} alt="Foto de Perfil"
+                            <img src={infoAdocao.fotoPerfil} alt="Foto de Perfil"
                                 className="bg-cinza relative inline-block h-52 w-52 !rounded-full border-amarelo-select border-2 object-cover object-center" />
                         </div>
                         <div className="border-[3px] border-amarelo-select w-full rounded-2xl flex items-center justify-between px-6 py-3">
@@ -67,25 +77,29 @@ const ModalAvaliacao = ({ show, onClose }) => {
                             </div>
                         </div>
                         <div className="w-full flex justify-between mt-16">
-                            <button className="bg-amarelo px-16 py-3 rounded-md text-branco"> Rejeitar </button>
-                            <button onClick={handleAvaliarClick} className="bg-verde-border px-16 py-3 rounded-md text-branco"> Avaliar </button>
+                            <button onClick={toggleModal} className="bg-amarelo px-16 py-3 rounded-md text-branco"> Rejeitar </button>
+                            <button onClick={handleAvaliarClick} className="bg-verde-border px-16 py-3 rounded-md text-branco"> Aprovar </button>
                         </div>
+                        <ModalRejectAvaliacao show={isShowingModal} onCloseModal={toggleModal} idReq={infoAdocao.idReq}/>
                     </>
                 ) : (
                     <>
                         <h2 className="text-3xl text-azul-main font-semibold text-center mb-6">Formulário</h2>
                         <FormProvider {...methods}>
-                            <fieldset className='flex flex-col gap-2'>
+                            <fieldset className="flex flex-col gap-2" disabled={true}>
                                 {formAdotante.map((radio, index) => (
                                     <FormControl key={index} component="fieldset">
                                         <FormLabel component="legend">{radio.pergunta}</FormLabel>
                                         <Controller
                                             name={radio.name}
                                             control={methods.control}
-                                            defaultValue=""
                                             rules={{ required: true }}
+                                            defaultValue=""
                                             render={({ field }) => (
-                                                <RadioGroup row {...field}>
+                                                <RadioGroup
+                                                    row
+                                                    {...field}
+                                                >
                                                     <FormControlLabel
                                                         control={<Radio />}
                                                         value={radio.valor1}

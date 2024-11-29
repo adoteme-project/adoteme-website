@@ -18,7 +18,7 @@ const OngLayout = () => {
 
   return (
     <div className="w-full flex h-svh max-h-svh relative">
-      <SidebarOng />
+      <SidebarOng role={authOng.userData?.role} />
       <div className="h-full flex-1">
         <div className="flex h-full flex-col overflow-y-auto no-scrollbar">
           <HeaderOng userData={userInfo} />

@@ -37,7 +37,7 @@ const Card = ({ colorBg, data = {}, onDoarClick, tipoCard }) => {
           {isPet ? (
             <div className="font-nunito space-y-4 py-2">
               <h3>Idade: {data.idade}</h3>
-              <h3>Tamanho: {data.porte}</h3>
+              <h3>Porte: {data.porte}</h3>
               <h3>Sexo: {data.sexo}</h3>
               <h3>Espécie: {data.especie}</h3>
             </div>

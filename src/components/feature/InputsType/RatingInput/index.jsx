@@ -1,11 +1,18 @@
+import { useState, useEffect } from 'react';
 import Rating from '@mui/material/Rating';
 import PetsIcon from '@mui/icons-material/Pets';
 import { Controller } from 'react-hook-form';
 
-const RatingInput = ({ name, disabled, color, title, control = null }) => {
+const RatingInput = ({ name, disabled, color, title, control = null, defaultValue }) => {
+    const [internalValue, setInternalValue] = useState(defaultValue ?? 0);
+
+    useEffect(() => {
+        setInternalValue(defaultValue ?? 0);
+    }, [defaultValue]);
+
     return (
         <div>
-            <span className='text-center block'>{title}</span>
+            <span className="text-center block">{title}</span>
             {control ? (
                 <Controller
                     name={name}
@@ -14,7 +21,6 @@ const RatingInput = ({ name, disabled, color, title, control = null }) => {
                         <Rating
                             {...field}
                             value={field.value ?? 0}
-                            defaultValue={0}
                             onChange={(_, newValue) => field.onChange(newValue)}
                             disabled={disabled}
                             icon={<PetsIcon fontSize="inherit" style={{ color: color }} />}
@@ -25,7 +31,8 @@ const RatingInput = ({ name, disabled, color, title, control = null }) => {
             ) : (
                 <Rating
                     name={name}
-                    defaultValue={0}
+                    value={internalValue}
+                    onChange={(_, newValue) => setInternalValue(newValue)}
                     disabled={disabled}
                     icon={<PetsIcon fontSize="inherit" style={{ color: color }} />}
                     emptyIcon={<PetsIcon fontSize="inherit" />}

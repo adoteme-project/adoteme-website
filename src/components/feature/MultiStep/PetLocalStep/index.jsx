@@ -41,14 +41,31 @@ const PetsLocalStep = () => {
         if (place.geometry && place.geometry.location) {
             const location = place.geometry.location;
             const newCenter = { lat: location.lat(), lng: location.lng() };
+    
+            const addressComponents = place.address_components;
+            const postalCodeComponent = addressComponents?.find((component) =>
+                component.types.includes("postal_code")
+            );
+            const cep = postalCodeComponent ? postalCodeComponent.long_name : null;
+    
             setSelectedPlace(newCenter);
             setCameraProps((prevCamera) => ({
                 ...prevCamera,
                 center: newCenter,
                 zoom: 19,
             }));
+
+            setFormState((prevState) => ({
+                ...prevState,
+                posicao: {
+                    latitude: newCenter.lat,
+                    longitude: newCenter.lng,
+                },
+                cep
+            }));
         }
     };
+    
 
     const onMarkerDragEnd = (coord) => {
         const { latLng } = coord;

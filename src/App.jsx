@@ -124,7 +124,7 @@ function App() {
                     </Route>
 
                     <Route path="/ong/aplicacoes" element={<OngAplicacoes />} />
-                    <Route path="/ong/pet/:id" element={<OngPetDetalhes />} />
+                    <Route path="/ong/pets/:id" element={<OngPetDetalhes />} />
 
                   </Route>
                 </Route>

@@ -4,34 +4,77 @@ import PageTitle from "@/components/layout/PageTitle";
 import SearchLayout from "@/components/layout/SearchLayout";
 import { usersColumns } from "@/mocks/tableColumns";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import OngAuthContext from "@/context/AuthOngProvider";
 
 const OngUsuarios = () => {
   const [dataUsuarios, setDataUsuarios] = useState([]);
   const [filteredUsuarios, setFilteredUsuarios] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { authOng } = useContext(OngAuthContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("/usuariosOng.json");
-        const data = response.data;
+  const ongId = authOng?.userData?.ongId;
 
-        const dataFormat = data.map((usuario) => ({
+  useEffect(() => {
+    if (!ongId) {
+      setError("ID da ONG não encontrado. Faça login novamente.");
+      setLoading(false);
+      return;
+    }
+
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(`http://localhost:8080/ongusers/lista-ong-users-por-ong/${ongId}`);
+
+        if (response.status === 204) {
+          setError("Nenhum usuário encontrado para esta ONG.");
+          setDataUsuarios([]);
+          setFilteredUsuarios([]);
+          return;
+        }
+
+        const dataFormat = response.data.map((usuario) => ({
           ...usuario,
-          dataEntrada: new Date(usuario.dataEntrada).toLocaleDateString(),
+          dataEntrada: new Date(usuario.dataCadastro).toLocaleDateString(),
         }));
 
         setDataUsuarios(dataFormat);
         setFilteredUsuarios(dataFormat);
-      } catch (error) {
-        console.error("Erro ao buscar os dados", error);
+        setError(null);
+      } catch (err) {
+        setError("Erro ao buscar os dados. Tente novamente mais tarde.");
+        console.error(err);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchData();
-  }, []);
+  }, [ongId]);
+
+  if (loading) {
+    return <div>Carregando dados dos usuários...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="text-red-500 text-center mt-4">
+        {error}
+        <div className="mt-4">
+          <button
+            className="bg-amarelo px-6 py-3 rounded-md text-branco font-bold text-sm hover:bg-amarelo-hover shadow-md"
+            onClick={() => navigate(-1)}
+          >
+            Voltar
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <>

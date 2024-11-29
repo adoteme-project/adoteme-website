@@ -37,7 +37,13 @@ export const OngAuthProvider = ({ children }) => {
 
                 await retriveUserData("ongusers");
 
-                navigate("/ong/dashboard")
+                if (role === 'MODERATOR' || role === 'ADMIN') {
+                    navigate("/ong/dashboard")
+                } else {
+                    navigate("/ong/pets")
+                }
+
+                
             }
 
         } catch (error) {

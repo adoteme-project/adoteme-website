@@ -10,6 +10,7 @@ import BannerImage from "@/assets/banner-pets.svg";
 import Pagination from "@/components/common/Pagination";
 import Carousel from "@/components/section/Categories";
 import Botao from "@/components/common/Button";
+import { SearchInput } from "@/components/common/SearchInput";
 
 const normalizeString = (str) =>
   str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : str;
@@ -47,9 +48,9 @@ const Pets = () => {
     setDropdownValues((prev) => ({ ...prev, [key]: value }));
   };
 
-  // const handleSearchChange = (filteredPets) => {
-  //   setFilteredPets(filteredPets);
-  // };
+  const handleSearchChange = (filteredPets) => {
+    setFilteredPets(filteredPets);
+  };
 
   const handleClearFilters = () => {
     setFilters({});
@@ -68,7 +69,7 @@ const Pets = () => {
       <Carousel titulo="Categorias" tipo="categorias" />
       <div className="flex flex-row w-full justify-evenly gap-4 px-4">
         <div className="flex flex-row w-8/12 gap-4 items-center">
-{/*           <DropDown 
+         <DropDown 
             filterKey="porte" 
             nome="Porte" 
             tamanho={200} 
@@ -98,9 +99,9 @@ const Pets = () => {
             titulo="Limpar filtro" 
             onClick={handleClearFilters} 
             color="#FFA607"
-          /> */}
+          /> 
         </div>
-        {/* <div className="w-[200px]">
+         <div className="w-[200px]">
           <SearchInput 
             data={validItems} 
             placeholder="Cidade" 
@@ -108,7 +109,7 @@ const Pets = () => {
             onSearch={handleSearchChange} 
             filterKey="nome" 
           />
-        </div> */}
+        </div> 
       </div>
 
       <Pagination

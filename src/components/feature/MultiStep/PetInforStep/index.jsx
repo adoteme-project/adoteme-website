@@ -5,10 +5,13 @@ import { FormProvider, useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import TextArea from "../../InputsType/TextArea";
 import RatingInput from "../../InputsType/RatingInput";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { racasCachorro, racasGato } from "@/mocks/racasMocks";
 import { useFormState } from "@/context/FormStateProvider";
 import { useContextPath } from "@/context/PathContextProvider";
+import { cadastroPetResgatado } from "@/services/ongAPI";
+import { useNotification } from "@/context/NotificationProvider";
+import OngAuthContext from "@/context/AuthOngProvider";
 
 const PetInfoStep = () => {
   const methods = useForm();
@@ -16,6 +19,9 @@ const PetInfoStep = () => {
   const [racaOptions, setRacaOptions] = useState(racasCachorro);
   const { formState, setFormState } = useFormState();
   const contextPath = useContextPath();
+  const { error, promise } = useNotification();
+
+  const { authOng } = useContext(OngAuthContext);
 
   useEffect(() => {
     methods.reset(formState);
@@ -28,14 +34,15 @@ const PetInfoStep = () => {
 
   const saveData = (data) => {
 
-    const {inteligente, obediente, sociavel, territorial, tolerante, ...rest} = data;
+    const { energia, inteligencia, obediente, sociabilidade, territorial, tolerante, ...rest } = data;
 
     const formattedData = {
       ...rest,
       personalidade: {
-        inteligente: inteligente || 0,
+        energia: energia || 0,
+        inteligencia: inteligencia || 0,
         obediente: obediente || 0,
-        sociavel: sociavel || 0,
+        sociabilidade: sociabilidade || 0,
         territorial: territorial || 0,
         tolerante: tolerante || 0,
       },
@@ -44,11 +51,53 @@ const PetInfoStep = () => {
     setFormState({ ...formState, ...formattedData });
 
     if (contextPath === 'abrigo') {
-      console.log("Dados do pet do abrigo:", {...formState});
+      console.log("Dados do pet do abrigo:", { ...formState });
       navigate(`/ong/cadastrar-pet/${contextPath}/${contextPath}-taxa`);
     } else {
       console.log("Dados do pet perdido:", { ...formState, ...data });
-      navigate("/ong/pets")
+
+      const formattedDataResgatado = {
+        nome: data.nome,
+        sexo: data.sexo,
+        especie: data.especie,
+        cep: data.cep,
+        posicao: {
+          latitude: data.posicao.latitude,
+          longitude: data.posicao.longitude,
+        },
+        raca: data.raca,
+        descricao: data.descricao,
+        isEncontrado: false,
+        porte: data.porte,
+        ongId: authOng?.userData?.ongId,
+      }
+
+
+      const formData = new FormData();
+      formData.append(data.especie.toLowerCase(), JSON.stringify(formattedDataResgatado))
+
+
+      if (data.images && data.images[0] instanceof File) {
+        formData.append("fotoPerfil", data.images[0]);
+      }
+
+      const cadastroPromise = cadastroPetResgatado(data.especie.toLowerCase(), formData)
+        .then((response) => {
+          if (response.status === 201) {
+            navigate("/ong/pets")
+          }
+        })
+        .catch((err) => {
+          error("Erro ao cadastrar pet resgatado!");
+          console.error("Erro ao cadastrar Pet Resgatado:", err);
+        });
+
+      promise(cadastroPromise, {
+        pending: "Enviando dados...",
+        success: "Cadastro realizado com sucesso!",
+        error: "Erro ao cadastrar! Por favor, tente novamente.",
+      });
+
     }
 
   };
@@ -61,14 +110,14 @@ const PetInfoStep = () => {
       <FormProvider {...methods}>
         <form className="w-full flex flex-col gap-8" onSubmit={methods.handleSubmit(saveData)}>
           <fieldset className="grid grid-cols-2 gap-6 w-full">
-            <Input label="Nome" type="text" name="nomePet" placeholder="Nome" />
+            <Input label="Nome" type="text" name="nome" placeholder="Nome" />
 
             <Select
               label="Sexo"
               name="sexo"
               options={[
-                { label: 'Masculino', value: 'masculino' },
-                { label: 'Feminino', value: 'feminino' },
+                { label: 'Masculino', value: 'Masculino' },
+                { label: 'Feminino', value: 'Feminino' },
               ]}
             />
 
@@ -86,9 +135,9 @@ const PetInfoStep = () => {
               label="Porte"
               name="porte"
               options={[
-                { label: 'Grande', value: 'grande' },
-                { label: 'Médio', value: 'medio' },
-                { label: 'Pequeno', value: 'pequeno' }
+                { label: 'Grande', value: 'Grande' },
+                { label: 'Médio', value: 'Médio' },
+                { label: 'Pequeno', value: 'Pequeno' }
               ]}
             />
 
@@ -98,24 +147,27 @@ const PetInfoStep = () => {
               options={racaOptions}
             />
 
-            <Input label="Cor" type="text" name="cor" placeholder="Cor" />
-
             {
-            contextPath === 'abrigo' ?
-              (<Input label="Ano de Nascimento" type="date" name="anoNascimento" />) : null
+              contextPath === 'abrigo' ?
+                (<>
+                  <Input label="Idade" type="text" name="anoNascimento" placeholder="Idade" />
+                  <Input label="Data no Abrigo" type="date" name="dataAbrigo" />
+                  <Checkbox label="Castrado ?" name="isCastrado" />
+                </>
+                ) : null
             }
 
-            <Input label="Tamanho do Pelo" name="tamanhoPelo" />
-            <Checkbox label="Castrado ?" name="castrado" />
+
             <TextArea label="Descrição" name="descricao" rows={5} />
           </fieldset>
 
           {contextPath === 'abrigo' ? (
             <>
               <h1 className="text-center text-azul-main font-nunito text-3xl font-semibold"> Personalidade </h1><div className="w-full flex justify-around">
-                <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="sociavel" title="Sociável" />
+                <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="energia" title="Energia" />
+                <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="sociabilidade" title="Sociável" />
                 <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="obediente" title="Obediente" />
-                <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="inteligente" title="Inteligente" />
+                <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="inteligencia" title="Inteligente" />
                 <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="tolerante" title="Tolerante" />
                 <RatingInput color={'#FFBB1C'} control={methods.control} disabled={false} name="territorial" title="Territorial" />
               </div>

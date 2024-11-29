@@ -1,19 +1,20 @@
 const racasCachorro = [
-    { label: 'Pinscher', value: 'pinscher' },
-    { label: 'Spitz Alemão', value: 'spitz-alemao' },
-    { label: 'Dachshund', value: 'dachshund' },
-    { label: 'Pastor Alemão', value: 'pastor-alemao' },
-    { label: 'Beagle', value: 'beagle' },
-    { label: 'Schnauzer', value: 'schnauzer' },
-    { label: 'Border Collie', value: 'border-collie' },
-    { label: 'Pitbull', value: 'pitbull' },
-    { label: 'Rottweiler', value: 'rottweiler' },
-    { label: 'Husky Siberiano', value: 'husky-siberiano' },
-    { label: 'Chihuahua', value: 'chihuahua' },
-    { label: 'Boston Terrier', value: 'boston-terrier' },
-    { label: 'Chow Chow', value: 'chow-chow' },
-    { label: 'Pastor Australiano', value: 'pastor-australiano' },
-    { label: 'SRD (Vira Lata)', value: 'srd-vira-lata' }
+    { label: 'SRD (Vira Lata)', value: 'SRD-Vira-Lata' },
+    { label: 'Spitz Alemão', value: 'Spitz-alemão' },
+    { label: 'Dachshund', value: 'Dachshund' },
+    { label: 'Pastor Alemão', value: 'Pastor-Alemão' },
+    { label: 'Beagle', value: 'Beagle' },
+    { label: 'Schnauzer', value: 'Schnauzer' },
+    { label: 'Border Collie', value: 'Border-Collie' },
+    { label: 'Pitbull', value: 'Pitbull' },
+    { label: 'Rottweiler', value: 'Rottweiler' },
+    { label: 'Husky Siberiano', value: 'Husky-Siberiano' },
+    { label: 'Chihuahua', value: 'Chihuahua' },
+    { label: 'Boston Terrier', value: 'Boston-terrier' },
+    { label: 'Chow Chow', value: 'Chow-Chow' },
+    { label: 'Pastor Australiano', value: 'Pastor-Australiano' },
+    { label: 'Pinscher', value: 'Pinscher' },
+    { label: 'Pug', value: 'Pug' }
 ];
 
 const racasGato = [
