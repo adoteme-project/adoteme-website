@@ -24,7 +24,7 @@ const JanelaInfo = ({ setOpen, pet, enderecoFormatado}) => {
           <div className="flex flex-col gap-2">
             <p>
               <span className="font-bold">Endereço: </span>
-              Liberdade, São Paulo 
+              {pet.bairroPerdido + pet.ruaPerdido} 
             </p>
             <p>
               <span className="font-bold">Data de resgate: </span>
