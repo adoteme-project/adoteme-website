@@ -1,7 +1,7 @@
 import { DEFAULT_IMAGE } from "@/mocks/petsMocks";
 import { InfoWindow } from "@vis.gl/react-google-maps";
 
-const JanelaInfo = ({ setOpen, pet, enderecoFormatado}) => {
+const JanelaInfo = ({ setOpen, pet}) => {
   const position = {lat: pet.latitude, lng: pet.longitude}
   
 
@@ -24,7 +24,7 @@ const JanelaInfo = ({ setOpen, pet, enderecoFormatado}) => {
           <div className="flex flex-col gap-2">
             <p>
               <span className="font-bold">Endereço: </span>
-              Liberdade, São Paulo 
+              {pet.bairroPerdido + pet.ruaPerdido}  
             </p>
             <p>
               <span className="font-bold">Data de resgate: </span>
