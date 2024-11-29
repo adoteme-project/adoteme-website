@@ -25,7 +25,7 @@ const Pagination = ({ items, renderGrid, itemsPerPageOptions = [3, 6, 9], itemLa
 
             {renderGrid(currentItems)}
 
-            <div className="flex flex-col items-center mt-8 gap-4">
+            <div className="flex flex-col items-center my-10 gap-4">
 
                 <div className="flex justify-center items-center gap-2 mb-4">
                     <label className="font-medium text-gray-700">{itemLabel} por página:</label>
