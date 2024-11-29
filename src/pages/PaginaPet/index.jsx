@@ -105,43 +105,43 @@ const PaginaPet = () => {
             <p>Idade: {animal.idade}</p>
             <p>Tamanho: {animal.porte}</p>
 
-            <div className="flex flex-col gap-4 mt-4 mb-4">
-              <div className="flex items-center">
+            <div className="flex flex-col gap-4 mt-4 mb-4 w-[40%]">
+              <div className="flex items-center gap-4 justify-between">
                 Energia:
                 <Avaliacao
                   avaliacao={animal.personalidade.energia}
                   cor="#A9B949"
                 />
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center gap-4 justify-between">
                 Sociável:
                 <Avaliacao
                   avaliacao={animal.personalidade.sociabilidade}
                   cor="#A9B949"
                 />
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center gap-4 justify-between">
                 Tolerante:
                 <Avaliacao
                   avaliacao={animal.personalidade.tolerante}
                   cor="#A9B949"
                 />
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center gap-4 justify-between">
                 Obediente:
                 <Avaliacao
                   avaliacao={animal.personalidade.obediente}
                   cor="#A9B949"
                 />
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center gap-4 justify-between">
                 Territorialista:
                 <Avaliacao
                   avaliacao={animal.personalidade.territorial}
                   cor="#A9B949"
                 />
               </div>
-              <div className="flex items-center">
+              <div className="flex items-center gap-4 justify-between">
                 Inteligente:
                 <Avaliacao
                   avaliacao={animal.personalidade.inteligencia}
@@ -162,7 +162,7 @@ const PaginaPet = () => {
         </div>
       </section>
 
-      <section className="mt-10 p-10 bg-gray-100">
+      <section className=" p-10 bg-branco">
         <h2 className="text-3xl font-bold mb-6 text-center">Sugestão</h2>
         {sugestoes.length > 0 ? (
           <Carousel
