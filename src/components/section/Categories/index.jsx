@@ -69,7 +69,7 @@ const Carousel = ({ tipo, titulo }) => {
     const BoxComponent = tipo === "categorias" ? BoxCategoria : BoxOng;
 
     return (
-        <section className="h-[71.79vh] bg-white flex flex-col justify-center">
+        <section className="bg-white flex flex-col justify-center py-10">
             <h1 className="text-4xl text-center font-bold font-nunito text-azul-dark">
                 {titulo}
             </h1>
