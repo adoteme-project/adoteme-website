@@ -14,23 +14,16 @@ const RedefinirSenha = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post(
-        "http://localhost:8080/api/redefinicao-senha/request-code", 
-        { email }
-      );
+      const response = await axios.post("http://localhost:8080/api/redefinicao-senha/request-code", { email });
       toast.success("Código de verificação enviado com sucesso! Verifique seu e-mail.", {
         autoClose: 3000,
         onClose: () => navigate("/login/inserir-codigo", { state: { email } }),
       });
     } catch (err) {
-      if (err.response?.status === 404) {
-        toast.error("E-mail não encontrado. Verifique se foi digitado corretamente.");
-      } else {
-        toast.error("Não foi possível enviar o código de verificação. Tente novamente.");
-      }
+      toast.error("Erro ao enviar o código de verificação. Tente novamente.");
     } finally {
       setLoading(false);
-    }    
+    }
   };
 
   return (
