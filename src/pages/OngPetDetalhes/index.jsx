@@ -9,6 +9,7 @@ import { getPetDetalhesOng } from "@/services/ongAPI";
 import { formatarHorarioPassado } from "@/utils/formatMessageTime";
 import ButtonAvaliacao from "@/components/feature/AvaliacaoPet/ButtonAvaliacao";
 import OngAuthContext from "@/context/AuthOngProvider";
+import { MoonLoader } from "react-spinners";
 
 
 const OngPetDetalhes = () => {
@@ -53,7 +54,31 @@ const OngPetDetalhes = () => {
             <h2 className="text-3xl text-azul-main font-bold"> Detalhes do Pet </h2>
             <div className="border-amarelo-select border-2 flex flex-col rounded-2xl p-8">
                 <div className="w-full grid grid-cols-5 gap-10 justify-between">
-                    <img src={infoPet.fotoPerfil} className="w-full h-72 col-span-2 rounded-2xl" />
+                    <div className="relative h-80 col-span-2 flex items-center justify-center">
+                        {!infoPet.fotoPerfil ? (
+                            <MoonLoader speedMultiplier={1} color="#FFBB1C"/>
+                        ) : (
+                            <>
+                                <div className="absolute inset-0">
+                                    <img
+                                        src={infoPet.fotoPerfil}
+                                        alt="Fundo"
+                                        className="h-80 w-full object-cover opacity-35 "
+                                    />
+                                </div>
+
+                                <div className="relative z-10  bg-clip-padding">
+                                    <img
+                                        src={infoPet.fotoPerfil}
+                                        alt="Imagem do Pet"
+                                        className="w-full h-80"
+                                    />
+                                </div>
+                            </>
+
+                        )}
+
+                    </div>
 
                     <div className="bg-beje rounded-xl col-span-3 p-6">
                         <h3 className="font-medium text-xl mb-4"> Descrição </h3>
@@ -68,7 +93,7 @@ const OngPetDetalhes = () => {
                                     <li><span className="font-semibold">ID:</span> {infoPet.id}</li>
                                     <li><span className="font-semibold">Tipo:</span> {infoPet.especie}</li>
                                     <li><span className="font-semibold">Sexo:</span> {infoPet.sexo}</li>
-                                    <li><span className="font-semibold">Tempo no abrigo:</span> {formatarHorarioPassado(infoPet.dataAbrigo)}</li>
+                                    <li><span className="font-semibold">Tempo de abrigo:</span> {formatarHorarioPassado(infoPet.dataAbrigo)}</li>
                                 </ul>
                             </div>
                             <div>
@@ -76,7 +101,7 @@ const OngPetDetalhes = () => {
                                     <li><span className="font-semibold">Raça:</span> {infoPet.raca}</li>
                                     <li><span className="font-semibold">Taxa de adoção:</span> {infoPet.taxaAdocao}R$</li>
                                     <li><span className="font-semibold">Idade:</span> {infoPet.idade}</li>
-                                    <li><span className="font-semibold">Tamanho:</span> {infoPet.tamanho}</li>
+                                    <li><span className="font-semibold">Porte:</span> {infoPet.tamanho}</li>
                                 </ul>
                             </div>
                         </ul>
@@ -89,7 +114,7 @@ const OngPetDetalhes = () => {
                                 col.field === 'actions'
                                     ? {
                                         ...col, renderCell: (params) =>
-                                            params.row.status === 'Descartado' ? null : (
+                                            params.row.status !== 'Nova' ? null : (
                                                 <ButtonAvaliacao
                                                     toggleModal={toggleModal}
                                                     idForm={params.row.formularioId}

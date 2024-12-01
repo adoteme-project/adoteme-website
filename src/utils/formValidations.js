@@ -30,4 +30,34 @@ const LoginSchema = z.object({
     senha: z.string().min(8, { message: "A senha deve ter no mínimo 8 caracteres" })
 })
 
-export { RegistrationAdotanteSchema, LoginSchema }
+const InfoPetSchema = z.object({
+    nome: z.string().min(1, { message: "Nome é um campo obrigatório"} ),
+    anoNascimento: z
+    .string() 
+    .transform((value) => Number(value))
+    .refine((num) => num <= 20 && num > 0, {
+      message: "O valor idade deve estar até 20 anos.",
+    }),
+    energia: z.number().min(1, { message: 'Obrigatório preencher estes campos' }),
+    sociabilidade: z.number().min(1, { message: 'Obrigatório preencher estes campos' }),
+    obediente: z.number().min(1, { message: 'Obrigatório preencher estes campos' }),
+    inteligencia: z.number().min(1, { message: 'Obrigatório preencher estes campos' }),
+    tolerante: z.number().min(1, { message: 'Obrigatório preencher estes campos' }),
+    territorial: z.number().min(1, { message: 'Obrigatório preencher estes campos' })
+})
+
+const InfoPetResgatadoSchema = z.object({
+    nome: z.string().min(1, { message: "Nome é um campo obrigatório"} ),
+    sexo: z.string(),
+    especie: z.string(),
+    cep: z.string(),
+    posicao: z.object({
+      latitude: z.number().min(-90).max(90, "Latitude inválida"),
+      longitude: z.number().min(-180).max(180, "Longitude inválida"),
+    }),
+    raca: z.string(),
+    descricao: z.string().optional(),
+    porte: z.string(),
+})
+
+export { RegistrationAdotanteSchema, LoginSchema, InfoPetSchema, InfoPetResgatadoSchema}

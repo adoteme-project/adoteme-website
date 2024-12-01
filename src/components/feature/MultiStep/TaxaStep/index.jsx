@@ -50,6 +50,7 @@ const TaxaStep = () => {
             isCastrado: data.isCastrado || false,
             descricao: data.descricao || "Descrição",
             isVisible: data.isVisible || false,
+            isAdotado: false,
             porte: data.porte || "Médio",
             taxaAdocao: enableTaxa ? data.taxaAdocao : 0,
             personalidade: {
@@ -123,6 +124,7 @@ const TaxaStep = () => {
                                 className="accent-amarelo h-5 w-5 rounded-sm"
                                 type="radio"
                                 value={true}
+                                defaultChecked
                                 onChange={handleVisibilityChange}
                             />
                         </div>

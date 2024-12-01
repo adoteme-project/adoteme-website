@@ -19,3 +19,11 @@ export function rejeitarRequisicao(idReq, motivo) {
         },
     });
 }
+
+export function aprovarRequisicao(idReq) {
+    return axiosAuthenticatedOng.patch(`/requisicoes/aprovado/${idReq}`);
+}
+
+export function confirmarAdocao(idReq) {
+    return axiosAuthenticatedOng.patch(`/requsicoes/adotado/${idReq}`);
+}
