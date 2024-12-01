@@ -10,10 +10,13 @@ import { formatarHorarioPassado } from "@/utils/formatMessageTime";
 import ButtonAvaliacao from "@/components/feature/AvaliacaoPet/ButtonAvaliacao";
 import OngAuthContext from "@/context/AuthOngProvider";
 import { MoonLoader } from "react-spinners";
+import ButtonAdocao from "@/components/feature/AvaliacaoPet/ButtonAdocao";
+import ModalAdocao from "@/components/feature/AvaliacaoPet/ModalAdocao";
 
 
 const OngPetDetalhes = () => {
     const [isShowingModal, toggleModal] = useModal();
+    const [isShowingModalAdocao, toggleModalAdocao] = useModal();
     const [infoReq, setInfoReq] = useState({});
     const [infoPet, setInfoPet] = useState({});
 
@@ -56,7 +59,7 @@ const OngPetDetalhes = () => {
                 <div className="w-full grid grid-cols-5 gap-10 justify-between">
                     <div className="relative h-80 col-span-2 flex items-center justify-center">
                         {!infoPet.fotoPerfil ? (
-                            <MoonLoader speedMultiplier={1} color="#FFBB1C"/>
+                            <MoonLoader speedMultiplier={1} color="#FFBB1C" />
                         ) : (
                             <>
                                 <div className="absolute inset-0">
@@ -113,16 +116,29 @@ const OngPetDetalhes = () => {
                             columns={aplicacoesPetColumns.map((col) =>
                                 col.field === 'actions'
                                     ? {
-                                        ...col, renderCell: (params) =>
-                                            params.row.status !== 'Nova' ? null : (
-                                                <ButtonAvaliacao
-                                                    toggleModal={toggleModal}
-                                                    idForm={params.row.formularioId}
-                                                    setInfoReq={setInfoReq}
-                                                    idReq={params.row.id}
-                                                    idUser={authOng.userData.id}
-                                                />
-                                            ),
+                                        ...col,
+                                        renderCell: (params) => {
+                                            if (params.row.status === 'Nova') {
+                                                return (
+                                                    <ButtonAvaliacao
+                                                        toggleModal={toggleModal}
+                                                        idForm={params.row.formularioId}
+                                                        setInfoReq={setInfoReq}
+                                                        idReq={params.row.id}
+                                                        idUser={authOng.userData.id}
+                                                    />
+                                                );
+                                            } else if (params.row.status === 'Aprovado') {
+                                                return (
+                                                    <ButtonAdocao
+                                                        toggleModal={toggleModalAdocao}
+                                                        idForm={params.row.formularioId}
+                                                        setInfoReq={setInfoReq}
+                                                        idReq={params.row.id} />
+                                                );
+                                            }
+                                            return null;
+                                        },
                                     }
                                     : col
                             )}
@@ -144,6 +160,7 @@ const OngPetDetalhes = () => {
                 </div>
             </div>
             <ModalAvaliacao show={isShowingModal} onClose={toggleModal} infoAdocao={infoReq} />
+            <ModalAdocao show={isShowingModalAdocao} onClose={toggleModalAdocao} infoConfirmacao={infoReq} />
         </>
     )
 }

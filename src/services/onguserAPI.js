@@ -25,5 +25,5 @@ export function aprovarRequisicao(idReq) {
 }
 
 export function confirmarAdocao(idReq) {
-    return axiosAuthenticatedOng.patch(`/requsicoes/adotado/${idReq}`);
+    return axiosAuthenticatedOng.patch(`/requisicoes/adotado/${idReq}`);
 }

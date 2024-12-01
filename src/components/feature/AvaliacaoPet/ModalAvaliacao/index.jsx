@@ -36,8 +36,8 @@ const ModalAvaliacao = ({ show, onClose, infoAdocao }) => {
 
     const handleAprovarReq = () => {
         try {
-            promise(aprovarRequisicao(infoAdocao.idReq), {
-                pending: "Enviando dados...",
+            promise(aprovarRequisicao(infoAdocao.idReq).then(setTimeout(() => { window.location.reload() }, 5000)), {
+                pending: "Enviando Aprovação...",
                 success: "Aprovação realizado com sucesso!",
                 error: "Erro ao aprovar adoção! Por favor, tente novamente.",
             })
