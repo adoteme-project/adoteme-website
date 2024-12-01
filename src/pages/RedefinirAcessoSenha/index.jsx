@@ -19,6 +19,17 @@ const NovaSenha = () => {
       toast.error("As senhas não coincidem.");
       return;
     }
+    
+    if (newPassword.length < 8 || confirmPassword.length < 8) {
+      toast.error("As senhas devem ter no mínimo 8 caracteres.");
+      return;
+    }
+    
+    const hasUpperCase = /[A-Z]/.test(newPassword);
+    if (!hasUpperCase) {
+      toast.error("A senha deve conter pelo menos uma letra maiúscula.");
+      return;
+    }    
 
     setLoading(true);
 
