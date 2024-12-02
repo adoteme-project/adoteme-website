@@ -20,7 +20,11 @@ const RedefinirSenha = () => {
         onClose: () => navigate("/login/inserir-codigo", { state: { email } }),
       });
     } catch (err) {
-      toast.error("Erro ao enviar o código de verificação. Tente novamente.");
+      if (err.response?.status === 404) {
+        toast.error("E-mail não encontrado. Verifique se foi digitado corretamente.");
+      } else {
+        toast.error("Não foi possível enviar o código de verificação. Tente novamente.");
+      }
     } finally {
       setLoading(false);
     }
