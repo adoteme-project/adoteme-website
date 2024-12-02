@@ -59,7 +59,6 @@ const PerfilUsuario = () => {
   }, [auth]);
 
 
-  // Atualizar o formulário com os dados do usuário assim que "dadosPerfil" for carregado
   useEffect(() => {
     if (dadosPerfil) {
       reset({

@@ -23,7 +23,7 @@ const RedefinirSenha = () => {
       if (err.response?.status === 404) {
         toast.error("E-mail não encontrado. Verifique se foi digitado corretamente.");
       } else {
-        toast.error("Não foi possível enviar o código de verificação. Tente novamente.");
+        toast.error("Email inválido.");
       }
     } finally {
       setLoading(false);
