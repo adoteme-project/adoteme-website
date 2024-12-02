@@ -8,7 +8,7 @@ const FormRegisterImage = ({ control, userImage }) => {
   const location = useLocation();
   const [preview, setPreview] = useState(null);
 
-  console.log(userImage)
+  // console.log(userImage)
 
   if(userImage && preview == null) {
     setPreview(userImage)

@@ -1,36 +1,63 @@
-import Card from "@/components/common/Card";
-
-const dataPet = {
-    "id": 1,
-    "nome": "NOHA",
-    "idade": "2 anos",
-    "imagem": "",
-    "distancia": "600m",
-    "porte": "grande",
-    "sexo": "Macho",
-    "especie": "gato",
-    "personalidade": {
-        "energia": 5,
-        "inteligencia": 4,
-        "obediente": 3,
-        "sociabilidade": 4,
-        "territorial": 2,
-        "tolerante": 5,
-        "brincalhao": 3
-    }
-}
+import RequestCard from "@/components/common/RequestCard/index.jsx";
+import { useContext, useEffect, useState } from "react";
+import { getRequisicoesByAdotante } from "@/services/adotanteAPI";
+import AuthContext from "@/context/AuthProvider";
 
 const Aplicacao = () => {
-    return (
-        <section className="flex flex-row">
-            <div className="w-full py-20 px-16">
-                <h1 className="text-center font-nunito font-medium text-3xl pb-16">Minhas Aplicações</h1>
-                <div className="w-full grid grid-cols-4 gap-8">
-                    <Card data={dataPet} colorBg={'#FFC55E'} tipoCard='animal'  />
-                </div>
-            </div>
-        </section>
-    );
+  const { auth } = useContext(AuthContext);
+  const idAdotante = auth?.userData?.id;
+  const [requisicoes, setRequisicoes] = useState([]);
+  const cores = ["#FFC55E", "#A9B949", "#B2DED3", "#EC5A49"];
+
+  useEffect(() => {
+    const fetchRequisicoes = async () => {
+      try {
+        console.log("ID ADOTANTE", idAdotante);
+        const response = await getRequisicoesByAdotante(idAdotante);
+        console.log("Resposta", response.data);
+        
+        if (Array.isArray(response.data)) {
+            setRequisicoes(response.data);
+        }
+      } catch (error) {
+        console.error("Erro ao buscar requisições:", error);
+        setRequisicoes([]);
+      }
+    };
+
+    fetchRequisicoes();
+  }, []);
+
+  const getRandomColorFromArray = () => {
+    const randomIndex = Math.floor(Math.random() * cores.length);
+    return cores[randomIndex];
+  };
+
+  return (
+    <section className="flex w-full">
+      <div className="w-full py-20 px-16 flex-col">
+        <h1 className="text-center font-nunito font-medium text-3xl pb-16">
+          Minhas Aplicações
+        </h1>
+        <div className="flex flex-wrap gap-6">
+          {requisicoes.length > 0 ? (
+            requisicoes.map((req) => {
+              const colorBg = getRandomColorFromArray(); 
+              return (
+                <RequestCard
+                  key={req.id}
+                  data={req}
+                  colorBg={colorBg}
+                />
+              );
+            })
+          ) : (
+            <p className="text-center text-gray-500">Nenhuma aplicação encontrada.</p>
+          )}
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Aplicacao;
