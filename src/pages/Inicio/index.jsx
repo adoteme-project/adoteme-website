@@ -34,7 +34,7 @@ const Inicio = () => {
       <AnimaisProximos
         items={animal}
         tipoCard="animal"
-        titulo="Animais próximos a você"
+        titulo="Pets que precisam de você !"
       />
       <CarouselOngs titulo="Ongs" tipo="ongs" />
     </>

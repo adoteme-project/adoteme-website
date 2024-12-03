@@ -17,25 +17,21 @@ const Card = ({ colorBg, data = {}, onDoarClick, tipoCard }) => {
   };
 
   return (
-    <div className="w-[41vw] bg-beje rounded-lg grid grid-cols-2 gap-4 px-5 py-3 mb-5">
-      <div className="h-[41.88vh] flex flex-col justify-center items-center py-4">
+    <div className="bg-beje rounded-lg grid grid-cols-2 gap-x-8 pl-5 py-4 w-full shadow-sm">
+      <div className="flex flex-col justify-center items-center">
         <img
           src={isPet && data.imagem ? data.imagem : imgOng}
           alt={isPet ? "Imagem do animal que está disponível para adoção" : "Imagem da ONG"}
-          className="w-[19.68vw] h-[40.68vh] rounded-lg"
+          className="w-full h-64 rounded-lg"
         />
-        {isPet && <p>A {data.distancia || "N/A"} de distância</p>}
       </div>
       <div>
-        <h1
-          style={{ backgroundColor: colorBg }}
-          className="w-full h-[7.52vh] text-left px-2 font-roboto text-2xl flex items-center"
-        >
-          {data.nome}
-        </h1>
-        <div className="font-roboto flex flex-col gap-3">
+        <div className="font-roboto flex flex-col justify-between gap-6">
+          <h1 style={{ backgroundColor: colorBg }} className="w-full text-left px-2 py-2 font-roboto text-2xl flex items-center">
+            {data.nome}
+          </h1>
           {isPet ? (
-            <div className="font-nunito space-y-4 py-2">
+            <div className="font-nunito space-y-2">
               <h3>Idade: {data.idade}</h3>
               <h3>Porte: {data.porte}</h3>
               <h3>Sexo: {data.sexo}</h3>
@@ -48,7 +44,7 @@ const Card = ({ colorBg, data = {}, onDoarClick, tipoCard }) => {
             </div>
           )}
 
-          <div className="flex flex-row justify-between items-center">
+          <div className="flex flex-row justify-between items-center pr-3">
             <Link to={isPet ? `/pagina-pet/${data.id}` : `/pagina-ong/${data.id}`}>
               <Botao
                 textColor="#FFFFFF"
@@ -59,6 +55,17 @@ const Card = ({ colorBg, data = {}, onDoarClick, tipoCard }) => {
                 titulo={isPet ? "Saiba mais" : "Ver mais"}
               />
             </Link>
+            {!isPet && (
+              <Botao
+                textColor="#FFFFFF"
+                color="#C6D668"
+                tamanho="150"
+                altura="40"
+                nome="Doar"
+                titulo="Doar"
+                onClick={onDoarClick}
+              />
+            )}
             {auth.token && (
               <FontAwesomeIcon
                 icon={favorito ? faHeartSolid : faHeartRegular}
@@ -67,18 +74,6 @@ const Card = ({ colorBg, data = {}, onDoarClick, tipoCard }) => {
               />
             )}
           </div>
-
-          {!isPet && (
-            <Botao
-              textColor="#FFFFFF"
-              color="#C6D668"
-              tamanho="150"
-              altura="40"
-              nome="Doar"
-              titulo="Doar"
-              onClick={onDoarClick}
-            />
-          )}
         </div>
       </div>
     </div>
