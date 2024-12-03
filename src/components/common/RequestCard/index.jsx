@@ -1,43 +1,14 @@
 import { Link } from "react-router-dom";
 import Botao from "../Button";
-import { useContext, useEffect, useState } from "react";
-import { getAnimalFavoritoByAdotante } from "@/services/adotanteAPI";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
-import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+import { useContext} from "react";
 import AuthContext from "@/context/AuthProvider";
 
 const RequestCard = ({ data, colorBg }) => {
-  const [favoriteAnimals, setFavorites] = useState([]);
   const { auth } = useContext(AuthContext);
   const idAdotante = auth?.userData?.id;
 
   console.log("Id ADOTANTE", idAdotante);
   console.log("data", data);
-
-  useEffect(() => {
-    const getFavoritePet = async () => {
-      if (!idAdotante) return;
-
-      try {
-        const response = await getAnimalFavoritoByAdotante(idAdotante);
-        console.log("Animais favoritos: ", response);
-
-        // Garante que sempre será um array
-        const favorites = Array.isArray(response) ? response : [];
-        setFavorites(favorites);
-      } catch (error) {
-        console.error("Erro ao buscar os animais favoritos", error);
-        setFavorites([]); // Garante que seja um array em caso de erro
-      }
-    };
-
-    getFavoritePet();
-  }, [idAdotante]);
-
-  const isFavorite =
-    favoriteAnimals.length > 0 &&
-    favoriteAnimals.some((animal) => animal.animalId === data.idAnimal);
 
   const getStatusData = (status) => {
     if (status === "Nova") {
@@ -96,12 +67,6 @@ const RequestCard = ({ data, colorBg }) => {
               titulo={"Ver mais"}
             />
           </Link>
-          <FontAwesomeIcon
-            icon={isFavorite ? regularHeart : solidHeart}
-            className={`text-vermelho text-2xl ${
-              isFavorite ? "text-cinza" : "text-vermelho"
-            }`}
-          />
         </div>
       </div>
     </div>

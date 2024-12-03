@@ -1,4 +1,4 @@
-import { axiosAuthenticated } from "./configs/axiosConfig"
+import { axiosAuthenticated, axiosAuthenticatedOngMultiPart } from "./configs/axiosConfig"
 
 export const getUserData = (context) => {
     return axiosAuthenticated.get(`/${context}/me`);
@@ -35,5 +35,13 @@ export const getRequisicoesByAdotante = (idAdotante) => {
 
 export const getAnimalFavoritoByAdotante = (idAdotante) => {
     return axiosAuthenticated.get(`/adotantes/animais-favoritos-usuario/${idAdotante}`)
+}
+
+export const putAdotante = (idAdotante, formData) => {
+    return axiosAuthenticatedOngMultiPart.put(`/adotantes/${idAdotante}`, formData);
+}
+
+export const putAdotanteFormulario = (id,data) => {
+    return axiosAuthenticated.put(`/adotantes/atualizacao-formulario/${id}/`,data)
 }
 

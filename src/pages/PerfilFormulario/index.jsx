@@ -2,10 +2,11 @@ import Botao from "@/components/common/Button";
 import FormGroup from "@/components/common/FormGroup";
 import AuthContext from "@/context/AuthProvider";
 import { formQuestionsAdotante } from "@/mocks/stepFormRegister";
-import { getUserAdotanteFormulario } from "@/services/adotanteAPI";
+import { getUserAdotanteFormulario, putAdotanteFormulario } from "@/services/adotanteAPI";
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const PerfilUsuario = () => {
   const [editando, setEditando] = useState(false);
@@ -38,9 +39,33 @@ const PerfilUsuario = () => {
     setEditando(false);
   };
 
-  const salvarEdicao = () => {
-    console.log("Salvando alterações...");
-    setEditando(false);
+  const salvarEdicao = async () => {
+    try{
+      debugger
+      const valoresAtualizados = getValues();
+      console.log("Salvando alterações...");
+
+      const valoresConvertidos = {
+        casaPortaoAlto: valoresAtualizados.casaPortaoAlto === "true" || valoresAtualizados.casaPortaoAlto === true,
+      isTelado: valoresAtualizados.isTelado === "true" || valoresAtualizados.isTelado === true,
+      moraEmCasa: valoresAtualizados.moraEmCasa === "true" || valoresAtualizados.moraEmCasa === true,
+      moradoresConcordam: valoresAtualizados.moradoresConcordam === "true" || valoresAtualizados.moradoresConcordam === true,
+      seraResponsavel: valoresAtualizados.seraResponsavel === "true" || valoresAtualizados.seraResponsavel === true,
+      temCrianca: valoresAtualizados.temCrianca === "true" || valoresAtualizados.temCrianca === true,
+      temPet: valoresAtualizados.temPet === "true" || valoresAtualizados.temPet === true,
+      };
+
+      await putAdotanteFormulario(auth?.userData?.id, valoresConvertidos);
+
+      setDadosForm(valoresConvertidos)
+
+      toast.success("Formulário atualizado com sucesso!");
+    }catch(error){
+      console.error("Erro ao salvar alterações:", error);
+      toast.error("Ocorreu um erro ao salvar as alterações. Tente novamente.");
+    }finally{
+      setEditando(false);
+    }
   };
 
   useEffect(() => {

@@ -11,6 +11,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import { MoonLoader } from "react-spinners";
 import AuthContext from "@/context/AuthProvider";
 import { getUserById } from "@/services/adotanteAPI";
+import { putAdotante } from "@/services/adotanteAPI";
+import { toast } from "react-toastify";
 
 const PerfilUsuario = () => {
   const { auth } = useContext(AuthContext);
@@ -25,8 +27,8 @@ const PerfilUsuario = () => {
       dataNascimento: "1999-02-02",
       telefone: "",
       cep: "",
-      numero: ""
-    }
+      numero: "",
+    },
   });
 
   const {
@@ -58,7 +60,6 @@ const PerfilUsuario = () => {
     }
   }, [auth]);
 
-
   // Atualizar o formulário com os dados do usuário assim que "dadosPerfil" for carregado
   useEffect(() => {
     if (dadosPerfil) {
@@ -71,7 +72,7 @@ const PerfilUsuario = () => {
         endereco: dadosPerfil.endereco?.bairro || "",
         cidade: dadosPerfil.endereco?.cidade || "",
         estado: dadosPerfil.endereco?.estado || "",
-        numero: dadosPerfil.endereco?.numero || ""
+        numero: dadosPerfil.endereco?.numero || "",
       });
     }
   }, [dadosPerfil, reset]);
@@ -86,32 +87,70 @@ const PerfilUsuario = () => {
     setEditando(false);
   };
 
-  const salvarEdicao = () => {
-    console.log("Salvando alterações...");
+  const salvarEdicao = async () => {
+    try {
+      const valoresAtualizados = getValues();
+      const formData = new FormData();
+
+      for (const key in valoresAtualizados) {
+        formData.append(key, valoresAtualizados[key]);
+      }
+
+      if (dadosPerfil.fileFoto) {
+        formData.append("fotoPerfil", dadosPerfil.fileFoto);
+      }
+
+      console.log("Salvando alterações...", formData);
+
+      await putAdotante(auth?.userData?.id, formData);
+
+      setDadosPerfil((prevDados) => ({
+        ...prevDados,
+        ...valoresAtualizados,
+      }));
+
+      toast.success("Dados atualizados com sucesso!");
+      setEditando(false);
+    } catch (error) {
+      console.error("Erro ao salvar alterações", error);
+      toast.error("Ocorreu um erro ao salvar as alterações, tente novamente.");
+    }
     setEditando(false);
   };
 
   return (
-
     <div className="flex flex-col items-center gap-8 h-full px-16 py-8">
       <div className="flex flex-col gap-8 items-center justify-between">
         <h1 className="text-3xl font-nunito text-azul-dark font-medium text-center">
           Meu perfil
         </h1>
-        <CadastroFoto control={control} userImage={dadosPerfil.urlFoto} tamanho="150px" altura="150px" />
+        {editando ? (
+          <CadastroFoto
+            control={control}
+            userImage={dadosPerfil.urlFoto}
+            tamanho="150px"
+            altura="150px"
+          />
+        ) : (
+          <img
+            src={dadosPerfil.urlFoto || "caminho-para-imagem-padrao.png"}
+            alt="Foto de Perfil"
+            className="w-40 h-40 rounded-full object-cover"
+          />
+        )}
       </div>
 
       {!editando && (
-          <Botao
-            tamanho="120"
-            altura="50"
-            color="#4C8EB5"
-            titulo="Editar"
-            textColor="#FFFFFF"
-            icon={faPenToSquare}
-            onClick={iniciarEdicao}
-          />
-        )}
+        <Botao
+          tamanho="120"
+          altura="50"
+          color="#4C8EB5"
+          titulo="Editar"
+          textColor="#FFFFFF"
+          icon={faPenToSquare}
+          onClick={iniciarEdicao}
+        />
+      )}
 
       <FormProvider {...methods}>
         {formsDadosUsuario.formGroups.map((formGroup, index) => (

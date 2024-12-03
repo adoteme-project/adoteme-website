@@ -15,6 +15,7 @@ const Card = ({ colorBg, data = {}, onDoarClick, tipoCard }) => {
   const isPet = tipoCard === 'animal' || data.personalidade?.length > 0;
 
 
+  
   const handleFavoriteClick = async () => {
     setFavorito(!favorito);
     // const idAdotante = auth?.userData?.id;
