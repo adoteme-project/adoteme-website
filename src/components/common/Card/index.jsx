@@ -6,8 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import imgOng from "@/assets/imagem-ong.png";
+import Avaliacao from "@/components/feature/Rating";
 
-const Card = ({ colorBg, data = {}, onDoarClick, tipoCard }) => {
+const Card = ({ colorBg, data = {}, onDoarClick, tipoCard, isCategoria, categoriaName }) => {
   const { auth } = useContext(AuthContext);
   const [favorito, setFavorito] = useState(false);
   const isPet = tipoCard === 'animal' || data.personalidade?.length > 0;
@@ -16,16 +17,17 @@ const Card = ({ colorBg, data = {}, onDoarClick, tipoCard }) => {
     setFavorito(!favorito);
   };
 
+
   return (
-    <div className="bg-beje rounded-lg grid grid-cols-2 gap-x-8 pl-5 py-4 w-full shadow-sm">
-      <div className="flex flex-col justify-center items-center">
+    <div className="bg-beje rounded-lg grid grid-cols-8 gap-x-8 pl-5 py-4 w-full shadow-sm">
+      <div className="flex flex-col justify-center items-center col-span-3">
         <img
           src={isPet && data.imagem ? data.imagem : imgOng}
           alt={isPet ? "Imagem do animal que está disponível para adoção" : "Imagem da ONG"}
-          className="w-full h-64 rounded-lg"
+          className="w-full h-64 rounded-lg object-cover"
         />
       </div>
-      <div>
+      <div className="col-span-5">
         <div className="font-roboto flex flex-col justify-between gap-6">
           <h1 style={{ backgroundColor: colorBg }} className="w-full text-left px-2 py-2 font-roboto text-2xl flex items-center">
             {data.nome}
@@ -35,7 +37,12 @@ const Card = ({ colorBg, data = {}, onDoarClick, tipoCard }) => {
               <h3>Idade: {data.idade}</h3>
               <h3>Porte: {data.porte}</h3>
               <h3>Sexo: {data.sexo}</h3>
-              <h3>Espécie: {data.especie}</h3>
+              {isCategoria ? <div className="flex items-center gap-2">
+                <span>{categoriaName} </span>
+                <Avaliacao avaliacao={data.personalidade[categoriaName?.toLowerCase()]} cor="#A9B949" />
+              </div>
+                :
+                <h3>Espécie: {data.especie}</h3>}
             </div>
           ) : (
             <div className="flex flex-col py-5 gap-2">
@@ -45,27 +52,30 @@ const Card = ({ colorBg, data = {}, onDoarClick, tipoCard }) => {
           )}
 
           <div className="flex flex-row justify-between items-center pr-3">
-            <Link to={isPet ? `/pagina-pet/${data.id}` : `/pagina-ong/${data.id}`}>
-              <Botao
-                textColor="#FFFFFF"
-                color={isPet ? "#4C8EB5" : "#FFC55E"}
-                tamanho="150"
-                altura="40"
-                nome="Ver mais"
-                titulo={isPet ? "Saiba mais" : "Ver mais"}
-              />
-            </Link>
-            {!isPet && (
-              <Botao
-                textColor="#FFFFFF"
-                color="#C6D668"
-                tamanho="150"
-                altura="40"
-                nome="Doar"
-                titulo="Doar"
-                onClick={onDoarClick}
-              />
-            )}
+            <div className="flex gap-4">
+              <Link to={isPet ? `/pagina-pet/${data.id}` : `/pagina-ong/${data.id}`}>
+                <Botao
+                  textColor="#FFFFFF"
+                  color={isPet ? "#4C8EB5" : "#FFC55E"}
+                  tamanho="150"
+                  altura="40"
+                  nome="Ver mais"
+                  titulo={isPet ? "Saiba mais" : "Ver mais"}
+                />
+              </Link>
+              {!isPet && (
+                <Botao
+                  textColor="#FFFFFF"
+                  color="#C6D668"
+                  tamanho="150"
+                  altura="40"
+                  nome="Doar"
+                  titulo="Doar"
+                  onClick={onDoarClick}
+                />
+              )}
+            </div>
+
             {auth.token && (
               <FontAwesomeIcon
                 icon={favorito ? faHeartSolid : faHeartRegular}

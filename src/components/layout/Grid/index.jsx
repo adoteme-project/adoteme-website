@@ -1,6 +1,6 @@
 import Card from "@/components/common/Card";
 
-const GridLayout = ({ items, onDoarClick, titulo, tipoCard }) => {
+const GridLayout = ({ items, onDoarClick, titulo, tipoCard, isCategoria, categoriaName }) => {
   const cores = ["#FFC55E", "#A9B949", "#B2DED3", "#EC5A49"];
 
   return (
@@ -15,6 +15,8 @@ const GridLayout = ({ items, onDoarClick, titulo, tipoCard }) => {
               colorBg={cores[index % cores.length]}
               onDoarClick={onDoarClick}
               tipoCard={tipoCard}
+              isCategoria={isCategoria}
+              categoriaName={categoriaName}
             />
           ))}
         </section>

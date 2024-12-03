@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
 import BoxCategoria from "@/components/feature/Box-Categoria";
 import Carrosel from "@/components/common/Carousel/index";
-import brincalhao from "@/assets/brincalhao.svg";
-import sociavel from "@/assets/sociavel.svg";
+import sociavel from "@/assets/box/dog_soc.png";
+import imgEnergia from "@/assets/box/cat_enr.png";
+import imgInt from "@/assets/box/dog_int.png";
+import imgObd from "@/assets/box/dog_obd.png";
+import imgTol from "@/assets/box/cat_tol.png";
+import imgTerr from "@/assets/box/dog_territorial.png";
 
 const CarouselCategorias = ({ titulo }) => {
     const [categorias, setCategorias] = useState([]);
     const cores = ['#FFC55E', '#C6D668', '#4C8EB5'];
 
     const mockImages = {
-        energia: '/path/to/mock/energia.jpg',
-        inteligencia: '/path/to/mock/inteligencia.jpg',
-        obediente: '/path/to/mock/obediente.jpg',
+        energia: imgEnergia,
+        inteligencia: imgInt,
+        obediente: imgObd,
         sociabilidade: sociavel,
-        territorial: '/path/to/mock/territorial.jpg',
-        tolerante: '/path/to/mock/tolerante.jpg',
-        brincalhao: brincalhao,
+        territorial: imgTerr,
+        tolerante: imgTol,
     };
 
     const carregarPersonalidades = async () => {
@@ -44,7 +47,7 @@ const CarouselCategorias = ({ titulo }) => {
     }, []);
 
     return (
-        <section className="h-[71.79vh] bg-white flex flex-col justify-center">
+        <section className="w-full bg-white flex flex-col justify-center items-center py-12">
             <h1 className="text-4xl text-center font-bold font-nunito text-azul-dark">
                 {titulo}
             </h1>

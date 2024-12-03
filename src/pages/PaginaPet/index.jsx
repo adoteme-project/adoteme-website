@@ -125,7 +125,7 @@ const PaginaPet = () => {
               <li><span className="text-lg font-semibold">Tamanho: </span> {animal.porte}</li>
             </ul>
 
-            <div className="flex flex-col gap-3 mt-4 mb-4 w-[45%]">
+            <div className="flex flex-col gap-3 mt-4 mb-4 w-[55%]">
               {Object.entries(animal.personalidade).map(([key, value]) => (
                 <div key={key} className="flex items-center gap-4 justify-between">
                   {key.charAt(0).toUpperCase() + key.slice(1)}:
