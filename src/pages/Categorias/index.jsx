@@ -67,8 +67,6 @@ const Categorias = () => {
         return <div>Nenhum animal encontrado na categoria {categoria}</div>;
     }
 
-    console.log(categoria);
-
     return (
         <>
             <Banner imagensBanner={image}/>

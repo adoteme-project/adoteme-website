@@ -146,7 +146,7 @@ const PaginaPet = () => {
         </div>
       </section>
 
-      <section className=" p-10 bg-branco">
+      <section className=" p-10 bg-branco py-12">
         <h2 className="text-3xl font-bold mb-6 text-center">Sugestão</h2>
         {sugestoes.length > 0 ? (
           <Carousel
