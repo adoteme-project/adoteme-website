@@ -17,9 +17,12 @@ const OngEditarConfiguracoes = () => {
     instagram: "",
     facebook: "",
     email: "",
+    imagem: "",
   });
 
   const [isEditing, setIsEditing] = useState(false);
+  const [newImage, setNewImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,12 +32,15 @@ const OngEditarConfiguracoes = () => {
       }
 
       try {
-        const response = await fetch(`http://localhost:8080/ongs/ong-edicao-visualizacao/${ongId}`);
+        const response = await fetch(
+          `http://localhost:8080/ongs/ong-edicao-visualizacao/${ongId}`
+        );
         if (!response.ok) {
           throw new Error("Erro ao buscar dados da ONG");
         }
         const data = await response.json();
         setOrgData(data);
+        setPreviewImage(data.imagem);
       } catch (error) {
         console.error("Erro ao buscar dados da ONG:", error);
       }
@@ -51,6 +57,14 @@ const OngEditarConfiguracoes = () => {
     }));
   };
 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setNewImage(file);
+      setPreviewImage(URL.createObjectURL(file));
+    }
+  };
+
   const handleSave = async () => {
     if (!ongId) {
       console.error("ID da ONG não disponível para salvar.");
@@ -58,23 +72,26 @@ const OngEditarConfiguracoes = () => {
     }
 
     try {
+      const formData = new FormData();
+      formData.append("imagem", newImage);
+      Object.keys(orgData).forEach((key) => {
+        formData.append(key, orgData[key]);
+      });
+
       const response = await fetch(`http://localhost:8080/ongs/editar/${ongId}`, {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(orgData),
+        body: formData,
       });
 
       if (response.ok) {
-        toast.success("Dados salvos com sucesso")
+        toast.success("Dados salvos com sucesso!");
         setIsEditing(false);
       } else {
-        toast.error("Erro ao salvar os dados.")
+        toast.error("Erro ao salvar os dados.");
       }
     } catch (error) {
       console.error("Erro ao salvar dados da ONG:", error);
-      toast.error("Erro ao salvar os dados.")
+      toast.error("Erro ao salvar os dados.");
     }
   };
 
@@ -86,16 +103,26 @@ const OngEditarConfiguracoes = () => {
         <div className="flex flex-col sm:flex-row gap-8 w-full lg:max-w-3xl lg:mx-auto">
           <h2 className="text-xl font-semibold mb-4 sm:mb-0">Perfil Organização</h2>
 
-          <div className="w-32 h-32 sm:w-40 sm:h-40 bg-gray-200 rounded-lg flex items-center justify-center mx-auto sm:mx-0">
-            {orgData.imagem ? (
+          <div
+            className="w-32 h-32 sm:w-40 sm:h-40 bg-gray-200 rounded-lg flex items-center justify-center mx-auto sm:mx-0 cursor-pointer relative"
+            onClick={() => document.getElementById("fileInput").click()} 
+          >
+            {previewImage ? (
               <img
-                src={orgData.imagem}
+                src={previewImage}
                 alt="Imagem da ONG"
                 className="w-full h-full object-cover rounded-lg"
               />
             ) : (
               <span className="text-gray-500">Sem imagem</span>
             )}
+            <input
+              id="fileInput"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+            />
           </div>
 
           <div className="flex flex-col gap-4 flex-grow">
