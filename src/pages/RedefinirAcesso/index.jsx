@@ -1,24 +1,30 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RedefinirSenha = () => {
   const [email, setEmail] = useState("");
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError(null);
 
     try {
-      const response = await axios.post('http://localhost:8080/api/send-reset-code', { email });
-      console.log(response.data.message);
-      navigate("/login/inserir-codigo", { state: { email } });
+      const response = await axios.post("http://localhost:8080/api/redefinicao-senha/request-code", { email });
+      toast.success("Código de verificação enviado com sucesso! Verifique seu e-mail.", {
+        autoClose: 3000,
+        onClose: () => navigate("/login/inserir-codigo", { state: { email } }),
+      });
     } catch (err) {
-      setError("Erro ao enviar código de verificação. Tente novamente.");
+      if (err.response?.status === 404) {
+        toast.error("E-mail não encontrado. Verifique se foi digitado corretamente.");
+      } else {
+        toast.error("Email inválido.");
+      }
     } finally {
       setLoading(false);
     }
@@ -44,7 +50,6 @@ const RedefinirSenha = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-400"
             />
           </div>
-          {error && <p className="text-red-500 text-sm">{error}</p>}
           <div className="flex justify-between mt-6">
             <button
               type="button"
@@ -63,6 +68,7 @@ const RedefinirSenha = () => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

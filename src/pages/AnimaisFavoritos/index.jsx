@@ -1,27 +1,29 @@
 import DropDown from "@/components/section/DropDown";
 import Banner from "@/components/section/Banner";
 import BreadCrumb from "@/components/common/BreadCrumb";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import GridLayout from "@/components/layout/Grid";
 import Pagination from "@/components/common/Pagination";
 import imgBanner from "@/assets/banner-favoritos.png";
-
-const normalizeString = (str) =>
-    str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : str;
+import AuthContext from "@/context/AuthProvider";
 
 const FavoritosAnimais = () => {
     const [favorites, setFavorites] = useState([]); 
     const [filteredFavorites, setFilteredFavorites] = useState([]); 
     const [filters, setFilters] = useState({});
+    const { auth } = useContext(AuthContext);
 
     const handleFilterChange = (key, value) => {
         setFilters((prev) => ({ ...prev, [key]: normalizeString(value) }));
     };
 
+    const userId = auth.userData?.id;
+
+
     useEffect(() => {
         const fetchFavorites = async () => {
             try {
-                const response = await fetch("/animaisFavoritos.json");
+                const response = await fetch(`http://localhost:8080/adotantes/animais-favoritos-usuario/${userId}`);
                 const data = await response.json();
                 setFavorites(data.favoritos_animais);
                 setFilteredFavorites(data.favoritos_animais); 
@@ -29,9 +31,12 @@ const FavoritosAnimais = () => {
                 console.error("Erro ao buscar favoritos de animais:", error);
             }
         };
-
+    
         fetchFavorites();
-    }, []);
+    }, [userId]);    
+
+    const normalizeString = (str) =>
+        str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : str;
 
     useEffect(() => {
         const applyFilters = () => {
@@ -45,6 +50,10 @@ const FavoritosAnimais = () => {
 
         applyFilters();
     }, [filters, favorites]);
+
+    if (!userId) {
+        return <div>Carregando...</div>;
+    }
 
     return (
         <div>

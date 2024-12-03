@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const NovaSenha = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -13,19 +14,36 @@ const NovaSenha = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     if (newPassword !== confirmPassword) {
-      setError("As senhas não coincidem.");
+      toast.error("As senhas não coincidem.");
       return;
     }
+
+    if (newPassword.length < 8 || confirmPassword.length < 8) {
+      toast.error("As senhas devem ter no mínimo 8 caracteres.");
+      return;
+    }
+    
+    const hasUpperCase = /[A-Z]/.test(newPassword);
+    if (!hasUpperCase) {
+      toast.error("A senha deve conter pelo menos uma letra maiúscula.");
+      return;
+    }    
+
     setLoading(true);
-    setError(null);
 
     try {
-      const response = await axios.post("http://localhost:8080/api/set-new-password", { email, newPassword });
-      console.log(response.data.message);
-      navigate("/login");
+      const response = await axios.put(
+        "http://localhost:8080/api/redefinicao-senha/resetar-senha",
+        { email, newPassword }
+      );
+      toast.success("Senha redefinida com sucesso!", {
+        autoClose: 3000,
+        onClose: () => navigate("/login"),
+      });
     } catch (err) {
-      setError("Erro ao redefinir senha. Tente novamente.");
+      toast.error("Erro ao redefinir senha. Tente novamente.");
     } finally {
       setLoading(false);
     }
@@ -61,7 +79,6 @@ const NovaSenha = () => {
               className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-400"
             />
           </div>
-          {error && <p className="text-red-500 text-sm mt-2 text-center">{error}</p>}
           <div className="flex justify-center mt-6">
             <button
               type="submit"
@@ -73,6 +90,7 @@ const NovaSenha = () => {
           </div>
         </form>
       </div>
+      <ToastContainer />
     </div>
   );
 };

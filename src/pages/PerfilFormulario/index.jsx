@@ -41,7 +41,6 @@ const PerfilUsuario = () => {
 
   const salvarEdicao = async () => {
     try{
-      debugger
       const valoresAtualizados = getValues();
       console.log("Salvando alterações...");
 

@@ -1,29 +1,53 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from "react";
 import PageTitle from "@/components/layout/PageTitle";
+import OngAuthContext from "@/context/AuthOngProvider";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const OngEditarConfiguracoes = () => {
+  const { authOng } = useContext(OngAuthContext);
+  const ongId = authOng?.userData?.ongId;
+
   const [orgData, setOrgData] = useState({
-    nome: '',
-    descricao: '',
-    celular: '',
-    telefone: '',
-    site: '',
-    instagram: '',
-    facebook: '',
-    email: '',
+    nome: "",
+    descricao: "",
+    celular: "",
+    telefone: "",
+    site: "",
+    instagram: "",
+    facebook: "",
+    email: "",
+    imagem: "",
   });
 
-  const [isEditing, setIsEditing] = useState(false); 
+  const [isEditing, setIsEditing] = useState(false);
+  const [newImage, setNewImage] = useState(null);
+  const [previewImage, setPreviewImage] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await fetch('/api/organizacao');
-      const data = await response.json();
-      setOrgData(data);
+      if (!ongId) {
+        console.error("ID da ONG não disponível.");
+        return;
+      }
+
+      try {
+        const response = await fetch(
+          `http://localhost:8080/ongs/ong-edicao-visualizacao/${ongId}`
+        );
+        if (!response.ok) {
+          throw new Error("Erro ao buscar dados da ONG");
+        }
+        const data = await response.json();
+        setOrgData(data);
+        setPreviewImage(data.imagem);
+      } catch (error) {
+        console.error("Erro ao buscar dados da ONG:", error);
+      }
     };
 
     fetchData();
-  }, []);
+  }, [ongId]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,20 +57,41 @@ const OngEditarConfiguracoes = () => {
     }));
   };
 
-  const handleSave = async () => {
-    const response = await fetch('/api/organizacao', {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(orgData),
-    });
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setNewImage(file);
+      setPreviewImage(URL.createObjectURL(file));
+    }
+  };
 
-    if (response.ok) {
-      alert('Dados salvos com sucesso!');
-      setIsEditing(false); 
-    } else {
-      alert('Erro ao salvar os dados.');
+  const handleSave = async () => {
+    if (!ongId) {
+      console.error("ID da ONG não disponível para salvar.");
+      return;
+    }
+
+    try {
+      const formData = new FormData();
+      formData.append("imagem", newImage);
+      Object.keys(orgData).forEach((key) => {
+        formData.append(key, orgData[key]);
+      });
+
+      const response = await fetch(`http://localhost:8080/ongs/editar/${ongId}`, {
+        method: "PUT",
+        body: formData,
+      });
+
+      if (response.ok) {
+        toast.success("Dados salvos com sucesso!");
+        setIsEditing(false);
+      } else {
+        toast.error("Erro ao salvar os dados.");
+      }
+    } catch (error) {
+      console.error("Erro ao salvar dados da ONG:", error);
+      toast.error("Erro ao salvar os dados.");
     }
   };
 
@@ -58,8 +103,26 @@ const OngEditarConfiguracoes = () => {
         <div className="flex flex-col sm:flex-row gap-8 w-full lg:max-w-3xl lg:mx-auto">
           <h2 className="text-xl font-semibold mb-4 sm:mb-0">Perfil Organização</h2>
 
-          <div className="w-32 h-32 sm:w-40 sm:h-40 bg-gray-200 rounded-lg flex items-center justify-center mx-auto sm:mx-0">
-            <span className="text-gray-500">Imagem</span>
+          <div
+            className="w-32 h-32 sm:w-40 sm:h-40 bg-gray-200 rounded-lg flex items-center justify-center mx-auto sm:mx-0 cursor-pointer relative"
+            onClick={() => document.getElementById("fileInput").click()} 
+          >
+            {previewImage ? (
+              <img
+                src={previewImage}
+                alt="Imagem da ONG"
+                className="w-full h-full object-cover rounded-lg"
+              />
+            ) : (
+              <span className="text-gray-500">Sem imagem</span>
+            )}
+            <input
+              id="fileInput"
+              type="file"
+              accept="image/*"
+              onChange={handleImageChange}
+              className="hidden"
+            />
           </div>
 
           <div className="flex flex-col gap-4 flex-grow">
@@ -116,64 +179,27 @@ const OngEditarConfiguracoes = () => {
           </div>
 
           <div className="flex flex-col gap-4 mt-4">
-            <div>
-              <label className="font-semibold">Site</label>
-              <input
-                type="text"
-                name="site"
-                value={orgData.site}
-                onChange={handleChange}
-                disabled={!isEditing}
-                placeholder="🌐 Ex: www.ongesperanca.org"
-                className="p-3 border-2 border-[#FFC55E] rounded-md w-full font-bold"
-              />
-            </div>
-
-            <div>
-              <label className="font-semibold">Instagram</label>
-              <input
-                type="text"
-                name="instagram"
-                value={orgData.instagram}
-                onChange={handleChange}
-                disabled={!isEditing}
-                placeholder="📷 Ex: @ongesperanca"
-                className="p-3 border-2 border-[#FFC55E] rounded-md w-full font-bold"
-              />
-            </div>
-
-            <div>
-              <label className="font-semibold">Facebook</label>
-              <input
-                type="text"
-                name="facebook"
-                value={orgData.facebook}
-                onChange={handleChange}
-                disabled={!isEditing}
-                placeholder="📘 Ex: facebook.com/ongesperanca"
-                className="p-3 border-2 border-[#FFC55E] rounded-md w-full font-bold"
-              />
-            </div>
-
-            <div>
-              <label className="font-semibold">Email</label>
-              <input
-                type="text"
-                name="email"
-                value={orgData.email}
-                onChange={handleChange}
-                disabled={!isEditing}
-                placeholder="✉️ Ex: contato@ongesperanca.org"
-                className="p-3 border-2 border-[#FFC55E] rounded-md w-full font-bold"
-              />
-            </div>
+            {["site", "instagram", "facebook", "email"].map((field) => (
+              <div key={field}>
+                <label className="font-semibold">{field.charAt(0).toUpperCase() + field.slice(1)}</label>
+                <input
+                  type="text"
+                  name={field}
+                  value={orgData[field]}
+                  onChange={handleChange}
+                  disabled={!isEditing}
+                  placeholder={`Ex: ${field === "site" ? "www.ongesperanca.org" : `@ongesperanca`}`}
+                  className="p-3 border-2 border-[#FFC55E] rounded-md w-full font-bold"
+                />
+              </div>
+            ))}
           </div>
         </div>
 
         <div className="flex gap-4 mt-8 lg:max-w-3xl lg:mx-auto">
           <button
             className="px-6 py-2 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 w-full sm:w-auto"
-            onClick={() => setIsEditing(false)} 
+            onClick={() => setIsEditing(false)}
           >
             Voltar
           </button>
@@ -187,13 +213,14 @@ const OngEditarConfiguracoes = () => {
           ) : (
             <button
               className="px-6 py-2 bg-[#A9B949] text-white rounded-md hover:bg-[#95A344] w-full sm:w-auto"
-              onClick={() => setIsEditing(true)} 
+              onClick={() => setIsEditing(true)}
             >
               Editar
             </button>
           )}
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
