@@ -21,18 +21,17 @@ const Pagination = ({ items, renderGrid, itemsPerPageOptions = [3, 6, 9], itemLa
     const currentItems = items.slice(startIndex, startIndex + itemsPerPage);
 
     return (
-        <div className="w-full">
+        <div className="w-full flex flex-col justify-center items-center">
 
             {renderGrid(currentItems)}
 
             <div className="flex flex-col items-center my-10 gap-4">
-
                 <div className="flex justify-center items-center gap-2 mb-4">
-                    <label className="font-medium text-gray-700">{itemLabel} por página:</label>
+                    <label className="font-medium ">{itemLabel} por página:</label>
                     <select
                         value={itemsPerPage}
                         onChange={handleItemsPerPageChange}
-                        className="border px-3 py-1 rounded bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-600"
+                        className="border px-3 py-1 rounded bg-white shadow-sm focus:outline-none focus:ring-2 "
                     >
                         {itemsPerPageOptions.map(option => (
                             <option key={option} value={option}>
@@ -44,7 +43,7 @@ const Pagination = ({ items, renderGrid, itemsPerPageOptions = [3, 6, 9], itemLa
 
                 <div className="flex items-center gap-4">
                     <button
-                        className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 ${currentPage === 1 ? 'bg-gray-400 text-gray-800 cursor-not-allowed' : 'bg-blue-700 text-white hover:bg-blue-800'
+                        className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-azul-main ${currentPage === 1 ? 'bg-gray-400 text-gray-800 cursor-not-allowed' : 'bg-azul-main text-white hover:bg-blue-800'
                             }`}
                         onClick={() => handleChangePage(currentPage - 1)}
                         disabled={currentPage === 1}
@@ -57,7 +56,7 @@ const Pagination = ({ items, renderGrid, itemsPerPageOptions = [3, 6, 9], itemLa
                     </span>
 
                     <button
-                        className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 ${currentPage === totalPages ? 'bg-gray-400 text-gray-800 cursor-not-allowed' : 'bg-blue-700 text-white hover:bg-blue-800'
+                        className={`px-4 py-2 rounded-lg font-medium transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:bg-azul-main ${currentPage === totalPages ? 'bg-gray-400 text-gray-800 cursor-not-allowed' : 'bg-azul-main text-white hover:bg-blue-800'
                             }`}
                         onClick={() => handleChangePage(currentPage + 1)}
                         disabled={currentPage === totalPages}

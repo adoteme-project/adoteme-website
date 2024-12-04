@@ -4,6 +4,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { useEffect, useState } from "react";
 import { useFormState } from "@/context/FormStateProvider";
 import { useContextPath } from "@/context/PathContextProvider";
+import { useNotification } from "@/context/NotificationProvider";
 
 const PetsImagesStep = () => {
   const navigate = useNavigate();
@@ -12,6 +13,7 @@ const PetsImagesStep = () => {
   const { formState, setFormState } = useFormState();
   const [images, setImages] = useState(formState.images || []);
   const contextPath = useContextPath();
+  const { error } = useNotification();
 
   const handleImageChange = (file, index) => {
     if (file) {
@@ -34,13 +36,19 @@ const PetsImagesStep = () => {
   }, [images, reset]);
 
   const saveImages = () => {
-    setFormState({
-      ...formState,
-      images,
-    })
 
-    console.log("Dados enviados:", formState);
-    navigate(`/ong/cadastrar-pet/${contextPath}/${contextPath}-informacoes`);
+    if (images.length <= 0 || images[0] == undefined) {
+      error("Por favor, inserir pelo menos uma imagen no primeiro quadrante")
+    } else {
+      setFormState({
+        ...formState,
+        images,
+      })
+
+      console.log("Dados enviados:", formState);
+      navigate(`/ong/cadastrar-pet/${contextPath}/${contextPath}-informacoes`);
+    }
+
   };
 
   return (
@@ -49,7 +57,7 @@ const PetsImagesStep = () => {
         <h1 className="text-center text-azul-main font-nunito text-2xl mb-4 font-semibold">
           {contextPath === 'abrigo' ? 'Imagens do Pet' : 'Imagem do Pet'}
         </h1>
-        <div className={`w-full ${contextPath === 'abrigo' ? 'grid grid-rows-2 grid-cols-4' : 
+        <div className={`w-full ${contextPath === 'abrigo' ? 'grid grid-rows-2 grid-cols-4' :
           'flex justify-center'} gap-6 h-96`}>
           {[...Array(contextPath === 'abrigo' ? 5 : 1)].map((_, index) => (
             <ImageWidget

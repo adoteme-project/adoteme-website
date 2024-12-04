@@ -6,7 +6,7 @@ import OngAuthContext from "@/context/AuthOngProvider";
 import { aplicacoesColumns } from "@/mocks/tableColumns";
 import { listarAplicacoesOng } from "@/services/ongAPI";
 import { formatarHorarioPassado } from "@/utils/formatMessageTime";
-import { AssignmentTurnedIn, NewReleases, PendingActions } from "@mui/icons-material";
+import { AssignmentTurnedIn, NewReleases, PendingActions, Pets } from "@mui/icons-material";
 import { Tab, Tabs } from "@mui/material";
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -55,7 +55,7 @@ const OngAplicacoes = () => {
     navigation(`/ong/pets/${params.row.id}`);
   }
 
-  const situacoes = ["Sem aplicação", "Revisão", "Adotado"];
+  const situacoes = ["Sem aplicação", "Revisão", "Aprovado", "Adotado"];
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -81,7 +81,8 @@ const OngAplicacoes = () => {
         }} value={value} onChange={handleChange}>
           <Tab icon={<NewReleases color="#FFBB1C" />} label={"Novo"} iconPosition="start" />
           <Tab icon={<PendingActions color="#FFBB1C" />} label={"Revisão"} iconPosition="start" />
-          <Tab icon={<AssignmentTurnedIn color="#FFBB1C" />} label={"Concluído"} iconPosition="start" />
+          <Tab icon={<AssignmentTurnedIn color="#FFBB1C" />} label={"Aprovado"} iconPosition="start" />
+          <Tab icon={<Pets color="#FFBB1C" />} label={"Concluído"} iconPosition="start" />
         </Tabs>
       </PageTitle>
       <SearchLayout numberResults={filteredAplicacoes.length} registerName="Aplicações">

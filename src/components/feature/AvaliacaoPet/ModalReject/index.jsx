@@ -1,3 +1,4 @@
+import { useNotification } from "@/context/NotificationProvider";
 import { rejeitarRequisicao } from "@/services/onguserAPI";
 import { faClose } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -5,21 +6,21 @@ import { useState } from "react";
 
 const ModalRejectAvaliacao = ({ show, onCloseModal, idReq }) => {
     const [selectValue, setSelectValue] = useState('');
+    const {error} = useNotification();
 
     if (!show) return null;
 
     const handleReject = async () => {
-        console.log("Reijeitado", idReq);
-
         try {
             const response = rejeitarRequisicao(idReq, selectValue);
 
             if (response.status == 200) {
-                console.log("Rejeitado com sucesso");
+                onCloseModal();
             }
 
         } catch (err) {
-            console.error("Erro ao reijeitar", err);
+            console.error(err);
+            error("Erro ao reijeitar")
         }
 
 

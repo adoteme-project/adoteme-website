@@ -7,9 +7,9 @@ import { useEffect, useState } from "react";
 import GridLayout from "@/components/layout/Grid";
 import BannerImage from "@/assets/banner-pets.svg";
 import Pagination from "@/components/common/Pagination";
-import Carousel from "@/components/section/Categories";
 import Botao from "@/components/common/Button";
 import { SearchInput } from "@/components/common/SearchInput";
+import CarouselCategorias from "@/components/common/CarouselCategorias";
 
 const normalizeString = (str) =>
   str
@@ -75,7 +75,7 @@ const Pets = () => {
         cor="#B2DED3"
         caminho="/pets"
       />
-      <Carousel titulo="Categorias" tipo="categorias" />
+      <CarouselCategorias titulo="Categorias" tipo="categorias" />
       <div className="flex flex-row w-full justify-evenly items-center gap-4 px-4 py-10">
         <DropDown
           filterKey="porte"

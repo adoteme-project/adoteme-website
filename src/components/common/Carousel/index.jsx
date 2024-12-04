@@ -9,7 +9,7 @@ register();
 
 function Carrosel({ data = [], slidePerview, color, BoxComponent }) {
   return (
-    <div>
+    <div className='w-[90%]'>
       <Swiper
         slidesPerView={slidePerview}
         navigation
@@ -17,7 +17,7 @@ function Carrosel({ data = [], slidePerview, color, BoxComponent }) {
         className="py-5"
       >
         {data.map((item, index) => (
-          <SwiperSlide key={item.id} className="flex justify-center items-center py-5 px-px">
+          <SwiperSlide key={item.id} className="flex justify-evenly items-center py-5 px-3">
             <BoxComponent
               id={item.id}
               color={color[index % color.length]}

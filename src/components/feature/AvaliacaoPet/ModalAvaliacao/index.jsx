@@ -8,10 +8,13 @@ import useModal from '@/hooks/useModal';
 import ModalRejectAvaliacao from '../ModalReject';
 import { celularMask, formatarEndereco } from '@/utils/textMask';
 import { calcularIdadeDataCompleta } from '@/utils/calcularIdade';
+import { aprovarRequisicao } from '@/services/onguserAPI';
+import { useNotification } from '@/context/NotificationProvider';
 
 const ModalAvaliacao = ({ show, onClose, infoAdocao }) => {
     const [modalState, setModalState] = useState('info');
     const [isShowingModal, toggleModal] = useModal();
+    const { promise, error } = useNotification();
 
     const methods = useForm({
         defaultValues: infoAdocao.formulario,
@@ -30,6 +33,21 @@ const ModalAvaliacao = ({ show, onClose, infoAdocao }) => {
     const handleAvaliarClick = () => {
         setModalState('formulario');
     };
+
+    const handleAprovarReq = () => {
+        try {
+            promise(aprovarRequisicao(infoAdocao.idReq).then(setTimeout(() => { window.location.reload() }, 5000)), {
+                pending: "Enviando Aprovação...",
+                success: "Aprovação realizado com sucesso!",
+                error: "Erro ao aprovar adoção! Por favor, tente novamente.",
+            })
+        } catch (err) {
+            console.error(err);
+            error("Não foi possível realizar a aprovação tente novamente mais tarde")
+        } finally {
+            onClose();
+        }
+    }
 
     return (
         <div className="fixed inset-0 z-20 flex items-center justify-center">
@@ -72,15 +90,14 @@ const ModalAvaliacao = ({ show, onClose, infoAdocao }) => {
                         <div className="border-[3px] border-amarelo-select w-full rounded-2xl flex items-center justify-between px-6 py-3">
                             <h3 className="text-2xl"> Formulário </h3>
                             <div className="flex items-center gap-8">
-                                <p className="text-azul-main"> Status: <span>Pendente</span> </p>
                                 <button onClick={handleAvaliarClick} className="bg-amarelo px-16 py-3 rounded-md text-branco"> Avaliar </button>
                             </div>
                         </div>
                         <div className="w-full flex justify-between mt-16">
                             <button onClick={toggleModal} className="bg-amarelo px-16 py-3 rounded-md text-branco"> Rejeitar </button>
-                            <button onClick={handleAvaliarClick} className="bg-verde-border px-16 py-3 rounded-md text-branco"> Aprovar </button>
+                            <button onClick={handleAprovarReq} className="bg-verde-border px-16 py-3 rounded-md text-branco"> Aprovar </button>
                         </div>
-                        <ModalRejectAvaliacao show={isShowingModal} onCloseModal={toggleModal} idReq={infoAdocao.idReq}/>
+                        <ModalRejectAvaliacao show={isShowingModal} onCloseModal={toggleModal} idReq={infoAdocao.idReq} />
                     </>
                 ) : (
                     <>

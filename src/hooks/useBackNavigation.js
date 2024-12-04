@@ -1,31 +1,25 @@
-import { useCallback } from "react";
-import { useLocation, useNavigate, matchRoutes } from "react-router-dom";
-import routesConfig from "@/routes/routeConfig";
+import { useCallback, useContext } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import AuthContext from "@/context/AuthProvider";
 
 const useGoBack = (fallback = "/") => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { auth } = useContext(AuthContext);
 
   return useCallback(() => {
-    const canGoBack = location.state?.canGoBack;
-    const matchedRoutes = matchRoutes(routesConfig, location.pathname);
+    const isAuthenticated = !auth.token;
+    const hasHistory = window.history.length > 1;
 
-    const isValidRoute = matchedRoutes && matchedRoutes.length > 0;
-
-    if (!isValidRoute) {
-      console.warn(`Rota inválida: ${location.pathname}. Redirecionando para ${fallback}.`);
+    if (!isAuthenticated || location.pathname === "/403" || !hasHistory) {
+      console.info(`Redirecionando para ${fallback} (usuário não autenticado ou sem histórico válido).`);
       navigate(fallback, { replace: true });
       return;
     }
 
-    if (canGoBack || window.history.length > 1) {
-      console.info("Retornando para a página anterior no histórico.");
-      navigate(-1);
-    } else {
-      console.info(`Sem histórico ou estado de navegação. Redirecionando para ${fallback}.`);
-      navigate(fallback, { replace: true });
-    }
-  }, [location, fallback, navigate]);
+    console.info("Retornando para a página anterior no histórico.");
+    navigate(-1);
+  }, [auth.token, fallback, navigate, location.pathname]);
 };
 
 export default useGoBack;
