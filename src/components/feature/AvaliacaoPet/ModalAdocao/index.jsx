@@ -10,7 +10,7 @@ const ModalAdocao = ({ show, onClose, infoConfirmacao }) => {
 
     const handleAprovarAdocao = () => {
         try {
-            promise(confirmarAdocao(infoConfirmacao.idReq).then(setTimeout(() => { window.location.reload() }, 5000)), {
+            promise(confirmarAdocao(infoConfirmacao.idReq).then(setTimeout(() => { window.location.reload() }, 2000)), {
                 pending: "Confirmando Adoção...",
                 success: " realizado com sucesso!",
                 error: "Erro ao aprovar adoção! Por favor, tente novamente.",

@@ -31,7 +31,7 @@ const Pagination = ({ items, renderGrid, itemsPerPageOptions = [3, 6, 9], itemLa
                     <select
                         value={itemsPerPage}
                         onChange={handleItemsPerPageChange}
-                        className="border px-3 py-1 rounded bg-white shadow-sm focus:outline-none focus:ring-2 focus:bg-azul-main"
+                        className="border px-3 py-1 rounded bg-white shadow-sm focus:outline-none focus:ring-2 "
                     >
                         {itemsPerPageOptions.map(option => (
                             <option key={option} value={option}>

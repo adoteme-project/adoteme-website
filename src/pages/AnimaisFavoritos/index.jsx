@@ -14,18 +14,10 @@ const FavoritosAnimais = () => {
     const [filters, setFilters] = useState({}); 
     const { auth } = useContext(AuthContext);
     const idAdotante = auth?.userData?.id
-
-    const handleFilterChange = (key, value) => {
-        setFilters((prev) => ({ ...prev, [key]: normalizeString(value) }));
-    };
-    // const adotante = auth.userData;
-    // console.log("ID ADOTANTE",auth.userData)
-
-    
     
     useEffect(() => {
         const fetchFavorites = async () => {
-            if (!userId) return; 
+            if (!idAdotante) return; 
 
             try {
                 // debugger
