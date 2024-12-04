@@ -10,7 +10,7 @@ function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange, sele
 
   const optionsMap = {
     porte: ["pequeno", "médio", "grande"],
-    sexo: ["macho", "fêmea"],
+    sexo: ["masculino", "feminino"],
     especie: ["cachorro", "gato"],
   };
 

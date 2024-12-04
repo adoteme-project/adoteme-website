@@ -10,7 +10,7 @@ const BoxOng = ({ id, color, imagem, nome }) => {
   return (
     <div
       id={id}
-      className="w-[288px] h-[192px] shadow-md rounded-lg cursor-pointer"
+      className="sm:w-[20%] md:w-[40%] lg:w-[50%] xl:w-[60%] h-52 shadow-md rounded-lg cursor-pointer flex flex-col items-center"
       style={{ backgroundColor: color }}
       onClick={handleClick}
     >
@@ -20,7 +20,7 @@ const BoxOng = ({ id, color, imagem, nome }) => {
       <img 
         src={imagem} 
         alt="Imagem da ONG" 
-        className="w-3/4 h-auto mx-auto object-contain" 
+        className="w-32 h-32 object-cover !rounded-full object-center" 
       />
     </div>
   );

@@ -69,7 +69,7 @@ const Categorias = () => {
 
     return (
         <>
-            <Banner imagensBanner={image} tamanho='700.25vh' />
+            <Banner imagensBanner={image}/>
             <BreadCrumb
                 tituloCaminho="Home"
                 tituloCaminho2="Animais"
@@ -82,7 +82,7 @@ const Categorias = () => {
             <Pagination
                 items={animaisFiltrados}
                 renderGrid={(currentItems) => (
-                    <GridLayout items={currentItems} titulo="Animal" tipoCard="animal" />
+                    <GridLayout items={currentItems} titulo="Animal" tipoCard="animal" isCategoria={true} categoriaName={categoria} />
                 )}
                 itemsPerPageOptions={[2, 4, 6]} 
             />

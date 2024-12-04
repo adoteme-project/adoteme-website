@@ -1,15 +1,25 @@
-import { useState } from "react";
+import OngAuthContext from "@/context/AuthOngProvider";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AdicionarUsuario = () => {
   const navigate = useNavigate();
+  const { authOng } = useContext(OngAuthContext);
+
+  const ongId = authOng?.userData?.ongId
 
   const [formData, setFormData] = useState({
     nome: "",
-    funcao: "",
+    role: "",
     celular: "",
     telefone: "",
     email: "",
+    imagem: null,
+    senha: "",
+    ongId: ongId
   });
 
   const handleInputChange = (e) => {
@@ -20,10 +30,77 @@ const AdicionarUsuario = () => {
     }));
   };
 
-  const handleSave = () => {
-    console.log("Dados do usuário:", formData);
-    alert("Usuário salvo com sucesso (simulação)!");
-    navigate(-1); 
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        setFormData((prev) => ({
+          ...prev,
+          imagem: reader.result,
+        }));
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const validatePassword = (senha) => {
+    const senhaRegex = /[A-Z]/; 
+    if (senha.length < 8) {
+      toast.info("A senha deve ter pelo menos 8 caracteres.");
+      return false;
+    }
+    if (!senhaRegex.test(senha)) {
+      toast.info("A senha deve conter pelo menos uma letra maiúscula.");
+      return false;
+    }
+    return true;
+  };
+
+  const validateForm = (data) => {
+    const requiredFields = ["nome", "email", "senha"];
+    for (const field of requiredFields) {
+      if (!data[field]) {
+        toast.info(`Por favor, preencha o campo: ${field}`);
+        return false;
+      }
+    }
+
+    if (!validatePassword(data.senha)) {
+      return false;
+    }
+
+    return true;
+  };
+
+
+  const handleSave = async () => {
+    if (!validateForm(formData)) return;
+
+    const { nome, role, celular, telefone, email, imagem, senha, ongId } = formData;
+    console.log(formData);
+
+
+    try {
+      const response = await axios.post("http://localhost:8080/ongusers", {
+        nome,
+        role,
+        celular,
+        telefone,
+        email,
+        imagem,
+        senha,
+        ongId,
+      });
+
+      if (response.status === 201) {
+        console.log("Usuário adicionado com sucesso!");
+        navigate(-1);
+      }
+    } catch (error) {
+      console.error("Erro ao adicionar usuário:", error);
+      toast.error("Erro ao salvar usuário. Por favor, tente novamente.");
+    }
   };
 
   return (
@@ -37,9 +114,26 @@ const AdicionarUsuario = () => {
 
         <div className="flex flex-col lg:flex-row gap-6">
           <div className="w-full lg:w-1/3 flex flex-col items-center">
-            <div className="w-32 h-32 bg-gray-200 rounded-lg flex items-center justify-center border">
-              <span className="text-gray-500 text-sm">Sem imagem</span>
-            </div>
+            <label htmlFor="imagemUpload" className="cursor-pointer">
+              <div className="w-32 h-32 bg-gray-200 rounded-lg flex items-center justify-center border">
+                {formData.imagem ? (
+                  <img
+                    src={formData.imagem}
+                    alt="Imagem do usuário"
+                    className="w-full h-full object-cover rounded-lg"
+                  />
+                ) : (
+                  <span className="text-gray-500 text-sm text-center">Clique para adicionar imagem</span>
+                )}
+              </div>
+            </label>
+            <input
+              id="imagemUpload"
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleImageChange}
+            />
           </div>
 
           <div className="w-full lg:w-2/3">
@@ -61,15 +155,15 @@ const AdicionarUsuario = () => {
                 Função
               </label>
               <select
-                name="funcao"
-                value={formData.funcao}
+                name="role"
+                value={formData.role}
                 onChange={handleInputChange}
                 className="w-full p-3 border border-[#FFC55E] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FFC55E]"
               >
                 <option value="">Selecione uma função</option>
-                <option value="admin">Administrador</option>
-                <option value="editor">Funcionário</option>
-                <option value="viewer">Voluntário</option>
+                <option value="ADMIN">Administrador</option>
+                <option value="MODERATOR">Gerente de Staff</option>
+                <option value="USER">Voluntário</option>
               </select>
             </div>
           </div>
@@ -117,6 +211,20 @@ const AdicionarUsuario = () => {
                 className="w-full p-3 border border-[#FFC55E] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FFC55E]"
               />
             </div>
+            <div className="col-span-1 sm:col-span-2">
+              <label className="block text-sm font-medium mb-2 text-gray-700">
+                Senha
+              </label>
+              <input
+                type="password"
+                name="senha"
+                placeholder="Digite uma senha"
+                value={formData.senha}
+                onChange={handleInputChange}
+                className="w-full p-3 border border-[#FFC55E] rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#FFC55E]"
+              />
+            </div>
+            <input type="hidden" name="ongId" value={formData.ongId} />
           </div>
         </div>
 

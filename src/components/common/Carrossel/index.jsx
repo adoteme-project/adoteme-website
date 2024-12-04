@@ -5,17 +5,17 @@ import 'swiper/css/scrollbar';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 
-const Carousel = ({ items, renderItem, slidesPerView = 3, spaceBetween = 10 }) => {
+const Carousel = ({ items, renderItem, slidesPerView = 3, spaceBetween = 20 }) => {
     return (
         <Swiper
             spaceBetween={spaceBetween}
             slidesPerView={slidesPerView}
             navigation
             pagination={{ clickable: true }}
-            className='py-5 w-[90%]'
+            className='py-5 w-[100%]'
         >
             {items.map((item, index) => (
-                <SwiperSlide key={index}>
+                <SwiperSlide key={index} className='flex justify-between items-center py-6 px-14'>
                     {renderItem(item)}
                 </SwiperSlide>
             ))}

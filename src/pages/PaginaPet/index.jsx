@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { postRequisicaoAdocao } from "@/services/adotanteAPI";
 import { useContext, useEffect, useState } from "react";
 import BreadCrumb from "@/components/common/BreadCrumb";
 import Card from "@/components/common/Card";
@@ -11,15 +12,21 @@ import AuthContext from "@/context/AuthProvider";
 import useModal from "@/hooks/useModal";
 import ModalLogin from "@/components/common/ModalLogin";
 import ModalAdocao from "@/components/feature/AdotarPet/ModalAdoacao";
+import { MoonLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const PaginaPet = () => {
   const { id } = useParams();
   const { sugestoes } = useCardContext();
   const [animal, setAnimal] = useState(null);
+  const [animalImg, setAnimalImg] = useState([]);
+  const [active, setActive] = useState(null);
   const [isShowing, toggleModal] = useModal();
   const { auth } = useContext(AuthContext);
   const cores = ["#FFC55E", "#A9B949", "#B2DED3", "#EC5A49"];
 
+  console.log("id:", id);
+  console.log("id adotante: ", auth?.userData?.id );
   useEffect(() => {
     if (sugestoes.length > 0) {
       const animalEncontrado = sugestoes
@@ -27,13 +34,29 @@ const PaginaPet = () => {
         .find((animal) => animal.id === parseInt(id));
 
       if (animalEncontrado) {
+        const imagensPet = [
+          { imgelink: animalEncontrado.imagem },
+          { imgelink: animalEncontrado.imagem2 },
+          { imgelink: animalEncontrado.imagem3 },
+          { imgelink: animalEncontrado.imagem4 },
+          { imgelink: animalEncontrado.imagem5 },
+        ].filter((img) => img.imgelink);
+
+        setAnimalImg(imagensPet);
         setAnimal(animalEncontrado);
+        setActive(imagensPet[0]?.imgelink || null);
       }
     }
   }, [id, sugestoes]);
 
   if (!animal) {
-    return <p>Carregando...</p>;
+    window.scrollTo({top: 0})
+
+    return (
+      <div className="w-full flex justify-center h-[75vh]">
+        <MoonLoader speedMultiplier={1} />
+      </div>
+    );
   }
 
   const generatePastelColorFromString = (str) => {
@@ -50,6 +73,23 @@ const PaginaPet = () => {
     return color;
   };
 
+  const handleAdoptAnimal = async ()=> {
+    const IdAdotante = auth?.userData?.id;
+    const IdAnimal = id;
+    try{
+        const response = await postRequisicaoAdocao(
+            IdAdotante,
+            IdAnimal
+        );
+        console.log("Requisicao feita com sucesso!", response.data);
+        toast.success("Sua solicitação foi feita com sucesso!");
+
+    }catch(error){
+        console.error("Erro ao fazer a adoção", error);
+        toast.error("Erro ao realizar a adoção. Tente novamente.")
+    };
+  }
+
   return (
     <>
       <BreadCrumb
@@ -60,34 +100,33 @@ const PaginaPet = () => {
         caminho={`/pagina-pet/${animal.id}`}
       />
 
-      <section className="p-10 bg-beje">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-          <div className="flex flex-col items-center">
-            <img
-              src={animal.imagem}
-              alt={`Imagem de ${animal.nome}`}
-              className="w-[350px] h-auto rounded-lg"
-            />
-            <div className="flex gap-4 mt-4 justify-center">
+      <section className="p-10 bg-beje flex justify-center ">
+        <div className="flex justify-evenly w-[95%] ">
+          <div className="w-[35%] grid gap-4">
+            <div>
               <img
-                src={animal.imagem}
-                alt="Miniatura 1"
-                className="w-20 h-20 rounded-lg"
+                className="h-auto w-full max-w-full rounded-lg object-cover object-center md:h-96"
+                src={active || animalImg[0]?.imgelink}
+                alt="Imagem do animal"
               />
-              <img
-                src={animal.imagem}
-                alt="Miniatura 2"
-                className="w-20 h-20 rounded-lg"
-              />
-              <img
-                src={animal.imagem}
-                alt="Miniatura 3"
-                className="w-20 h-20 rounded-lg"
-              />
+            </div>
+            <div className="grid grid-cols-5 gap-4">
+              {animalImg.map(({ imgelink }, index) => (
+                <div key={index} className="flex justify-center">
+                  <img
+                    onClick={() => setActive(imgelink)}
+                    src={imgelink}
+                    className={`h-20 w-full cursor-pointer rounded-lg object-cover object-center ${
+                      active === imgelink ? "border-2 border-blue-500" : ""
+                    }`}
+                    alt={`Imagem ${index + 1}`}
+                  />
+                </div>
+              ))}
             </div>
           </div>
 
-          <div>
+          <div className="w-[35%]">
             <h1
               className="text-4xl font-bold inline-block px-4 py-1"
               style={{
@@ -99,55 +138,21 @@ const PaginaPet = () => {
             >
               {animal.nome}
             </h1>
-            <p className="text-lg mt-2">{animal.localizacao}</p>
-            <p className="mt-2">Espécie: {animal.especie}</p>
-            <p>Sexo: {animal.sexo}</p>
-            <p>Idade: {animal.idade}</p>
-            <p>Tamanho: {animal.porte}</p>
 
-            <div className="flex flex-col gap-4 mt-4 mb-4 w-[40%]">
-              <div className="flex items-center gap-4 justify-between">
-                Energia:
-                <Avaliacao
-                  avaliacao={animal.personalidade.energia}
-                  cor="#A9B949"
-                />
-              </div>
-              <div className="flex items-center gap-4 justify-between">
-                Sociável:
-                <Avaliacao
-                  avaliacao={animal.personalidade.sociabilidade}
-                  cor="#A9B949"
-                />
-              </div>
-              <div className="flex items-center gap-4 justify-between">
-                Tolerante:
-                <Avaliacao
-                  avaliacao={animal.personalidade.tolerante}
-                  cor="#A9B949"
-                />
-              </div>
-              <div className="flex items-center gap-4 justify-between">
-                Obediente:
-                <Avaliacao
-                  avaliacao={animal.personalidade.obediente}
-                  cor="#A9B949"
-                />
-              </div>
-              <div className="flex items-center gap-4 justify-between">
-                Territorialista:
-                <Avaliacao
-                  avaliacao={animal.personalidade.territorial}
-                  cor="#A9B949"
-                />
-              </div>
-              <div className="flex items-center gap-4 justify-between">
-                Inteligente:
-                <Avaliacao
-                  avaliacao={animal.personalidade.inteligencia}
-                  cor="#A9B949"
-                />
-              </div>
+            <ul className="my-4 flex flex-col gap-1">
+              <li><span className="text-lg font-semibold">Espécie: </span> {animal.especie}</li>
+              <li><span className="text-lg font-semibold">Sexo: </span> {animal.sexo}</li>
+              <li><span className="text-lg font-semibold">Idade: </span> {animal.idade}</li>
+              <li><span className="text-lg font-semibold">Tamanho: </span> {animal.porte}</li>
+            </ul>
+
+            <div className="flex flex-col gap-3 mt-4 mb-4 w-[55%]">
+              {Object.entries(animal.personalidade).map(([key, value]) => (
+                <div key={key} className="flex items-center gap-4 justify-between">
+                  {key.charAt(0).toUpperCase() + key.slice(1)}:
+                  <Avaliacao avaliacao={value} cor="#A9B949" />
+                </div>
+              ))}
             </div>
 
             <Botao
@@ -162,7 +167,7 @@ const PaginaPet = () => {
         </div>
       </section>
 
-      <section className=" p-10 bg-branco">
+      <section className=" p-10 bg-branco py-12">
         <h2 className="text-3xl font-bold mb-6 text-center">Sugestão</h2>
         {sugestoes.length > 0 ? (
           <Carousel
@@ -186,7 +191,7 @@ const PaginaPet = () => {
       </section>
       <Doacao />
       {auth?.token ? (
-        <ModalAdocao isOpen={isShowing} onClose={toggleModal} />
+        <ModalAdocao isOpen={isShowing} onClose={toggleModal} handleAdoptAnimal={handleAdoptAnimal} />
       ) : (
         <ModalLogin isOpen={isShowing} onClose={toggleModal} />
       )}

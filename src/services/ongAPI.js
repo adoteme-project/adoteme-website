@@ -35,3 +35,7 @@ export function deletePetOng(idPet) {
 export function deletePetPerdidoOng(idPetPerdido) {
     return axiosAuthenticatedOng.delete(`/animais-perdidos/${idPetPerdido}`);
 }
+
+export function getSidebarInfoOng(idOng) {
+    return axiosAuthenticatedOng.get(`/ongs/nome-e-imagem-ong/${idOng}`);
+}

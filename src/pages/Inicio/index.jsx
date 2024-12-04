@@ -1,8 +1,9 @@
 import AnimaisProximos from "../../components/section/Near-Animals/index.jsx";
 import Doacao from "../../components/section/Donation/index.jsx";
-import Carousel from "../../components/section/Categories/index.jsx";
 import { useCardContext } from "@/context/CardProvider.jsx";
 import { Link } from "react-router-dom";
+import CarouselCategorias from "@/components/common/CarouselCategorias/index.jsx";
+import CarouselOngs from "@/components/common/CarouselOngs/index.jsx";
 
 const Inicio = () => {
   const { sugestoes } = useCardContext();
@@ -29,13 +30,13 @@ const Inicio = () => {
         </div>
       </section>
       <Doacao />
-      <Carousel titulo="Categorias" tipo="categorias" />
+      <CarouselCategorias titulo="Categorias" tipo="categorias" />
       <AnimaisProximos
         items={animal}
         tipoCard="animal"
-        titulo="Animais próximos a você"
+        titulo="Pets que combinam com você !"
       />
-      <Carousel titulo="Ongs" tipo="ongs" />
+      <CarouselOngs titulo="Ongs" tipo="ongs" />
     </>
   );
 };

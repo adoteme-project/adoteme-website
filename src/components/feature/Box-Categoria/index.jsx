@@ -10,18 +10,20 @@ const BoxCategoria = ({ id, color, imagem, nome }) => {
   return (
     <div
       id={id}
-      className="w-[288px] h-[192px] shadow-md rounded-lg cursor-pointer"
+      className="sm:w-[20%] md:w-[40%] lg:w-[50%] xl:w-[60%]  h-52 shadow-md rounded-xl cursor-pointer flex flex-col justify-evenly items-center px-4"
       style={{ backgroundColor: color }}
       onClick={handleClick}
     >
-      <h1 className="text-left font-robot text-2xl px-3 py-4 font-semibold">
+      <h1 className="text-center font-robot text-2xl font-semibold">
         {nome}
       </h1>
-      <img
-        src={imagem}
-        alt="Imagem da Categoria"
-        className="w-3/4 h-auto mx-auto object-contain"
-      />
+      <div className='w-[95%] '>
+        <img
+          src={imagem}
+          alt="Imagem da Categoria"
+          className="w-full h-32 object-cover"
+        />
+      </div>
     </div>
   );
 };
