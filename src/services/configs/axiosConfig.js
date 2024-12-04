@@ -2,10 +2,11 @@ import axios from "axios";
 
 
 const api = axios.create({
-  baseURL: "/api",
+  baseURL: "https://adotme-api-hjg3egfuhhgzecdw.brazilsouth-01.azurewebsites.net",
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
+    "accept": "*/*",
   },
 });
 
