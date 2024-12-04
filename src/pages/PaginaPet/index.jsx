@@ -1,4 +1,5 @@
 import { useParams } from "react-router-dom";
+import { postRequisicaoAdocao } from "@/services/adotanteAPI";
 import { useContext, useEffect, useState } from "react";
 import BreadCrumb from "@/components/common/BreadCrumb";
 import Card from "@/components/common/Card";
@@ -10,7 +11,8 @@ import Carousel from "@/components/common/Carrossel";
 import AuthContext from "@/context/AuthProvider";
 import useModal from "@/hooks/useModal";
 import ModalLogin from "@/components/common/ModalLogin";
-import ModalAdocao from "@/components/feature/AdotarPet/ModalAdoacao";
+import ModalAdocao from "@/components/feature/AdotarPet/ModalAdoacao/index";
+import { toast } from "react-toastify";
 
 const PaginaPet = () => {
   const { id } = useParams();
@@ -20,6 +22,8 @@ const PaginaPet = () => {
   const { auth } = useContext(AuthContext);
   const cores = ["#FFC55E", "#A9B949", "#B2DED3", "#EC5A49"];
 
+  console.log("id:", id);
+  console.log("id adotante: ", auth?.userData?.id );
   useEffect(() => {
     if (sugestoes.length > 0) {
       const animalEncontrado = sugestoes
@@ -49,6 +53,23 @@ const PaginaPet = () => {
     }
     return color;
   };
+
+  const handleAdoptAnimal = async ()=> {
+    const IdAdotante = auth?.userData?.id;
+    const IdAnimal = id;
+    try{
+        const response = await postRequisicaoAdocao(
+            IdAdotante,
+            IdAnimal
+        );
+        console.log("Requisicao feita com sucesso!", response.data);
+        toast.success("Sua solicitação foi feita com sucesso!");
+
+    }catch(error){
+        console.error("Erro ao fazer a adoção", error);
+        toast.error("Erro ao realizar a adoção. Tente novamente.")
+    };
+  }
 
   return (
     <>
@@ -186,7 +207,7 @@ const PaginaPet = () => {
       </section>
       <Doacao />
       {auth?.token ? (
-        <ModalAdocao isOpen={isShowing} onClose={toggleModal} />
+        <ModalAdocao isOpen={isShowing} onClose={toggleModal} handleAdoptAnimal={handleAdoptAnimal} />
       ) : (
         <ModalLogin isOpen={isShowing} onClose={toggleModal} />
       )}

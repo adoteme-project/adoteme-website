@@ -1,5 +1,7 @@
 import Botao from "@/components/common/Button";
 import AuthContext from "@/context/AuthProvider";
+import {postFavoritarAnimal} from "@/services/adotanteAPI"
+import {deleteDesfavoritarAnimal} from "@/services/adotanteAPI"
 import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,9 +14,33 @@ const Card = ({ colorBg, data = {}, onDoarClick, tipoCard }) => {
   const [favorito, setFavorito] = useState(false);
   const isPet = tipoCard === 'animal' || data.personalidade?.length > 0;
 
-  const handleFavoriteClick = () => {
+
+  
+  const handleFavoriteClick = async () => {
     setFavorito(!favorito);
-  };
+    // const idAdotante = auth?.userData?.id;
+    console.log("Id animal",data.id);
+    console.log("Id adotante", auth?.userData?.id)
+    console.log("Favorito: ", favorito);
+    const idAdotante = auth?.userData?.id
+    const idAnimal = data.id
+
+    if(!favorito){
+      try{
+        const response = await postFavoritarAnimal(idAdotante, idAnimal);
+        console.log("Animal favoritado com sucesso", response);
+      }catch(error){
+        console.error("Ocorreu um erro durante a requisicao", error);
+      }
+    }else{
+      try{
+        const response = await deleteDesfavoritarAnimal(idAdotante,idAnimal);
+        console.log("Animal desfavoritado", response);
+      }catch(error){
+        console.error("Ocorreu um erro para desfavoritar um animal", error);
+      }
+    }
+    }
 
   return (
     <div className="w-[41vw] bg-beje rounded-lg grid grid-cols-2 gap-4 px-5 py-3 mb-5">

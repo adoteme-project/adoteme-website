@@ -35,7 +35,7 @@ const Header = () => {
 
           {auth?.token ? (
             <>
-              <Link to="/favoritos">
+              <Link to="/animais-favoritos">
                 <FontAwesomeIcon icon={faHeart} className="text-vermelho" />
               </Link>
               <div className="relative flex justify-center items-center flex-col">
