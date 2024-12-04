@@ -13,7 +13,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "adotme-api-hjg3egfuhhgzecdw.brazilsouth-01.azurewebsites.net",
+        target: "https://adotme-api-hjg3egfuhhgzecdw.brazilsouth-01.azurewebsites.net/",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
