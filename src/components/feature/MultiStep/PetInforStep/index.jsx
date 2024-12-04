@@ -130,7 +130,7 @@ const PetInfoStep = () => {
             />
 
             <Select
-              label="Especie"
+              label="Espécie"
               name="especie"
               options={[
                 { label: 'Cachorro', value: 'CACHORRO' },

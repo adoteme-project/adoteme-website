@@ -11,7 +11,7 @@ const SidebarOng = ({ role, ongInfo }) => {
   return (
     <div className="h-full flex-[0.2] p-4 bg-ong-color-bg flex flex-col gap-6">
       <div className="flex justify-center items-center gap-4">
-        <img src={ongInfo.imageOng} className='w-20 h-12' />
+        <img src={ongInfo.imageOng} className='w-20 h-16' />
         <h4 className='font-nunito text-azul-main font-bold text-xl'> {ongInfo.nomeOng} </h4>
       </div>
       <nav className='flex flex-col gap-4 font-nunito'>
