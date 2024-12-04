@@ -11,7 +11,7 @@ import { faWpforms } from "@fortawesome/free-brands-svg-icons";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "@/context/AuthProvider";
 
-export default function Modal({data}) {
+export default function Modal({ data }) {
   const { auth, logout } = useContext(AuthContext);
   const [isOpen, setIsOpen] = useState(false);
   const [requisicao, setRequisicoes] = useState([]);
@@ -23,19 +23,18 @@ export default function Modal({data}) {
 
   useEffect(() => {
     const fetchRequisicoes = async () => {
-      try{
+      try {
         const response = await getUserById(idAdotante);
         // console.log("Requisição feita com sucesso!", response);
         setRequisicoes(response);
         setImage(response.data.urlFoto);
         // console.log("IMAGEM!", response.data.urlFoto);
-      }catch(error){
+      } catch (error) {
         console.error("Error", error);
       }
-    }
+    };
     fetchRequisicoes();
-  }, [])
-
+  }, []);
 
   return (
     <>
@@ -45,7 +44,11 @@ export default function Modal({data}) {
         onMouseLeave={handleMouseLeave}
       >
         <div className="flex flex-row items-center py-1 gap-2">
-          <img src={image} alt="Fotoo" className= "rounded-full w-[2.5rem] h-[2.5rem] object-cover" />
+          <img
+            src={image}
+            alt="Fotoo"
+            className="rounded-full w-[2.5rem] h-[2.5rem] object-cover"
+          />
           {/* <FontAwesomeIcon
             icon={faCircleUser}
             className="text-[#307299] text-4xl"
@@ -56,27 +59,27 @@ export default function Modal({data}) {
         </div>
         <hr className="my-2 border-verde-border" />
         <div className="flex flex-col gap-2 pt-2">
-          <div className="flex flex-row items-center gap-4">
-            <FontAwesomeIcon icon={faUser} className="text-azul-light " />
-            Meu perfil
-            <Link to="/perfil/usuario" onClick={() => setIsOpen(false)}>
+          <div className="flex flex-row">
+            <Link to="/perfil/usuario" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
+              <FontAwesomeIcon icon={faUser} className="text-azul-light " />
+              Meu perfil
               <FontAwesomeIcon icon={faAngleUp} rotation={90} />
             </Link>
           </div>
           <div className="flex flex-row items-center gap-4">
-            <FontAwesomeIcon
-              icon={faClockRotateLeft}
-              className="text-amarelo"
-            />
-            Aplicações
-            <Link to="/perfil-formulario" onClick={() => setIsOpen(false)}>
+            <Link to="/perfil/formulario" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
+              <FontAwesomeIcon
+                icon={faClockRotateLeft}
+                className="text-amarelo"
+              />
+              Aplicações
               <FontAwesomeIcon icon={faAngleUp} rotation={90} />
             </Link>
           </div>
           <div className="flex flex-row items-center gap-4">
-            <FontAwesomeIcon icon={faWpforms} className="text-verde" />
-            Formulário
-            <Link to="/perfil-formulario" onClick={() => setIsOpen(false)}>
+            <Link to="/perfil/aplicacao" onClick={() => setIsOpen(false)} className="flex items-center gap-2">
+              <FontAwesomeIcon icon={faWpforms} className="text-verde" />
+              Formulário
               <FontAwesomeIcon icon={faAngleUp} rotation={90} />
             </Link>
           </div>

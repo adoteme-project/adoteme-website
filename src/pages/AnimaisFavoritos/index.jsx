@@ -6,34 +6,44 @@ import GridLayout from "@/components/layout/Grid";
 import Pagination from "@/components/common/Pagination";
 import imgBanner from "@/assets/banner-favoritos.png";
 import AuthContext from "@/context/AuthProvider";
+import { getAnimalFavoritoByAdotante } from "@/services/adotanteAPI"; 
 
 const FavoritosAnimais = () => {
     const [favorites, setFavorites] = useState([]); 
     const [filteredFavorites, setFilteredFavorites] = useState([]); 
     const [filters, setFilters] = useState({});
     const { auth } = useContext(AuthContext);
+    const idAdotante = auth?.userData?.id
 
     const handleFilterChange = (key, value) => {
         setFilters((prev) => ({ ...prev, [key]: normalizeString(value) }));
     };
+    // const adotante = auth.userData;
+    // console.log("ID ADOTANTE",auth.userData)
 
-    const userId = auth.userData?.id;
-
-
+    
+    
     useEffect(() => {
         const fetchFavorites = async () => {
             try {
-                const response = await fetch(`http://localhost:8080/adotantes/animais-favoritos-usuario/${userId}`);
-                const data = await response.json();
-                setFavorites(data.favoritos_animais);
-                setFilteredFavorites(data.favoritos_animais); 
+                // debugger
+                const response = await getAnimalFavoritoByAdotante(idAdotante);
+                
+                const animaisFavoritos = response.data.animaisfavoritos;
+
+                setFavorites(animaisFavoritos);
+                console.log("Favorites", favorites)
+                setFilteredFavorites(animaisFavoritos); 
+                console.log("Filtered favorites", filteredFavorites)
             } catch (error) {
                 console.error("Erro ao buscar favoritos de animais:", error);
             }
         };
-    
-        fetchFavorites();
-    }, [userId]);    
+
+        if (idAdotante) {
+            fetchFavorites();
+        }
+    }, [idAdotante]);  
 
     const normalizeString = (str) =>
         str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : str;
@@ -51,8 +61,8 @@ const FavoritosAnimais = () => {
         applyFilters();
     }, [filters, favorites]);
 
-    if (!userId) {
-        return <div>Carregando...</div>;
+    if (!auth?.userData?.id) {
+        return <div>Carregando dados do usuário...</div>;
     }
 
     return (
@@ -71,7 +81,7 @@ const FavoritosAnimais = () => {
             <Pagination
                 items={filteredFavorites} 
                 renderGrid={(currentItems) => (
-                    <GridLayout items={currentItems} titulo="Animal" tipoCard="animal" />
+                    <GridLayout items={currentItems} titulo="Animal" tipoCard="animal"/>
                 )}
                 itemsPerPageOptions={[2, 4, 6]}
                 itemLabel="Animais"

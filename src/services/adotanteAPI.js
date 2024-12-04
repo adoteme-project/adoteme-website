@@ -29,8 +29,8 @@ export const deleteDesfavoritarAnimal = (idAdotante, idAnimal) => {
     return axiosAuthenticated.delete(`/adotantes/desfavoritar-animal/${idAdotante}/${idAnimal}`)
 }
 
-export const getRequisicoesByAdotante = (idAdotante) => {
-    return axiosAuthenticated.get(`/adotantes/lista-requisicao-adotante/${idAdotante}`)
+export const getRequisicoesByAdotante = (id) => {
+    return axiosAuthenticated.get(`/adotantes/lista-requisicao-adotante/${id}`)
 }
 
 export const getAnimalFavoritoByAdotante = (idAdotante) => {

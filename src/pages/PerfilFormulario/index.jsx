@@ -39,6 +39,7 @@ const PerfilUsuario = () => {
     setEditando(false);
   };
 
+  console.log(auth.userData, "BLABLABLA");
   const salvarEdicao = async () => {
     try{
       const valoresAtualizados = getValues();
