@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BoxOng from "@/components/feature/Box-Ongs";
 import Carrosel from "@/components/common/Carousel/index";
+import { getOngs } from "@/services/siteAPI";
 
 const CarouselOngs = ({ titulo }) => {
     const [ongs, setOngs] = useState([]);
@@ -8,7 +9,7 @@ const CarouselOngs = ({ titulo }) => {
 
     const carregarOngs = async () => {
         try {
-            const response = await fetch('http://localhost:8080/ongs/com-dados-bancarios');
+            const response = await getOngs();
             const data = await response.json();
             setOngs(data);
         } catch (error) {

@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
+import { getAllPets, getOngs } from '@/services/siteAPI';
 
 const CardContext = createContext();
 
@@ -9,17 +9,9 @@ export const CardProvider = ({ children }) => {
     useEffect(() => {
         const fetchDados = async () => {
             try {
-                const responseAnimais = await axios.get('http://localhost:8080/animais/todos-animais-com-personalidade/', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
+                const responseAnimais = await getAllPets();
 
-                const responseOngs = await axios.get('http://localhost:8080/ongs/com-dados-bancarios', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
+                const responseOngs = await getOngs();
 
                 const dadosCombinados = [   
                     ...responseAnimais.data.map(animal => ({ ...animal, tipo: 'animal' })),
