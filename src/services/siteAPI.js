@@ -7,3 +7,7 @@ export function getOngs() {
 export function getAllPets() {
     return api.get(`/animais/todos-animais-com-personalidade/`);
 }
+
+export function getPetsSiteOng() {
+    return api.get(`/ongs/listagem-ongs-com-animais-dados-bancarios/`)
+}

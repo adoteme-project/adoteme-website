@@ -20,9 +20,9 @@ function CardList({ filterKey, nome, tamanho, fetchOptions, onFilterChange, sele
         setOptionsList(optionsMap[filterKey]);
       } else if (fetchOptions) {
         try {
-          const response = await fetch(fetchOptions);
+          const response = await fetchOptions();
           if (!response.ok) throw new Error("Erro ao buscar opções de filtro!");
-          const cards = await response.json();
+          const cards = await response.data;
           console.log("Cards:", cards);
           const options = new Set(
             cards.map((option) =>

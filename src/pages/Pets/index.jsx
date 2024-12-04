@@ -10,6 +10,7 @@ import Pagination from "@/components/common/Pagination";
 import Botao from "@/components/common/Button";
 import { SearchInput } from "@/components/common/SearchInput";
 import CarouselCategorias from "@/components/common/CarouselCategorias";
+import { getAllPets } from "@/services/siteAPI";
 
 const normalizeString = (str) =>
   str
@@ -82,7 +83,7 @@ const Pets = () => {
           nome="Porte"
           tamanho={200}
           fetchOptions={
-            "http://localhost:8080/animais/todos-animais-com-personalidade/"
+            getAllPets
           }
           onFilterChange={handleFilterChange}
           selectedValue={dropdownValues.porte}
@@ -92,7 +93,7 @@ const Pets = () => {
           nome="Sexo"
           tamanho={200}
           fetchOptions={
-            "http://localhost:8080/animais/todos-animais-com-personalidade/"
+            getAllPets
           }
           onFilterChange={handleFilterChange}
           selectedValue={dropdownValues.sexo}
@@ -102,7 +103,7 @@ const Pets = () => {
           nome="Espécie"
           tamanho={200}
           fetchOptions={
-            "http://localhost:8080/animais/todos-animais-com-personalidade/"
+            getAllPets
           }
           onFilterChange={handleFilterChange}
           selectedValue={dropdownValues.especie}
