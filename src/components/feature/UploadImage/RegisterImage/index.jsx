@@ -4,17 +4,21 @@ import { faAdd, faCamera, faPen } from "@fortawesome/free-solid-svg-icons";
 import { Controller } from "react-hook-form";
 import { useLocation } from "react-router-dom";
 
-const FormRegisterImage = ({ control, userImage }) => {
+const FormRegisterImage = ({ control, userImage, onImageUpload }) => {
   const location = useLocation();
   const [preview, setPreview] = useState(null);
 
-  console.log(userImage)
+  // console.log(userImage)
 
   if(userImage && preview == null) {
     setPreview(userImage)
   }
 
   const handleFileChange = (file, onChange) => {
+    if(onImageUpload){
+      onImageUpload(file);
+    }
+    
     if (file && file.size > 5 * 1024 * 1024) {
       alert("Arquivo não pode passar de 5MB");
       return;
