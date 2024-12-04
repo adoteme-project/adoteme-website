@@ -123,7 +123,7 @@ const AdicionarUsuario = () => {
                     className="w-full h-full object-cover rounded-lg"
                   />
                 ) : (
-                  <span className="text-gray-500 text-sm">Clique para adicionar imagem</span>
+                  <span className="text-gray-500 text-sm text-center">Clique para adicionar imagem</span>
                 )}
               </div>
             </label>
