@@ -10,7 +10,7 @@ const CarouselOngs = ({ titulo }) => {
     const carregarOngs = async () => {
         try {
             const response = await getOngs();
-            const data = await response.json();
+            const data = await response.data;
             setOngs(data);
         } catch (error) {
             console.error("Erro ao carregar o JSON de ONGs:", error);

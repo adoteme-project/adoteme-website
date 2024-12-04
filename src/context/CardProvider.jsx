@@ -13,6 +13,9 @@ export const CardProvider = ({ children }) => {
 
                 const responseOngs = await getOngs();
 
+                console.log(responseAnimais.data)
+                console.log(responseOngs.data)
+
                 const dadosCombinados = [   
                     ...responseAnimais.data.map(animal => ({ ...animal, tipo: 'animal' })),
                     ...responseOngs.data.map(ong => ({ ...ong, tipo: 'ong' }))
