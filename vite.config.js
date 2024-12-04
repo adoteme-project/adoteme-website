@@ -13,10 +13,12 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://adotme-api-hjg3egfuhhgzecdw.brazilsouth-01.azurewebsites.net/",
+        target: "adotme-api-hjg3egfuhhgzecdw.brazilsouth-01.azurewebsites.net",
         changeOrigin: true,
+        secure: false,
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
+      cors: false
     },
   },
 });
