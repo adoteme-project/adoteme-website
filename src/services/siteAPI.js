@@ -1,7 +1,7 @@
 import { api } from "./configs/axiosConfig";
 
 export function getOngs() {
-    return api.get(`/ongs/com-dados-bancarios/`);
+    return api.get(`/ongs/com-dados-bancarios`);
 }
 
 export function getAllPets() {
@@ -9,5 +9,5 @@ export function getAllPets() {
 }
 
 export function getPetsSiteOng() {
-    return api.get(`/ongs/listagem-ongs-com-animais-dados-bancarios/`)
+    return api.get(`/ongs/listagem-ongs-com-animais-dados-bancarios`)
 }
