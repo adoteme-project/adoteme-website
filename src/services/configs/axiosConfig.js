@@ -6,7 +6,6 @@ const api = axios.create({
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
-    "accept": "*/*",
   },
 });
 
@@ -15,7 +14,6 @@ const axiosForm = axios.create({
   headers: {
     "Content-Type": "multipart/form-data",
     "Access-Control-Allow-Origin": "*",
-    "accept": "*/*",
   }
 });
 
@@ -31,7 +29,6 @@ const axiosDownload = axios.create({
   headers: {
     "Content-Disposition": "attachment;filename=animais.xls",
     "Content-Type": "application/octet-stream",
-    "accept": "*/*",
   },
   responseType: 'blob',
   withCredentials: true
@@ -44,7 +41,6 @@ const axiosAuth = axios.create({
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
-    "accept": "*/*",
   },
   withCredentials: true,
 });
@@ -55,7 +51,6 @@ const axiosAuthenticated = axios.create({
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
-    "accept": "*/*",
   },
   withCredentials: true,
 })
@@ -97,7 +92,6 @@ const axiosAuthenticatedOngMultiPart = axios.create({
   headers: {
     "Content-Type": "multipart/form-data",
     "Access-Control-Allow-Origin": "*",
-    "accept": "*/*",
   },
   withCredentials: true,
 })
