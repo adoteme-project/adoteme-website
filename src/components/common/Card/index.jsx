@@ -7,7 +7,6 @@ import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import imgOng from "@/assets/imagem-ong.png";
 import Avaliacao from "@/components/feature/Rating";
 
 const Card = ({ colorBg, data = {}, onDoarClick, tipoCard, isCategoria, categoriaName }) => {
@@ -48,7 +47,7 @@ const Card = ({ colorBg, data = {}, onDoarClick, tipoCard, isCategoria, categori
     <div className="bg-beje rounded-lg grid grid-cols-8 gap-x-8 pl-5 py-4 w-full shadow-sm">
       <div className="flex flex-col justify-center items-center col-span-3">
         <img
-          src={isPet && data.imagem ? data.imagem : imgOng}
+          src={data.imagem}
           alt={isPet ? "Imagem do animal que está disponível para adoção" : "Imagem da ONG"}
           className="w-full h-64 rounded-lg object-cover"
         />

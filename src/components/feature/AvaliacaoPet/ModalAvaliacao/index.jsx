@@ -28,6 +28,8 @@ const ModalAvaliacao = ({ show, onClose, infoAdocao }) => {
         return null;
     }
 
+    console.log(infoAdocao);
+
     const formAdotante = formQuestionsAdotante[0].formGroups[0].radioControl;
 
     const handleAvaliarClick = () => {

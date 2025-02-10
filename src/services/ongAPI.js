@@ -1,4 +1,4 @@
-import { axiosAuthenticated, axiosAuthenticatedOng, axiosAuthenticatedOngMultiPart } from "./configs/axiosConfig";
+import { api, axiosAuthenticated, axiosAuthenticatedOng, axiosAuthenticatedOngMultiPart } from "./configs/axiosConfig";
 
 export function getPetsOng(id) {
     return axiosAuthenticated.get(`/ongs/listagem-animais-ong/${id}`);
@@ -38,4 +38,8 @@ export function deletePetPerdidoOng(idPetPerdido) {
 
 export function getSidebarInfoOng(idOng) {
     return axiosAuthenticatedOng.get(`/ongs/nome-e-imagem-ong/${idOng}`);
+}
+
+export function getOngComDadosBancarios() {
+    return api.get(`ongs/com-dados-bancarios`);
 }

@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
+import { getOngComDadosBancarios } from '@/services/ongAPI';
 
 const CardContext = createContext();
 
@@ -15,11 +16,9 @@ export const CardProvider = ({ children }) => {
                     },
                 });
 
-                const responseOngs = await axios.get('http://localhost:8080/ongs/com-dados-bancarios', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
+                const responseOngs = await getOngComDadosBancarios();
+
+                console.log(responseOngs.data);
 
                 const dadosCombinados = [   
                     ...responseAnimais.data.map(animal => ({ ...animal, tipo: 'animal' })),

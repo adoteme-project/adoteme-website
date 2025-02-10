@@ -4,6 +4,7 @@ import BoxOng from "@/components/feature/Box-Ongs";
 import Carrosel from "@/components/common/Carousel/index";
 import brincalhao from "@/assets/brincalhao.svg"
 import sociavel from "@/assets/sociavel.svg"
+import { getOngComDadosBancarios } from "@/services/ongAPI";
 
 const Carousel = ({ tipo, titulo }) => {
     const [personalidades, setPersonalidades] = useState([]);
@@ -33,9 +34,8 @@ const Carousel = ({ tipo, titulo }) => {
 
     const carregarOngs = async () => {
         try {
-            const response = await fetch('http://localhost:8080/ongs/com-dados-bancarios');
-            const data = await response.json();
-            setOngs(data);
+            const response = await getOngComDadosBancarios();
+            setOngs(response.data);
         } catch (error) {
             console.error("Erro ao carregar o JSON de ONGs:", error);
         }

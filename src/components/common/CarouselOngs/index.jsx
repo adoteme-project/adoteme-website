@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import BoxOng from "@/components/feature/Box-Ongs";
 import Carrosel from "@/components/common/Carousel/index";
+import { getOngComDadosBancarios } from "@/services/ongAPI";
 
 const CarouselOngs = ({ titulo }) => {
     const [ongs, setOngs] = useState([]);
@@ -8,9 +9,8 @@ const CarouselOngs = ({ titulo }) => {
 
     const carregarOngs = async () => {
         try {
-            const response = await fetch('http://localhost:8080/ongs/com-dados-bancarios');
-            const data = await response.json();
-            setOngs(data);
+            const response = await getOngComDadosBancarios();
+            setOngs(response.data);
         } catch (error) {
             console.error("Erro ao carregar o JSON de ONGs:", error);
         }
