@@ -1,4 +1,3 @@
-import DropDown from "@/components/section/DropDown";
 import Banner from "@/components/section/Banner";
 import BreadCrumb from "@/components/common/BreadCrumb";
 import { useEffect, useState } from "react";
@@ -80,14 +79,12 @@ const PaginaOng = () => {
 
     return (
         <div>
-            <Banner tamanho="700.25vh" imagensBanner={imgBanner} />
+            <Banner imagensBanner={imgBanner} />
             <BreadCrumb tituloCaminho="Home" tituloCaminho2="Ongs" tituloCaminho3={ong.nome} cor="#B2DED3" caminho={`/pagina-ong/${ong.id}`} />
 
             <div className="flex flex-row w-full justify-evenly gap-4 px-4 mt-16">
                 <div className="flex flex-row w-8/12 gap-4">
-                 {/*    <DropDown filterKey="porte" nome="Porte" tamanho={200} fetchOptions={"http://localhost:8080/animais/todos-animais-com-personalidade/"} onFilterChange={handleFilterChange} />
-                    <DropDown filterKey="sexo" nome="Sexo" tamanho={200} fetchOptions={"http://localhost:8080/animais/todos-animais-com-personalidade/"} onFilterChange={handleFilterChange} />
-                    <DropDown filterKey="especie" nome="Espécie" tamanho={200} fetchOptions={"http://localhost:8080/animais/todos-animais-com-personalidade/"} onFilterChange={handleFilterChange} /> */}
+                    {/* Seção de Dropdown da ong */}
                 </div>
             </div>
 

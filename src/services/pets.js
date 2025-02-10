@@ -7,3 +7,7 @@ export function getPetsPerdido() {
 export function getPetPerdidoPorId(idAnimal) {
     return api.get(`/animais-perdidos/animal-perdido-achados-perdidos-card/${idAnimal}`)
 }
+
+export function getTodosAnimaisComPersonalidade() {
+    return api.get(`/animais/todos-animais-com-personalidade/`);
+}

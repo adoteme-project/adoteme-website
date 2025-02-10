@@ -1,4 +1,3 @@
-import DropDown from "@/components/section/DropDown";
 import Banner from "@/components/section/Banner";
 import BreadCrumb from "@/components/common/BreadCrumb";
 import { useContext, useEffect, useState } from "react";
@@ -67,7 +66,7 @@ const FavoritosAnimais = () => {
 
     return (
         <div>
-            <Banner tamanho="700.25vh" imagensBanner={imgBanner} />
+            <Banner imagensBanner={imgBanner} />
             <BreadCrumb
                 tituloCaminho="Home"
                 tituloCaminho2="Favoritos Animais"
@@ -77,24 +76,6 @@ const FavoritosAnimais = () => {
 
             <div className="flex flex-row w-full justify-evenly gap-4 px-4 mt-16">
                 <div className="flex flex-row w-8/12 gap-4">
-                    <DropDown
-                        filterKey="porte"
-                        nome="Porte"
-                        tamanho={200}
-                        onFilterChange={handleFilterChange}
-                    />
-                    <DropDown
-                        filterKey="sexo"
-                        nome="Sexo"
-                        tamanho={200}
-                        onFilterChange={handleFilterChange}
-                    />
-                    <DropDown
-                        filterKey="especie"
-                        nome="Espécie"
-                        tamanho={200}
-                        onFilterChange={handleFilterChange}
-                    />
                 </div>
             </div>
 

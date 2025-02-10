@@ -1,6 +1,6 @@
-const Banner = ({ tamanho, imagensBanner }) => {
+const Banner = ({ imagensBanner }) => {
   return (
-    <section className={`h-[${tamanho}] w-full inline-block`}>
+    <section className={`h-auto w-full inline-block`}>
       <div className="relative  w-full">
         <img
           src={imagensBanner}

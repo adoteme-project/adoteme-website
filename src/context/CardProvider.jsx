@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
 import { getOngComDadosBancarios } from '@/services/ongAPI';
+import { getTodosAnimaisComPersonalidade } from '@/services/pets';
 
 const CardContext = createContext();
 
@@ -10,15 +10,9 @@ export const CardProvider = ({ children }) => {
     useEffect(() => {
         const fetchDados = async () => {
             try {
-                const responseAnimais = await axios.get('http://localhost:8080/animais/todos-animais-com-personalidade/', {
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
+                const responseAnimais = await getTodosAnimaisComPersonalidade();
 
                 const responseOngs = await getOngComDadosBancarios();
-
-                console.log(responseOngs.data);
 
                 const dadosCombinados = [   
                     ...responseAnimais.data.map(animal => ({ ...animal, tipo: 'animal' })),

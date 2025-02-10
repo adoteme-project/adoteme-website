@@ -6,6 +6,7 @@ import Doacao from "@/components/section/Donation";
 import GridLayout from '@/components/layout/Grid';
 import Pagination from '@/components/common/Pagination';
 import image from '@/assets/banner-categoria.svg';
+import { getTodosAnimaisComPersonalidade } from '@/services/pets';
 
 const useQuery = () => {
     return new URLSearchParams(useLocation().search);
@@ -21,10 +22,9 @@ const Categorias = () => {
     useEffect(() => {
         const fetchAnimais = async () => {
             try {
-                const response = await fetch('http://localhost:8080/animais/todos-animais-com-personalidade/');
-                const data = await response.json();
+                const response = await getTodosAnimaisComPersonalidade();
 
-                const animaisNormalizados = data.map(animal => ({
+                const animaisNormalizados = response.data.map(animal => ({
                     ...animal,
                     personalidade: Object.fromEntries(
                         Object.entries(animal.personalidade).map(([key, value]) => [key.toLowerCase(), value])
