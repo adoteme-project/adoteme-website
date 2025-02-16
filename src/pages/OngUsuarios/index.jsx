@@ -7,6 +7,7 @@ import axios from "axios";
 import { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import OngAuthContext from "@/context/AuthOngProvider";
+import { listarUsuariosOng } from "@/services/onguserAPI";
 
 const OngUsuarios = () => {
   const [dataUsuarios, setDataUsuarios] = useState([]);
@@ -28,7 +29,7 @@ const OngUsuarios = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:8080/ongusers/lista-ong-users-por-ong/${ongId}`);
+        const response = await listarUsuariosOng(ongId);
 
         if (response.status === 204) {
           setError("Nenhum usuário encontrado para esta ONG.");

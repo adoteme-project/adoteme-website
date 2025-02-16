@@ -43,3 +43,17 @@ export function getSidebarInfoOng(idOng) {
 export function getOngComDadosBancarios() {
     return api.get(`ongs/com-dados-bancarios`);
 }
+
+export function getAplicaoesPorAno(ongId, anoSelecionado) {
+    return axiosAuthenticatedOng.get(`/adocoes/dados-adocao-dashboard/${ongId}`,
+        {params: { ano: anoSelecionado }},
+    );
+}
+
+export function putEditarDadosOng(ongId, formData) {
+    return axiosAuthenticatedOng.put(`/ongs/editar/${ongId}`, formData);
+}
+
+export function getDadosOng(ongId) {
+    return axiosAuthenticated.get(`/ongs/ong-edicao-visualizacao/${ongId}`);
+}

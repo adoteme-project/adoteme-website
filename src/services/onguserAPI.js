@@ -27,3 +27,11 @@ export function aprovarRequisicao(idReq) {
 export function confirmarAdocao(idReq) {
     return axiosAuthenticatedOng.patch(`/requisicoes/adotado/${idReq}`);
 }
+
+export function postCriarUsuarioOng(formUserData) {
+    return axiosAuthenticatedOng.post(`/ongusers`, formUserData);
+}
+
+export function listarUsuariosOng(ongId) {
+    return axiosAuthenticatedOng.get(`/ongusers/lista-ong-users-por-ong/${ongId}`);
+}

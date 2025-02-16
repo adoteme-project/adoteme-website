@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import { ComposedChart, Bar, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts";
 import PageTitle from "@/components/layout/PageTitle";
 import OngAuthContext from "@/context/AuthOngProvider";
 import "react-toastify/dist/ReactToastify.css"; 
 import { useNotification } from "@/context/NotificationProvider";
+import { getAplicaoesPorAno } from "@/services/ongAPI";
 
 const OngDashboard = () => {
   const [data, setData] = useState([]);
@@ -27,9 +27,7 @@ const OngDashboard = () => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:8080/adocoes/dados-adocao-dashboard/${ongId}`, {
-          params: { ano: selectedYear },
-        });
+        const response = await getAplicaoesPorAno(ongId, selectedYear);
         setData(response.data);
       } catch (err) {
         console.log(err)

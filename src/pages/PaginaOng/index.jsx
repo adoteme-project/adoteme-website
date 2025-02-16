@@ -3,9 +3,9 @@ import BreadCrumb from "@/components/common/BreadCrumb";
 import { useEffect, useState } from "react";
 import GridLayout from "@/components/layout/Grid";
 import Pagination from "@/components/common/Pagination";
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import imgBanner from "@/assets/banner-ong.svg";
+import { getOngComTodosPets } from "@/services/pets";
 
 const normalizeString = (str) =>
     str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase() : str;
@@ -21,7 +21,7 @@ const PaginaOng = () => {
     useEffect(() => {
         const fetchOng = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/ongs/listagem-ongs-com-animais-dados-bancarios');
+                const response = await getOngComTodosPets();
                 const ongsData = response.data;
 
                 const ongData = ongsData.find(ong => ong.id === Number(id));

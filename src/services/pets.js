@@ -11,3 +11,7 @@ export function getPetPerdidoPorId(idAnimal) {
 export function getTodosAnimaisComPersonalidade() {
     return api.get(`/animais/todos-animais-com-personalidade/`);
 }
+
+export function getOngComTodosPets() {
+    return api.get(`/ongs/listagem-ongs-com-animais-dados-bancarios`)
+}

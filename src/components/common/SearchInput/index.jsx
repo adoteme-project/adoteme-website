@@ -16,8 +16,9 @@ export const SearchInput = ({ data, placeholder, name, disabled, error, onSearch
   return (
     <>
       <div>
+      <label className={`text-sm font-medium`}> Buscar </label>
         <input
-          className={`mt-1 w-full ${className} ${
+          className={`w-full ${className} ${
             disabled && `bg-input-d`
           } rounded-md border-titulo border-2 px-3 py-2 shadow-md sm:text-sm`}
           placeholder={placeholder ?? ""}

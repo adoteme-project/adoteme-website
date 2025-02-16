@@ -1,9 +1,9 @@
 import OngAuthContext from "@/context/AuthOngProvider";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { postCriarUsuarioOng } from "@/services/onguserAPI";
 
 const AdicionarUsuario = () => {
   const navigate = useNavigate();
@@ -77,21 +77,8 @@ const AdicionarUsuario = () => {
   const handleSave = async () => {
     if (!validateForm(formData)) return;
 
-    const { nome, role, celular, telefone, email, imagem, senha, ongId } = formData;
-    console.log(formData);
-
-
     try {
-      const response = await axios.post("http://localhost:8080/ongusers", {
-        nome,
-        role,
-        celular,
-        telefone,
-        email,
-        imagem,
-        senha,
-        ongId,
-      });
+      const response = await postCriarUsuarioOng(formData);
 
       if (response.status === 201) {
         console.log("Usuário adicionado com sucesso!");

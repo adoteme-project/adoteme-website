@@ -3,6 +3,7 @@ import PageTitle from "@/components/layout/PageTitle";
 import OngAuthContext from "@/context/AuthOngProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getDadosOng, putEditarDadosOng } from "@/services/ongAPI";
 
 const OngEditarConfiguracoes = () => {
   const { authOng } = useContext(OngAuthContext);
@@ -32,13 +33,8 @@ const OngEditarConfiguracoes = () => {
       }
 
       try {
-        const response = await fetch(
-          `http://localhost:8080/ongs/ong-edicao-visualizacao/${ongId}`
-        );
-        if (!response.ok) {
-          throw new Error("Erro ao buscar dados da ONG");
-        }
-        const data = await response.json();
+        const response = await getDadosOng(ongId);
+        const data = response.data;
         setOrgData(data);
         setPreviewImage(data.imagem);
       } catch (error) {
@@ -78,10 +74,7 @@ const OngEditarConfiguracoes = () => {
         formData.append(key, orgData[key]);
       });
 
-      const response = await fetch(`http://localhost:8080/ongs/editar/${ongId}`, {
-        method: "PUT",
-        body: formData,
-      });
+      const response = await putEditarDadosOng(ongId, formData);
 
       if (response.ok) {
         toast.success("Dados salvos com sucesso!");

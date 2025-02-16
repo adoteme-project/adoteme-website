@@ -32,7 +32,7 @@ const Pets = () => {
       />
       <CarouselCategorias titulo="Categorias" tipo="categorias" />
       <div className="flex flex-row w-full justify-evenly items-center gap-4 px-4 py-10">
-        <div className="flex gap-8 items-center">
+        <div className="flex gap-8 items-end">
           <DropDown label='Sexo' options={[
             {label: 'Macho', value: 'macho'}, 
             {label: 'Fêmea', value: 'femea'}
