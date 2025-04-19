@@ -1,4 +1,5 @@
 import emailjs from "emailjs-com";
+import { axiosAuthenticated } from "./configs/axiosConfig";
 
 export function sendEmail(params) {
     emailjs
@@ -14,4 +15,8 @@ export function sendEmail(params) {
         .catch((error) => {
             console.error("Erro ao enviar email:", error.text);
         });
+}
+
+export function sendEmailFa(email) {
+    return axiosAuthenticated.post(`/login/ativar/${email}`);
 }

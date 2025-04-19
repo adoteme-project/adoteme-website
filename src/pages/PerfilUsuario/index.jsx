@@ -100,8 +100,6 @@ const PerfilUsuario = () => {
         formData.append("fotoPerfil", dadosPerfil.fileFoto);
       }
 
-      console.log("Salvando alterações...", formData);
-
       await putAdotante(auth?.userData?.id, formData);
 
       setDadosPerfil((prevDados) => ({

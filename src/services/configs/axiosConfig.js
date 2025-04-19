@@ -1,8 +1,7 @@
 import axios from "axios";
 
-
 const api = axios.create({
-  baseURL: "https://adotme-api-hjg3egfuhhgzecdw.brazilsouth-01.azurewebsites.net",
+  baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -10,7 +9,7 @@ const api = axios.create({
 });
 
 const axiosForm = axios.create({
-  baseURL: "https://adotme-api-hjg3egfuhhgzecdw.brazilsouth-01.azurewebsites.net",
+  baseURL: "/api",
   headers: {
     "Content-Type": "multipart/form-data",
     "Access-Control-Allow-Origin": "*",
@@ -25,7 +24,7 @@ const viaCep = axios.create({
 });
 
 const axiosDownload = axios.create({
-  baseURL: "https://adotme-api-hjg3egfuhhgzecdw.brazilsouth-01.azurewebsites.net",
+  baseURL: "/api",
   headers: {
     "Content-Disposition": "attachment;filename=animais.xls",
     "Content-Type": "application/octet-stream",
@@ -37,7 +36,7 @@ const axiosDownload = axios.create({
 
 /* Instância para método de login */
 const axiosAuth = axios.create({
-  baseURL: "https://adotme-api-hjg3egfuhhgzecdw.brazilsouth-01.azurewebsites.net",
+  baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -47,7 +46,7 @@ const axiosAuth = axios.create({
 
 /* Instância para quando o usuário estiver autenticado */
 const axiosAuthenticated = axios.create({
-  baseURL: "https://adotme-api-hjg3egfuhhgzecdw.brazilsouth-01.azurewebsites.net",
+  baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -68,7 +67,7 @@ axiosAuthenticated.interceptors.request.use(
 );
 
 const axiosAuthenticatedOng = axios.create({
-  baseURL: 'https://adotme-api-hjg3egfuhhgzecdw.brazilsouth-01.azurewebsites.net"',
+  baseURL: "/api",
   headers: {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -88,7 +87,7 @@ axiosAuthenticatedOng.interceptors.request.use(
 );
 
 const axiosAuthenticatedOngMultiPart = axios.create({
-  baseURL: "https://adotme-api-hjg3egfuhhgzecdw.brazilsouth-01.azurewebsites.net",
+  baseURL: "/api",
   headers: {
     "Content-Type": "multipart/form-data",
     "Access-Control-Allow-Origin": "*",

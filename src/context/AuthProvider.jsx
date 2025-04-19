@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { login as loginService } from "@/services/authAPI";
+import { loginOtp, login as loginService } from "@/services/authAPI";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { getUserData } from "@/services/adotanteAPI";
@@ -15,9 +15,41 @@ export const AuthProvider = ({ children }) => {
 
     const navigate = useNavigate();
 
-    const login = async (context, data) => {
+    const login = async (context, data, toggleModal) => {
         try {
             const response = await loginService(context, data);
+
+            if (response.status === 401) {
+                toast.error("Erro ao realizar o login! Verifique suas credenciais.");
+            } else if (response.status === 202) {
+                toggleModal();
+            } else {
+                const { token } = response.data;
+
+                setAuth((prevAuth) => ({
+                    ...prevAuth,
+                    token,
+                }));
+
+                toast.success("Login realizado com sucesso!");
+                localStorage.setItem("adotanteToken", token);
+
+                await retriveUserData("adotantes");
+
+                navigate("/");
+            }
+
+        } catch (error) {
+            const errorMessage = error.response?.data.message || "Erro desconhecido";
+            console.log(errorMessage);
+
+            toast.error("Erro ao realizar o login! Verifique suas credenciais.");
+        }
+    };
+
+    const loginWithOtp = async (email, code) => {
+        try {
+            const response = await loginOtp(email, code);
 
             if (response.status === 401) {
                 toast.error("Erro ao realizar o login! Verifique suas credenciais.");
@@ -34,16 +66,13 @@ export const AuthProvider = ({ children }) => {
 
                 await retriveUserData("adotantes");
 
-                navigate("/")
+                navigate("/");
             }
-
-        } catch (error) {
-            const errorMessage = error.response?.data.message || "Erro desconhecido";
-            console.log(errorMessage);
-
-            toast.error("Erro ao realizar o login! Verifique suas credenciais.");
+        } catch (err) {
+            console.error(err)
+            toast.error("Erro ao realizar o login! Código inválido ou expirado");
         }
-    };
+    }
 
 
     const retriveUserData = async (contextType) => {
@@ -132,7 +161,7 @@ export const AuthProvider = ({ children }) => {
     }, [auth.token, auth.userData]);
 
     return (
-        <AuthContext.Provider value={{ auth, setAuth, login, logout }}>
+        <AuthContext.Provider value={{ auth, setAuth, login, logout , loginWithOtp}}>
             {children}
         </AuthContext.Provider>
     );
