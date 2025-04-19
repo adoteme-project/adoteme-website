@@ -1,7 +1,7 @@
 import { faUser } from "@fortawesome/free-regular-svg-icons";
 import { getUserById } from "@/services/adotanteAPI";
 import { faClockRotateLeft } from "@fortawesome/free-solid-svg-icons";
-import { faWpforms } from "@fortawesome/free-brands-svg-icons";
+import { faSteam, faWpforms } from "@fortawesome/free-brands-svg-icons";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import AuthContext from "@/context/AuthProvider";
 import NavItem from "@/components/common/NavItem";
@@ -64,6 +64,12 @@ const SideBarUsuario = () => {
           icon={faClockRotateLeft}
           label="Pets"
           pathTo="/aplicacao"
+          type="perfil"
+        />
+        <NavItem
+          icon={faSteam}
+          label="Configurações"
+          pathTo="/configuracao"
           type="perfil"
         />
         <hr className="my-2 border-ong-div" />

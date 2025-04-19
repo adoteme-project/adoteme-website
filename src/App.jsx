@@ -45,6 +45,7 @@ import OngEditarConfiguracoes from "./pages/OngEditarConfiguracoes";
 import OngPetDetalhes from "./pages/OngPetDetalhes";
 import OngUsuarios from "./pages/OngUsuarios";
 import AdicionarUsuario from "./pages/OngAdicionarUsuario";
+import PerfilConfig from "./pages/PerfilConfig";
 
 function App() {
   return (
@@ -72,6 +73,7 @@ function App() {
                   <Route path="/perfil/usuario" element={<PerfilUsuario />} />
                   <Route path="/perfil/formulario" element={<FormularioUsuario />} />
                   <Route path="/perfil/aplicacao" element={<PerfilAplicacao />} />
+                  <Route path="/perfil/configuracao" element={<PerfilConfig />} />
                 </Route>
 
                 <Route path="/login" element={<LoginLayout />}>
