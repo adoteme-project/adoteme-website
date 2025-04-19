@@ -1,4 +1,4 @@
-import ModalFa from "@/components/common/ModalFa";
+import ModalHabilitarFa from "@/components/common/ModalFa";
 import useModal from "@/hooks/useModal";
 
 const PerfilConfig = () => {
@@ -19,7 +19,7 @@ const PerfilConfig = () => {
           Habilitar 2FA
         </button>
       </div>
-      <ModalFa isOpen={isShowing} onClose={toggleModal} />
+      <ModalHabilitarFa isOpen={isShowing} onClose={toggleModal} />
     </div>
   );
 };

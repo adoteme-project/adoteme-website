@@ -9,10 +9,9 @@ const MODAL_STATES = {
   SUCCESS: 'SUCCESS',
 };
 
-const ModalFa = ({ isOpen, onClose }) => {
+const ModalHabilitarFa = ({ isOpen, onClose }) => {
   const [modalState, setModalState] = useState(MODAL_STATES.EMAIL);
   const [email, setEmail] = useState('');
-  const [code, setCode] = useState('');
   const {error} = useNotification();
 
   if (!isOpen) {
@@ -106,4 +105,4 @@ const ModalFa = ({ isOpen, onClose }) => {
   );
 };
 
-export default ModalFa;
+export default ModalHabilitarFa;
