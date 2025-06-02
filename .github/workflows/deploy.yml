@@ -25,9 +25,10 @@ jobs:
 
       - name: Deploy to server via SCP
         env:
-          SSH_PRIVATE_KEY: ${{ secrets.EC2_KEY}}
+          SSH_PRIVATE_KEY: ${{ secrets.EC2_KEY }}
         run: |
           mkdir -p ~/.ssh
           echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H 54.145.147.197 >> ~/.ssh/known_hosts
           scp -r ./dist/* ubuntu@54.145.147.197:/home/ubuntu/frontend-react/
