@@ -59,9 +59,6 @@ const CadastroAdotante = () => {
       formulario
     }
 
-    console.log(completeData);
-    console.log(JSON.stringify(completeData));
-
     const formData = new FormData();
     formData.append("adotante", JSON.stringify(completeData));
 

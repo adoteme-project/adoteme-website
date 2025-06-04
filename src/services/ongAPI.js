@@ -39,3 +39,9 @@ export function deletePetPerdidoOng(idPetPerdido) {
 export function getSidebarInfoOng(idOng) {
     return axiosAuthenticatedOng.get(`/ongs/nome-e-imagem-ong/${idOng}`);
 }
+
+export function listarAplicacoesDashboard(ongId, anoSelecionado) {
+    return axiosAuthenticatedOng.get(`/adocoes/dados-adocao-dashboard/${ongId}`, 
+        { params: anoSelecionado }
+    );
+}
