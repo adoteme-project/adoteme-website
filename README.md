@@ -10,6 +10,7 @@ Este projeto é uma aplicação desenvolvida para ajudar ONGs de proteção anim
 - [@CaueGhelfi03](https://github.com/CaueGhelfi03)
 - [@ViniciusVieiraJS](https://github.com/ViniciusVieiraJS)
 - [@anaCatarina23](https://github.com/anaCatarina23)
+- [@EsterRocha99](https://github.com/EsterRocha99)
 
 
 ## Documentação
